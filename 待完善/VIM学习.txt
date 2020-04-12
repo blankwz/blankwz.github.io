@@ -1,1 +1,0 @@
-vimtutor -g zh   中文文档
