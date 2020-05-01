@@ -4,6 +4,7 @@ Web
 	Mac
 	Windows
 	IOS
+	
 硬件
 折腾硬件
 Python
@@ -13,12 +14,13 @@ Python
 	爬虫
 开发必会
 	Github
+	Linux   
 	工具软件（Chrome，vscode，VIM）
 破解
 IOS开发
 道与术（学习方法,Anki）
 英语
 资源（怎么查，哪里查）
-好软
+推荐
 
 「」
