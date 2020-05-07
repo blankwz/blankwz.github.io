@@ -1,0 +1,151 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>终于解决-VirtualBOX安装失败 | Gxkon's Blog</title><meta name="description" content="终于解决-VirtualBOX安装失败"><meta name="keywords" content="VirtualBOX"><meta name="author" content="Gkon"><meta name="copyright" content="Gkon"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/Pic/favicon.ico"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="twitter:card" content="summary"><meta name="twitter:title" content="终于解决-VirtualBOX安装失败"><meta name="twitter:description" content="终于解决-VirtualBOX安装失败"><meta name="twitter:image" content="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/05/alpaca-5126291_1280.jpg"><meta property="og:type" content="article"><meta property="og:title" content="终于解决-VirtualBOX安装失败"><meta property="og:url" content="http://gxkon.top/posts/fded7f59/"><meta property="og:site_name" content="Gxkon's Blog"><meta property="og:description" content="终于解决-VirtualBOX安装失败"><meta property="og:image" content="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/05/alpaca-5126291_1280.jpg"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>var autoChangeMode = '1'
+var t = Cookies.get("theme")
+if (autoChangeMode == '1'){
+  var isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+  var isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+  var isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined){
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport){
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour < 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+  }
+  } else if (t == 'light') activateLightMode()
+  else activateDarkMode()
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="canonical" href="http://gxkon.top/posts/fded7f59/"><link rel="next" title="Windows下通过Vagrant安装Linux系统进行学习" href="http://gxkon.top/posts/2bf7c002/"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script><script src="https://cdn.jsdelivr.net/npm/blueimp-md5/js/md5.min.js"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: {"text":"本人,超帅,打钱","fontSize":"15px"},
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  highlightShrink: 'false',
+  isFontAwesomeV5: false,
+  isPhotoFigcaption: false
+  
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isSidebar: true  
+  }</script><noscript><style>
+#page-header {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 4.2.0"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/Pic/avatar.png" onerror="onerror=null;src='/Pic/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">32</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">28</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">19</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 娱乐</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li></ul></div></div></div></div><i class="fa fa-arrow-right on" id="toggle-sidebar" aria-hidden="true">     </i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#VirtualBOX安装失败"><span class="toc-text">VirtualBOX安装失败</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、找出错误原因"><span class="toc-text">一、找出错误原因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、我的原因及解决办法"><span class="toc-text">二、我的原因及解决办法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#试验了下面几种方法-都无效"><span class="toc-text">试验了下面几种方法,都无效</span></a></li></ol></li></ol></li></ol></div></div></div><div id="body-wrap"><div class="post-bg" id="nav" style="background-image: url(https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/05/alpaca-5126291_1280.jpg)"><div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">Gxkon's Blog</a></span><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 娱乐</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li></ul></div></div><span class="toggle-menu close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span></span></div><div id="post-info"><div id="post-title"><div class="posttitle">终于解决-VirtualBOX安装失败</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2020-05-06 21:32:11"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2020-05-06</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2020-05-07 20:39:43"><i class="fa fa-history" aria-hidden="true"></i> 更新于 2020-05-07</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E5%BC%80%E5%8F%91%E5%BF%85%E4%BC%9A/">开发必会</a><i class="fa fa-angle-right post-meta__separator" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E5%BC%80%E5%8F%91%E5%BF%85%E4%BC%9A/linux/">linux</a></span></div><div class="meta-secondline"> </div><div class="meta-thirdline"><span class="post-meta-pv-cv"><i class="fa fa-eye post-meta__icon" aria-hidden="true"> </i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"><span class="post-meta__separator">|</span><i class="post-meta__icon fa fa-comment-o" aria-hidden="true"></i><span>评论数:</span><a href="/posts/fded7f59/#post-comment"><span class="gitalk-comment-count comment-count"></span></a></span></div></div></div></div><main class="layout_post" id="content-inner"><article id="post"><div id="article-container"><h1 id="VirtualBOX安装失败"><a href="#VirtualBOX安装失败" class="headerlink" title="VirtualBOX安装失败"></a>VirtualBOX安装失败</h1><blockquote>
+<p>出现问题：出现回滚，无法安装！</p>
+<p>提示：your system has not been modified，没有错误代码</p>
+</blockquote>
+<h3 id="一、找出错误原因"><a href="#一、找出错误原因" class="headerlink" title="一、找出错误原因"></a>一、找出错误原因</h3><ol>
+<li>到安装包 <code>VirtualBox-6.1.6-137129-Win.exe</code> （名字无所谓，这是我下载的版本）目录下</li>
+<li><code>Shift + 右键</code>，<code>在此处打开命令窗口</code></li>
+<li>输入命令：<code>VirtualBox-6.1.6-137129-Win.exe --extract</code>（可以通过<code>VirtualBox-6.1.6-137129-Win.exe --help</code> 查看帮助）</li>
+<li>弹出提示：已<code>解压到 X:/TMP/XXX.msi 下</code> ，打开路径</li>
+<li>再 <code>Shift + 右键</code>，<code>在此处打开命令窗口</code></li>
+<li>输入命令：<code>VirtualBox-6.1.6-r137129.msi /log log.txt</code></li>
+<li>会生成一个log.txt文件，然后自动打开安装包， 一直下一步，安装一次</li>
+<li>失败了~ 现在可以打开log.txt文件，查看失败原因。</li>
+<li>搜索关键字 ： <code>error</code> 或者  <code>failed</code></li>
+<li>把失败原因找出后，网上找解决办法</li>
+</ol>
+<h3 id="二、我的原因及解决办法"><a href="#二、我的原因及解决办法" class="headerlink" title="二、我的原因及解决办法"></a>二、我的原因及解决办法</h3><blockquote>
+<p>错误原因：VBoxNetCfgWinUpdateHostOnlyNetworkInterface failed, hr = 0xe000020b</p>
+<p>VBoxNetLwf.inf无法安装</p>
+<p>我的可能的原因：</p>
+<p>1、装了Vmware，虚拟网卡可能冲突</p>
+<p>2、Win10系统中安装VirtualBox虚拟机无法桥接问题，是个普遍问题！</p>
+<p>3、虚拟网卡过多，控制面板\所有控制面板项\网络连接 中，有10个网卡，可能达到了max值，无法增加网卡了</p>
+<p>解决办法：要不删掉vmware，要不就先不装网卡，</p>
+</blockquote>
+<ol>
+<li>重新安装，把 network都取消掉，先不装网卡~</li>
+<li>果然，安装成功，是网卡的问题，但是怕设备无法桥接，所以另外再想办法</li>
+<li>终于搞定了！！！！果然还是系统版本问题！ Win10更新！！那种更新完，重启后，需要更新很久的那种!大更新！</li>
+</ol>
+<p>搞了我两个晚上！！真尼玛!!!</p>
+<h3 id="试验了下面几种方法-都无效"><a href="#试验了下面几种方法-都无效" class="headerlink" title="试验了下面几种方法,都无效"></a>试验了下面几种方法,都无效</h3><ol>
+<li>删除Vmware</li>
+<li>关闭Hyper-v （据说会和虚拟网卡起冲突）<ul>
+<li>关闭方法1：<code>bcdedit /set hypervisorlaunchtype off</code></li>
+<li>查看：<code>bcdedit /enum</code>，显示 <code>hypervisorlaunchtype   Off</code>，那么就表示关掉了Hyper-v </li>
+<li>如果要重新开启Hyper-V，只需执行 bcdedit /set hypervisorlaunchtype auto 命令并<code>重启</code>即可</li>
+<li>并且在<code>控制面板</code>—-  <code>程序和功能</code>—–  <code>启用和关闭Windows功能</code>—— <code>去掉Hyper-V的勾</code></li>
+</ul>
+</li>
+<li>在<code>设备管理器</code>中 — <code>网络适配器</code> —<code>删除全部的Hyper-V网卡</code></li>
+<li>卸载 网络适配器中的 N个WAN miniport,重启后又出现</li>
+<li>验证安装包的MD5，是否完整~</li>
+<li>安装时，拼手速，把 <code>C:\Program Files\Oracle\VirtualBox\drivers</code>文件夹拷贝下来，试试单独安装VBoxNetLwf.inf会有什么提示</li>
+</ol>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Gkon</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://gxkon.top/posts/fded7f59/">http://gxkon.top/posts/fded7f59/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://gxkon.top" target="_blank">Gxkon's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/VirtualBOX/">VirtualBOX</a></div><div class="post_share"><div class="social-share" data-image="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/05/alpaca-5126291_1280.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><nav class="pagination_post" id="pagination"><div class="next-post pull-full"><a href="/posts/2bf7c002/"><img class="next_cover lazyload" data-src="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/05/coffee-5037804_1280.jpg" onerror="onerror=null;src='/Pic/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Windows下通过Vagrant安装Linux系统进行学习</div></div></a></div></nav><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i><span> 评论</span></div><div id="gitalk-container"></div><script>var gitalk = new Gitalk({
+  clientID: '1ce3148e3133bf004c96',
+  clientSecret: '2a1e5c0f4d38387460b916843bfe5cac67ef2d07',
+  repo: 'blankwz.github.io',
+  owner: 'blankwz',
+  admin: ['blankwz'],
+  id: md5(decodeURI(location.pathname)),
+  language: 'zh-CN',
+  perPage: 10,
+  distractionFreeMode: false,
+  pagerDirection: 'last',
+  createIssueManually: false,
+  updateCountCallback: commentCount
+})
+gitalk.render('gitalk-container')
+
+function commentCount(n){
+  try {
+    document.getElementsByClassName('gitalk-comment-count')[0].innerHTML= n
+  } catch (e) {
+    return false
+  }
+}</script></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 By Gkon</div><div class="framework-info"><span>驱动 </span><a href="https://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="阅读模式"></i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">簡</a><i class="darkmode fa fa-moon-o" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><a id="to_comment" href="#post-comment" title="直达评论"><i class="scroll_to_comment fa fa-comments">  </i></a><i class="fa fa-list-ul close" id="mobile-toc-button" title="目录" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@latest/lazysizes.min.js" async=""></script><script src="/js/third-party/ClickShowText.js"></script></body></html>

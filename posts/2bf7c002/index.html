@@ -1,0 +1,348 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Windows下通过Vagrant安装Linux系统进行学习 | Gxkon's Blog</title><meta name="description" content="Windows下通过Vagrant安装Linux系统进行学习"><meta name="keywords" content="Vagrant,Linux"><meta name="author" content="Gkon"><meta name="copyright" content="Gkon"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/Pic/favicon.ico"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Windows下通过Vagrant安装Linux系统进行学习"><meta name="twitter:description" content="Windows下通过Vagrant安装Linux系统进行学习"><meta name="twitter:image" content="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/05/coffee-5037804_1280.jpg"><meta property="og:type" content="article"><meta property="og:title" content="Windows下通过Vagrant安装Linux系统进行学习"><meta property="og:url" content="http://gxkon.top/posts/2bf7c002/"><meta property="og:site_name" content="Gxkon's Blog"><meta property="og:description" content="Windows下通过Vagrant安装Linux系统进行学习"><meta property="og:image" content="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/05/coffee-5037804_1280.jpg"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>var autoChangeMode = '1'
+var t = Cookies.get("theme")
+if (autoChangeMode == '1'){
+  var isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+  var isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+  var isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined){
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport){
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour < 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+  }
+  } else if (t == 'light') activateLightMode()
+  else activateDarkMode()
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="canonical" href="http://gxkon.top/posts/2bf7c002/"><link rel="prev" title="终于解决-VirtualBOX安装失败" href="http://gxkon.top/posts/fded7f59/"><link rel="next" title="利用腾讯COS制作个人图床" href="http://gxkon.top/posts/4e2300e2/"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script><script src="https://cdn.jsdelivr.net/npm/blueimp-md5/js/md5.min.js"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: {"text":"本人,超帅,打钱","fontSize":"15px"},
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  highlightShrink: 'false',
+  isFontAwesomeV5: false,
+  isPhotoFigcaption: false
+  
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isSidebar: true  
+  }</script><noscript><style>
+#page-header {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 4.2.0"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/Pic/avatar.png" onerror="onerror=null;src='/Pic/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">32</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">28</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">19</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 娱乐</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li></ul></div></div></div></div><i class="fa fa-arrow-right on" id="toggle-sidebar" aria-hidden="true">     </i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Windows下通过Vagrant安装Linux系统进行学习"><span class="toc-text">Windows下通过Vagrant安装Linux系统进行学习</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、工具"><span class="toc-text">一、工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、下载镜像"><span class="toc-text">二、下载镜像</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#如果觉得下载速度慢（需搭梯子），可以网上找镜像box文件，自行下载到本地目录"><span class="toc-text">如果觉得下载速度慢（需搭梯子），可以网上找镜像box文件，自行下载到本地目录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总结："><span class="toc-text">总结：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、Vagrant配置"><span class="toc-text">三、Vagrant配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#设置本机与虚拟机同步的目录"><span class="toc-text">设置本机与虚拟机同步的目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置网络端口转发-也是就虚拟机中的80端口映射为宿主机上的8080端口"><span class="toc-text">设置网络端口转发, 也是就虚拟机中的80端口映射为宿主机上的8080端口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置私有网络地址"><span class="toc-text">设置私有网络地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置公有网络地址"><span class="toc-text">设置公有网络地址</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#错误问题"><span class="toc-text">错误问题</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、-Vagrant常见命令"><span class="toc-text">四、 Vagrant常见命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ssh终端连接vagrant"><span class="toc-text">ssh终端连接vagrant</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#本地"><span class="toc-text">本地</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、更改国内镜像站"><span class="toc-text">五、更改国内镜像站</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#六、安装Docker"><span class="toc-text">六、安装Docker</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#安装-Docker-Compose时，速度太慢，选择手动安装"><span class="toc-text">安装 Docker Compose时，速度太慢，选择手动安装</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker加速"><span class="toc-text">Docker加速</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#错误解决"><span class="toc-text">错误解决</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#环境打包"><span class="toc-text">环境打包</span></a></li></ol></li></ol></div></div></div><div id="body-wrap"><div class="post-bg" id="nav" style="background-image: url(https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/05/coffee-5037804_1280.jpg)"><div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">Gxkon's Blog</a></span><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 娱乐</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li></ul></div></div><span class="toggle-menu close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span></span></div><div id="post-info"><div id="post-title"><div class="posttitle">Windows下通过Vagrant安装Linux系统进行学习</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2020-05-06 17:12:11"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2020-05-06</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2020-05-07 20:40:05"><i class="fa fa-history" aria-hidden="true"></i> 更新于 2020-05-07</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E5%BC%80%E5%8F%91%E5%BF%85%E4%BC%9A/">开发必会</a><i class="fa fa-angle-right post-meta__separator" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E5%BC%80%E5%8F%91%E5%BF%85%E4%BC%9A/linux/">linux</a></span></div><div class="meta-secondline"> </div><div class="meta-thirdline"><span class="post-meta-pv-cv"><i class="fa fa-eye post-meta__icon" aria-hidden="true"> </i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"><span class="post-meta__separator">|</span><i class="post-meta__icon fa fa-comment-o" aria-hidden="true"></i><span>评论数:</span><a href="/posts/2bf7c002/#post-comment"><span class="gitalk-comment-count comment-count"></span></a></span></div></div></div></div><main class="layout_post" id="content-inner"><article id="post"><div id="article-container"><h1 id="Windows下通过Vagrant安装Linux系统进行学习"><a href="#Windows下通过Vagrant安装Linux系统进行学习" class="headerlink" title="Windows下通过Vagrant安装Linux系统进行学习"></a>Windows下通过Vagrant安装Linux系统进行学习</h1><h2 id="一、工具"><a href="#一、工具" class="headerlink" title="一、工具"></a>一、工具</h2><ol>
+<li><p>VirtualBox:</p>
+<ul>
+<li><p>VirtualBox 是一款开源虚拟机软件</p>
+</li>
+<li><p><a href="https://www.virtualbox.org/wiki/Downloads" target="_blank" rel="noopener">下载</a> </p>
+</li>
+</ul>
+</li>
+<li><p>Vagrant: </p>
+<ul>
+<li>Vagrant是一个基于Ruby的工具，用于创建和部署虚拟化开发环境。</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>拿VirtualBox举例，VirtualBox会开放一个创建虚拟机的接口，Vagrant会利用这个接口创建虚拟机，并且通过Vagrant来管理，配置和自动安装虚拟机<ul>
+<li><a href="https://www.vagrantup.com/downloads.html" target="_blank" rel="noopener">下载</a> 选择系统版本 （需搭梯子，下载速度才会起来）</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>下载并安装他们</p>
+<p>Vagrant安装完后，需重启</p>
+<p>选择一个系统镜像，装进VB，这里我们主要是Vagrant教程</p>
+</blockquote>
+<h2 id="二、下载镜像"><a href="#二、下载镜像" class="headerlink" title="二、下载镜像"></a>二、下载镜像</h2><ol>
+<li>在 <a href="https://app.vagrantup.com/boxes/search?provider=virtualbox" target="_blank" rel="noopener">Vagrant下筛选VB的包</a>，找到你想要的系统镜像</li>
+</ol>
+<blockquote>
+<p><strong>推荐：</strong>到 <a href="https://mirrors.tuna.tsinghua.edu.cn" target="_blank" rel="noopener">清华开源站</a>镜像下载,比如<a href="https://mirrors.tuna.tsinghua.edu.cn/ubuntu-cloud-images/bionic/" target="_blank" rel="noopener">Ubuntu的镜像</a>,（找后缀为box的包）</p>
+</blockquote>
+<ol start="2">
+<li><p>创建个存放目录，比如 D:/workspace</p>
+</li>
+<li><p>使用 <code>Vagrantfile</code> 或者 <code>包的名称</code>来进行添加镜像 （只是添加）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Vagrant.configure(<span class="string">"2"</span>) <span class="keyword">do</span> |config|</span><br><span class="line">  config.vm.box = <span class="string">"ubuntu/xenial64"</span>  <span class="comment"># 自动官网找ubuntu/xenial64的box包，然后在文件夹下生成`Vagrantfile`配置文件</span></span><br><span class="line">end</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">或者</span><br><span class="line">d:</span><br><span class="line"><span class="built_in">cd</span> workspace <span class="comment"># 先创建个文件夹</span></span><br><span class="line">vagrant init ubuntu/xenial64  <span class="comment"># 自动官网找ubuntu/xenial64的box包，然后在文件夹下生成`Vagrantfile`配置文件</span></span><br></pre></td></tr></table></figure></li>
+<li><p>如果想下载开源镜像站的话</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vagrant box add https://mirrors.tuna.tsinghua.edu.cn/ubuntu-cloud-images/bionic/20200430/bionic-server-cloudimg-amd64-vagrant.box --name ubuntu/bionic</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装镜像： <code>vagrant up</code> </p>
+</li>
+</ol>
+<h4 id="如果觉得下载速度慢（需搭梯子），可以网上找镜像box文件，自行下载到本地目录"><a href="#如果觉得下载速度慢（需搭梯子），可以网上找镜像box文件，自行下载到本地目录" class="headerlink" title="如果觉得下载速度慢（需搭梯子），可以网上找镜像box文件，自行下载到本地目录"></a>如果觉得下载速度慢（需搭梯子），可以网上找镜像box文件，自行下载到本地目录</h4><ul>
+<li><p>如果你有梯子，无法开启全局模式的情况下，可以在 <code>vagrant up</code> 时，看到box 的文件地址，再通过浏览器下载</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">例如：把 centos-6.5-x86_64-base.box 下载到 D:/workspace，包名随便起个，叫dev</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> D:/workspace</span><br><span class="line">vagrant box add dev centos-6.5-x86_64-base.box <span class="comment">#添加到环境</span></span><br><span class="line"><span class="comment">#vagrant init dev #初始化配置，如果之前文件夹下有Vagrantfile，则需要先删除</span></span><br><span class="line">vagrant up <span class="comment"># 安装</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h4 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加box</span></span><br><span class="line">vagrant box add  ubuntu/xenial64</span><br><span class="line"></span><br><span class="line"><span class="comment">#初始化box，生成Vagrantfile</span></span><br><span class="line">vagrant init ubuntu/xenial64</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动系统</span></span><br><span class="line">vagrant up</span><br><span class="line"></span><br><span class="line"><span class="comment">#ssh登录系统</span></span><br><span class="line">vagrant ssh</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="三、Vagrant配置"><a href="#三、Vagrant配置" class="headerlink" title="三、Vagrant配置"></a>三、Vagrant配置</h2><blockquote>
+<p>Vagrant 的核心配置文件是 Vagrantfile</p>
+<ul>
+<li><p>官方教程：<a href="https://www.vagrantup.com/docs/index.html" target="_blank" rel="noopener">文档</a></p>
+<ul>
+<li><a href="https://www.vagrantup.com/docs/networking/forwarded_ports.html" target="_blank" rel="noopener">端口映射教程</a></li>
+<li><a href="https://www.vagrantup.com/docs/networking/private_network.html" target="_blank" rel="noopener">私有网络教程</a></li>
+<li><a href="https://www.vagrantup.com/docs/networking/public_network.html" target="_blank" rel="noopener">共有网络教程</a></li>
+</ul>
+</li>
+<li><p>以下所有代码操作都是编辑，<code>创建的文件夹下的Vagrantfile</code></p>
+</li>
+</ul>
+</blockquote>
+<h3 id="设置本机与虚拟机同步的目录"><a href="#设置本机与虚拟机同步的目录" class="headerlink" title="设置本机与虚拟机同步的目录"></a>设置本机与虚拟机同步的目录</h3><ul>
+<li>例：<code>config.vm.synced_folder &quot;d:/workspace&quot;, &quot;/workspace&quot;</code></li>
+</ul>
+<h3 id="设置网络端口转发-也是就虚拟机中的80端口映射为宿主机上的8080端口"><a href="#设置网络端口转发-也是就虚拟机中的80端口映射为宿主机上的8080端口" class="headerlink" title="设置网络端口转发, 也是就虚拟机中的80端口映射为宿主机上的8080端口"></a>设置网络端口转发, 也是就虚拟机中的80端口映射为宿主机上的8080端口</h3><ul>
+<li><code>config.vm.network :forwarded_port, guest: 80, host: 8080</code></li>
+<li>方法2：VirtualBox中设置端口转发，缺点是，每次通过vagrant reload命令重启虚拟机以后失效<ul>
+<li>打开VB —-  设置 —网络 —高级 —-端口转发 —添加转发规则 —保存<ul>
+<li>协议：TCP</li>
+<li>主机IP：127.0.0.1</li>
+<li>主机端口：8080</li>
+<li>子系统端口：80</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>优点：简单、容易理解、容易实现外网访问虚拟机。</li>
+<li>缺点：需映射很多端口时较麻烦、不支持在宿主机器上使用小于1024的端口来转发(如:不能使用SSL的443端口来进行https连接)</li>
+</ul>
+<h3 id="设置私有网络地址"><a href="#设置私有网络地址" class="headerlink" title="设置私有网络地址"></a>设置私有网络地址</h3><ul>
+<li><p>固定IP：<code>config.vm.network :private_network, ip: “192.168.10.10”</code> </p>
+</li>
+<li><p>或者固定IP：<code>config.vm.network &quot;private_network&quot;, type: &quot;dhcp&quot;</code></p>
+</li>
+<li><p>这种网络配置下，只有主机可以访问虚拟机，如果多个虚拟机设置定在同一个网段也可以相互访问，当然虚拟机也是可以访问外部网络的</p>
+</li>
+<li><p>优点：安全，只能自己访问</p>
+</li>
+<li><p>缺点：因私有原有，所以其他团队成员不能和你协作</p>
+<h3 id="设置公有网络地址"><a href="#设置公有网络地址" class="headerlink" title="设置公有网络地址"></a>设置公有网络地址</h3></li>
+<li><p>固定IP：<code>config.vm.network :public_network, ip: “192.168.10.10”</code></p>
+</li>
+<li><p>桥接网卡：<code>config.vm.network &quot;public_network&quot;, bridge: &quot;en1: Wi-Fi (AirPort)&quot;</code></p>
+</li>
+<li><p>这种配置下，虚拟机享受实体机一样的待遇，一样的网络配置，vagrant 1.3版本以后这种配置也支持设定</p>
+</li>
+<li><p>优点：方便团队协作，别人可以访问你的虚拟机。</p>
+</li>
+<li><p>缺点：需要有网络，有路由器分配IP</p>
+</li>
+</ul>
+<h4 id="错误问题"><a href="#错误问题" class="headerlink" title="错误问题"></a>错误问题</h4><p>Q1：<code>Message: undefined local variable or method &quot;\u201Cgxkon\u201D&quot;&#39;</code></p>
+<p>A1：检查Vagrantfile文件，格式错误，是否用了中文的符号。比如 <code>“”</code>，一般是账号密码，从其他地方复制过来的~</p>
+<p>Q2：vagrant 卡在 <code>SSH auth method: password</code> 或者 <code>SSH auth method: private key</code></p>
+<p>A2：参考：<a href="https://learnku.com/laravel/t/4796/ssh-auth-method-private-key-solution-summary-when-homestead-starts" target="_blank" rel="noopener">安装问题汇总</a>  <strong>这个虽然没用</strong>（不适合我），但是也可以是个思路.  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">回忆一下，我做了哪些操作，导致无法连接，出现这个问题</span><br><span class="line">1. 安装了vagrant-vbguest， <span class="comment"># 卸载了，也没用</span></span><br><span class="line">2. 添加了root账户 <span class="comment"># 应该不是~</span></span><br><span class="line">3. VirtualBox 中 设置-存储 - 添加了控制器IDE 中，加入了一个什么东西，忘了~然后删除了~</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="四、-Vagrant常见命令"><a href="#四、-Vagrant常见命令" class="headerlink" title="四、 Vagrant常见命令"></a>四、 Vagrant常见命令</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>vagrant box list</td>
+<td>查看目前已有的box</td>
+</tr>
+<tr>
+<td>vagrant box add</td>
+<td><code>新增</code>加一个box</td>
+</tr>
+<tr>
+<td>vagrant box add {box_name} {file_path}</td>
+<td><code>添加</code>box到本地vagrant环境</td>
+</tr>
+<tr>
+<td>vagrant box remove box-name</td>
+<td><code>删除</code>指定box</td>
+</tr>
+<tr>
+<td>vagrant box repackage box-name</td>
+<td><code>重新打包</code>本地环境中指定的box</td>
+</tr>
+<tr>
+<td>vagrant init [box-name]</td>
+<td><code>初始化</code>配置vagrantfile ，生成Vagrantfile文件</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>vagrant up</td>
+<td>在初始化完的文件夹内，<code>启动虚拟机</code></td>
+</tr>
+<tr>
+<td>vagrant ssh</td>
+<td><code>ssh</code>登录虚拟机，退出方法：<code>exit</code> 或者 <code>Ctrl+D</code></td>
+</tr>
+<tr>
+<td>vagrant suspend</td>
+<td><code>挂起</code>虚拟机</td>
+</tr>
+<tr>
+<td>vagrant reload</td>
+<td><code>重启</code>虚拟机  （修改配置文件后，重启虚拟化开发环境）</td>
+</tr>
+<tr>
+<td>vagrant halt</td>
+<td><code>关闭</code>虚拟机</td>
+</tr>
+<tr>
+<td>vagrant status</td>
+<td><code>查看</code>虚拟机状态</td>
+</tr>
+<tr>
+<td>vagrant destroy</td>
+<td><code>删除</code>虚拟机</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>vagrant ssh-config</td>
+<td>检查ssh配置</td>
+</tr>
+<tr>
+<td>vagrant help</td>
+<td>查看更多命令</td>
+</tr>
+</tbody></table>
+<h4 id="ssh终端连接vagrant"><a href="#ssh终端连接vagrant" class="headerlink" title="ssh终端连接vagrant"></a>ssh终端连接vagrant</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">IP: 127.0.0.1</span><br><span class="line">端口：2222</span><br><span class="line">用户名：vagrant</span><br><span class="line">密 码：vagrant</span><br><span class="line">root帐号密码：vagrant</span><br></pre></td></tr></table></figure>
+
+<h4 id="本地"><a href="#本地" class="headerlink" title="本地"></a>本地</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh vagrant@127.0.0.1 -p 2222</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="五、更改国内镜像站"><a href="#五、更改国内镜像站" class="headerlink" title="五、更改国内镜像站"></a>五、更改国内镜像站</h2><p><strong>以Ubuntu为例：</strong><a href="https://developer.aliyun.com/mirror/ubuntu?spm=a2c6h.13651102.0.0.3e221b11Jh5Amp" target="_blank" rel="noopener">镜像网址</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 修改文件需要root权限</span></span><br><span class="line">sudo passwd root <span class="comment"># 建立root用户，根据提示输入两次新密码</span></span><br><span class="line">su root <span class="comment"># 切换到 root 用户</span></span><br><span class="line"></span><br><span class="line">sudo mv /etc/apt/sources.list /etc/apt/sources.list.bak  <span class="comment"># 备份原镜像列表文件</span></span><br><span class="line">vim /etc/apt/sources.list  <span class="comment"># 按系统版本，修改好文件 </span></span><br><span class="line">:wq 保存退出</span><br><span class="line">sudo apt-get update <span class="comment"># 更新软件列表</span></span><br><span class="line">sudo apt-get upgrade <span class="comment"># 开始更新软件</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="六、安装Docker"><a href="#六、安装Docker" class="headerlink" title="六、安装Docker"></a>六、安装Docker</h2><blockquote>
+<p> <a href="https://docs.docker.com/engine/install/ubuntu/" target="_blank" rel="noopener">Ubuntu安装Docker官方教程</a> </p>
+<p><a href="https://www.runoob.com/docker/docker-compose.html" target="_blank" rel="noopener">安装Docker Compose官方教程</a></p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 删除旧版本的docker</span></span><br><span class="line">sudo apt-get remove docker docker-engine docker.io containerd runc</span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新 apt 包索引</span></span><br><span class="line">$ sudo apt-get update  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 apt 依赖包，用于通过HTTPS来获取仓库</span></span><br><span class="line">$ sudo apt-get install \</span><br><span class="line">    apt-transport-https \</span><br><span class="line">    ca-certificates \</span><br><span class="line">    curl \</span><br><span class="line">    gnupg-agent \</span><br><span class="line">    software-properties-common</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="comment"># 添加Docker的官方GPG密钥</span></span><br><span class="line">$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -    </span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置稳定的存储库</span></span><br><span class="line">$ sudo add-apt-repository \</span><br><span class="line">   <span class="string">"deb [arch=amd64] https://download.docker.com/linux/ubuntu \</span></span><br><span class="line"><span class="string">   <span class="variable">$(lsb_release -cs)</span> \</span></span><br><span class="line"><span class="string">   stable"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装DOCKER引擎</span></span><br><span class="line"> $ sudo apt-get update</span><br><span class="line"> $ sudo apt-get install docker-ce docker-ce-cli containerd.io</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 安装特定版本的 Docker Engine-Community前，列出您的仓库中可用的版本</span></span><br><span class="line">$ apt-cache madison docker-ce <span class="comment"># 可以不需要这一步</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 选择上面的的版本号，替换下面的 VERSION_STRING</span></span><br><span class="line">$ sudo apt-get install docker-ce=&lt;VERSION_STRING&gt; docker-ce-cli=&lt;VERSION_STRING&gt; containerd.io <span class="comment"># 可以不需要这一步</span></span><br><span class="line">   </span><br><span class="line"><span class="comment"># 查看是否安装完成</span></span><br><span class="line"> $ docker run hello-world</span><br><span class="line"> </span><br><span class="line"> <span class="comment"># 安装 Docker Compose</span></span><br><span class="line"> $ sudo curl -L <span class="string">"https://github.com/docker/compose/releases/download/1.25.5/docker-compose-<span class="variable">$(uname -s)</span>-<span class="variable">$(uname -m)</span>"</span> -o /usr/<span class="built_in">local</span>/bin/docker-compose</span><br><span class="line"> </span><br><span class="line"> <span class="comment"># 将可执行权限应用于二进制文件：</span></span><br><span class="line"> $ sudo chmod +x /usr/<span class="built_in">local</span>/bin/docker-compose</span><br><span class="line"> </span><br><span class="line"> <span class="comment"># 创建软链</span></span><br><span class="line"> $ sudo ln -s /usr/<span class="built_in">local</span>/bin/docker-compose /usr/bin/docker-compose</span><br><span class="line"> </span><br><span class="line"> <span class="comment"># 测试是否安装成功</span></span><br><span class="line"> $ docker -v</span><br><span class="line"> $ docker-compose --version</span><br></pre></td></tr></table></figure>
+
+<h4 id="安装-Docker-Compose时，速度太慢，选择手动安装"><a href="#安装-Docker-Compose时，速度太慢，选择手动安装" class="headerlink" title="安装 Docker Compose时，速度太慢，选择手动安装"></a>安装 Docker Compose时，速度太慢，选择手动安装</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 搭梯子下载，或者找其他的人的 docker-compose</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 因为这里是用的windows装Vagrant，所以需要将windows下的文件夹映射到vagrant的linux中</span></span><br><span class="line"><span class="comment">#更改vagrantFile，我的是这样</span></span><br><span class="line">`config.vm.synced_folder <span class="string">"d:/workspace"</span>, <span class="string">"/workspace"</span>`</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重启虚拟机</span></span><br><span class="line">Vagrant reload</span><br><span class="line"><span class="comment"># 重新连接ssh</span></span><br><span class="line">vagrant ssh</span><br><span class="line"><span class="comment"># 到bin目录</span></span><br><span class="line"><span class="built_in">cd</span>  /usr/<span class="built_in">local</span>/bin</span><br><span class="line"></span><br><span class="line"><span class="comment"># 复制过去</span></span><br><span class="line">mv  /home/sharefile/docker-compose-Linux-x86_64  docker-compose</span><br><span class="line"><span class="comment"># 给权限</span></span><br><span class="line">sudo chmod +x docker-compose</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h3 id="Docker加速"><a href="#Docker加速" class="headerlink" title="Docker加速"></a>Docker加速</h3><p><a href="https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors" target="_blank" rel="noopener">阿里云镜像加速</a></p>
+<p>1、登录阿里云</p>
+<p>2、<code>容器镜像服务</code>—-<code>镜像中心</code>—<code>镜像加速器</code>–<code>选择你的系统</code>，根据文档来加速</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> $ sudo mkdir -p /etc/docker</span><br><span class="line"> $ sudo tee /etc/docker/daemon.json &lt;&lt;-<span class="string">'EOF'</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"registry-mirrors"</span>: [<span class="string">"https://XXXXXXX.mirror.aliyuncs.com"</span>]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line"><span class="comment"># 修改上面的XXX，为你的专属镜像地址</span></span><br><span class="line"> $ sudo systemctl daemon-reload</span><br><span class="line"> $ sudo systemctl restart docker</span><br></pre></td></tr></table></figure>
+
+<h4 id="错误解决"><a href="#错误解决" class="headerlink" title="错误解决"></a>错误解决</h4><p>Q1：<code>Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?</code></p>
+<p>A1：<code>sudo systemctl start docker</code></p>
+<p>或者 <code>sudo /etc/init.d/docker start</code></p>
+<p>Q2：共享文件错误，如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Vagrant was unable to mount VirtualBox shared folders. This is usually</span><br><span class="line">because the filesystem <span class="string">"vboxsf"</span> is not available. This filesystem is</span><br><span class="line">made available via the VirtualBox Guest Additions and kernel module.</span><br><span class="line">Please verify that these guest additions are properly installed <span class="keyword">in</span> the</span><br><span class="line">guest. This is not a bug <span class="keyword">in</span> Vagrant and is usually caused by a faulty</span><br><span class="line">Vagrant box. For context, the <span class="built_in">command</span> attempted was:</span><br><span class="line"></span><br><span class="line">mount -t vboxsf -o uid=1000,gid=1000 vagrant /vagrant</span><br><span class="line"></span><br><span class="line">The error output from the <span class="built_in">command</span> was:</span><br><span class="line"></span><br><span class="line">/sbin/mount.vboxsf: mounting failed with the error: No such device</span><br></pre></td></tr></table></figure>
+
+<p>A2:<a href="https://segmentfault.com/a/1190000019710781" target="_blank" rel="noopener">virtualbox 解决文件挂载问题 - 相当详细</a></p>
+<h2 id="环境打包"><a href="#环境打包" class="headerlink" title="环境打包"></a>环境打包</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 退出虚拟机</span></span><br><span class="line"><span class="built_in">exit</span></span><br><span class="line"><span class="comment"># 关闭虚拟机</span></span><br><span class="line">vagrant halt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打包</span></span><br><span class="line">ubuntu vagrant package --output ubuntu-docker.box</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># ---------------测试</span></span><br><span class="line"><span class="comment"># vagrant添加box</span></span><br><span class="line">ubuntu vagrant box add ubuntu-docker ./ubuntu-docker.box</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建目录并且初始化</span></span><br><span class="line">mkdir ubuntu-docker1 &amp;&amp; <span class="built_in">cd</span> ubuntu-docker1 &amp;&amp; vagrant init ubuntu-docker</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编辑Vagrantfile文件</span></span><br><span class="line">config.vm.box = <span class="string">"ubuntu-docker"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动虚拟机，并且ssh连接</span></span><br><span class="line">vagrant up</span><br><span class="line">vagrant ssh</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>参考：<a href="https://www.cnblogs.com/hafiz/p/9175484.html" target="_blank" rel="noopener">征服诱人的Vagrant！</a></p>
+<p><a href="https://www.jianshu.com/p/7e8f61376053" target="_blank" rel="noopener">Vagrant 快速上手教程</a></p>
+<p><a href="https://wxnacy.com/2019/07/18/vagrant-root-login/" target="_blank" rel="noopener">Vagrant 使用 root 账号登录</a></p>
+<p><a href="https://www.cnblogs.com/songxi/p/12788249.html" target="_blank" rel="noopener">ubuntu 20.04 LTS 安装docker</a></p>
+<p><a href="https://www.cnblogs.com/SnailMove/p/11497253.html" target="_blank" rel="noopener">Linux离线安装docker&amp;docker-compose</a></p>
+<p><a href="https://segmentfault.com/a/1190000019576703" target="_blank" rel="noopener">2019 年 最简单最通俗的 vagrant 安装使用说明，附带示例Vagrantfile</a> </p>
+</blockquote>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Gkon</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://gxkon.top/posts/2bf7c002/">http://gxkon.top/posts/2bf7c002/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://gxkon.top" target="_blank">Gxkon's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Vagrant/">Vagrant</a><a class="post-meta__tags" href="/tags/Linux/">Linux</a></div><div class="post_share"><div class="social-share" data-image="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/05/alpaca-5126291_1280.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/posts/fded7f59/"><img class="prev_cover lazyload" data-src="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/05/alpaca-5126291_1280.jpg" onerror="onerror=null;src='/Pic/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">终于解决-VirtualBOX安装失败</div></div></a></div><div class="next-post pull_right"><a href="/posts/4e2300e2/"><img class="next_cover lazyload" data-src="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/05/green-5124174_1280.jpg" onerror="onerror=null;src='/Pic/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">利用腾讯COS制作个人图床</div></div></a></div></nav><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i><span> 评论</span></div><div id="gitalk-container"></div><script>var gitalk = new Gitalk({
+  clientID: '1ce3148e3133bf004c96',
+  clientSecret: '2a1e5c0f4d38387460b916843bfe5cac67ef2d07',
+  repo: 'blankwz.github.io',
+  owner: 'blankwz',
+  admin: ['blankwz'],
+  id: md5(decodeURI(location.pathname)),
+  language: 'zh-CN',
+  perPage: 10,
+  distractionFreeMode: false,
+  pagerDirection: 'last',
+  createIssueManually: false,
+  updateCountCallback: commentCount
+})
+gitalk.render('gitalk-container')
+
+function commentCount(n){
+  try {
+    document.getElementsByClassName('gitalk-comment-count')[0].innerHTML= n
+  } catch (e) {
+    return false
+  }
+}</script></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 By Gkon</div><div class="framework-info"><span>驱动 </span><a href="https://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="阅读模式"></i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">簡</a><i class="darkmode fa fa-moon-o" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><a id="to_comment" href="#post-comment" title="直达评论"><i class="scroll_to_comment fa fa-comments">  </i></a><i class="fa fa-list-ul close" id="mobile-toc-button" title="目录" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@latest/lazysizes.min.js" async=""></script><script src="/js/third-party/ClickShowText.js"></script></body></html>
