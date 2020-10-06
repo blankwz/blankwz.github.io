@@ -1,0 +1,1535 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ADO 教程 | Gxkon's Blog</title><meta name="description" content="ADO 教程 一个微软的 Active-X 组件  ADO 指 ActiveX 数据对象（ActiveX Data Objects）  用于从网页访问数据库  会随微软的 IIS 被自动安装  是一个访问数据库中数据的编程接口    应当具备的基础知识在继续学习之前，您需要对下面的知识有基本的了解：  WWW、HTML 以及对网站构建的基本了解 ASP（动态服务器页面） SQL（结构化查询语言）"><meta name="keywords" content="ADO"><meta name="author" content="Gkon"><meta name="copyright" content="Gkon"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="dns-prefetch" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="crossorigin"/><link rel="dns-prefetch" href="https://fonts.googleapis.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="dns-prefetch" href="//busuanzi.ibruce.info"/><meta name="twitter:card" content="summary"><meta name="twitter:title" content="ADO 教程"><meta name="twitter:description" content="ADO 教程 一个微软的 Active-X 组件  ADO 指 ActiveX 数据对象（ActiveX Data Objects）  用于从网页访问数据库  会随微软的 IIS 被自动安装  是一个访问数据库中数据的编程接口    应当具备的基础知识在继续学习之前，您需要对下面的知识有基本的了解：  WWW、HTML 以及对网站构建的基本了解 ASP（动态服务器页面） SQL（结构化查询语言）"><meta name="twitter:image" content="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/07/alpaca-5405469_1280.jpg"><meta property="og:type" content="article"><meta property="og:title" content="ADO 教程"><meta property="og:url" content="http://gxkon.top/posts/8726eb83/"><meta property="og:site_name" content="Gxkon's Blog"><meta property="og:description" content="ADO 教程 一个微软的 Active-X 组件  ADO 指 ActiveX 数据对象（ActiveX Data Objects）  用于从网页访问数据库  会随微软的 IIS 被自动安装  是一个访问数据库中数据的编程接口    应当具备的基础知识在继续学习之前，您需要对下面的知识有基本的了解：  WWW、HTML 以及对网站构建的基本了解 ASP（动态服务器页面） SQL（结构化查询语言）"><meta property="og:image" content="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/07/alpaca-5405469_1280.jpg"><meta property="article:published_time" content="2020-07-17T12:20:55.000Z"><meta property="article:modified_time" content="2020-09-13T03:36:47.444Z"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>var autoChangeMode = '1'
+var t = Cookies.get("theme")
+if (autoChangeMode == '1'){
+  var isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+  var isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+  var isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined){
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport){
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour < 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+  }
+  } else if (t == 'light') activateLightMode()
+  else activateDarkMode()
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="canonical" href="http://gxkon.top/posts/8726eb83/"><link rel="prev" title="JavaScript 教程" href="http://gxkon.top/posts/da462756/"><link rel="next" title="JSP 教程" href="http://gxkon.top/posts/12fc1c4b/"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script><script src="https://cdn.jsdelivr.net/npm/blueimp-md5/js/md5.min.js"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: {"text":"本人,超帅,打钱","fontSize":"15px"},
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  highlightShrink: 'false',
+  isFontAwesomeV5: false,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false
+  
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isSidebar: true  
+  }</script><noscript><style>
+#page-header {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 4.2.0"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/Pic/avatar.png" onerror="onerror=null;src='/Pic/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">95</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">64</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">44</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 娱乐</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li></ul></div></div></div></div><i class="fa fa-arrow-right on" id="toggle-sidebar" aria-hidden="true">     </i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ADO-教程"><span class="toc-text">ADO 教程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#应当具备的基础知识"><span class="toc-text">应当具备的基础知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0、从-ASP-页面访问数据库"><span class="toc-text">0、从 ASP 页面访问数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-创建一个到数据库的-ADO-连接"><span class="toc-text">1 创建一个到数据库的 ADO 连接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-打开数据库连接"><span class="toc-text">2 打开数据库连接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-创建-ADO-记录集"><span class="toc-text">3 创建 ADO 记录集</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-从记录集提取您需要的数据"><span class="toc-text">4 从记录集提取您需要的数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-关闭记录集"><span class="toc-text">5 关闭记录集</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-关闭连接"><span class="toc-text">6 关闭连接</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1、建立并打开一个数据库连接"><span class="toc-text">1、建立并打开一个数据库连接</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建一个-DSN-less-数据库连接"><span class="toc-text">创建一个 DSN-less 数据库连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建一个-ODBC-数据库连接"><span class="toc-text">创建一个 ODBC 数据库连接</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、创建ADO-Recordset（记录集）"><span class="toc-text">2、创建ADO Recordset（记录集）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建一个-ADO-表记录集（ADO-Table-Recordset）"><span class="toc-text">创建一个 ADO 表记录集（ADO Table Recordset）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建一个-ADO-SQL-记录集-（ADO-SQL-Recordset）"><span class="toc-text">创建一个 ADO SQL 记录集 （ADO SQL Recordset）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#从记录集中提取数据"><span class="toc-text">从记录集中提取数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、显示来自记录集中的数据"><span class="toc-text">3、显示来自记录集中的数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#显示字段名称和字段值"><span class="toc-text">显示字段名称和字段值</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#在一个-HTML-表格中显示"><span class="toc-text">在一个 HTML 表格中显示</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、使用-SQL-创建查询"><span class="toc-text">4、使用 SQL 创建查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#案例1、2"><span class="toc-text">案例1、2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#案例3"><span class="toc-text">案例3</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、使用SQL排序"><span class="toc-text">5、使用SQL排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#案例1"><span class="toc-text">案例1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#案例2"><span class="toc-text">案例2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6、使用-SQL添加记录"><span class="toc-text">6、使用 SQL添加记录</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#在使用-INSERT-command-命令时，请注意以下事项："><span class="toc-text">在使用 INSERT command 命令时，请注意以下事项：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建表单（获取数据）"><span class="toc-text">创建表单（获取数据）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加记录"><span class="toc-text">添加记录</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7、使用-SQL更新记录"><span class="toc-text">7、使用 SQL更新记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8、使用-SQL删除记录"><span class="toc-text">8、使用 SQL删除记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9、通过-GetString-加速脚本"><span class="toc-text">9、通过 GetString() 加速脚本</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#GetString-方法"><span class="toc-text">GetString()方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#案例"><span class="toc-text">案例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10、ADO-Command-对象"><span class="toc-text">10、ADO Command 对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#属性"><span class="toc-text">属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法"><span class="toc-text">方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集合"><span class="toc-text">集合</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11、Connection-对象"><span class="toc-text">11、Connection 对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#属性-1"><span class="toc-text">属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法-1"><span class="toc-text">方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#事件"><span class="toc-text">事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集合-1"><span class="toc-text">集合</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12、Error-对象"><span class="toc-text">12、Error 对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#循环遍历-Errors-集合方法"><span class="toc-text">循环遍历 Errors 集合方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#属性-2"><span class="toc-text">属性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13、Field-对象"><span class="toc-text">13、Field 对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#属性-3"><span class="toc-text">属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法-2"><span class="toc-text">方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集合-2"><span class="toc-text">集合</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14、Parameter-对象"><span class="toc-text">14、Parameter 对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#属性-4"><span class="toc-text">属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法-3"><span class="toc-text">方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#15、Property-对象-（动态特性）"><span class="toc-text">15、Property 对象 （动态特性）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#属性-5"><span class="toc-text">属性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#16、Record-对象"><span class="toc-text">16、Record 对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#属性-6"><span class="toc-text">属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法-4"><span class="toc-text">方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集合-3"><span class="toc-text">集合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Fields-集合的属性"><span class="toc-text">Fields 集合的属性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#17、Recordset-对象"><span class="toc-text">17、Recordset 对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Recordset-Open参数"><span class="toc-text">Recordset Open参数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Open实例（更多参数）"><span class="toc-text">Open实例（更多参数）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#属性-7"><span class="toc-text">属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法-5"><span class="toc-text">方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#事件-1"><span class="toc-text">事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集合-4"><span class="toc-text">集合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Fields-集合的属性-1"><span class="toc-text">Fields 集合的属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Properties-集合的属性"><span class="toc-text">Properties 集合的属性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#18、-Stream-对象"><span class="toc-text">18、 Stream 对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#属性-8"><span class="toc-text">属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法-6"><span class="toc-text">方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#19、ADO-数据类型"><span class="toc-text">19、ADO 数据类型</span></a></li></ol></li></ol></div></div></div><div id="body-wrap"><div class="post-bg" id="nav" style="background-image: url(https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/07/alpaca-5405469_1280.jpg)"><div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">Gxkon's Blog</a></span><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 娱乐</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li></ul></div></div><span class="toggle-menu close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span></span></div><div id="post-info"><div id="post-title"><div class="posttitle">ADO 教程</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2020-07-17 20:20:55"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2020-07-17</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2020-09-13 11:36:47"><i class="fa fa-history" aria-hidden="true"></i> 更新于 2020-09-13</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Web%E6%95%99%E7%A8%8B%E7%B3%BB%E5%88%97/">Web教程系列</a></span></div><div class="meta-secondline"> </div><div class="meta-thirdline"><span class="post-meta-pv-cv"><i class="fa fa-eye post-meta__icon" aria-hidden="true"> </i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"><span class="post-meta__separator">|</span><i class="post-meta__icon fa fa-comment-o" aria-hidden="true"></i><span>评论数:</span><a href="/posts/8726eb83/#post-comment"><span class="gitalk-comment-count comment-count"></span></a></span></div></div></div></div><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h1 id="ADO-教程"><a href="#ADO-教程" class="headerlink" title="ADO 教程"></a>ADO 教程</h1><blockquote>
+<p>一个微软的 Active-X 组件</p>
+<ul>
+<li><p>ADO 指 ActiveX 数据对象（ActiveX Data Objects）</p>
+</li>
+<li><p>用于从网页访问数据库</p>
+</li>
+<li><p>会随微软的 IIS 被自动安装</p>
+</li>
+<li><p>是一个访问数据库中数据的编程接口</p>
+</li>
+</ul>
+</blockquote>
+<h2 id="应当具备的基础知识"><a href="#应当具备的基础知识" class="headerlink" title="应当具备的基础知识"></a>应当具备的基础知识</h2><p>在继续学习之前，您需要对下面的知识有基本的了解：</p>
+<ul>
+<li>WWW、HTML 以及对网站构建的基本了解</li>
+<li>ASP（动态服务器页面）</li>
+<li>SQL（结构化查询语言）</li>
+</ul>
+<h2 id="0、从-ASP-页面访问数据库"><a href="#0、从-ASP-页面访问数据库" class="headerlink" title="0、从 ASP 页面访问数据库"></a>0、从 ASP 页面访问数据库</h2><p>从一个 ASP 页面内部访问数据库的通常的方法是：</p>
+<h4 id="1-创建一个到数据库的-ADO-连接"><a href="#1-创建一个到数据库的-ADO-连接" class="headerlink" title="1 创建一个到数据库的 ADO 连接"></a>1 创建一个到数据库的 ADO 连接</h4><h4 id="2-打开数据库连接"><a href="#2-打开数据库连接" class="headerlink" title="2 打开数据库连接"></a>2 打开数据库连接</h4><h4 id="3-创建-ADO-记录集"><a href="#3-创建-ADO-记录集" class="headerlink" title="3 创建 ADO 记录集"></a>3 创建 ADO 记录集</h4><h4 id="4-从记录集提取您需要的数据"><a href="#4-从记录集提取您需要的数据" class="headerlink" title="4 从记录集提取您需要的数据"></a>4 从记录集提取您需要的数据</h4><h4 id="5-关闭记录集"><a href="#5-关闭记录集" class="headerlink" title="5 关闭记录集"></a>5 关闭记录集</h4><h4 id="6-关闭连接"><a href="#6-关闭连接" class="headerlink" title="6 关闭连接"></a>6 关闭连接</h4><h2 id="1、建立并打开一个数据库连接"><a href="#1、建立并打开一个数据库连接" class="headerlink" title="1、建立并打开一个数据库连接"></a>1、建立并打开一个数据库连接</h2><p>在从某个网页访问数据之前，必须先建立一个数据库连接</p>
+<h3 id="创建一个-DSN-less-数据库连接"><a href="#创建一个-DSN-less-数据库连接" class="headerlink" title="创建一个 DSN-less 数据库连接"></a>创建一个 DSN-less 数据库连接</h3><ul>
+<li>DSN-less 连接可被用于您的站点上的任何微软 Access 数据库</li>
+<li>必须规定微软的 Access 数据库驱动程序（Provider），以及此数据库在计算机上的物理路径</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;连接数据库，一个名为 &quot;northwind.mdb&quot; 的数据库位于 &quot;c:&#x2F;webdata&#x2F;&quot; 的 web 目录中</span><br><span class="line">&lt;%</span><br><span class="line">set conn&#x3D;Server.CreateObject(&quot;ADODB.Connection&quot;)</span><br><span class="line">conn.Provider&#x3D;&quot;Microsoft.Jet.OLEDB.4.0&quot;</span><br><span class="line">conn.Open &quot;c:&#x2F;webdata&#x2F;northwind.mdb&quot;</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建一个-ODBC-数据库连接"><a href="#创建一个-ODBC-数据库连接" class="headerlink" title="创建一个 ODBC 数据库连接"></a>创建一个 ODBC 数据库连接</h3><ul>
+<li>通过一个 ODBC 连接，您可以连接到您的网络中任何计算机上的任何数据库，只要 ODBC 连接是可用的</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;连接一个名为 &quot;northwind&quot; 的 ODBC 数据库</span><br><span class="line">&lt;%</span><br><span class="line">set conn&#x3D;Server.CreateObject(&quot;ADODB.Connection&quot;)</span><br><span class="line">conn.Open &quot;northwind&quot;</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、创建ADO-Recordset（记录集）"><a href="#2、创建ADO-Recordset（记录集）" class="headerlink" title="2、创建ADO Recordset（记录集）"></a>2、创建ADO Recordset（记录集）</h2><p>如需读取数据库的数据，那么其中的数据必须首先被载入一个记录集中</p>
+<h3 id="创建一个-ADO-表记录集（ADO-Table-Recordset）"><a href="#创建一个-ADO-表记录集（ADO-Table-Recordset）" class="headerlink" title="创建一个 ADO 表记录集（ADO Table Recordset）"></a>创建一个 ADO 表记录集（ADO Table Recordset）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;连接名为 &quot;Northwind&quot; 的数据库，并访问数据库中的 &quot;Customers&quot; 表</span><br><span class="line">&lt;%</span><br><span class="line">set conn&#x3D;Server.CreateObject(&quot;ADODB.Connection&quot;)</span><br><span class="line">conn.Provider&#x3D;&quot;Microsoft.Jet.OLEDB.4.0&quot;</span><br><span class="line">conn.Open &quot;c:&#x2F;webdata&#x2F;northwind.mdb&quot;</span><br><span class="line"></span><br><span class="line">set rs&#x3D;Server.CreateObject(&quot;ADODB.recordset&quot;)</span><br><span class="line">rs.Open &quot;Customers&quot;, conn</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建一个-ADO-SQL-记录集-（ADO-SQL-Recordset）"><a href="#创建一个-ADO-SQL-记录集-（ADO-SQL-Recordset）" class="headerlink" title="创建一个 ADO SQL 记录集 （ADO SQL Recordset）"></a>创建一个 ADO SQL 记录集 （ADO SQL Recordset）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;%</span><br><span class="line">set conn&#x3D;Server.CreateObject(&quot;ADODB.Connection&quot;)</span><br><span class="line">conn.Provider&#x3D;&quot;Microsoft.Jet.OLEDB.4.0&quot;</span><br><span class="line">conn.Open &quot;c:&#x2F;webdata&#x2F;northwind.mdb&quot;</span><br><span class="line"></span><br><span class="line">set rs&#x3D;Server.CreateObject(&quot;ADODB.recordset&quot;)</span><br><span class="line">rs.Open &quot;Select * from Customers&quot;, conn</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="从记录集中提取数据"><a href="#从记录集中提取数据" class="headerlink" title="从记录集中提取数据"></a>从记录集中提取数据</h3><p>在记录集被打开后，我们可以从记录集中提取数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;%</span><br><span class="line">。。。&#x2F;&#x2F;同上，省略</span><br><span class="line">    </span><br><span class="line">for each x in rs.fields</span><br><span class="line">  response.write(x.name)</span><br><span class="line">  response.write(&quot; &#x3D; &quot;)</span><br><span class="line">  response.write(x.value)</span><br><span class="line">next</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3、显示来自记录集中的数据"><a href="#3、显示来自记录集中的数据" class="headerlink" title="3、显示来自记录集中的数据"></a>3、显示来自记录集中的数据</h2><ul>
+<li>最常用的方法，就是把数据显示在 HTML 表格中</li>
+</ul>
+<h3 id="显示字段名称和字段值"><a href="#显示字段名称和字段值" class="headerlink" title="显示字段名称和字段值"></a>显示字段名称和字段值</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">&lt;%</span><br><span class="line">set conn&#x3D;Server.CreateObject(&quot;ADODB.Connection&quot;)</span><br><span class="line">conn.Provider&#x3D;&quot;Microsoft.Jet.OLEDB.4.0&quot;</span><br><span class="line">conn.Open &quot;c:&#x2F;webdata&#x2F;northwind.mdb&quot;</span><br><span class="line"></span><br><span class="line">set rs &#x3D; Server.CreateObject(&quot;ADODB.recordset&quot;)</span><br><span class="line">rs.Open &quot;SELECT * FROM Customers&quot;, conn</span><br><span class="line"></span><br><span class="line">do until rs.EOF</span><br><span class="line">  for each x in rs.Fields</span><br><span class="line">    Response.Write(x.name)</span><br><span class="line">    Response.Write(&quot; &#x3D; &quot;)</span><br><span class="line">    Response.Write(x.value &amp; &quot;&lt;br&gt;&quot;)</span><br><span class="line">  next</span><br><span class="line">  Response.Write(&quot;&lt;br&gt;&quot;)</span><br><span class="line">  rs.MoveNext</span><br><span class="line">loop</span><br><span class="line"></span><br><span class="line">rs.close</span><br><span class="line">conn.close</span><br><span class="line">%&gt;</span><br><span class="line">&#x2F;&#x2F;结果</span><br><span class="line">CustomerID &#x3D; Nokia</span><br><span class="line">CompanyName &#x3D; Nokia Corporation</span><br><span class="line">ContactName &#x3D; Olli-Pekka Kallasvuo</span><br><span class="line">Address &#x3D; P.O. Box 226, FIN-00045 Nokia Group, Finland</span><br><span class="line">City &#x3D; Helsinki</span><br><span class="line">PostalCode &#x3D; none</span><br><span class="line">Country &#x3D; Finland</span><br><span class="line"></span><br><span class="line">CustomerID &#x3D; Google</span><br><span class="line">CompanyName &#x3D; Google, Inc.</span><br><span class="line">ContactName &#x3D; Larry Page</span><br><span class="line">Address &#x3D; 1600 Amphitheatre Parkway Mountain View, CA 94043</span><br><span class="line">City &#x3D; Mountain View</span><br><span class="line">PostalCode &#x3D; 94043</span><br><span class="line">Country &#x3D; USA</span><br><span class="line">。。。</span><br></pre></td></tr></table></figure>
+
+<h4 id="在一个-HTML-表格中显示"><a href="#在一个-HTML-表格中显示" class="headerlink" title="在一个 HTML 表格中显示"></a>在一个 HTML 表格中显示</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;%</span><br><span class="line">set conn&#x3D;Server.CreateObject(&quot;ADODB.Connection&quot;)</span><br><span class="line">conn.Provider&#x3D;&quot;Microsoft.Jet.OLEDB.4.0&quot;</span><br><span class="line">conn.Open &quot;c:&#x2F;webdata&#x2F;northwind.mdb&quot;</span><br><span class="line"></span><br><span class="line">set rs &#x3D; Server.CreateObject(&quot;ADODB.recordset&quot;)</span><br><span class="line">sql&#x3D;&quot;SELECT Companyname, Contactname FROM Customers&quot;</span><br><span class="line">rs.Open sql, conn</span><br><span class="line">%&gt;</span><br><span class="line"></span><br><span class="line">&lt;table border&#x3D;&quot;1&quot; width&#x3D;&quot;100%&quot;&gt;</span><br><span class="line">  &lt;tr&gt;</span><br><span class="line">  &lt;%for each x in rs.Fields</span><br><span class="line">    response.write(&quot;&lt;th&gt;&quot; &amp; x.name &amp; &quot;&lt;&#x2F;th&gt;&quot;)</span><br><span class="line">  next%&gt;</span><br><span class="line">  &lt;&#x2F;tr&gt;</span><br><span class="line">  &lt;%do until rs.EOF%&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">    &lt;%for each x in rs.Fields%&gt;</span><br><span class="line">      &lt;td&gt;&lt;%Response.Write(x.value)%&gt;&lt;&#x2F;td&gt;</span><br><span class="line">    &lt;%next</span><br><span class="line">    rs.MoveNext%&gt;</span><br><span class="line">    &lt;&#x2F;tr&gt;</span><br><span class="line">  &lt;%loop</span><br><span class="line">  rs.close</span><br><span class="line">  conn.close</span><br><span class="line">  %&gt;</span><br><span class="line">&lt;&#x2F;table&gt;</span><br></pre></td></tr></table></figure>
+
+<p>结果</p>
+<table>
+<thead>
+<tr>
+<th>Companyname</th>
+<th>Contactname</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Nokia Corporation</td>
+<td>Olli-Pekka Kallasvuo</td>
+</tr>
+<tr>
+<td>Google, Inc.</td>
+<td>Larry Page</td>
+</tr>
+<tr>
+<td>Sony Corporation of America</td>
+<td>Kazuo Hirai</td>
+</tr>
+<tr>
+<td>Apple Computer, Inc.</td>
+<td>Steven Jobs</td>
+</tr>
+<tr>
+<td>BAIDU, Inc</td>
+<td>Li YanHong</td>
+</tr>
+<tr>
+<td>Canon USA, Inc.</td>
+<td>Tsuneji Uchida</td>
+</tr>
+</tbody></table>
+<h2 id="4、使用-SQL-创建查询"><a href="#4、使用-SQL-创建查询" class="headerlink" title="4、使用 SQL 创建查询"></a>4、使用 SQL 创建查询</h2><p>使用 SQL 来创建查询，这样就可以指定仅查看选定的记录和字段</p>
+<h3 id="案例1、2"><a href="#案例1、2" class="headerlink" title="案例1、2"></a>案例1、2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;仅仅显示 &quot;Customers&quot; 表的 &quot;Companyname&quot; 字段中以 A 开头的记录</span><br><span class="line">&lt;%</span><br><span class="line">set conn&#x3D;Server.CreateObject(&quot;ADODB.Connection&quot;)</span><br><span class="line">conn.Provider&#x3D;&quot;Microsoft.Jet.OLEDB.4.0&quot;</span><br><span class="line">conn.Open &quot;c:&#x2F;webdata&#x2F;northwind.mdb&quot;</span><br><span class="line"></span><br><span class="line">set rs&#x3D;Server.CreateObject(&quot;ADODB.recordset&quot;)</span><br><span class="line">sql&#x3D;&quot;SELECT Companyname, Contactname FROM Customers</span><br><span class="line">WHERE CompanyName LIKE &#39;A%&#39;&quot;</span><br><span class="line">rs.Open sql, conn</span><br><span class="line">%&gt;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;仅仅显示 &quot;Customers&quot; 表的 &quot;Companyname&quot; 字段中大于 E 的记录</span><br><span class="line">&lt;%</span><br><span class="line">set conn&#x3D;Server.CreateObject(&quot;ADODB.Connection&quot;)</span><br><span class="line">conn.Provider&#x3D;&quot;Microsoft.Jet.OLEDB.4.0&quot;</span><br><span class="line">conn.Open(Server.Mappath(&quot;&#x2F;db&#x2F;northwind.mdb&quot;))</span><br><span class="line">set rs &#x3D; Server.CreateObject(&quot;ADODB.recordset&quot;)</span><br><span class="line">sql&#x3D;&quot;SELECT Companyname, Contactname FROM Customers WHERE CompanyName&gt;&#39;E&#39;&quot;</span><br><span class="line">rs.Open sql, conn</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="案例3"><a href="#案例3" class="headerlink" title="案例3"></a>案例3</h3><p>让用户根据国别来选择客户</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">&lt;%</span><br><span class="line">set conn&#x3D;Server.CreateObject(&quot;ADODB.Connection&quot;)</span><br><span class="line">conn.Provider&#x3D;&quot;Microsoft.Jet.OLEDB.4.0&quot;</span><br><span class="line">conn.Open(Server.Mappath(&quot;&#x2F;db&#x2F;northwind.mdb&quot;))</span><br><span class="line"></span><br><span class="line">set rs&#x3D;Server.CreateObject(&quot;ADODB.recordset&quot;)</span><br><span class="line">sql&#x3D;&quot;SELECT DISTINCT Country FROM Customers ORDER BY Country&quot;</span><br><span class="line">rs.Open sql,conn</span><br><span class="line"></span><br><span class="line">country&#x3D;request.form(&quot;country&quot;)</span><br><span class="line"></span><br><span class="line">%&gt;</span><br><span class="line"></span><br><span class="line">&lt;form method&#x3D;&quot;post&quot;&gt;</span><br><span class="line">Choose Country &lt;select name&#x3D;&quot;country&quot;&gt;</span><br><span class="line">&lt;%  do until rs.EOF</span><br><span class="line">    response.write(&quot;&lt;option&quot;)</span><br><span class="line">    if rs.fields(&quot;country&quot;)&#x3D;country then</span><br><span class="line">      response.write(&quot; selected&quot;)</span><br><span class="line">    end if</span><br><span class="line">    response.write(&quot;&gt;&quot;)</span><br><span class="line">    response.write(rs.fields(&quot;Country&quot;))</span><br><span class="line">    rs.MoveNext</span><br><span class="line">loop</span><br><span class="line">rs.Close</span><br><span class="line">set rs&#x3D;Nothing %&gt;</span><br><span class="line">&lt;&#x2F;select&gt;</span><br><span class="line">&lt;input type&#x3D;&quot;submit&quot; value&#x3D;&quot;Show customers&quot;&gt;</span><br><span class="line">&lt;&#x2F;form&gt;</span><br><span class="line"></span><br><span class="line">&lt;%</span><br><span class="line">if country&lt;&gt;&quot;&quot; then</span><br><span class="line">   sql&#x3D;&quot;SELECT Companyname,Contactname,Country FROM Customers WHERE country&#x3D;&#39;&quot; &amp; country &amp; &quot;&#39;&quot;</span><br><span class="line">   set rs&#x3D;Server.CreateObject(&quot;ADODB.Recordset&quot;)</span><br><span class="line">   rs.Open sql,conn</span><br><span class="line">%&gt;</span><br><span class="line">   &lt;table width&#x3D;&quot;100%&quot; cellspacing&#x3D;&quot;0&quot; cellpadding&#x3D;&quot;2&quot; border&#x3D;&quot;1&quot;&gt;</span><br><span class="line">   &lt;tr&gt;</span><br><span class="line">     &lt;th&gt;Companyname&lt;&#x2F;th&gt;</span><br><span class="line">     &lt;th&gt;Contactname&lt;&#x2F;th&gt;</span><br><span class="line">     &lt;th&gt;Country&lt;&#x2F;th&gt;</span><br><span class="line">   &lt;&#x2F;tr&gt;</span><br><span class="line">&lt;%</span><br><span class="line">do until rs.EOF</span><br><span class="line">   response.write(&quot;&lt;tr&gt;&quot;)</span><br><span class="line">   response.write(&quot;&lt;td&gt;&quot; &amp; rs.fields(&quot;companyname&quot;) &amp; &quot;&lt;&#x2F;td&gt;&quot;)</span><br><span class="line">   response.write(&quot;&lt;td&gt;&quot; &amp; rs.fields(&quot;contactname&quot;) &amp; &quot;&lt;&#x2F;td&gt;&quot;)</span><br><span class="line">   response.write(&quot;&lt;td&gt;&quot; &amp; rs.fields(&quot;country&quot;) &amp; &quot;&lt;&#x2F;td&gt;&quot;)</span><br><span class="line">   response.write(&quot;&lt;&#x2F;tr&gt;&quot;)</span><br><span class="line">   rs.MoveNext</span><br><span class="line">loop</span><br><span class="line">rs.close</span><br><span class="line">conn.Close</span><br><span class="line">set rs&#x3D;Nothing</span><br><span class="line">set conn&#x3D;Nothing%&gt;</span><br><span class="line">&lt;&#x2F;table&gt;</span><br><span class="line">&lt;%  end if %&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5、使用SQL排序"><a href="#5、使用SQL排序" class="headerlink" title="5、使用SQL排序"></a>5、使用SQL排序</h2><blockquote>
+<p> 使用SQL对记录集中的数据进行排序</p>
+</blockquote>
+<h3 id="案例1"><a href="#案例1" class="headerlink" title="案例1"></a>案例1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;显示 &quot;Customers&quot; 表中的&quot;Companyname&quot;和&quot;Contactname&quot;字段，并根据&quot;Companyname&quot;进行排序</span><br><span class="line">&lt;%</span><br><span class="line">set conn&#x3D;Server.CreateObject(&quot;ADODB.Connection&quot;)</span><br><span class="line">conn.Provider&#x3D;&quot;Microsoft.Jet.OLEDB.4.0&quot;</span><br><span class="line">conn.Open &quot;c:&#x2F;webdata&#x2F;northwind.mdb&quot;</span><br><span class="line"></span><br><span class="line">set rs &#x3D; Server.CreateObject(&quot;ADODB.recordset&quot;)</span><br><span class="line">sql&#x3D;&quot;SELECT Companyname, Contactname FROM</span><br><span class="line">Customers ORDER BY CompanyName&quot;</span><br><span class="line">rs.Open sql, conn</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="案例2"><a href="#案例2" class="headerlink" title="案例2"></a>案例2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;根据指定的字段名处对记录进行降序排序</span><br><span class="line">&lt;%</span><br><span class="line">set conn&#x3D;Server.CreateObject(&quot;ADODB.Connection&quot;)</span><br><span class="line">conn.Provider&#x3D;&quot;Microsoft.Jet.OLEDB.4.0&quot;</span><br><span class="line">conn.Open(Server.Mappath(&quot;&#x2F;db&#x2F;northwind.mdb&quot;))</span><br><span class="line">set rs &#x3D; Server.CreateObject(&quot;ADODB.recordset&quot;)</span><br><span class="line">sql&#x3D;&quot;SELECT Companyname, Contactname FROM Customers ORDER BY CompanyName DESC&quot;</span><br><span class="line">rs.Open sql, conn</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="6、使用-SQL添加记录"><a href="#6、使用-SQL添加记录" class="headerlink" title="6、使用 SQL添加记录"></a>6、使用 SQL添加记录</h2><p>使用 SQL 的 <code>INSERT INTO 命令</code>向数据库中的表添加记录</p>
+<ol>
+<li>首先要创建一个表单，这个表单包含了我们需要从中搜集数据的输入域</li>
+<li>当用户按下确认按钮时，向 表添加一条新记录的代码</li>
+</ol>
+<h3 id="在使用-INSERT-command-命令时，请注意以下事项："><a href="#在使用-INSERT-command-命令时，请注意以下事项：" class="headerlink" title="在使用 INSERT command 命令时，请注意以下事项："></a>在使用 INSERT command 命令时，请注意以下事项：</h3><ul>
+<li>如果表含有一个主键，请确保向主键字段添加的值是唯一且非空的（否则，provider 就不会追加此记录，亦或发生错误）</li>
+<li>如果表含有一个自动编号的字段，请不要在 INSERT 命令中涉及此字段（这个字段的值是由 provider 负责的）</li>
+</ul>
+<h3 id="创建表单（获取数据）"><a href="#创建表单（获取数据）" class="headerlink" title="创建表单（获取数据）"></a>创建表单（获取数据）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;form method&#x3D;&quot;post&quot; action&#x3D;&quot;demo_add.asp&quot;&gt;</span><br><span class="line">&lt;table&gt;</span><br><span class="line">&lt;tr&gt;</span><br><span class="line">&lt;td&gt;CustomerID:&lt;&#x2F;td&gt;</span><br><span class="line">&lt;td&gt;&lt;input name&#x3D;&quot;custid&quot;&gt;&lt;&#x2F;td&gt;</span><br><span class="line">&lt;&#x2F;tr&gt;&lt;tr&gt;</span><br><span class="line">&lt;td&gt;Company Name:&lt;&#x2F;td&gt;</span><br><span class="line">&lt;td&gt;&lt;input name&#x3D;&quot;compname&quot;&gt;&lt;&#x2F;td&gt;</span><br><span class="line">&lt;&#x2F;tr&gt;&lt;tr&gt;</span><br><span class="line">&lt;td&gt;Contact Name:&lt;&#x2F;td&gt;</span><br><span class="line">&lt;td&gt;&lt;input name&#x3D;&quot;contname&quot;&gt;&lt;&#x2F;td&gt;</span><br><span class="line">&lt;&#x2F;tr&gt;&lt;tr&gt;</span><br><span class="line">&lt;td&gt;Address:&lt;&#x2F;td&gt;</span><br><span class="line">&lt;td&gt;&lt;input name&#x3D;&quot;address&quot;&gt;&lt;&#x2F;td&gt;</span><br><span class="line">&lt;&#x2F;tr&gt;&lt;tr&gt;</span><br><span class="line">&lt;td&gt;City:&lt;&#x2F;td&gt;</span><br><span class="line">&lt;td&gt;&lt;input name&#x3D;&quot;city&quot;&gt;&lt;&#x2F;td&gt;</span><br><span class="line">&lt;&#x2F;tr&gt;&lt;tr&gt;</span><br><span class="line">&lt;td&gt;Postal Code:&lt;&#x2F;td&gt;</span><br><span class="line">&lt;td&gt;&lt;input name&#x3D;&quot;postcode&quot;&gt;&lt;&#x2F;td&gt;</span><br><span class="line">&lt;&#x2F;tr&gt;&lt;tr&gt;</span><br><span class="line">&lt;td&gt;Country:&lt;&#x2F;td&gt;</span><br><span class="line">&lt;td&gt;&lt;input name&#x3D;&quot;country&quot;&gt;&lt;&#x2F;td&gt;</span><br><span class="line">&lt;&#x2F;tr&gt;</span><br><span class="line">&lt;&#x2F;table&gt;</span><br><span class="line">&lt;br&gt;&lt;br&gt;</span><br><span class="line">&lt;input type&#x3D;&quot;submit&quot; value&#x3D;&quot;Add New&quot;&gt;</span><br><span class="line">&lt;input type&#x3D;&quot;reset&quot; value&#x3D;&quot;Cancel&quot;&gt;</span><br><span class="line">&lt;&#x2F;form&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="添加记录"><a href="#添加记录" class="headerlink" title="添加记录"></a>添加记录</h3><p><strong>当用户按下确认按钮时，这个表单就会被送往名为 “demo_add.asp” 的文件。</strong></p>
+<p><strong>文件 “demo_add.asp” 中含有可向 Customers 表添加一条新记录的代码</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;%</span><br><span class="line">set conn&#x3D;Server.CreateObject(&quot;ADODB.Connection&quot;)</span><br><span class="line">conn.Provider&#x3D;&quot;Microsoft.Jet.OLEDB.4.0&quot;</span><br><span class="line">conn.Open &quot;c:&#x2F;webdata&#x2F;northwind.mdb&quot;</span><br><span class="line"></span><br><span class="line">sql&#x3D;&quot;INSERT INTO customers (customerID,companyname,&quot;</span><br><span class="line">sql&#x3D;sql &amp; &quot;contactname,address,city,postalcode,country)&quot;</span><br><span class="line">sql&#x3D;sql &amp; &quot; VALUES &quot;</span><br><span class="line">sql&#x3D;sql &amp; &quot;(&#39;&quot; &amp; Request.Form(&quot;custid&quot;) &amp; &quot;&#39;,&quot;</span><br><span class="line">sql&#x3D;sql &amp; &quot;&#39;&quot; &amp; Request.Form(&quot;compname&quot;) &amp; &quot;&#39;,&quot;</span><br><span class="line">sql&#x3D;sql &amp; &quot;&#39;&quot; &amp; Request.Form(&quot;contname&quot;) &amp; &quot;&#39;,&quot;</span><br><span class="line">sql&#x3D;sql &amp; &quot;&#39;&quot; &amp; Request.Form(&quot;address&quot;) &amp; &quot;&#39;,&quot;</span><br><span class="line">sql&#x3D;sql &amp; &quot;&#39;&quot; &amp; Request.Form(&quot;city&quot;) &amp; &quot;&#39;,&quot;</span><br><span class="line">sql&#x3D;sql &amp; &quot;&#39;&quot; &amp; Request.Form(&quot;postcode&quot;) &amp; &quot;&#39;,&quot;</span><br><span class="line">sql&#x3D;sql &amp; &quot;&#39;&quot; &amp; Request.Form(&quot;country&quot;) &amp; &quot;&#39;)&quot;</span><br><span class="line"></span><br><span class="line">on error resume next</span><br><span class="line">conn.Execute sql,recaffected</span><br><span class="line">if err&lt;&gt;0 then</span><br><span class="line">  Response.Write(&quot;No update permissions!&quot;)</span><br><span class="line">else</span><br><span class="line">  Response.Write(&quot;&lt;h3&gt;&quot; &amp; recaffected &amp; &quot; record added&lt;&#x2F;h3&gt;&quot;)</span><br><span class="line">end if</span><br><span class="line">conn.close</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="7、使用-SQL更新记录"><a href="#7、使用-SQL更新记录" class="headerlink" title="7、使用 SQL更新记录"></a>7、使用 SQL更新记录</h2><p>使用 SQL 的 <code>UPDATE</code> 来更新数据库表中的某条记录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">&lt;h2&gt;Update Record&lt;&#x2F;h2&gt;</span><br><span class="line">&lt;%</span><br><span class="line">set conn&#x3D;Server.CreateObject(&quot;ADODB.Connection&quot;)</span><br><span class="line">conn.Provider&#x3D;&quot;Microsoft.Jet.OLEDB.4.0&quot;</span><br><span class="line">conn.Open &quot;c:&#x2F;webdata&#x2F;northwind.mdb&quot;</span><br><span class="line"></span><br><span class="line">cid&#x3D;Request.Form(&quot;customerID&quot;)</span><br><span class="line"></span><br><span class="line">if Request.form(&quot;companyname&quot;)&#x3D;&quot;&quot; then</span><br><span class="line">  set rs&#x3D;Server.CreateObject(&quot;ADODB.Recordset&quot;)</span><br><span class="line">  rs.open &quot;SELECT * FROM customers WHERE customerID&#x3D;&#39;&quot; &amp; cid &amp; &quot;&#39;&quot;,conn</span><br><span class="line">  %&gt;</span><br><span class="line">  &lt;form method&#x3D;&quot;post&quot; action&#x3D;&quot;demo_update.asp&quot;&gt;</span><br><span class="line">  &lt;table&gt;</span><br><span class="line">  &lt;%for each x in rs.Fields%&gt;</span><br><span class="line">  &lt;tr&gt;</span><br><span class="line">  &lt;td&gt;&lt;%&#x3D;x.name%&gt;&lt;&#x2F;td&gt;</span><br><span class="line">  &lt;td&gt;&lt;input name&#x3D;&quot;&lt;%&#x3D;x.name%&gt;&quot; value&#x3D;&quot;&lt;%&#x3D;x.value%&gt;&quot;&gt;&lt;&#x2F;td&gt;</span><br><span class="line">  &lt;%next%&gt;</span><br><span class="line">  &lt;&#x2F;tr&gt;</span><br><span class="line">  &lt;&#x2F;table&gt;</span><br><span class="line">  &lt;br&gt;&lt;br&gt;</span><br><span class="line">  &lt;input type&#x3D;&quot;submit&quot; value&#x3D;&quot;Update record&quot;&gt;</span><br><span class="line">  &lt;&#x2F;form&gt;</span><br><span class="line">&lt;%</span><br><span class="line">else</span><br><span class="line">  sql&#x3D;&quot;UPDATE customers SET &quot;</span><br><span class="line">  sql&#x3D;sql &amp; &quot;companyname&#x3D;&#39;&quot; &amp; Request.Form(&quot;companyname&quot;) &amp; &quot;&#39;,&quot;</span><br><span class="line">  sql&#x3D;sql &amp; &quot;contactname&#x3D;&#39;&quot; &amp; Request.Form(&quot;contactname&quot;) &amp; &quot;&#39;,&quot;</span><br><span class="line">  sql&#x3D;sql &amp; &quot;address&#x3D;&#39;&quot; &amp; Request.Form(&quot;address&quot;) &amp; &quot;&#39;,&quot;</span><br><span class="line">  sql&#x3D;sql &amp; &quot;city&#x3D;&#39;&quot; &amp; Request.Form(&quot;city&quot;) &amp; &quot;&#39;,&quot;</span><br><span class="line">  sql&#x3D;sql &amp; &quot;postalcode&#x3D;&#39;&quot; &amp; Request.Form(&quot;postalcode&quot;) &amp; &quot;&#39;,&quot;</span><br><span class="line">  sql&#x3D;sql &amp; &quot;country&#x3D;&#39;&quot; &amp; Request.Form(&quot;country&quot;) &amp; &quot;&#39;&quot;</span><br><span class="line">  sql&#x3D;sql &amp; &quot; WHERE customerID&#x3D;&#39;&quot; &amp; cid &amp; &quot;&#39;&quot;</span><br><span class="line">  on error resume next</span><br><span class="line">  conn.Execute sql</span><br><span class="line">  if err&lt;&gt;0 then</span><br><span class="line">    response.write(&quot;No update permissions!&quot;)</span><br><span class="line">  else</span><br><span class="line">    response.write(&quot;Record &quot; &amp; cid &amp; &quot; was updated!&quot;)</span><br><span class="line">  end if</span><br><span class="line">end if</span><br><span class="line">conn.close</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="8、使用-SQL删除记录"><a href="#8、使用-SQL删除记录" class="headerlink" title="8、使用 SQL删除记录"></a>8、使用 SQL删除记录</h2><p>使用 SQL 的 <code>DELETE 命令</code>来删除数据库表中的某条记录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">&lt;h2&gt;Delete Record&lt;&#x2F;h2&gt;</span><br><span class="line">&lt;%</span><br><span class="line">set conn&#x3D;Server.CreateObject(&quot;ADODB.Connection&quot;)</span><br><span class="line">conn.Provider&#x3D;&quot;Microsoft.Jet.OLEDB.4.0&quot;</span><br><span class="line">conn.Open &quot;c:&#x2F;webdata&#x2F;northwind.mdb&quot;</span><br><span class="line"></span><br><span class="line">cid&#x3D;Request.Form(&quot;customerID&quot;)</span><br><span class="line"></span><br><span class="line">if Request.form(&quot;companyname&quot;)&#x3D;&quot;&quot; then</span><br><span class="line">  set rs&#x3D;Server.CreateObject(&quot;ADODB.Recordset&quot;)</span><br><span class="line">  rs.open &quot;SELECT * FROM customers WHERE customerID&#x3D;&#39;&quot; &amp; cid &amp; &quot;&#39;&quot;,conn</span><br><span class="line">  %&gt;</span><br><span class="line">  &lt;form method&#x3D;&quot;post&quot; action&#x3D;&quot;demo_delete.html&quot;&gt;</span><br><span class="line">  &lt;table&gt;</span><br><span class="line">  &lt;%for each x in rs.Fields%&gt;</span><br><span class="line">  &lt;tr&gt;</span><br><span class="line">  &lt;td&gt;&lt;%&#x3D;x.name%&gt;&lt;&#x2F;td&gt;</span><br><span class="line">  &lt;td&gt;&lt;input name&#x3D;&quot;&lt;%&#x3D;x.name%&gt;&quot; value&#x3D;&quot;&lt;%&#x3D;x.value%&gt;&quot;&gt;&lt;&#x2F;td&gt;</span><br><span class="line">  &lt;%next%&gt;</span><br><span class="line">  &lt;&#x2F;tr&gt;</span><br><span class="line">  &lt;&#x2F;table&gt;</span><br><span class="line">  &lt;br&gt;&lt;br&gt;</span><br><span class="line">  &lt;input type&#x3D;&quot;submit&quot; value&#x3D;&quot;Delete record&quot;&gt;</span><br><span class="line">  &lt;&#x2F;form&gt;</span><br><span class="line">&lt;%</span><br><span class="line">else</span><br><span class="line">  sql&#x3D;&quot;DELETE FROM customers&quot;</span><br><span class="line">  sql&#x3D;sql &amp; &quot; WHERE customerID&#x3D;&#39;&quot; &amp; cid &amp; &quot;&#39;&quot;</span><br><span class="line">  on error resume next</span><br><span class="line">  conn.Execute sql</span><br><span class="line">  if err&lt;&gt;0 then</span><br><span class="line">    response.write(&quot;No update permissions!&quot;)</span><br><span class="line">  else</span><br><span class="line">    response.write(&quot;Record &quot; &amp; cid &amp; &quot; was deleted!&quot;)</span><br><span class="line">  end if</span><br><span class="line">end if</span><br><span class="line">conn.close</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="9、通过-GetString-加速脚本"><a href="#9、通过-GetString-加速脚本" class="headerlink" title="9、通过 GetString() 加速脚本"></a>9、通过 GetString() 加速脚本</h2><p>请使用 GetString() 方法来加速您的 ASP 脚本（来代替多行的 Response.Write）</p>
+<ul>
+<li>对于一个大型的查询来说，若使用大量的 Response.Write 命令，这样做会增加脚本的处理时间</li>
+<li>解决的办法是创<strong>建全部字符串</strong>，<code>从 &lt;table&gt; 到 &lt;/table&gt;</code>，然后将其输出 <ul>
+<li>只使用一次 Response.Write</li>
+</ul>
+</li>
+</ul>
+<h3 id="GetString-方法"><a href="#GetString-方法" class="headerlink" title="GetString()方法"></a>GetString()方法</h3><ul>
+<li><p>仅使用一次 Response.Write，就可以显示所有的字符串。</p>
+<ul>
+<li>同时它甚至不需要 do..loop 代码以及条件测试来检查记录集是否处于 EOF</li>
+</ul>
+</li>
+<li><p>语法</p>
+<ul>
+<li><code>str = rs.GetString(format,rows,coldel,rowdel,nullexpr)</code></li>
+<li>所有的参数都是可选的</li>
+<li><code>coldel</code> - 用作列分隔符的 HTML</li>
+<li><code>rowdel</code> - 用作行分隔符的 HTML</li>
+<li><code>nullexpr</code> - 当列为空时所使用的 HTML</li>
+</ul>
+</li>
+</ul>
+<h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;%</span><br><span class="line">set conn&#x3D;Server.CreateObject(&quot;ADODB.Connection&quot;)</span><br><span class="line">conn.Provider&#x3D;&quot;Microsoft.Jet.OLEDB.4.0&quot;</span><br><span class="line">conn.Open &quot;c:&#x2F;webdata&#x2F;northwind.mdb&quot;</span><br><span class="line"></span><br><span class="line">set rs &#x3D; Server.CreateObject(&quot;ADODB.recordset&quot;)</span><br><span class="line">rs.Open &quot;SELECT Companyname, Contactname FROM Customers&quot;, conn</span><br><span class="line"></span><br><span class="line">str&#x3D;rs.GetString(,,&quot;&lt;&#x2F;td&gt;&lt;td&gt;&quot;,&quot;&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;&quot;,&quot;&amp;nbsp;&quot;)</span><br><span class="line">&#x2F;&#x2F;str 包含着由 SELECT 语句返回的所有列和行的一个字符串</span><br><span class="line">&#x2F;&#x2F;在每列之间会出现 &lt;&#x2F;td&gt;&lt;td&gt;，在每行之间会出现 &lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;&lt;tr&gt;&lt;td&gt;</span><br><span class="line">%&gt;</span><br><span class="line"></span><br><span class="line">&lt;table border&#x3D;&quot;1&quot; width&#x3D;&quot;100%&quot;&gt;</span><br><span class="line">  &lt;tr&gt;</span><br><span class="line">    &lt;td&gt;&lt;%Response.Write(str)%&gt;&lt;&#x2F;td&gt;</span><br><span class="line">  &lt;&#x2F;tr&gt;</span><br><span class="line">&lt;&#x2F;table&gt;</span><br><span class="line"></span><br><span class="line">&lt;%</span><br><span class="line">rs.close</span><br><span class="line">conn.close</span><br><span class="line">set rs &#x3D; Nothing</span><br><span class="line">set conn &#x3D; Nothing</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="10、ADO-Command-对象"><a href="#10、ADO-Command-对象" class="headerlink" title="10、ADO Command 对象"></a>10、ADO Command 对象</h2><p>用于执行面向数据库的一次简单查询。</p>
+<ul>
+<li><p>此查询可执行诸如创建、添加、取回、删除或更新记录等动作</p>
+</li>
+<li><p>如果该查询用于取回数据，此数据将以一个 RecordSet 对象返回。</p>
+<ul>
+<li>这意味着被取回的数据能够被 RecordSet 对象的属性、集合、方法或事件进行操作</li>
+</ul>
+</li>
+<li><p>主要特性是有能力使用存储查询和带有参数的存储过程</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> objCommand=Server.CreateObject(<span class="string">"ADODB.command"</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">ActiveConnection</td>
+<td align="left">设置或返回包含了定义连接或 Connection 对象的字符串。</td>
+</tr>
+<tr>
+<td align="left">CommandText</td>
+<td align="left">设置或返回包含提供者（provider）命令（如 SOL 语句、表格名称或存储的过程调用）的字符串值。默认值为 “”（零长度字符串）。</td>
+</tr>
+<tr>
+<td align="left">CommandTimeout</td>
+<td align="left">设置或返回长整型值，该值指示等待命令执行的时间（单位为秒）。默认值为 30。</td>
+</tr>
+<tr>
+<td align="left">CommandType</td>
+<td align="left">设置或返回一个 Command 对象的类型</td>
+</tr>
+<tr>
+<td align="left">Name</td>
+<td align="left">设置或返回一个 Command 对象的名称</td>
+</tr>
+<tr>
+<td align="left">Prepared</td>
+<td align="left">指示执行前是否保存命令的编译版本（已经准备好的版本）。</td>
+</tr>
+<tr>
+<td align="left">State</td>
+<td align="left">返回一个值，此值可描述该 Command 对象处于打开、关闭、连接、执行还是取回数据的状态。</td>
+</tr>
+</tbody></table>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Cancel</td>
+<td align="left">取消一个方法的一次执行。</td>
+</tr>
+<tr>
+<td align="left">CreateParameter</td>
+<td align="left">创建一个新的 Parameter 对象</td>
+</tr>
+<tr>
+<td align="left">Execute</td>
+<td align="left">执行 CommandText 属性中的查询、SQL 语句或存储过程。</td>
+</tr>
+</tbody></table>
+<h3 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h3><table>
+<thead>
+<tr>
+<th align="left">集合</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Parameters</td>
+<td align="left">包含一个 Command 对象的所有 Parameter 对象。</td>
+</tr>
+<tr>
+<td align="left">Properties</td>
+<td align="left">包含一个 Command 对象的所有 Property 对象。</td>
+</tr>
+</tbody></table>
+<h2 id="11、Connection-对象"><a href="#11、Connection-对象" class="headerlink" title="11、Connection 对象"></a>11、Connection 对象</h2><p>用于创建一个到达某个数据源的开放连接。</p>
+<ul>
+<li>通过此连接，可以对一个数据库进行访问和操作</li>
+<li>如果需要多次访问某个数据库，应当使用 Connection 对象来建立一个连接</li>
+<li>也可以经由一个 Command 或 Recordset 对象传递一个连接字符串来创建某个连接。<ul>
+<li>不过，此类连接仅仅适合一次具体的简单的查询</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> objConnection=Server.CreateObject(<span class="string">"ADODB.connection"</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="属性-1"><a href="#属性-1" class="headerlink" title="属性"></a>属性</h3><table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Attributes</td>
+<td align="left">设置或返回 Connection 对象的属性。</td>
+</tr>
+<tr>
+<td align="left">CommandTimeout</td>
+<td align="left">指示在终止尝试和产生错误之前执行命令期间需等待的时间。</td>
+</tr>
+<tr>
+<td align="left">ConnectionString</td>
+<td align="left">设置或返回用于建立连接数据源的细节信息。</td>
+</tr>
+<tr>
+<td align="left">ConnectionTimeout</td>
+<td align="left">指示在终止尝试和产生错误前建立连接期间所等待的时间。</td>
+</tr>
+<tr>
+<td align="left">CursorLocation</td>
+<td align="left">设置或返回游标服务的位置。</td>
+</tr>
+<tr>
+<td align="left">DefaultDatabase</td>
+<td align="left">指示 Connection 对象的默认数据库。</td>
+</tr>
+<tr>
+<td align="left">IsolationLevel</td>
+<td align="left">指示 Connection 对象的隔离级别。</td>
+</tr>
+<tr>
+<td align="left">Mode</td>
+<td align="left">设置或返回 provider 的访问权限。</td>
+</tr>
+<tr>
+<td align="left">Provider</td>
+<td align="left">设置或返回 Connection 对象提供者的名称。</td>
+</tr>
+<tr>
+<td align="left">State</td>
+<td align="left">返回一个描述连接是打开还是关闭的值。</td>
+</tr>
+<tr>
+<td align="left">Version</td>
+<td align="left">返回 ADO 的版本号。</td>
+</tr>
+</tbody></table>
+<h3 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h3><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">BeginTrans</td>
+<td align="left">开始一个新事务。</td>
+</tr>
+<tr>
+<td align="left">Cancel</td>
+<td align="left">取消一次执行。</td>
+</tr>
+<tr>
+<td align="left">Close</td>
+<td align="left">关闭一个连接。</td>
+</tr>
+<tr>
+<td align="left">CommitTrans</td>
+<td align="left">保存任何更改并结束当前事务。</td>
+</tr>
+<tr>
+<td align="left">Execute</td>
+<td align="left">执行查询、SQL 语句、存储过程或 provider 具体文本。</td>
+</tr>
+<tr>
+<td align="left">Open</td>
+<td align="left">打开一个连接。</td>
+</tr>
+<tr>
+<td align="left">OpenSchema</td>
+<td align="left">从 provider 返回有关数据源的 schema 信息。</td>
+</tr>
+<tr>
+<td align="left">RollbackTrans</td>
+<td align="left">取消当前事务中所作的任何更改并结束事务。</td>
+</tr>
+</tbody></table>
+<h3 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h3><p><strong>注释：</strong>您无法使用 VBScript or JScript 来处理事件（仅能使用 Visual Basic、Visual C++ 以及 Visual J++ 语言处理事件）。</p>
+<table>
+<thead>
+<tr>
+<th align="left">事件</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">BeginTransComplete</td>
+<td align="left">在 BeginTrans 操作之后被触发。</td>
+</tr>
+<tr>
+<td align="left">CommitTransComplete</td>
+<td align="left">在 CommitTrans 操作之后被触发。</td>
+</tr>
+<tr>
+<td align="left">ConnectComplete</td>
+<td align="left">在一个连接开始后被触发。</td>
+</tr>
+<tr>
+<td align="left">Disconnect</td>
+<td align="left">在一个连接结束之后被触发。</td>
+</tr>
+<tr>
+<td align="left">ExecuteComplete</td>
+<td align="left">在一条命令执行完毕后被触发。</td>
+</tr>
+<tr>
+<td align="left">InfoMessage</td>
+<td align="left">假如在一个 ConnectionEvent 操作过程中警告发生，则触发该事件。</td>
+</tr>
+<tr>
+<td align="left">RollbackTransComplete</td>
+<td align="left">在 RollbackTrans 操作之后被触发。</td>
+</tr>
+<tr>
+<td align="left">WillConnect</td>
+<td align="left">在一个连接开始之前被触发。</td>
+</tr>
+<tr>
+<td align="left">WillExecute</td>
+<td align="left">在一条命令被执行之前被触发。</td>
+</tr>
+</tbody></table>
+<h3 id="集合-1"><a href="#集合-1" class="headerlink" title="集合"></a>集合</h3><table>
+<thead>
+<tr>
+<th align="left">集合</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Errors</td>
+<td align="left">包含 Connection 对象的所有 Error 对象。</td>
+</tr>
+<tr>
+<td align="left">Properties</td>
+<td align="left">包含 Connection 对象的所有 Property 对象。</td>
+</tr>
+</tbody></table>
+<h2 id="12、Error-对象"><a href="#12、Error-对象" class="headerlink" title="12、Error 对象"></a>12、Error 对象</h2><p>包含与单个操作（涉及提供者）有关的数据访问错误的详细信息</p>
+<ul>
+<li>ADO 会因每次错误产生一个 Error 对象。</li>
+<li>每个 Error 对象包含具体错误的详细信息，且 Error 对象被存储在 Errors 集合中。</li>
+<li>要访问这些错误，就必须引用某个具体的连接。</li>
+</ul>
+<h3 id="循环遍历-Errors-集合方法"><a href="#循环遍历-Errors-集合方法" class="headerlink" title="循环遍历 Errors 集合方法"></a>循环遍历 Errors 集合方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;%</span><br><span class="line">for each objErr in objConn.Errors</span><br><span class="line">  response.write(&quot;&lt;p&gt;&quot;)</span><br><span class="line">  response.write(&quot;Description: &quot;)</span><br><span class="line">  response.write(objErr.Description&amp; &quot;&lt;br&gt;&quot;)</span><br><span class="line">  response.write(&quot;Help context: &quot;)</span><br><span class="line">  response.write(objErr.HelpContext &amp; &quot;&lt;br&gt;&quot;)</span><br><span class="line">  response.write(&quot;Help file: &quot;)</span><br><span class="line">  response.write(objErr.HelpFile &amp; &quot;&lt;br&gt;&quot;)</span><br><span class="line">  response.write(&quot;Native error: &quot;)</span><br><span class="line">  response.write(objErr.NativeError &amp; &quot;&lt;br&gt;&quot;)</span><br><span class="line">  response.write(&quot;Error number: &quot;)</span><br><span class="line">  response.write(objErr.Number &amp; &quot;&lt;br&gt;&quot;)</span><br><span class="line">  response.write(&quot;Error source: &quot;)</span><br><span class="line">  response.write(objErr.Source &amp; &quot;&lt;br&gt;&quot;)</span><br><span class="line">  response.write(&quot;SQL state: &quot;)</span><br><span class="line">  response.write(objErr.SQLState &amp; &quot;&lt;br&gt;&quot;)</span><br><span class="line">  response.write(&quot;&lt;&#x2F;p&gt;&quot;)</span><br><span class="line">next</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="属性-2"><a href="#属性-2" class="headerlink" title="属性"></a>属性</h3><table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Description</td>
+<td align="left">返回一个错误描述。</td>
+</tr>
+<tr>
+<td align="left">HelpContext</td>
+<td align="left">返回 Microsoft Windows help system 中某个主题的内容 ID。</td>
+</tr>
+<tr>
+<td align="left">HelpFile</td>
+<td align="left">返回 Microsoft Windows help system 中帮助文件的完整路径。</td>
+</tr>
+<tr>
+<td align="left">NativeError</td>
+<td align="left">返回来自 provider 或数据源的错误代码。</td>
+</tr>
+<tr>
+<td align="left">Number</td>
+<td align="left">返回可标识错误的一个唯一的数字。</td>
+</tr>
+<tr>
+<td align="left">Source</td>
+<td align="left">返回产生错误的对象或应用程序的名称。</td>
+</tr>
+<tr>
+<td align="left">SQLState</td>
+<td align="left">返回一个 5 字符的 SQL 错误码。</td>
+</tr>
+</tbody></table>
+<h2 id="13、Field-对象"><a href="#13、Field-对象" class="headerlink" title="13、Field 对象"></a>13、Field 对象</h2><p>包含有关 Recordset 对象中某一列的信息。</p>
+<ul>
+<li><p>Recordset 中的每一列对应一个 Field 对象</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> objField=Server.CreateObject(<span class="string">"ADODB.field"</span>)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="属性-3"><a href="#属性-3" class="headerlink" title="属性"></a>属性</h3><table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">ActualSize</td>
+<td align="left">返回一个字段值的实际长度。</td>
+</tr>
+<tr>
+<td align="left">Attributes</td>
+<td align="left">设置或返回 Field 对象的属性。</td>
+</tr>
+<tr>
+<td align="left">DefinedSize</td>
+<td align="left">返回Field 对象被定义的大小</td>
+</tr>
+<tr>
+<td align="left">Name</td>
+<td align="left">设置或返回 Field 对象的名称。</td>
+</tr>
+<tr>
+<td align="left">NumericScale</td>
+<td align="left">设置或返回 Field 对象中的值所允许的小数位数。</td>
+</tr>
+<tr>
+<td align="left">OriginalValue</td>
+<td align="left">返回某个字段的原始值。</td>
+</tr>
+<tr>
+<td align="left">Precision</td>
+<td align="left">设置或返回当表示 Field 对象中的数值时所允许的数字的最大数。</td>
+</tr>
+<tr>
+<td align="left">Status</td>
+<td align="left">返回 Field 对象的状态。</td>
+</tr>
+<tr>
+<td align="left">Type</td>
+<td align="left">设置或返回 Field 对象的类型。</td>
+</tr>
+<tr>
+<td align="left">UnderlyingValue</td>
+<td align="left">返回一个字段的当前值。</td>
+</tr>
+<tr>
+<td align="left">Value</td>
+<td align="left">设置或返回 Field 对象的值。</td>
+</tr>
+</tbody></table>
+<h3 id="方法-2"><a href="#方法-2" class="headerlink" title="方法"></a>方法</h3><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">AppendChunk</td>
+<td align="left">把大型的二进制或文本数据追加到 Field 对象</td>
+</tr>
+<tr>
+<td align="left">GetChunk</td>
+<td align="left">返回大型二进制或文本 Field 对象的全部或部分内容。</td>
+</tr>
+</tbody></table>
+<h3 id="集合-2"><a href="#集合-2" class="headerlink" title="集合"></a>集合</h3><table>
+<thead>
+<tr>
+<th align="left">集合</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Properties</td>
+<td align="left">包含一个 Field 对象的所有 Property 对象。</td>
+</tr>
+</tbody></table>
+<h2 id="14、Parameter-对象"><a href="#14、Parameter-对象" class="headerlink" title="14、Parameter 对象"></a>14、Parameter 对象</h2><p>提供有关被用于存储过程或查询中的一个单个参数的信息</p>
+<ul>
+<li><p>Parameter 对象在其被创建时被添加到 Parameters 集合。</p>
+</li>
+<li><p>Parameters 集合与一个具体的 Command 对象相关联，Command 对象使用此集合在存储过程和查询内外传递参数。</p>
+</li>
+<li><p>参数被用来创建参数化的命令。</p>
+<ul>
+<li>有四种类型的参数：input 参数、output 参数、input/output 参数 以及 return 参数</li>
+<li>这些命令（在它们已被定义和存储之后）使用参数在命令执行前来改变命令的某些细节</li>
+</ul>
+</li>
+<li><p>语法：</p>
+<ul>
+<li><code>objectname.property</code></li>
+<li><code>objectname.method</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="属性-4"><a href="#属性-4" class="headerlink" title="属性"></a>属性</h3><table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Attributes</td>
+<td align="left">设置或返回一个 Parameter 对象的属性。</td>
+</tr>
+<tr>
+<td align="left">Direction</td>
+<td align="left">设置或返回某个参数如何传递到存储过程或从存储过程传递回来。</td>
+</tr>
+<tr>
+<td align="left">Name</td>
+<td align="left">设置或返回一个 Parameter 对象的名称。</td>
+</tr>
+<tr>
+<td align="left">NumericScale</td>
+<td align="left">设置或返回一个 Parameter 对象的数值的小数点右侧的数字数目。</td>
+</tr>
+<tr>
+<td align="left">Precision</td>
+<td align="left">设置或返回当表示一个参数中数值时所允许数字的最大数目。</td>
+</tr>
+<tr>
+<td align="left">Size</td>
+<td align="left">设置或返回 Parameter 对象中的值的最大大小（按字节或字符）。</td>
+</tr>
+<tr>
+<td align="left">Type</td>
+<td align="left">设置或返回一个 Parameter 对象的类型。</td>
+</tr>
+<tr>
+<td align="left">Value</td>
+<td align="left">设置或返回一个 Parameter 对象的值。</td>
+</tr>
+</tbody></table>
+<h3 id="方法-3"><a href="#方法-3" class="headerlink" title="方法"></a>方法</h3><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">AppendChunk</td>
+<td align="left">把长二进制或字符数据追加到一个 Parameter 对象。</td>
+</tr>
+<tr>
+<td align="left">Delete</td>
+<td align="left">从 Parameters 集合中删除一个对象。</td>
+</tr>
+</tbody></table>
+<h2 id="15、Property-对象-（动态特性）"><a href="#15、Property-对象-（动态特性）" class="headerlink" title="15、Property 对象 （动态特性）"></a>15、Property 对象 （动态特性）</h2><p>ADO 对象有两种类型的属性：<strong>内置属性和动态属性</strong></p>
+<p>内置属性</p>
+<ul>
+<li>是在 ADO 中实现并立即可用于任何新对象的属性，此时使用 MyObject.Property 语法。</li>
+<li>它们不会作为 Property 对象出现在对象的 Properties 集合中，因此，<strong>虽然可以更改它们的值，但无法更改它们的特性</strong>。</li>
+</ul>
+<blockquote>
+<p>ADO Property 对象表示 ADO 对象的动态特性，这种动态特性是被 provider 定义的。</p>
+<p>每个与 ADO 对话的 provider 拥有不同的方式与 ADO 进行交互。所以，ADO 需要通过某种方式来存储有关 provider 的信息。解决方法是 provider 为 ADO 提供具体的信息（动态属性）</p>
+</blockquote>
+<ul>
+<li>ADO 把每个 provider 属性存储在一个 Property 对象中，</li>
+<li>而 Property 对象相应地也被存储在 Properties 集合中。</li>
+<li>此集合会被分配到 Command 对象、Connection 对象、Field 对象 或者 Recordset 对象。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> objProperty=Server.CreateObject(<span class="string">"ADODB.property"</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="属性-5"><a href="#属性-5" class="headerlink" title="属性"></a>属性</h3><table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Attributes</td>
+<td align="left">返回一个 Property 对象的属性</td>
+</tr>
+<tr>
+<td align="left">Name</td>
+<td align="left">设置或返回一个 Property 对象的名称</td>
+</tr>
+<tr>
+<td align="left">Type</td>
+<td align="left">返回 Property 的类型</td>
+</tr>
+<tr>
+<td align="left">Value</td>
+<td align="left">设置或返回 一个 Property 对象的值</td>
+</tr>
+</tbody></table>
+<h2 id="16、Record-对象"><a href="#16、Record-对象" class="headerlink" title="16、Record 对象"></a>16、Record 对象</h2><p><strong>用于容纳记录集中的一行、或文件系统的一个文件或一个目录</strong></p>
+<ul>
+<li>Record 对象允许访问行与行之间的列数且/或数据类型不同的数据集。</li>
+<li>ADO 2.5 之前的版本仅能够访问结构化的数据库<ul>
+<li>在一个结构化的数据库中，每个表在每一行均有确切相同的列数，并且每一列都由相同的数据类型组成</li>
+</ul>
+</li>
+</ul>
+<h3 id="属性-6"><a href="#属性-6" class="headerlink" title="属性"></a>属性</h3><table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">ActiveConnection</td>
+<td align="left">设置或返回 Record 对象当前所属的 Connection 对象。</td>
+</tr>
+<tr>
+<td align="left">Mode</td>
+<td align="left">设置或返回在Record 对象中修改数据的有效权限。</td>
+</tr>
+<tr>
+<td align="left">ParentURL</td>
+<td align="left">返回父 Record 的绝对URL。</td>
+</tr>
+<tr>
+<td align="left">RecordType</td>
+<td align="left">返回 Record 对象的类型。</td>
+</tr>
+<tr>
+<td align="left">Source</td>
+<td align="left">设置或返回 Record 对象的 Open 方法的 src 参数。</td>
+</tr>
+<tr>
+<td align="left">State</td>
+<td align="left">返回 Record 对象的状态。</td>
+</tr>
+</tbody></table>
+<h3 id="方法-4"><a href="#方法-4" class="headerlink" title="方法"></a>方法</h3><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Cancel</td>
+<td align="left">取消一次 CopyRecord、DeleteRecord、MoveRecord 或 Open 调用的执行。</td>
+</tr>
+<tr>
+<td align="left">Close</td>
+<td align="left">关闭一个 Record 对象。</td>
+</tr>
+<tr>
+<td align="left">CopyRecord</td>
+<td align="left">把文件或目录拷贝到另外一个位置。</td>
+</tr>
+<tr>
+<td align="left">DeleteRecord</td>
+<td align="left">删除一个文件或目录。</td>
+</tr>
+<tr>
+<td align="left">GetChildren</td>
+<td align="left">返回一个 Recordset 对象，其中的每一行表示目录中的文件或子目录。</td>
+</tr>
+<tr>
+<td align="left">MoveRecord</td>
+<td align="left">把文件或目录移动到另外一个位置。</td>
+</tr>
+<tr>
+<td align="left">Open</td>
+<td align="left">打开一个已有的 Record 对象或创建一个新的文件或目录。</td>
+</tr>
+</tbody></table>
+<h3 id="集合-3"><a href="#集合-3" class="headerlink" title="集合"></a>集合</h3><table>
+<thead>
+<tr>
+<th align="left">集合</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Properties</td>
+<td align="left">特定提供者属性的一个集合。</td>
+</tr>
+<tr>
+<td align="left">Fields</td>
+<td align="left">包含 Record 对象中的所有 Field 对象。</td>
+</tr>
+</tbody></table>
+<h3 id="Fields-集合的属性"><a href="#Fields-集合的属性" class="headerlink" title="Fields 集合的属性"></a>Fields 集合的属性</h3><table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Count</td>
+<td align="left">返回 fields 集合中的项目数。起始值为 0。<br>例子：<code>countfields = rec.Fields.Count</code></td>
+</tr>
+<tr>
+<td align="left">Item(named_item/number)</td>
+<td align="left">返回 fields 集合中的某个指定的项目。<br/>例子：<code>itemfields = rec.Fields.Item(1)</code> <br/>或者<code>itemfields = rec.Fields.Item(&quot;Name&quot;)</code></td>
+</tr>
+</tbody></table>
+<h2 id="17、Recordset-对象"><a href="#17、Recordset-对象" class="headerlink" title="17、Recordset 对象"></a>17、Recordset 对象</h2><blockquote>
+<p>在 ADO 中，此对象是最重要且最常用于对数据库的数据进行操作的对象</p>
+</blockquote>
+<p><strong>用于容纳一个来自数据库表的记录集</strong>。</p>
+<ul>
+<li>一个 Recordset 对象由记录和列（字段）组成</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> objRecordset=Server.CreateObject(<span class="string">"ADODB.recordset"</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>当首次打开一个 Recordset 时，</p>
+<ul>
+<li>当前记录指针将指向第一个记录，同时 BOF 和 EOF 属性为 False。</li>
+</ul>
+</li>
+<li><p>如果没有记录，BOF 和 EOF 属性为 True。</p>
+<ul>
+<li><p>BOF （Before of File）指示当前记录位置位于 Recordset 对象的第一个记录之前。</p>
+</li>
+<li><p>EOF（End of File） 指示当前记录位置位于 Recordset 对象的最后一个记录之后。</p>
+</li>
+</ul>
+</li>
+<li><p>Recordset 对象能够支持两种更新类型：</p>
+<ul>
+<li>立即更新 - 一旦调用 Update 方法，所有更改被立即写入数据库。</li>
+<li>批更新 - provider 将缓存多个更改，然后使用 UpdateBatch 方法把这些更改传送到数据库。</li>
+</ul>
+</li>
+<li><p>4 中不同的CursorType 游标（指针）类型</p>
+<ul>
+<li>动态游标 - 允许您查看其他用户所作的添加、更改和删除</li>
+<li>键集游标 - 类似动态游标，不同的是您无法查看有其他用户所做的添加，并且它会防止您访问其他用户已删除的记录。其他用户所做的数据更改仍然是可见的。</li>
+<li>静态游标 - 提供记录集的静态副本，可用来查找数据或生成报告。此外，由其他用户所做的添加、更改和删除将是不可见的。当您打开一个客户端 Recordset 对象时，这是唯一被允许的游标类型。</li>
+</ul>
+</li>
+<li><p>仅向前游标 - 只允许在 Recordset 中向前滚动。此外，由其他用户所做的添加、更改和删除将是不可见的</p>
+</li>
+<li><p>通过 CursorType 属性或 Open 方法中的 CursorType 参数来设置游标的类型</p>
+</li>
+</ul>
+<h3 id="Recordset-Open参数"><a href="#Recordset-Open参数" class="headerlink" title="Recordset Open参数"></a>Recordset Open参数</h3><p><strong>Recordset对象的Open方法原型：</strong></p>
+<ul>
+<li><code>Open（[Source],[ActiveConnection],[CursorType],[LockType],[Options]）</code><ul>
+<li>CursorType游标类型：<ul>
+<li>Const adOpenForwardOnly = 0<br>前向游标，为缺省游标，提供最快的运行性能。用它打开recordset，从对至尾顺序取得所有结果。它不支持向后滚动，只允许在结果间单向移动。</li>
+<li>Const adOpenKeyset = 1<br>静态游标，反映第一次打开游标时表中数据的状态，游标无法查明底层表中的数据行是否更新过、删除过或添加了新的数据。不过与只能前移的洲标不同，静态游标可以在结果间前后滚动。</li>
+<li>Const adOpenDynamic = 2<br>键盘驱动的游标，可以查询表中底层数据行的某些变化，但不是全部。它特别是可以准确反映数据是否更新过。但它不能查明其它用户是否曾删除过数据行（删除掉的数据行在recordset中会留下空洞）。键盘驱动的游标支持在结果间前后滚动。</li>
+<li>Const adOpenStatic = 3<br>动态游标，是最丰富的游标类型。游标打开时可以查询其他用户对表的任何改动，而且支持滚动。</li>
+</ul>
+</li>
+<li>LockType加锁类型<ul>
+<li>Const adLockReadOnly = 1<br>缺省的上锁类型，只读方式上锁允许多个用户同时读取同样的数据，但不能改变数据。</li>
+<li>Const adLockPessimistic = 2<br>以悲观上锁方式打开数据对象。该方式假定在你编辑记录时会有其它用户访问数据。此时一旦你开始编辑记录，其它用户就不能访问该数据。</li>
+<li>Const adLockOptimistic = 3<br>以乐观上锁方式打开数据对象。该方式假定在你编辑记录时不会有其它用户访问数据。在完成改变之前，其它用户不能访问该记录。</li>
+<li>Const adLockBatchOptimistic = 4<br>执行多行批处理更新时使用这种类型</li>
+</ul>
+</li>
+<li>Options参数：标明用来打开记录集的命令字符串的类型。告诉ADO被执行的字符串内容的有关信息有助于高效地执行该命令字符串。<ul>
+<li>adCMDTable。被执行的字符串包含一个表的名字。</li>
+<li>adCMDText。被执行的字符串包含一个命令文本。</li>
+<li>adCMDStoredProc。被执行的字符串包含一个存储过程名。</li>
+<li>adCMDUnknown。不指定字符串的内容。（这是缺省值。）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="Open实例（更多参数）"><a href="#Open实例（更多参数）" class="headerlink" title="Open实例（更多参数）"></a>Open实例（更多参数）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">简单点就是：RS.OPEN SQL,CONN,A,B</span><br><span class="line"></span><br><span class="line">A: ADOPENFORWARDONLY(&#x3D;0) 只读,且当前数据记录只能向下移动</span><br><span class="line">ADOPENSTATIC(&#x3D;3) 只读,当前数据记录可自由移动</span><br><span class="line">ADOPENKEYSET(&#x3D;1) 可读写,当前数据记录可自由移动</span><br><span class="line">ADOPENDYNAMIC(&#x3D;2) 可读写,当前数据记录可自由移动,可看到新增记录</span><br><span class="line"></span><br><span class="line">B: ADLOCKREADONLY(&#x3D;1) 默认值,用来打开只读记录</span><br><span class="line">ADLOCKPESSIMISTIC(&#x3D;2) 悲观锁定</span><br><span class="line">ADLOCKOPTIMISTIC(&#x3D;3) 乐观锁定</span><br><span class="line">ADLOCKBATCHOPTIMISTIC(&#x3D;4) 批次乐观锁定</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果单单是读取，不涉及更新操作，那就用1，1<br>如果涉及读取及更新操作，可以用1,3 或3,2</p>
+</blockquote>
+<h3 id="属性-7"><a href="#属性-7" class="headerlink" title="属性"></a>属性</h3><table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">AbsolutePage</td>
+<td align="left">设置或返回一个可指定 Recordset 对象中页码的值。</td>
+</tr>
+<tr>
+<td align="left">AbsolutePosition</td>
+<td align="left">设置或返回一个值，此值可指定 Recordset 对象中当前记录的顺序位置（序号位置）。</td>
+</tr>
+<tr>
+<td align="left">ActiveCommand</td>
+<td align="left">返回与 Recordset 对象相关联的 Command 对象。</td>
+</tr>
+<tr>
+<td align="left">ActiveConnection</td>
+<td align="left">如果连接被关闭，设置或返回连接的定义，如果连接打开，设置或返回当前的 Connection 对象。</td>
+</tr>
+<tr>
+<td align="left">BOF</td>
+<td align="left">如果当前的记录位置在第一条记录之前，则返回 true，否则返回 fasle。</td>
+</tr>
+<tr>
+<td align="left">Bookmark</td>
+<td align="left">设置或返回一个书签。此书签保存当前记录的位置。</td>
+</tr>
+<tr>
+<td align="left">CacheSize</td>
+<td align="left">设置或返回能够被缓存的记录的数目。</td>
+</tr>
+<tr>
+<td align="left">CursorLocation</td>
+<td align="left">设置或返回游标服务的位置。</td>
+</tr>
+<tr>
+<td align="left">CursorType</td>
+<td align="left">设置或返回一个 Recordset 对象的游标类型。</td>
+</tr>
+<tr>
+<td align="left">DataMember</td>
+<td align="left">设置或返回要从 DataSource 属性所引用的对象中检索的数据成员的名称。</td>
+</tr>
+<tr>
+<td align="left">DataSource</td>
+<td align="left">指定一个包含要被表示为 Recordset 对象的数据的对象。</td>
+</tr>
+<tr>
+<td align="left">EditMode</td>
+<td align="left">返回当前记录的编辑状态。</td>
+</tr>
+<tr>
+<td align="left">EOF</td>
+<td align="left">如果当前记录的位置在最后的记录之后，则返回 true，否则返回 fasle。</td>
+</tr>
+<tr>
+<td align="left">Filter</td>
+<td align="left">返回一个针对 Recordset 对象中数据的过滤器。</td>
+</tr>
+<tr>
+<td align="left">Index</td>
+<td align="left">设置或返回 Recordset 对象的当前索引的名称。</td>
+</tr>
+<tr>
+<td align="left">LockType</td>
+<td align="left">设置或返回当编辑 Recordset 中的一条记录时，可指定锁定类型的值。</td>
+</tr>
+<tr>
+<td align="left">MarshalOptions</td>
+<td align="left">设置或返回一个值，此值指定哪些记录被返回服务器。</td>
+</tr>
+<tr>
+<td align="left">MaxRecords</td>
+<td align="left">设置或返回从一个查询返回 Recordset 对象的的最大记录数目。</td>
+</tr>
+<tr>
+<td align="left">PageCount</td>
+<td align="left">返回一个 Recordset 对象中的数据页数。</td>
+</tr>
+<tr>
+<td align="left">PageSize</td>
+<td align="left">设置或返回 Recordset 对象的一个单一页面上所允许的最大记录数。</td>
+</tr>
+<tr>
+<td align="left">RecordCount</td>
+<td align="left">返回一个 Recordset 对象中的记录数目。</td>
+</tr>
+<tr>
+<td align="left">Sort</td>
+<td align="left">设置或返回一个或多个作为 Recordset 排序基准的字段名。</td>
+</tr>
+<tr>
+<td align="left">Source</td>
+<td align="left">设置一个字符串值，或一个 Command 对象引用，或返回一个字符串值，此值可指示 Recordset 对象的数据源。</td>
+</tr>
+<tr>
+<td align="left">State</td>
+<td align="left">返回一个值，此值可描述是否 Recordset 对象是打开、关闭、正在连接、正在执行或正在取回数据。</td>
+</tr>
+<tr>
+<td align="left">Status</td>
+<td align="left">返回有关批更新或其他大量操作的当前记录的状态。</td>
+</tr>
+<tr>
+<td align="left">StayInSync</td>
+<td align="left">设置或返回当父记录位置改变时对子记录的引用是否改变。</td>
+</tr>
+</tbody></table>
+<h3 id="方法-5"><a href="#方法-5" class="headerlink" title="方法"></a>方法</h3><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">AddNew</td>
+<td align="left">创建一条新记录。</td>
+</tr>
+<tr>
+<td align="left">Cancel</td>
+<td align="left">撤销一次执行。</td>
+</tr>
+<tr>
+<td align="left">CancelBatch</td>
+<td align="left">撤销一次批更新。</td>
+</tr>
+<tr>
+<td align="left">CancelUpdate</td>
+<td align="left">撤销对 Recordset 对象的一条记录所做的更改。</td>
+</tr>
+<tr>
+<td align="left">Clone</td>
+<td align="left">创建一个已有 Recordset 的副本。</td>
+</tr>
+<tr>
+<td align="left">Close</td>
+<td align="left">关闭一个 Recordset。</td>
+</tr>
+<tr>
+<td align="left">CompareBookmarks</td>
+<td align="left">比较两个书签。</td>
+</tr>
+<tr>
+<td align="left">Delete</td>
+<td align="left">删除一条记录或一组记录。</td>
+</tr>
+<tr>
+<td align="left">Find</td>
+<td align="left">搜索一个 Recordset 中满足指定某个条件的一条记录。</td>
+</tr>
+<tr>
+<td align="left">GetRows</td>
+<td align="left">把多条记录从一个 Recordset 对象中拷贝到一个二维数组中。</td>
+</tr>
+<tr>
+<td align="left">GetString</td>
+<td align="left">将 Recordset 作为字符串返回。</td>
+</tr>
+<tr>
+<td align="left">Move</td>
+<td align="left">在 Recordset 对象中移动记录指针。</td>
+</tr>
+<tr>
+<td align="left">MoveFirst</td>
+<td align="left">把记录指针移动到第一条记录。</td>
+</tr>
+<tr>
+<td align="left">MoveLast</td>
+<td align="left">把记录指针移动到最后一条记录。</td>
+</tr>
+<tr>
+<td align="left">MoveNext</td>
+<td align="left">把记录指针移动到下一条记录。</td>
+</tr>
+<tr>
+<td align="left">MovePrevious</td>
+<td align="left">把记录指针移动到上一条记录。</td>
+</tr>
+<tr>
+<td align="left">NextRecordset</td>
+<td align="left">通过执行一系列命令清除当前 Recordset 对象并返回下一个 Recordset。</td>
+</tr>
+<tr>
+<td align="left">Open</td>
+<td align="left">打开一个数据库元素，此元素可提供对表的记录、查询的结果或保存的 Recordset 的访问。</td>
+</tr>
+<tr>
+<td align="left">Requery</td>
+<td align="left">通过重新执行对象所基于的查询来更新 Recordset 对象中的数据。</td>
+</tr>
+<tr>
+<td align="left">Resync</td>
+<td align="left">从原始数据库刷新当前 Recordset 中的数据。</td>
+</tr>
+<tr>
+<td align="left">Save</td>
+<td align="left">把 Recordset 对象保存到 file 或 Stream 对象中。</td>
+</tr>
+<tr>
+<td align="left">Seek</td>
+<td align="left">搜索 Recordset 的索引以快速定位与指定的值相匹配的行，并使其成为当前行。</td>
+</tr>
+<tr>
+<td align="left">Supports</td>
+<td align="left">返回一个布尔值，此值可定义 Recordset 对象是否支持特定类型的功能。</td>
+</tr>
+<tr>
+<td align="left">Update</td>
+<td align="left">保存所有对 Recordset 对象中的一条单一记录所做的更改。</td>
+</tr>
+<tr>
+<td align="left">UpdateBatch</td>
+<td align="left">把所有 Recordset 中的更改存入数据库。请在批更新模式中使用。</td>
+</tr>
+</tbody></table>
+<h3 id="事件-1"><a href="#事件-1" class="headerlink" title="事件"></a>事件</h3><p>注意: 你不能使用 VBScript 或者 JScript 处理(只允许 Visual Basic, Visual C++, 和 Visual J++ 语言处理事件).</p>
+<table>
+<thead>
+<tr>
+<th align="left">事件</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">EndOfRecordset</td>
+<td align="left">当试图移动到超过 Recordset 结尾的行时被触发。</td>
+</tr>
+<tr>
+<td align="left">FetchComplete</td>
+<td align="left">当异步操作中的所有记录均被读取后被触发。</td>
+</tr>
+<tr>
+<td align="left">FetchProgress</td>
+<td align="left">在异步操作期间被定期地触发，报告已读取多少记录。</td>
+</tr>
+<tr>
+<td align="left">FieldChangeComplete</td>
+<td align="left">Field 对象的值更改被触发。</td>
+</tr>
+<tr>
+<td align="left">MoveComplete</td>
+<td align="left">Recordset 中的当前位置更改后被触发。</td>
+</tr>
+<tr>
+<td align="left">RecordChangeComplete</td>
+<td align="left">一条记录更改之后被触发。</td>
+</tr>
+<tr>
+<td align="left">RecordsetChangeComplete</td>
+<td align="left">在 Recordset 更改之后被触发。</td>
+</tr>
+<tr>
+<td align="left">WillChangeField</td>
+<td align="left">在 Field 对象的值更改之前被触发</td>
+</tr>
+<tr>
+<td align="left">WillChangeRecord</td>
+<td align="left">在一条记录更改之前被触发。</td>
+</tr>
+<tr>
+<td align="left">WillChangeRecordset</td>
+<td align="left">在 Recordset 更改之前被触发。</td>
+</tr>
+<tr>
+<td align="left">WillMove</td>
+<td align="left">在 Recordset 中的当前位置更改之前被触发。</td>
+</tr>
+</tbody></table>
+<h3 id="集合-4"><a href="#集合-4" class="headerlink" title="集合"></a>集合</h3><table>
+<thead>
+<tr>
+<th align="left">集合</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Fields</td>
+<td align="left">指示在此 Recordset 对象中 Field 对象的数目。</td>
+</tr>
+<tr>
+<td align="left">Properties</td>
+<td align="left">包含所有 Recordset 对象中的 Property 对象。</td>
+</tr>
+</tbody></table>
+<h3 id="Fields-集合的属性-1"><a href="#Fields-集合的属性-1" class="headerlink" title="Fields 集合的属性"></a>Fields 集合的属性</h3><table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Count</td>
+<td align="left">返回 fields 集合中项目的数目。以 0 起始。<br>例子：<code>countfields = rs.Fields.Count</code></td>
+</tr>
+<tr>
+<td align="left">Item(named_item/number)</td>
+<td align="left">返回 fields 集合中的某个指定的项目。<br/>例子：<code>itemfields = rs.Fields.Item(1)</code>或者    <br/><code>itemfields = rs.Fields.Item(&quot;Name&quot;)</code></td>
+</tr>
+</tbody></table>
+<h3 id="Properties-集合的属性"><a href="#Properties-集合的属性" class="headerlink" title="Properties 集合的属性"></a>Properties 集合的属性</h3><table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Count</td>
+<td align="left">返回 properties 集合中项目的数目。以 0 起始。<br/>例子：<code>countprop = rs.Properties.Count</code></td>
+</tr>
+<tr>
+<td align="left">Item(named_item/number)</td>
+<td align="left">返回 properties 集合中某个指定的项目。<br/>例子：<code>itemprop = rs.Properties.Item(1)</code>或者<br/><code>itemprop = rs.Properties.Item(&quot;Name&quot;)</code></td>
+</tr>
+</tbody></table>
+<h2 id="18、-Stream-对象"><a href="#18、-Stream-对象" class="headerlink" title="18、 Stream 对象"></a>18、 Stream 对象</h2><p><strong>用于读写以及处理二进制数据或文本流</strong></p>
+<p>Stream 对象可通过三种方法获得：</p>
+<ul>
+<li>通过指向包含二进制或文本数据的对象（通常是文件）的 URL。此对象可以是简单的文档、表示结构化文档的 Record 对象或文件夹。</li>
+<li>通过将 Stream 对象实例化。这些 Stream 对象可用来存储用于应用程序的数据。跟与 URL 相关联的 Stream 或 Record 的默认 Stream 不同，实例化的 Stream 在默认情况下与基本源没有关联。</li>
+<li>通过打开与 Record 对象相关联的默认 Stream 对象。打开 Record 时便可获取与 Record 对象相关联的默认流。只需打开该流便可删除一个往返过程。</li>
+</ul>
+<h3 id="属性-8"><a href="#属性-8" class="headerlink" title="属性"></a>属性</h3><table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">CharSet</td>
+<td align="left">指定用于存储 Stream 的字符集。</td>
+</tr>
+<tr>
+<td align="left">EOS</td>
+<td align="left">返回当前位置是否位于流的结尾。</td>
+</tr>
+<tr>
+<td align="left">LineSeparator</td>
+<td align="left">设置或返回用在文本 Stream 对象中的分行符。</td>
+</tr>
+<tr>
+<td align="left">Mode</td>
+<td align="left">设置或返回供修改数据的可用权限。</td>
+</tr>
+<tr>
+<td align="left">Position</td>
+<td align="left">设置或返回从 Stream 对象开始处的当前位置（按字节计算）。</td>
+</tr>
+<tr>
+<td align="left">Size</td>
+<td align="left">返回一个打开的 Stream 对象的大小。</td>
+</tr>
+<tr>
+<td align="left">State</td>
+<td align="left">返回一个描述 Stream 是打开还是关闭的值。</td>
+</tr>
+<tr>
+<td align="left">Type</td>
+<td align="left">设置或返回 Stream 对象中的数据的类型。</td>
+</tr>
+</tbody></table>
+<h3 id="方法-6"><a href="#方法-6" class="headerlink" title="方法"></a>方法</h3><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Cancel</td>
+<td align="left">取消对 Stream 对象的 Open 调用的执行。</td>
+</tr>
+<tr>
+<td align="left">Close</td>
+<td align="left">关闭一个 Stream 对象。</td>
+</tr>
+<tr>
+<td align="left">CopyTo</td>
+<td align="left">把指定数目的字符/比特从一个 Stream 对象拷贝到另外一个 Stream 对象。</td>
+</tr>
+<tr>
+<td align="left">Flush</td>
+<td align="left">把 Stream 缓冲区中的内容发送到相关联的下层对象。</td>
+</tr>
+<tr>
+<td align="left">LoadFromFile</td>
+<td align="left">把文件的内容载入 Stream 对象。</td>
+</tr>
+<tr>
+<td align="left">Open</td>
+<td align="left">打开一个 Stream 对象。</td>
+</tr>
+<tr>
+<td align="left">Read</td>
+<td align="left">从一个二进制 Stream 对象读取全部流或指定的字节数。</td>
+</tr>
+<tr>
+<td align="left">ReadText</td>
+<td align="left">从一个文本 Stream 对象中读取全部流、一行或指定的字节数。</td>
+</tr>
+<tr>
+<td align="left">SaveToFile</td>
+<td align="left">把一个 Stream 对象的二进制内容保存到某个文件。</td>
+</tr>
+<tr>
+<td align="left">SetEOS</td>
+<td align="left">设置当前位置为流的结尾 (EOS)</td>
+</tr>
+<tr>
+<td align="left">SkipLine</td>
+<td align="left">在读取一个文本流时跳过一行。</td>
+</tr>
+<tr>
+<td align="left">Write</td>
+<td align="left">把二进制数据写到一个二进制 Stream 对象。</td>
+</tr>
+<tr>
+<td align="left">WriteText</td>
+<td align="left">把字符数据写到一个文本 Stream 对象。</td>
+</tr>
+</tbody></table>
+<h2 id="19、ADO-数据类型"><a href="#19、ADO-数据类型" class="headerlink" title="19、ADO 数据类型"></a>19、ADO 数据类型</h2><p>下面的表格列出了 Access、SQL Server 与 Oracle 之间的数据类型映射：</p>
+<table>
+<thead>
+<tr>
+<th align="left">DataType Enum</th>
+<th align="left">Value</th>
+<th align="left">Access</th>
+<th align="left">SQLServer</th>
+<th align="left">Oracle</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">adBigInt</td>
+<td align="left">20</td>
+<td align="left"></td>
+<td align="left">BigInt (SQL Server 2000 +)</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">adBinary</td>
+<td align="left">128</td>
+<td align="left"></td>
+<td align="left">Binary TimeStamp</td>
+<td align="left">Raw *</td>
+</tr>
+<tr>
+<td align="left">adBoolean</td>
+<td align="left">11</td>
+<td align="left">YesNo</td>
+<td align="left">Bit</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">adChar</td>
+<td align="left">129</td>
+<td align="left"></td>
+<td align="left">Char</td>
+<td align="left">Char</td>
+</tr>
+<tr>
+<td align="left">adCurrency</td>
+<td align="left">6</td>
+<td align="left">Currency</td>
+<td align="left">Money SmallMoney</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">adDate</td>
+<td align="left">7</td>
+<td align="left">Date</td>
+<td align="left">DateTime</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">adDBTimeStamp</td>
+<td align="left">135</td>
+<td align="left">DateTime (Access 97 (ODBC))</td>
+<td align="left">DateTime SmallDateTime</td>
+<td align="left">Date</td>
+</tr>
+<tr>
+<td align="left">adDecimal</td>
+<td align="left">14</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">Decimal *</td>
+</tr>
+<tr>
+<td align="left">adDouble</td>
+<td align="left">5</td>
+<td align="left">Double</td>
+<td align="left">Float</td>
+<td align="left">Float</td>
+</tr>
+<tr>
+<td align="left">adGUID</td>
+<td align="left">72</td>
+<td align="left">ReplicationID (Access 97 (OLEDB)), (Access 2000 (OLEDB))</td>
+<td align="left">UniqueIdentifier (SQL Server 7.0 +)</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">adIDispatch</td>
+<td align="left">9</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">adInteger</td>
+<td align="left">3</td>
+<td align="left">AutoNumber Integer Long</td>
+<td align="left">Identity (SQL Server 6.5) Int</td>
+<td align="left">Int *</td>
+</tr>
+<tr>
+<td align="left">adLongVarBinary</td>
+<td align="left">205</td>
+<td align="left">OLEObject</td>
+<td align="left">Image</td>
+<td align="left">Long Raw * Blob (Oracle 8.1.x)</td>
+</tr>
+<tr>
+<td align="left">adLongVarChar</td>
+<td align="left">201</td>
+<td align="left">Memo (Access 97) Hyperlink (Access 97)</td>
+<td align="left">Text</td>
+<td align="left">Long * Clob (Oracle 8.1.x)</td>
+</tr>
+<tr>
+<td align="left">adLongVarWChar</td>
+<td align="left">203</td>
+<td align="left">Memo (Access 2000 (OLEDB)) Hyperlink (Access 2000 (OLEDB))</td>
+<td align="left">NText (SQL Server 7.0 +)</td>
+<td align="left">NClob (Oracle 8.1.x)</td>
+</tr>
+<tr>
+<td align="left">adNumeric</td>
+<td align="left">131</td>
+<td align="left">Decimal (Access 2000 (OLEDB))</td>
+<td align="left">Decimal Numeric</td>
+<td align="left">Decimal Integer Number SmallInt</td>
+</tr>
+<tr>
+<td align="left">adSingle</td>
+<td align="left">4</td>
+<td align="left">Single</td>
+<td align="left">Real</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">adSmallInt</td>
+<td align="left">2</td>
+<td align="left">Integer</td>
+<td align="left">SmallInt</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">adUnsignedTinyInt</td>
+<td align="left">17</td>
+<td align="left">Byte</td>
+<td align="left">TinyInt</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">adVarBinary</td>
+<td align="left">204</td>
+<td align="left">ReplicationID (Access 97)</td>
+<td align="left">VarBinary</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">adVarChar</td>
+<td align="left">200</td>
+<td align="left">Text (Access 97)</td>
+<td align="left">VarChar</td>
+<td align="left">VarChar</td>
+</tr>
+<tr>
+<td align="left">adVariant</td>
+<td align="left">12</td>
+<td align="left"></td>
+<td align="left">Sql_Variant (SQL Server 2000 +)</td>
+<td align="left">VarChar2</td>
+</tr>
+<tr>
+<td align="left">adVarWChar</td>
+<td align="left">202</td>
+<td align="left">Text (Access 2000 (OLEDB))</td>
+<td align="left">NVarChar (SQL Server 7.0 +)</td>
+<td align="left">NVarChar2</td>
+</tr>
+<tr>
+<td align="left">adWChar</td>
+<td align="left">130</td>
+<td align="left"></td>
+<td align="left">NChar (SQL Server 7.0 +)</td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<p>* 在 Oracle 8.0.x 中 - decimal 和 int 等于 number 和 number(10)。</p>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Gkon</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://gxkon.top/posts/8726eb83/">http://gxkon.top/posts/8726eb83/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://gxkon.top" target="_blank">Gxkon's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/ADO/">ADO</a></div><div class="post_share"><div class="social-share" data-image="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/06/landscape-5282895_1280.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/posts/da462756/"><img class="prev_cover" data-src="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/07/person-5375746_1280.jpg" onerror="onerror=null;src='/Pic/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">JavaScript 教程</div></div></a></div><div class="next-post pull_right"><a href="/posts/12fc1c4b/"><img class="next_cover" data-src="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/07/night-5395836_1280.jpg" onerror="onerror=null;src='/Pic/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">JSP 教程</div></div></a></div></nav><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i><span> 评论</span></div><div id="gitalk-container"></div><script>var gitalk = new Gitalk({
+  clientID: '1ce3148e3133bf004c96',
+  clientSecret: '2a1e5c0f4d38387460b916843bfe5cac67ef2d07',
+  repo: 'blankwz.github.io',
+  owner: 'blankwz',
+  admin: ['blankwz'],
+  id: md5(decodeURI(location.pathname)),
+  language: 'zh-CN',
+  perPage: 10,
+  distractionFreeMode: false,
+  pagerDirection: 'last',
+  createIssueManually: false,
+  updateCountCallback: commentCount
+})
+gitalk.render('gitalk-container')
+
+function commentCount(n){
+  try {
+    document.getElementsByClassName('gitalk-comment-count')[0].innerHTML= n
+  } catch (e) {
+    return false
+  }
+}</script></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 By Gkon</div><div class="framework-info"><span>驱动 </span><a href="https://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="阅读模式"></i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">簡</a><i class="darkmode fa fa-moon-o" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><a id="to_comment" href="#post-comment" title="直达评论"><i class="scroll_to_comment fa fa-comments">  </i></a><i class="fa fa-list-ul close" id="mobile-toc-button" title="目录" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@3/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script><script src="/js/third-party/ClickShowText.js"></script></body></html>

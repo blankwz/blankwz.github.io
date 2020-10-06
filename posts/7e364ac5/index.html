@@ -1,0 +1,1637 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ASP教程 | Gxkon's Blog</title><meta name="description" content="ASP教程 ASP（Active Server Pages 动态服务器页面）是一种生成动态交互性网页的强有力工具 ASP 文件可包含文本、 HTML 标签和脚本。ASP 文件中的脚本可在服务器上执行。 在浏览器中通过查看源代码的方式是无法看到 ASP 源代码的，你只能看到由 ASP 文件输出的结果，而那些只是纯粹的 HTML 而已。这是因为，在结果被送回浏览器前，脚本已经在服务器上执行了  本教程"><meta name="keywords" content="ASP"><meta name="author" content="Gkon"><meta name="copyright" content="Gkon"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="dns-prefetch" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="crossorigin"/><link rel="dns-prefetch" href="https://fonts.googleapis.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="dns-prefetch" href="//busuanzi.ibruce.info"/><meta name="twitter:card" content="summary"><meta name="twitter:title" content="ASP教程"><meta name="twitter:description" content="ASP教程 ASP（Active Server Pages 动态服务器页面）是一种生成动态交互性网页的强有力工具 ASP 文件可包含文本、 HTML 标签和脚本。ASP 文件中的脚本可在服务器上执行。 在浏览器中通过查看源代码的方式是无法看到 ASP 源代码的，你只能看到由 ASP 文件输出的结果，而那些只是纯粹的 HTML 而已。这是因为，在结果被送回浏览器前，脚本已经在服务器上执行了  本教程"><meta name="twitter:image" content="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/06/the-caucasus-5299607_1280.jpg"><meta property="og:type" content="article"><meta property="og:title" content="ASP教程"><meta property="og:url" content="http://gxkon.top/posts/7e364ac5/"><meta property="og:site_name" content="Gxkon's Blog"><meta property="og:description" content="ASP教程 ASP（Active Server Pages 动态服务器页面）是一种生成动态交互性网页的强有力工具 ASP 文件可包含文本、 HTML 标签和脚本。ASP 文件中的脚本可在服务器上执行。 在浏览器中通过查看源代码的方式是无法看到 ASP 源代码的，你只能看到由 ASP 文件输出的结果，而那些只是纯粹的 HTML 而已。这是因为，在结果被送回浏览器前，脚本已经在服务器上执行了  本教程"><meta property="og:image" content="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/06/the-caucasus-5299607_1280.jpg"><meta property="article:published_time" content="2020-06-18T13:20:55.000Z"><meta property="article:modified_time" content="2020-06-20T02:40:19.914Z"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>var autoChangeMode = '1'
+var t = Cookies.get("theme")
+if (autoChangeMode == '1'){
+  var isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+  var isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+  var isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined){
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport){
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour < 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+  }
+  } else if (t == 'light') activateLightMode()
+  else activateDarkMode()
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="canonical" href="http://gxkon.top/posts/7e364ac5/"><link rel="prev" title="VBScript 教程" href="http://gxkon.top/posts/5f9102a/"><link rel="next" title="ASP.NET教程之Razor和WebPages" href="http://gxkon.top/posts/fd261a78/"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script><script src="https://cdn.jsdelivr.net/npm/blueimp-md5/js/md5.min.js"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: {"text":"本人,超帅,打钱","fontSize":"15px"},
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  highlightShrink: 'false',
+  isFontAwesomeV5: false,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false
+  
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isSidebar: true  
+  }</script><noscript><style>
+#page-header {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 4.2.0"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/Pic/avatar.png" onerror="onerror=null;src='/Pic/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">95</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">64</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">44</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 娱乐</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li></ul></div></div></div></div><i class="fa fa-arrow-right on" id="toggle-sidebar" aria-hidden="true">     </i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ASP教程"><span class="toc-text">ASP教程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#本教程总结"><span class="toc-text">本教程总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#学完ASP，下一步学习"><span class="toc-text">学完ASP，下一步学习</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一、ASP基础"><span class="toc-text">一、ASP基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-ASP能做什么"><span class="toc-text">1. ASP能做什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-ASP安装（把自己的-Windows-PC-作为-Web-服务器）"><span class="toc-text">2. ASP安装（把自己的 Windows PC 作为 Web 服务器）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-ASP语法规则"><span class="toc-text">3.ASP语法规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-向浏览器输出response-write"><span class="toc-text">4.向浏览器输出response.write</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-变量"><span class="toc-text">5.变量</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Session-变量"><span class="toc-text">Session 变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Application-变量"><span class="toc-text">Application 变量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-子程序"><span class="toc-text">6. 子程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-VBScript-与-JavaScript-之间的差异"><span class="toc-text">7. VBScript 与 JavaScript 之间的差异</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-ASP表单和取回用户的输入"><span class="toc-text">8.ASP表单和取回用户的输入</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Request-QueryString-（GET"><span class="toc-text">Request.QueryString （GET)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Request-Form-POST"><span class="toc-text">Request.Form (POST)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#表单验证"><span class="toc-text">表单验证</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-Cookie"><span class="toc-text">9. Cookie</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建Cookie-gt-Response-Cookies"><span class="toc-text">创建Cookie  -&gt;  Response.Cookies</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#取回-Cookie-的值-gt-Request-Cookies"><span class="toc-text">取回 Cookie 的值  -&gt;  Request.Cookies</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#不使用Cookie怎么在页面之间传递信息"><span class="toc-text">不使用Cookie怎么在页面之间传递信息</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-Session-对象"><span class="toc-text">10. Session 对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#10-1-Session-何时开始？"><span class="toc-text">10.1 Session 何时开始？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10-2-Session-何时结束？"><span class="toc-text">10.2 Session 何时结束？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10-3-存储和取回-Session-变量"><span class="toc-text">10.3 存储和取回 Session 变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10-4-Session-Contents-Remove-gt-删除Session变量"><span class="toc-text">10.4 Session.Contents.Remove-&gt; 删除Session变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10-5-Session-Contents-Count-gt-获取集合中的数量"><span class="toc-text">10.5 Session.Contents.Count -&gt; 获取集合中的数量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10-6-遍历-Contents-集合-gt-读取或操作所有变量"><span class="toc-text">10.6 遍历 Contents 集合 -&gt; 读取或操作所有变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10-7-遍历-StaticObjects-集合-gt-查看所有对象的值"><span class="toc-text">10.7 遍历 StaticObjects 集合 -&gt; 查看所有对象的值</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-Application-对象"><span class="toc-text">11. Application 对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建和访问App变量"><span class="toc-text">创建和访问App变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#与Session一样，通过Contents集合访问和改变App变量"><span class="toc-text">与Session一样，通过Contents集合访问和改变App变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#App锁定和解锁"><span class="toc-text">App锁定和解锁</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-引用文件-include"><span class="toc-text">12. 引用文件 #include</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#include语法"><span class="toc-text">include语法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#安全性"><span class="toc-text">安全性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#同时一个-ASP-文件可以对同一个文件引用多次"><span class="toc-text">同时一个 ASP 文件可以对同一个文件引用多次</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-Global-asa-文件"><span class="toc-text">13. Global.asa 文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#13-1-Global-asa-文件能包含四种类型的事件"><span class="toc-text">13.1 Global.asa 文件能包含四种类型的事件</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Application-OnStart"><span class="toc-text">Application_OnStart</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Session-OnStart"><span class="toc-text">Session_OnStart</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Session-OnEnd"><span class="toc-text">Session_OnEnd</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Application-OnEnd"><span class="toc-text">Application_OnEnd</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#13-2-lt-object-gt-声明-创建带作用域的对象"><span class="toc-text">13.2 &lt;object&gt;声明 创建带作用域的对象</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#lt-object-gt-实例"><span class="toc-text">&lt;object&gt;实例</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#13-3-TypeLibrary-声明"><span class="toc-text">13.3 TypeLibrary 声明</span></a></li></ol></li></ol></li></ol></li></ol></div></div></div><div id="body-wrap"><div class="post-bg" id="nav" style="background-image: url(https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/06/the-caucasus-5299607_1280.jpg)"><div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">Gxkon's Blog</a></span><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 娱乐</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li></ul></div></div><span class="toggle-menu close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span></span></div><div id="post-info"><div id="post-title"><div class="posttitle">ASP教程</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2020-06-18 21:20:55"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2020-06-18</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2020-06-20 10:40:19"><i class="fa fa-history" aria-hidden="true"></i> 更新于 2020-06-20</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Web%E6%95%99%E7%A8%8B%E7%B3%BB%E5%88%97/">Web教程系列</a></span></div><div class="meta-secondline"> </div><div class="meta-thirdline"><span class="post-meta-pv-cv"><i class="fa fa-eye post-meta__icon" aria-hidden="true"> </i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"><span class="post-meta__separator">|</span><i class="post-meta__icon fa fa-comment-o" aria-hidden="true"></i><span>评论数:</span><a href="/posts/7e364ac5/#post-comment"><span class="gitalk-comment-count comment-count"></span></a></span></div></div></div></div><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h1 id="ASP教程"><a href="#ASP教程" class="headerlink" title="ASP教程"></a>ASP教程</h1><blockquote>
+<p>ASP（Active Server Pages 动态服务器页面）是一种生成动态交互性网页的强有力工具</p>
+<p><strong>ASP 文件可包含文本、 HTML 标签和脚本。ASP 文件中的脚本可在服务器上执行。</strong></p>
+<p><strong>在浏览器中通过查看源代码的方式是无法看到 ASP 源代码的，你只能看到由 ASP 文件输出的结果，而那些只是纯粹的 HTML 而已。这是因为，在结果被送回浏览器前，脚本已经在服务器上执行了</strong></p>
+</blockquote>
+<h2 id="本教程总结"><a href="#本教程总结" class="headerlink" title="本教程总结"></a>本教程总结</h2><ul>
+<li><p>讲解了如何为网站添加服务器端脚本，使得网站的动态性和交互性更强。</p>
+</li>
+<li><p>如何动态地编辑、改变或者添加网页内容，对来自 HTML 表单提交的数据进行响应，访问数据或数据库并向浏览器返回结果，为不同的用户定制页面从而使这些页面的可用性更强。</p>
+</li>
+</ul>
+<h3 id="学完ASP，下一步学习"><a href="#学完ASP，下一步学习" class="headerlink" title="学完ASP，下一步学习"></a>学完ASP，下一步学习</h3><ol>
+<li><code>学习SQL</code> -&gt; <strong>用于访问和处理数据库系统的标准的计算机语言</strong></li>
+<li><code>学习ADO</code> -&gt; <strong>从网站访问数据库中数据的编程接口，ADO 使用 SQL 来查询数据库中的数据</strong></li>
+<li><code>学习AJAX</code> -&gt; <strong>不重载整个页面的情况下对网页的某些部分进行更新</strong></li>
+</ol>
+<h2 id="一、ASP基础"><a href="#一、ASP基础" class="headerlink" title="一、ASP基础"></a>一、ASP基础</h2><h3 id="1-ASP能做什么"><a href="#1-ASP能做什么" class="headerlink" title="1. ASP能做什么"></a>1. ASP能做什么</h3><ul>
+<li><p>动态地编辑、改变或者添加页面的任何内容</p>
+</li>
+<li><p>对由用户从 HTML 表单提交的查询或者数据作出响应</p>
+</li>
+<li><p>访问数据或者数据库，并向浏览器返回结果</p>
+</li>
+<li><p>为不同的用户定制网页，提高这些页面的可用性</p>
+</li>
+<li><p>用 ASP 替代 CGI 和 Perl 的优势在于它的简易性和速度</p>
+</li>
+<li><p>由于 ASP 代码无法从来浏览器端察看，ASP 确保了站点的安全性。</p>
+</li>
+<li><p>优秀的 ASP 编程可将网络负载降至最低</p>
+</li>
+</ul>
+<h3 id="2-ASP安装（把自己的-Windows-PC-作为-Web-服务器）"><a href="#2-ASP安装（把自己的-Windows-PC-作为-Web-服务器）" class="headerlink" title="2. ASP安装（把自己的 Windows PC 作为 Web 服务器）"></a>2. ASP安装（把自己的 Windows PC 作为 Web 服务器）</h3><p>这里，我们通过安装IIS，来运行ASP</p>
+<h3 id="3-ASP语法规则"><a href="#3-ASP语法规则" class="headerlink" title="3.ASP语法规则"></a>3.ASP语法规则</h3><ul>
+<li><p>ASP 文件包含 HTML 标签，类似 HTML 文件。</p>
+</li>
+<li><p>ASP 文件也能够包含<em>服务器端脚本</em>,这些脚本被分隔符 *&lt;%* 和 <em>%&gt;</em> 包围起来</p>
+</li>
+<li><p>服务器脚本<em>在服务器上执行</em>，可包含合法的表达式、语句、或者运算符</p>
+</li>
+</ul>
+<h3 id="4-向浏览器输出response-write"><a href="#4-向浏览器输出response-write" class="headerlink" title="4.向浏览器输出response.write"></a>4.向浏览器输出response.write</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;%</span><br><span class="line">response.write(<span class="string">"Hello World!"</span>)</span><br><span class="line">%&gt;</span><br><span class="line"></span><br><span class="line">//简写</span><br><span class="line">&lt;%=<span class="string">"Hello World!"</span>%&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-变量"><a href="#5-变量" class="headerlink" title="5.变量"></a>5.变量</h3><ul>
+<li><strong>在子程序<code>之外</code>声明变量，那么这个变量可被 ASP 文件中的任何脚本改变</strong></li>
+<li><strong>在子程序<code>中</code>声明变量，那么当子程序每次执行时，它才会被创建和撤销，子程序外的脚本无法访问和修改该变量</strong></li>
+<li>如需声明供多个 ASP 文件使用的变量，请将变量声明为 session 变量或者 application 变量</li>
+</ul>
+<h4 id="Session-变量"><a href="#Session-变量" class="headerlink" title="Session 变量"></a>Session 变量</h4><p>Session 变量用于存储<code>单一用户的信息</code>，并且对一个应用程序中的<code>所有页面均有效</code>。存储于 session 中的典型数据是姓名、id 或参数。</p>
+<h4 id="Application-变量"><a href="#Application-变量" class="headerlink" title="Application 变量"></a>Application 变量</h4><p>Application 变量用于存储<code>一个特定的应用程序中所有用户的信息</code>。同样对一个应用程序中的<code>所有页面均有效</code></p>
+<h3 id="6-子程序"><a href="#6-子程序" class="headerlink" title="6. 子程序"></a>6. 子程序</h3><p><strong>通过 VBScript 和其他方式调用子程序</strong></p>
+<ul>
+<li><p>默认情况，通过VBScript调用子程序</p>
+</li>
+<li><p>若用另外一种脚本语言来编写子程序或者函数，将 <code>&lt;%@ language=&quot;*language*&quot; %&gt;</code> 这一行写到 <html> 标签的上面</p>
+</li>
+</ul>
+<h3 id="7-VBScript-与-JavaScript-之间的差异"><a href="#7-VBScript-与-JavaScript-之间的差异" class="headerlink" title="7. VBScript 与 JavaScript 之间的差异"></a>7. VBScript 与 JavaScript 之间的差异</h3><p>用 VBScript 编写的 ASP 文件中调用 VBScript 或者 JavaScript 子程序时，</p>
+<ul>
+<li><p>可以使用关键词 “call”，后面跟着子程序名称。</p>
+</li>
+<li><p>假如子程序需要参数，当使用关键词 “call” 时必须使用括号包围参数。</p>
+</li>
+<li><p>假如省略 “call”，参数则不必由括号包围。</p>
+</li>
+<li><p>假如子程序没有参数，那么括号则是可选项。</p>
+</li>
+</ul>
+<p>用 JavaScript 编写的 ASP 文件中调用 VBScript 或者 JavaScript 子程序时，</p>
+<ul>
+<li>必须在子程序名后使用括号。</li>
+</ul>
+<h3 id="8-ASP表单和取回用户的输入"><a href="#8-ASP表单和取回用户的输入" class="headerlink" title="8.ASP表单和取回用户的输入"></a>8.ASP表单和取回用户的输入</h3><p><strong>用户输入的信息可通过两种方式取回：Request.QueryString 或 Request.Form</strong></p>
+<h4 id="Request-QueryString-（GET"><a href="#Request-QueryString-（GET" class="headerlink" title="Request.QueryString （GET)"></a>Request.QueryString （GET)</h4><ul>
+<li><p>用于搜集使用 <code>method=&quot;get&quot;</code> 的表单中的值</p>
+</li>
+<li><p>使用 GET 方法从表单传送的信息对所有的用户<code>都是可见的</code>（出现在浏览器的地址栏），并且对所发送信息的<code>量也有限制</code>。</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//表单例子，用户输入</span><br><span class="line">&lt;form method=<span class="string">"get"</span> action=<span class="string">"simpleform.asp"</span>&gt;</span><br><span class="line">&lt;p&gt;First Name: &lt;input <span class="built_in">type</span>=<span class="string">"text"</span> name=<span class="string">"fname"</span> /&gt;&lt;/p&gt;</span><br><span class="line">&lt;p&gt;Last Name: &lt;input <span class="built_in">type</span>=<span class="string">"text"</span> name=<span class="string">"lname"</span> /&gt;&lt;/p&gt;</span><br><span class="line">&lt;input <span class="built_in">type</span>=<span class="string">"submit"</span> value=<span class="string">"Submit"</span> /&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line"></span><br><span class="line">//输入后，发送至服务器的 URL</span><br><span class="line">会类似这样：http://www.w3school.com.cn/simpleform.asp?fname=Bill&amp;lname=Gates</span><br><span class="line"></span><br><span class="line">//取回</span><br><span class="line">&lt;%</span><br><span class="line">response.write(request.querystring(<span class="string">"fname"</span>))</span><br><span class="line">response.write(<span class="string">" "</span> &amp; request.querystring(<span class="string">"lname"</span>))</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Request-Form-POST"><a href="#Request-Form-POST" class="headerlink" title="Request.Form (POST)"></a>Request.Form (POST)</h4><ul>
+<li>用于搜集使用<code>method=&quot;post&quot;</code>的表单中的值</li>
+<li>使用 POST 方法从表单传送的信息对用户是<code>不可见的</code>，并且对所发送信息的量也<code>没有限制</code>。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//表单例子，用户输入</span><br><span class="line">&lt;form method=<span class="string">"post"</span> action=<span class="string">"simpleform.asp"</span>&gt;</span><br><span class="line">&lt;p&gt;First Name: &lt;input <span class="built_in">type</span>=<span class="string">"text"</span> name=<span class="string">"fname"</span> /&gt;&lt;/p&gt;</span><br><span class="line">&lt;p&gt;Last Name: &lt;input <span class="built_in">type</span>=<span class="string">"text"</span> name=<span class="string">"lname"</span> /&gt;&lt;/p&gt;</span><br><span class="line">&lt;input <span class="built_in">type</span>=<span class="string">"submit"</span> value=<span class="string">"Submit"</span> /&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line"></span><br><span class="line">//输入后，发送至服务器的 URL，不会有表单信息</span><br><span class="line">http://www.w3school.com.cn/simpleform.asp</span><br><span class="line"></span><br><span class="line">//取回</span><br><span class="line">&lt;%</span><br><span class="line">response.write(request.form(<span class="string">"fname"</span>))</span><br><span class="line">response.write(<span class="string">" "</span> &amp; request.form(<span class="string">"lname"</span>))</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="表单验证"><a href="#表单验证" class="headerlink" title="表单验证"></a>表单验证</h4><ul>
+<li>尽量在浏览器上对用户的输入进行验证（通过客户端脚本）<ul>
+<li>浏览器的验证速度更快，并可以减少服务器的负载</li>
+</ul>
+</li>
+<li>如果用户输入会保存到数据库中，那么您应该考虑使用服务器端验证</li>
+</ul>
+<h3 id="9-Cookie"><a href="#9-Cookie" class="headerlink" title="9. Cookie"></a>9. Cookie</h3><blockquote>
+<p>cookie 常用用于识别用户。</p>
+<p>cookie 是一种服务器留在用户计算机上的小文件。</p>
+<p>每当同一台计算机通过浏览器请求页面时，这台计算机将会发送 cookie。通过 ASP，您能够创建并取回 cookie 的值。</p>
+</blockquote>
+<h4 id="创建Cookie-gt-Response-Cookies"><a href="#创建Cookie-gt-Response-Cookies" class="headerlink" title="创建Cookie  -&gt;  Response.Cookies"></a>创建Cookie  -&gt;  <code>Response.Cookies</code></h4><p>Response.Cookies 命令必须出现在 <html> 标签之前</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//创建一个名为 <span class="string">"firstname"</span> 的 cookie，并将其赋值为 <span class="string">"Alex"</span></span><br><span class="line">&lt;%</span><br><span class="line">Response.Cookies(<span class="string">"firstname"</span>)=<span class="string">"Alex"</span></span><br><span class="line">%&gt;</span><br><span class="line"></span><br><span class="line">//向 cookie 分配属性也是可以的，比如设置 cookie 的失效时间</span><br><span class="line">&lt;%</span><br><span class="line">Response.Cookies(<span class="string">"firstname"</span>)=<span class="string">"Alex"</span></span><br><span class="line">Response.Cookies(<span class="string">"firstname"</span>).Expires=<span class="comment">#May 10,2012#</span></span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="取回-Cookie-的值-gt-Request-Cookies"><a href="#取回-Cookie-的值-gt-Request-Cookies" class="headerlink" title="取回 Cookie 的值  -&gt;  Request.Cookies"></a>取回 Cookie 的值  -&gt;  <code>Request.Cookies</code></h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//取回名为 <span class="string">"firstname"</span> 的 cookie 的值，并把值显示到了页面上</span><br><span class="line">&lt;%</span><br><span class="line">fname=Request.Cookies(<span class="string">"firstname"</span>)</span><br><span class="line">response.write(<span class="string">"Firstname="</span> &amp; fname)   //Firstname=Alex</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="不使用Cookie怎么在页面之间传递信息"><a href="#不使用Cookie怎么在页面之间传递信息" class="headerlink" title="不使用Cookie怎么在页面之间传递信息"></a>不使用Cookie怎么在页面之间传递信息</h4><p><strong>两种方法：</strong></p>
+<ul>
+<li><strong>向 URL 添加参数</strong></li>
+<li><strong>使用表单</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//方法一：向 URL 添加参数</span><br><span class="line">&lt;a href=<span class="string">"welcome.asp?fname=John&amp;lname=Smith"</span>&gt;Go to Welcome Page&lt;/a&gt;</span><br><span class="line">//再取回</span><br><span class="line">fname=Request.querystring(<span class="string">"fname"</span>)</span><br><span class="line">lname=Request.querystring(<span class="string">"lname"</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//方法二：使用表单</span><br><span class="line">&lt;form method=<span class="string">"post"</span> action=<span class="string">"welcome.asp"</span>&gt;</span><br><span class="line">First Name: &lt;input <span class="built_in">type</span>=<span class="string">"text"</span> name=<span class="string">"fname"</span> value=<span class="string">""</span>&gt;</span><br><span class="line">....</span><br><span class="line"></span><br><span class="line">//再取回</span><br><span class="line">fname=Request.form(<span class="string">"fname"</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="10-Session-对象"><a href="#10-Session-对象" class="headerlink" title="10. Session 对象"></a>10. Session 对象</h3><blockquote>
+<p>难点：<code>Session该设置多长时间结束</code></p>
+<ul>
+<li>设置时间长了：为某个空闲的 session 等待太久会耗尽服务器的资源</li>
+<li>设置时间短了：用户就需要重新来过，重新登录~~体验差</li>
+</ul>
+</blockquote>
+<ul>
+<li><p><code>作用</code>：<strong>用于存储关于用户会话（session）的信息，或者更改用户会话（session）的设置</strong></p>
+</li>
+<li><p><code>为什么要Session</code>：由于 HTTP 地址无法保持状态，Web 服务器并不知道你是谁以及你做了什么，需要个方法来告诉服务器</p>
+</li>
+<li><p><code>通过Cookie解决</code>：ASP 通过为每个用户创建一个唯一的 cookie 来解决这个问题</p>
+<ul>
+<li>cookie 被传送至用户的计算机上，它含有可识别用户的信息。这种接口被称作 Session 对象。</li>
+</ul>
+</li>
+<li><p><code>时效</code>：服务器会为每个新的用户创建一个新的 Session，并在 session 失效时撤销掉这个 Session 对象</p>
+</li>
+</ul>
+<h4 id="10-1-Session-何时开始？"><a href="#10-1-Session-何时开始？" class="headerlink" title="10.1 Session 何时开始？"></a>10.1 Session 何时开始？</h4><p>Session 开始于：</p>
+<ul>
+<li>某个新用户请求了一个 ASP 文件，并且 Global.asa 文件引用了 Session_OnStart 子程序</li>
+<li>某个值存储在 Session 变量中</li>
+<li>某个用户请求了一个 ASP 文件，并且 Global.asa 使用 <object> 标签通过 session 的 scope 来实例化某个对象</li>
+</ul>
+<h4 id="10-2-Session-何时结束？"><a href="#10-2-Session-何时结束？" class="headerlink" title="10.2 Session 何时结束？"></a>10.2 Session 何时结束？</h4><p><strong>如果用户没有在规定的时间内在应用程序中请求或者刷新页面，session 就会结束</strong></p>
+<ul>
+<li>默认值为 20 分钟</li>
+<li>使用 <strong>Timeout</strong> 属性设置<ul>
+<li><code>Session.Timeout=5</code> 设置了一个 5 分钟的超时时间间隔</li>
+<li><code>Session.Abandon</code>  立即结束 session</li>
+</ul>
+</li>
+</ul>
+<h4 id="10-3-存储和取回-Session-变量"><a href="#10-3-存储和取回-Session-变量" class="headerlink" title="10.3 存储和取回 Session 变量"></a>10.3 存储和取回 Session 变量</h4><p><strong>Session 对象最大的优点是可在其中存储变量，以供后续的网页读取，其应用范围是很广的。</strong></p>
+<ul>
+<li>把Session对象当作变量，来读取<ul>
+<li>比如：<code>&lt;%Response.Write(Session(&quot;username&quot;))%&gt;</code></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Contents 集合包含所有的 session 变量。</p>
+<p>通过Contents包的方法操作session</p>
+</blockquote>
+<h4 id="10-4-Session-Contents-Remove-gt-删除Session变量"><a href="#10-4-Session-Contents-Remove-gt-删除Session变量" class="headerlink" title="10.4 Session.Contents.Remove-&gt; 删除Session变量"></a>10.4 <code>Session.Contents.Remove</code>-&gt; 删除Session变量</h4><ul>
+<li><p><strong>通过 Remove 方法来移除 session 变量</strong></p>
+</li>
+<li><p><strong>使用 RemoveAll 方法删除 session 中的所有变量</strong></p>
+</li>
+</ul>
+<h4 id="10-5-Session-Contents-Count-gt-获取集合中的数量"><a href="#10-5-Session-Contents-Count-gt-获取集合中的数量" class="headerlink" title="10.5 Session.Contents.Count -&gt; 获取集合中的数量"></a>10.5 <code>Session.Contents.Count</code> -&gt; 获取集合中的数量</h4><h4 id="10-6-遍历-Contents-集合-gt-读取或操作所有变量"><a href="#10-6-遍历-Contents-集合-gt-读取或操作所有变量" class="headerlink" title="10.6 遍历 Contents 集合 -&gt; 读取或操作所有变量"></a>10.6 遍历 Contents 集合 -&gt; 读取或操作所有变量</h4><h4 id="10-7-遍历-StaticObjects-集合-gt-查看所有对象的值"><a href="#10-7-遍历-StaticObjects-集合-gt-查看所有对象的值" class="headerlink" title="10.7 遍历 StaticObjects 集合 -&gt; 查看所有对象的值"></a>10.7 遍历 StaticObjects 集合 -&gt; 查看所有对象的值</h4><p><strong>通过遍历 StaticObjects 集合，来查看存储在 Session 对象中的所有对象的值</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">//删除Session变量</span><br><span class="line">If Session.Contents(<span class="string">"age"</span>)&lt;18 <span class="keyword">then</span></span><br><span class="line">Session.Contents.Remove(<span class="string">"sale"</span>)</span><br><span class="line">End If</span><br><span class="line"></span><br><span class="line">//删除 session 中的所有变量</span><br><span class="line">Session.Contents.RemoveAll()</span><br><span class="line"></span><br><span class="line">//获取全部数量</span><br><span class="line">j=Session.Contents.Count</span><br><span class="line">Response.Write(<span class="string">"Session variables: "</span> &amp; j)</span><br><span class="line"></span><br><span class="line">//遍历 Contents 集合，来查看其中存储的变量</span><br><span class="line">//方法一</span><br><span class="line">For i=1 to j</span><br><span class="line">Response.Write(Session.Contents(i) &amp; <span class="string">"&lt;br&gt;"</span>)</span><br><span class="line">Next</span><br><span class="line"></span><br><span class="line">//方法二</span><br><span class="line">For Each i <span class="keyword">in</span> Session.Contents</span><br><span class="line">Response.Write(i &amp; <span class="string">"&lt;br&gt;"</span>)</span><br><span class="line">Next</span><br><span class="line"></span><br><span class="line">//查看所有对象的值</span><br><span class="line">dim i</span><br><span class="line">For Each i <span class="keyword">in</span> Session.StaticObjects</span><br><span class="line">Response.Write(i &amp; <span class="string">"&lt;br&gt;"</span>)</span><br><span class="line">Next</span><br></pre></td></tr></table></figure>
+
+<h3 id="11-Application-对象"><a href="#11-Application-对象" class="headerlink" title="11. Application 对象"></a>11. Application 对象</h3><p>Web 上的一个应用程序可以是一组 ASP 文件。这些 ASP 文件一起协同工作来完成某项任务。ASP 中的 Application 对象用于把这些文件捆绑在一起。</p>
+<ul>
+<li>Application 对象用于存储和访问来自任何页面的变量</li>
+<li>不同与Session 对象，在于所有的用户分享一个 Application 对象，而 Session 对象和用户的关系是一一对应的。</li>
+<li>Application 对象存有会被应用程序中的许多页面使用的信息（比如数据库连接信息）<ul>
+<li>可以从任何的页面访问这些信息</li>
+<li>也可以在一个地方改变这些信息，随后这些改变会自动反映在所有的页面上</li>
+</ul>
+</li>
+</ul>
+<h4 id="创建和访问App变量"><a href="#创建和访问App变量" class="headerlink" title="创建和访问App变量"></a>创建和访问App变量</h4><p><strong>Application 变量可被应用程序中的任何页面访问和改变</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//在<span class="string">"Global.asa"</span> 中创建 Application 变量</span><br><span class="line">&lt;script language=<span class="string">"vbscript"</span> runat=<span class="string">"server"</span>&gt;</span><br><span class="line">Sub Application_OnStart</span><br><span class="line">application(<span class="string">"vartime"</span>)=<span class="string">""</span></span><br><span class="line">application(<span class="string">"users"</span>)=1</span><br><span class="line">End Sub</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">//访问</span><br><span class="line">There are</span><br><span class="line">&lt;%</span><br><span class="line">Response.Write(Application(<span class="string">"users"</span>))</span><br><span class="line">%&gt;</span><br><span class="line">active connections.</span><br></pre></td></tr></table></figure>
+
+<h4 id="与Session一样，通过Contents集合访问和改变App变量"><a href="#与Session一样，通过Contents集合访问和改变App变量" class="headerlink" title="与Session一样，通过Contents集合访问和改变App变量"></a>与Session一样，通过Contents集合访问和改变App变量</h4><ul>
+<li>Contents 集合包含着所有的 application 变量<ul>
+<li>通过遍历 Contents 集合，来查看其中存储的变量</li>
+</ul>
+</li>
+<li><code>Application.Contents.Count</code> 获取集合中的数量</li>
+<li>遍历 StaticObjects 集合，来查看存储在 Application 对象中的所有对象的值</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">//遍历Contents</span><br><span class="line">dim i</span><br><span class="line">For Each i <span class="keyword">in</span> Application.Contents</span><br><span class="line">Response.Write(i &amp; <span class="string">"&lt;br&gt;"</span>)</span><br><span class="line">Next</span><br><span class="line"></span><br><span class="line">//获取数量</span><br><span class="line">dim i</span><br><span class="line">dim j</span><br><span class="line">j=Application.Contents.Count</span><br><span class="line">For i=1 to j</span><br><span class="line">Response.Write(Application.Contents(i) &amp; <span class="string">"&lt;br&gt;"</span>)</span><br><span class="line">Next</span><br><span class="line"></span><br><span class="line">//遍历 StaticObjects 集合</span><br><span class="line">dim i</span><br><span class="line">For Each i <span class="keyword">in</span> Application.StaticObjects</span><br><span class="line">Response.Write(i &amp; <span class="string">"&lt;br&gt;"</span>)</span><br><span class="line">Next</span><br></pre></td></tr></table></figure>
+
+<h4 id="App锁定和解锁"><a href="#App锁定和解锁" class="headerlink" title="App锁定和解锁"></a>App锁定和解锁</h4><p>防止数据冲突，用户操作APP时，需要锁定APP，操作完成后，解锁APP</p>
+<p>当应用程序锁定后，用户们就无法改变 Application 变量了（除了正在访问 Application 变量的用户）</p>
+<ul>
+<li>Application.Lock</li>
+<li>Application.Unlock</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;%</span><br><span class="line">Application.Lock</span><br><span class="line"><span class="string">'do some application object operations</span></span><br><span class="line"><span class="string">Application.Unlock</span></span><br><span class="line"><span class="string">%&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="12-引用文件-include"><a href="#12-引用文件-include" class="headerlink" title="12. 引用文件 #include"></a>12. 引用文件 #include</h3><blockquote>
+<p>通过使用 #include 指令，您可以在服务器执行 ASP 文件之前，把另一个 ASP 文件的内容插入到这个 ASP 文件中。</p>
+<p>#include 指令用于创建函数、页眉、页脚或者其他多个页面上需要重复使用的元素等。</p>
+</blockquote>
+<h4 id="include语法"><a href="#include语法" class="headerlink" title="include语法"></a>include语法</h4><p>把 #include 指令放在注释标签中，在 ASP 页面中引用文件</p>
+<ul>
+<li>关键词 <code>virtual</code> 来指示以虚拟目录开始的路径</li>
+<li>关键词 <code>file</code> 来指示一个<code>相对路径</code>。相对路径是以含有引用文件的目录开始的</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--<span class="comment">#include virtual="somefilename"--&gt;</span></span><br><span class="line">or</span><br><span class="line">&lt;!--<span class="comment">#include file ="somefilename"--&gt;</span></span><br><span class="line"></span><br><span class="line">&lt;!-- <span class="comment">#include virtual ="/html/header.inc" --&gt;</span></span><br><span class="line">&lt;!-- <span class="comment">#include file ="headersheader.inc" --&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h4><ul>
+<li>使用 “.inc” 来作为被被引用文件的文件扩展名。请注意：如果用户尝试直接浏览 INC 文件，这个文件中内容将会被显示出来</li>
+<li>如果您的被引用文件中的内容包含机密的信息或者是您不想让任何用户看到的信息，那么最好还是使用 “.asp” 作为扩展名。<ul>
+<li>因为，ASP 文件中的源代码被编译后是不可见的</li>
+</ul>
+</li>
+</ul>
+<h4 id="同时一个-ASP-文件可以对同一个文件引用多次"><a href="#同时一个-ASP-文件可以对同一个文件引用多次" class="headerlink" title="同时一个 ASP 文件可以对同一个文件引用多次"></a>同时一个 ASP 文件可以对同一个文件引用多次</h4><blockquote>
+<p>在脚本执行前，被引用的文件就会被处理和插入，所以不能在脚本分隔符之间包含文件引用</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//错误的！！！！！！！！</span><br><span class="line">&lt;%</span><br><span class="line">For i = 1 To n</span><br><span class="line">&lt;!--<span class="comment">#include file="count.inc"--&gt;</span></span><br><span class="line">Next</span><br><span class="line">%&gt;</span><br><span class="line"></span><br><span class="line">//正确的！！！</span><br><span class="line">&lt;% For i = 1 to n %&gt;</span><br><span class="line">&lt;!--<span class="comment">#include file="count.inc" --&gt;</span></span><br><span class="line">&lt;% Next %&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="13-Global-asa-文件"><a href="#13-Global-asa-文件" class="headerlink" title="13. Global.asa 文件"></a>13. Global.asa 文件</h3><p><code>Global.asa</code> 文件是一个可选的文件</p>
+<ul>
+<li><p>它可包含被 ASP 应用程序中每个页面<code>访问的对象、变量和方法的声明</code>。</p>
+</li>
+<li><p>所有合法的浏览器脚本（<code>JavaScript、VBScript、JScript、PerlScript</code> 等等）都能在 Global.asa 中使用。</p>
+</li>
+<li><p>Global.asa 文件必须存放在 <code>ASP 应用程序的根目录中</code>，而且<code>每个应用程序只能有一个</code> Global.asa 文件</p>
+</li>
+<li><p>你无法显示 Global.asa 文件中的文本。此文件无法显示信息</p>
+</li>
+<li><p>Global.asa 文件只能包含下列内容：</p>
+<ul>
+<li><code>Application 事件</code></li>
+<li><code>Session 事件</code></li>
+<li><code>&lt;object&gt; 声明</code></li>
+<li><code>TypeLibrary 声明</code></li>
+<li><code>#include 指令</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="13-1-Global-asa-文件能包含四种类型的事件"><a href="#13-1-Global-asa-文件能包含四种类型的事件" class="headerlink" title="13.1 Global.asa 文件能包含四种类型的事件"></a>13.1 Global.asa 文件能包含四种类型的事件</h4><p><strong>他告诉 application 和 session 对象当 application/session 开始时做什么，当 application/session 结束时做什么。完成这项任务的代码被放置在事件句柄中</strong></p>
+<h5 id="Application-OnStart"><a href="#Application-OnStart" class="headerlink" title="Application_OnStart"></a><strong>Application_OnStart</strong></h5><ul>
+<li><p>此事件在第一个用户调用 ASP 应用程序的第一个页面时发生。</p>
+</li>
+<li><p>此事件在 Web 服务器重启或者 Global.asa 文件被编辑之后发生。</p>
+</li>
+<li><p>“Session_OnStart” 事件会在此事件发生之后立即发生。</p>
+</li>
+<li><p><code>只能使用 Server 和 Application 对象</code></p>
+</li>
+</ul>
+<h5 id="Session-OnStart"><a href="#Session-OnStart" class="headerlink" title="Session_OnStart"></a><strong>Session_OnStart</strong></h5><ul>
+<li>此事件在每当新用户请求他（她）在 ASP 应用程序中的第一个页面时发生。</li>
+<li><code>可以使用任何内建的对象</code></li>
+</ul>
+<h5 id="Session-OnEnd"><a href="#Session-OnEnd" class="headerlink" title="Session_OnEnd"></a><strong>Session_OnEnd</strong></h5><ul>
+<li>此事件在每当用户结束 session 时发生。在规定的时间（默认的时间为 20 分钟）内如果用户没有请求任何页面，用户 session 就会结束。</li>
+<li><code>可以使用 Server、Application 和 Session 对</code>象</li>
+</ul>
+<h5 id="Application-OnEnd"><a href="#Application-OnEnd" class="headerlink" title="Application_OnEnd"></a><strong>Application_OnEnd</strong></h5><ul>
+<li>此事件在最后一个用户结束其 session 之后发生。</li>
+<li>典型的情况是，此事件会在 Web 服务器停止时发生。</li>
+<li>这个子程序用于在应用程序停止后清除设置，比如删除记录或者向文本文件中写入信息。</li>
+<li><code>只能使用 Server 和 Application 对象</code></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">//由于我们无法在 Global.asa 文件中使用 ASP 的脚本分隔符 (&lt;% 和 %&gt;) 插入脚本，我们需要把子例程放置在 HTML 的 &lt;script&gt; 元素内部</span><br><span class="line">&lt;script language=<span class="string">"vbscript"</span> runat=<span class="string">"server"</span>&gt;</span><br><span class="line"></span><br><span class="line">sub Application_OnStart</span><br><span class="line"><span class="string">'some code</span></span><br><span class="line"><span class="string">end sub</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">sub Application_OnEnd</span></span><br><span class="line"><span class="string">'</span>some code</span><br><span class="line">end sub</span><br><span class="line"></span><br><span class="line">sub Session_OnStart</span><br><span class="line"><span class="string">'some code</span></span><br><span class="line"><span class="string">end sub</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">sub Session_OnEnd</span></span><br><span class="line"><span class="string">'</span>some code</span><br><span class="line">end sub</span><br><span class="line"></span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="13-2-lt-object-gt-声明-创建带作用域的对象"><a href="#13-2-lt-object-gt-声明-创建带作用域的对象" class="headerlink" title="13.2 &lt;object&gt;声明 创建带作用域的对象"></a>13.2 <code>&lt;object&gt;</code>声明 创建带作用域的对象</h4><ul>
+<li><p>通过使用 <object> 标签在 Global.asa 文件中，创建带有 session 或者 application 作用域的对象</p>
+</li>
+<li><p>在 Global.asa 文件中声明的对象可被应用程序中的任何脚本使用</p>
+</li>
+<li><p><code>&lt;object&gt; 标签应位于 &lt;script&gt; 标签外部</code></p>
+</li>
+<li><p>语法</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;object runat=<span class="string">"server"</span> scope=<span class="string">"scope"</span> id=<span class="string">"id"</span> &#123;progid=<span class="string">"progID"</span>|classid=<span class="string">"classID"</span>&#125;&gt;</span><br><span class="line">....</span><br><span class="line">&lt;/object&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>参数：</p>
+<ul>
+<li><code>scope</code>    Session 或 Application，（设置对象的作用域）</li>
+<li><code>id</code>        为对象指定一个唯一的 id。</li>
+<li><code>ProgID</code>    与 ClassID 关联的 id。ProgID 的格式是：[Vendor.]Component[.Version]。ProgID  或 ClassID 必需被指定。</li>
+<li><code>ClassID</code>    为 COM 类对象指定一个唯一的 id。ProgID 或 ClassID 必需被指定。</li>
+</ul>
+</li>
+</ul>
+<h5 id="lt-object-gt-实例"><a href="#lt-object-gt-实例" class="headerlink" title="&lt;object&gt;实例"></a><code>&lt;object&gt;</code>实例</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//使用 ProgID 参数创建了一个名为 <span class="string">"MyAd"</span> 的 session 作用域对象</span><br><span class="line">&lt;object runat=<span class="string">"server"</span> scope=<span class="string">"session"</span> id=<span class="string">"MyAd"</span> progid=<span class="string">"MSWC.AdRotator"</span>&gt;</span><br><span class="line">&lt;/object&gt;</span><br><span class="line"></span><br><span class="line">//使用 ClassID 参数创建了一个名为 <span class="string">"MyConnection"</span> 的 application 作用域对象</span><br><span class="line">&lt;object runat=<span class="string">"server"</span> scope=<span class="string">"application"</span> id=<span class="string">"MyConnection"</span></span><br><span class="line">classid=<span class="string">"Clsid:8AD3067A-B3FC-11CF-A560-00A0C9081C21"</span>&gt;</span><br><span class="line">&lt;/object&gt;</span><br><span class="line"></span><br><span class="line">//任意页面引用 <span class="string">"MyAd"</span> 对象</span><br><span class="line">&lt;%=MyAd.GetAdvertisement(<span class="string">"/banners/adrot.txt"</span>)%&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="13-3-TypeLibrary-声明"><a href="#13-3-TypeLibrary-声明" class="headerlink" title="13.3 TypeLibrary 声明"></a>13.3 TypeLibrary 声明</h4><p>TypeLibrary（类型库）是一个容器，其中装有对应于 COM 对象的 DLL 文件</p>
+<ul>
+<li><p>METADATA 标签可出现在 Global.asa 文件中的任何位置（在 <script> 标签的内外皆可）</p>
+<ul>
+<li>但推荐将 METADATA 标签放置于 Global.asa 文件的顶部。</li>
+</ul>
+</li>
+<li><p>通过在 Global.asa 文件中包含对 TypeLibrary 的调用，可以访问 COM 对象的常量，同时 ASP 代码也能更好地报告错误</p>
+</li>
+<li><p>如果您的 Web 应用程序依赖于已在类型库中声明的数据类型的 COM 对象，您可以在 Global.asa 中对类型库进行声明。</p>
+</li>
+<li><p>语法</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--METADATA TYPE=<span class="string">"TypeLib"</span></span><br><span class="line">file=<span class="string">"filename"</span> uuid=<span class="string">"id"</span> version=<span class="string">"number"</span> lcid=<span class="string">"localeid"</span></span><br><span class="line">--&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>参数</p>
+<table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">file</td>
+<td align="left">规定指向类型库的绝对路径。file 参数或者 uuid 参数，两者缺一不可。</td>
+</tr>
+<tr>
+<td align="left">uuid</td>
+<td align="left">规定了类型库的唯一的标识符。file 参数或者 uuid 参数，两者缺一不可。</td>
+</tr>
+<tr>
+<td align="left">version</td>
+<td align="left">可选。用于选择版本。如果没有找到需要的版本，将使用最接近的版本。</td>
+</tr>
+<tr>
+<td align="left">lcid</td>
+<td align="left">可选。用于类型库的地区标识符。</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>错误值：服务器会返回以下的错误消息之一</p>
+<table>
+<thead>
+<tr>
+<th align="left">错误代码</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">ASP 0222</td>
+<td align="left">无效的类型库规范</td>
+</tr>
+<tr>
+<td align="left">ASP 0223</td>
+<td align="left">没有找到类型库</td>
+</tr>
+<tr>
+<td align="left">ASP 0224</td>
+<td align="left">无法加载类型库</td>
+</tr>
+<tr>
+<td align="left">ASP 0225</td>
+<td align="left">无法包装类型库</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h4 id="13-4-Global-asa的一些作用"><a href="#13-4-Global-asa的一些作用" class="headerlink" title="13.4 Global.asa的一些作用"></a>13.4 Global.asa的一些作用</h4><h5 id="常用于初始化变量"><a href="#常用于初始化变量" class="headerlink" title="常用于初始化变量"></a>常用于初始化变量</h5><ul>
+<li>比如，检测访客首次到达 Web 站点的确切时间<ul>
+<li>在Session_OnStart 子例程 中，获取时间（<code>now()</code>）后给变量，变量的值可被应用程序中的任何 ASP 页面访问</li>
+</ul>
+</li>
+</ul>
+<h5 id="用于控制页面访问"><a href="#用于控制页面访问" class="headerlink" title="用于控制页面访问"></a>用于控制页面访问</h5><ul>
+<li>比如：把每个新的访客重定向到另一个页面<ul>
+<li>在Session_OnStart 子例程 中，直接重定向 （<code>Response.Redirect(&quot;newpage.asp&quot;)</code>）,定向到一个名为 "newpage.asp" 的页面</li>
+</ul>
+</li>
+</ul>
+<h5 id="包含函数，函数各种功能"><a href="#包含函数，函数各种功能" class="headerlink" title="包含函数，函数各种功能"></a>包含函数，函数各种功能</h5><ul>
+<li>比如，在Application_OnStart 子例程会调用另一个名为 "getcustomers" 的子例程<ul>
+<li>"getcustomers" 子例程会打开一个数据库，然后从 "customers" 表中取回一个记录集。</li>
+<li>此记录集会赋值给一个数组，在不查询数据库的情况下，任何 ASP 页面都能够访问这个数组</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;script language=<span class="string">"vbscript"</span> runat=<span class="string">"server"</span>&gt;</span><br><span class="line"></span><br><span class="line">sub Application_OnStart</span><br><span class="line">getcustomers</span><br><span class="line">end sub</span><br><span class="line"></span><br><span class="line">sub getcustomers</span><br><span class="line"><span class="built_in">set</span> conn=Server.CreateObject(<span class="string">"ADODB.Connection"</span>)</span><br><span class="line">conn.Provider=<span class="string">"Microsoft.Jet.OLEDB.4.0"</span></span><br><span class="line">conn.Open <span class="string">"c:/webdata/northwind.mdb"</span></span><br><span class="line"><span class="built_in">set</span> rs=conn.execute(<span class="string">"select name from customers"</span>)</span><br><span class="line">Application(<span class="string">"customers"</span>)=rs.GetRows</span><br><span class="line">rs.Close</span><br><span class="line">conn.Close</span><br><span class="line">end sub</span><br><span class="line"></span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="13-5-实例：创建一个计算当前访客数量的-Global-asa-文件"><a href="#13-5-实例：创建一个计算当前访客数量的-Global-asa-文件" class="headerlink" title="13.5 实例：创建一个计算当前访客数量的 Global.asa 文件"></a>13.5 实例：创建一个计算当前访客数量的 Global.asa 文件</h4><ul>
+<li>当服务器启动时，Application_OnStart 设置 Application 变量 "visitors" 的值为 0。</li>
+<li>每当有新的访客来访时，Session_OnStart 子例程就会给变量 "visitors" 加 1。</li>
+<li>每当 Session_OnEnd 子例程被触发时，该子例程就会从变量 "visitors" 减 1。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">// Global.asa 文件 中</span><br><span class="line">&lt;script language=<span class="string">"vbscript"</span> runat=<span class="string">"server"</span>&gt;</span><br><span class="line">Sub Application_OnStart</span><br><span class="line">Application(<span class="string">"visitors"</span>)=0</span><br><span class="line">End Sub</span><br><span class="line"></span><br><span class="line">Sub Session_OnStart</span><br><span class="line">Application.Lock</span><br><span class="line">Application(<span class="string">"visitors"</span>)=Application(<span class="string">"visitors"</span>)+1</span><br><span class="line">Application.UnLock</span><br><span class="line">End Sub</span><br><span class="line"></span><br><span class="line">Sub Session_OnEnd</span><br><span class="line">Application.Lock</span><br><span class="line">Application(<span class="string">"visitors"</span>)=Application(<span class="string">"visitors"</span>)-1</span><br><span class="line">Application.UnLock</span><br><span class="line">End Sub</span><br><span class="line"></span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">//在 ASP 文件中，显示当前访客的数量</span><br><span class="line">&lt;p&gt;There are &lt;%response.write(Application(<span class="string">"visitors"</span>))%&gt; online now!&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="14-通过CDOSYS发送电子邮件"><a href="#14-通过CDOSYS发送电子邮件" class="headerlink" title="14. 通过CDOSYS发送电子邮件"></a>14. 通过CDOSYS发送电子邮件</h3><p><a href="https://www.runoob.com/asp/asp-send-email.html" target="_blank" rel="noopener">使用 CDOSYS 发送电子邮件</a></p>
+<h2 id="二、ASP对象"><a href="#二、ASP对象" class="headerlink" title="二、ASP对象"></a>二、ASP对象</h2><h3 id="1-Response-对象-输出结果"><a href="#1-Response-对象-输出结果" class="headerlink" title="1. Response 对象 - 输出结果"></a>1. Response 对象 - 输出结果</h3><p><strong>Response 对象用于从服务器向用户发送输出的结果</strong></p>
+<h4 id="Response-集合"><a href="#Response-集合" class="headerlink" title="Response 集合"></a>Response 集合</h4><table>
+<thead>
+<tr>
+<th align="left">集合</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a href="https://www.runoob.com/asp/coll-cookies-response.html" target="_blank" rel="noopener">Cookies</a></td>
+<td align="left">设置 cookie 的值。如果 cookie 不存在，则创建 cookie ，并设置指定的值。</td>
+</tr>
+</tbody></table>
+<h4 id="Response-属性"><a href="#Response-属性" class="headerlink" title="Response 属性"></a>Response 属性</h4><table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-buffer.html" target="_blank" rel="noopener">Buffer</a></td>
+<td align="left">规定是否缓冲页面的输出。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-cachecontrol.html" target="_blank" rel="noopener">CacheControl</a></td>
+<td align="left">设置代理服务器是否可以缓存由 ASP 产生的输出。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-charset.html" target="_blank" rel="noopener">Charset</a></td>
+<td align="left">将字符集的名称追加到 Response 对象中的 content-type 报头。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-contenttype.html" target="_blank" rel="noopener">ContentType</a></td>
+<td align="left">设置 Response 对象的 HTTP 内容类型。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-expires.html" target="_blank" rel="noopener">Expires</a></td>
+<td align="left">设置页面在失效前的浏览器缓存时间（分钟）。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-expiresabsolute.html" target="_blank" rel="noopener">ExpiresAbsolute</a></td>
+<td align="left">设置浏览器上页面缓存失效的日期和时间。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-isclientconnected.html" target="_blank" rel="noopener">IsClientConnected</a></td>
+<td align="left">指示客户端是否已从服务器断开。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-pics.html" target="_blank" rel="noopener">Pics</a></td>
+<td align="left">向 response 报头的 PICS 标签追加值。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-status.html" target="_blank" rel="noopener">Status</a></td>
+<td align="left">规定由服务器返回的状态行的值。</td>
+</tr>
+</tbody></table>
+<h4 id="Response-方法"><a href="#Response-方法" class="headerlink" title="Response 方法"></a>Response 方法</h4><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-addheader.html" target="_blank" rel="noopener">AddHeader</a></td>
+<td align="left">向 HTTP 响应添加新的 HTTP 报头和值。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-appendtolog.html" target="_blank" rel="noopener">AppendToLog</a></td>
+<td align="left">向服务器日志条目的末端添加字符串。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-binarywrite.html" target="_blank" rel="noopener">BinaryWrite</a></td>
+<td align="left">在没有任何字符转换的情况下直接向输出写数据。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-clear.html" target="_blank" rel="noopener">Clear</a></td>
+<td align="left">清除已缓冲的 HTML 输出。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-end.html" target="_blank" rel="noopener">End</a></td>
+<td align="left">停止处理脚本，并返回当前的结果。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-flush.html" target="_blank" rel="noopener">Flush</a></td>
+<td align="left">立即发送已缓冲的 HTML 输出。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-redirect.html" target="_blank" rel="noopener">Redirect</a></td>
+<td align="left">把用户重定向到一个不同的 URL。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-write-response.html" target="_blank" rel="noopener">Write</a></td>
+<td align="left">向输出写指定的字符串。</td>
+</tr>
+</tbody></table>
+<h3 id="2-Request-对象-获取用户信息"><a href="#2-Request-对象-获取用户信息" class="headerlink" title="2. Request 对象 - 获取用户信息"></a>2. Request 对象 - 获取用户信息</h3><ul>
+<li><p><strong>Request 对象用于从用户那里获取信息。</strong></p>
+</li>
+<li><p>当浏览器向服务器请求页面时，这个行为就被称为一个 request（请求）</p>
+</li>
+</ul>
+<h4 id="Request集合"><a href="#Request集合" class="headerlink" title="Request集合"></a>Request集合</h4><table>
+<thead>
+<tr>
+<th align="left">集合</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">ClientCertificate</td>
+<td align="left">包含了存储在客户证书中的所有的字段值。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/coll-cookies-request.html" target="_blank" rel="noopener">Cookies</a></td>
+<td align="left">包含了 HTTP 请求中发送的所有的 cookie 值。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/coll-form.html" target="_blank" rel="noopener">Form</a></td>
+<td align="left">包含了使用 post 方法由表单发送的所有的表单（输入）值。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/coll-querystring.html" target="_blank" rel="noopener">QueryString</a></td>
+<td align="left">包含了 HTTP 查询字符串中所有的变量值。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/coll-servervariables.html" target="_blank" rel="noopener">ServerVariables</a></td>
+<td align="left">包含了所有的服务器变量值。</td>
+</tr>
+</tbody></table>
+<h4 id="Request-属性"><a href="#Request-属性" class="headerlink" title="Request 属性"></a>Request 属性</h4><table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-totalbytes.html" target="_blank" rel="noopener">TotalBytes</a></td>
+<td align="left">返回在请求正文中客户端发送的字节总数。</td>
+</tr>
+</tbody></table>
+<h4 id="Request-方法"><a href="#Request-方法" class="headerlink" title="Request 方法"></a>Request 方法</h4><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-binaryread.html" target="_blank" rel="noopener">BinaryRead</a></td>
+<td align="left">取回作为 post 请求的一部分而从客户端发送至服务器的数据，并把它存储在一个安全的数组中。</td>
+</tr>
+</tbody></table>
+<h3 id="3-Application-对象"><a href="#3-Application-对象" class="headerlink" title="3. Application 对象"></a>3. Application 对象</h3><p>看[这里](#11. Application 对象)</p>
+<h4 id="Application-集合"><a href="#Application-集合" class="headerlink" title="Application 集合"></a>Application 集合</h4><table>
+<thead>
+<tr>
+<th align="left">集合</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a href="https://www.runoob.com/asp/coll-contents-app.html" target="_blank" rel="noopener">Contents</a></td>
+<td align="left">包含所有通过脚本命令追加到应用程序中的项目。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/coll-staticobjects-app.html" target="_blank" rel="noopener">StaticObjects</a></td>
+<td align="left">包含所有使用 HTML 的 <object> 标签追加到应用程序中的对象。</td>
+</tr>
+</tbody></table>
+<h4 id="Application属性"><a href="#Application属性" class="headerlink" title="Application属性"></a>Application属性</h4><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-contents-remove_app.html" target="_blank" rel="noopener">Contents.Remove</a></td>
+<td align="left">从 Contents 集合中删除一个项目。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-contents-removeall-app.html" target="_blank" rel="noopener">Contents.RemoveAll()</a></td>
+<td align="left">从 Contents 集合中删除所有的项目。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-lock-unlock.html" target="_blank" rel="noopener">Lock</a></td>
+<td align="left">防止其他的用户修改 Application 对象中的变量。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-lock-unlock.html" target="_blank" rel="noopener">Unlock</a></td>
+<td align="left">使其他的用户可以修改 Application 对象中的变量（在被 Lock 方法锁定之后）。</td>
+</tr>
+</tbody></table>
+<h4 id="Application方法"><a href="#Application方法" class="headerlink" title="Application方法"></a>Application方法</h4><table>
+<thead>
+<tr>
+<th align="left">事件</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a href="https://www.runoob.com/asp/ev-app-onend-onstart.html" target="_blank" rel="noopener">Application_OnEnd</a></td>
+<td align="left">当所有用户的 session 都结束，并且应用程序结束时，此事件发生。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/ev-app-onend-onstart.html" target="_blank" rel="noopener">Application_OnStart</a></td>
+<td align="left">在第一个新的 session 被创建之前（即 Application 对象第一次被引用时），此事件会发生。</td>
+</tr>
+</tbody></table>
+<h3 id="4-Session-对象"><a href="#4-Session-对象" class="headerlink" title="4. Session 对象"></a>4. Session 对象</h3><p>看看[这里](#10. Session 对象)</p>
+<h4 id="Session集合"><a href="#Session集合" class="headerlink" title="Session集合"></a>Session集合</h4><table>
+<thead>
+<tr>
+<th align="left">集合</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a href="https://www.runoob.com/asp/coll-contents-sess.html" target="_blank" rel="noopener">Contents</a></td>
+<td align="left">包含所有通过脚本命令追加到 session 的条目。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/coll-staticobjects-sess.html" target="_blank" rel="noopener">StaticObjects</a></td>
+<td align="left">包含了所有使用 HTML 的 <object> 标签追加到 session 的对象。</td>
+</tr>
+</tbody></table>
+<h4 id="Session属性"><a href="#Session属性" class="headerlink" title="Session属性"></a>Session属性</h4><table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-codepage.html" target="_blank" rel="noopener">CodePage</a></td>
+<td align="left">规定显示动态内容时使用的字符集。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-lcid.html" target="_blank" rel="noopener">LCID</a></td>
+<td align="left">设置或返回指定位置或者地区的一个整数。诸如日期、时间好以及货币的内容会根据位置或者地区来显示。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-sessionid.html" target="_blank" rel="noopener">SessionID</a></td>
+<td align="left">为每个用户返回一个唯一的 id。此 id 由服务器生成。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-timeout.html" target="_blank" rel="noopener">Timeout</a></td>
+<td align="left">设置或返回应用程序中的 Session 对象的超时时间（分钟）。</td>
+</tr>
+</tbody></table>
+<h4 id="Session方法"><a href="#Session方法" class="headerlink" title="Session方法"></a>Session方法</h4><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-abandon.html" target="_blank" rel="noopener">Abandon</a></td>
+<td align="left">撤销一个用户的 session。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-contents-remove-sess.html" target="_blank" rel="noopener">Contents.Remove</a></td>
+<td align="left">从 Contents 集合删除一个项目。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-contents-removeall-sess.html" target="_blank" rel="noopener">Contents.RemoveAll()</a></td>
+<td align="left">从 Contents 集合删除所有项目。</td>
+</tr>
+</tbody></table>
+<h4 id="Session事件"><a href="#Session事件" class="headerlink" title="Session事件"></a>Session事件</h4><table>
+<thead>
+<tr>
+<th align="left">事件</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a href="https://www.runoob.com/asp/ev-sess-onend-onstart.html" target="_blank" rel="noopener">Session_OnEnd</a></td>
+<td align="left">当一个会话结束时此事件发生。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/ev-sess-onend-onstart.html" target="_blank" rel="noopener">Session_OnStart</a></td>
+<td align="left">当一个会话开始时此事件发生。</td>
+</tr>
+</tbody></table>
+<h3 id="5-Server-对象-访问服务器属性和方法"><a href="#5-Server-对象-访问服务器属性和方法" class="headerlink" title="5.Server 对象 - 访问服务器属性和方法"></a>5.Server 对象 - 访问服务器属性和方法</h3><p>Server 对象用于访问有关服务器的属性和方法。</p>
+<h4 id="Server-属性"><a href="#Server-属性" class="headerlink" title="Server 属性"></a>Server 属性</h4><table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-scripttimeout.html" target="_blank" rel="noopener">ScriptTimeout</a></td>
+<td align="left">设置或返回在一段脚本终止前它所能运行时间（秒）的最大值。</td>
+</tr>
+</tbody></table>
+<h4 id="Server-方法"><a href="#Server-方法" class="headerlink" title="Server 方法"></a>Server 方法</h4><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-createobject-server.html" target="_blank" rel="noopener">CreateObject</a></td>
+<td align="left">创建对象的实例。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-execute.html" target="_blank" rel="noopener">Execute</a></td>
+<td align="left">从另一个 ASP 文件中执行一个 ASP 文件。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-getlasterror.html" target="_blank" rel="noopener">GetLastError()</a></td>
+<td align="left">返回可描述已发生错误状态的 ASPError 对象。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-htmlencode.html" target="_blank" rel="noopener">HTMLEncode</a></td>
+<td align="left">把 HTML 编码应用到某个指定的字符串。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-mappath.html" target="_blank" rel="noopener">MapPath</a></td>
+<td align="left">把一个指定的路径映射到一个物理路径。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-transfer.html" target="_blank" rel="noopener">Transfer</a></td>
+<td align="left">把一个 ASP 文件中创建的所有信息发送（传输）到另一个 ASP 文件。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-urlencode.html" target="_blank" rel="noopener">URLEncode</a></td>
+<td align="left">把 URL 编码规则应用到指定的字符串。</td>
+</tr>
+</tbody></table>
+<h3 id="6-ASPError-对象-错误信息"><a href="#6-ASPError-对象-错误信息" class="headerlink" title="6.ASPError 对象 - 错误信息"></a>6.ASPError 对象 - 错误信息</h3><p>ASPError 对象用于显示在 ASP 文件的脚本中发生的错误信息</p>
+<ul>
+<li><code>Server.GetLastError</code> 被调用时，ASPError 对象就会被创建，<ul>
+<li>因此只能通过使用 Server.GetLastError 方法来访问错误信息</li>
+</ul>
+</li>
+</ul>
+<h4 id="ASPError-属性"><a href="#ASPError-属性" class="headerlink" title="ASPError 属性"></a>ASPError 属性</h4><p>所有属性都是可读的</p>
+<table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-asperrorobject.html" target="_blank" rel="noopener">ASPCode</a></td>
+<td align="left">返回由 IIS 生成的错误代码。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-asperrorobject.html" target="_blank" rel="noopener">ASPDescription</a></td>
+<td align="left">返回错误的详细信息（如果错误和 ASP 相关）。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-asperrorobject.html" target="_blank" rel="noopener">Category</a></td>
+<td align="left">返回错误来源。(错误是由 ASP、脚本语言还是对象引起的？）</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-asperrorobject.html" target="_blank" rel="noopener">Column</a></td>
+<td align="left">返回在出错文件中的列位置。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-asperrorobject.html" target="_blank" rel="noopener">Description</a></td>
+<td align="left">返回关于错误的简短描述。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-asperrorobject.html" target="_blank" rel="noopener">File</a></td>
+<td align="left">返回出错 ASP 文件的名称。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-asperrorobject.html" target="_blank" rel="noopener">Line</a></td>
+<td align="left">返回错误所在的行数。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-asperrorobject.html" target="_blank" rel="noopener">Number</a></td>
+<td align="left">返回关于错误的标准 COM 错误代码。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-asperrorobject.html" target="_blank" rel="noopener">Source</a></td>
+<td align="left">返回错误所在行的实际的源代码。</td>
+</tr>
+</tbody></table>
+<h3 id="7-FileSystemObject-对象-访问文件系统"><a href="#7-FileSystemObject-对象-访问文件系统" class="headerlink" title="7.FileSystemObject 对象 - 访问文件系统"></a>7.FileSystemObject 对象 - 访问文件系统</h3><p>用于访问服务器上的文件系统</p>
+<ul>
+<li>此对象可对文件、文件夹和目录路径进行操作。也可通过此对象获取文件系统的信息</li>
+</ul>
+<h4 id="FileSystemObject-属性"><a href="#FileSystemObject-属性" class="headerlink" title="FileSystemObject 属性"></a>FileSystemObject 属性</h4><table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-drives.html" target="_blank" rel="noopener">Drives</a></td>
+<td align="left">返回本地计算机上所有驱动器对象的集合。</td>
+</tr>
+</tbody></table>
+<h4 id="FileSystemObject-方法"><a href="#FileSystemObject-方法" class="headerlink" title="FileSystemObject 方法"></a>FileSystemObject 方法</h4><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-buildpath.html" target="_blank" rel="noopener">BuildPath</a></td>
+<td align="left">将一个名称追加到已有的路径后。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-copyfile.html" target="_blank" rel="noopener">CopyFile</a></td>
+<td align="left">从一个位置向另一个位置拷贝一个或多个文件。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-copyfolder.html" target="_blank" rel="noopener">CopyFolder</a></td>
+<td align="left">从一个位置向另一个位置拷贝一个或多个文件夹。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-createfolder.html" target="_blank" rel="noopener">CreateFolder</a></td>
+<td align="left">创建新文件夹。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-createtextfile-filesystem.html" target="_blank" rel="noopener">CreateTextFile</a></td>
+<td align="left">创建文本文件，并返回一个可以读取或者写入文件的 TextStream 对象。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-deletefile.html" target="_blank" rel="noopener">DeleteFile</a></td>
+<td align="left">删除一个或者多个指定的文件。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-deletefolder.html" target="_blank" rel="noopener">DeleteFolder</a></td>
+<td align="left">删除一个或者多个指定的文件夹。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-driveexists.html" target="_blank" rel="noopener">DriveExists</a></td>
+<td align="left">检查指定的驱动器是否存在。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-fileexists.html" target="_blank" rel="noopener">FileExists</a></td>
+<td align="left">检查指定的文件是否存在。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-folderexists.html" target="_blank" rel="noopener">FolderExists</a></td>
+<td align="left">检查指定的文件夹是否存在。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-getabsolutepathname.html" target="_blank" rel="noopener">GetAbsolutePathName</a></td>
+<td align="left">针对指定的路径返回从驱动器根部起始的完整路径。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-getbasename.html" target="_blank" rel="noopener">GetBaseName</a></td>
+<td align="left">返回指定文件或者文件夹的基名称。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-getdrive.html" target="_blank" rel="noopener">GetDrive</a></td>
+<td align="left">返回指定路径中所对应的驱动器的 Drive 对象。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-getdrivename.html" target="_blank" rel="noopener">GetDriveName</a></td>
+<td align="left">返回指定的路径的驱动器名称。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-getextensionname.html" target="_blank" rel="noopener">GetExtensionName</a></td>
+<td align="left">返回在指定的路径中最后一个成分的文件扩展名。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-getfile.html" target="_blank" rel="noopener">GetFile</a></td>
+<td align="left">返回一个针对指定路径的 File 对象。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-getfilename.html" target="_blank" rel="noopener">GetFileName</a></td>
+<td align="left">返回在指定的路径中最后一个成分的文件名或者文件夹名。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-getfolder.html" target="_blank" rel="noopener">GetFolder</a></td>
+<td align="left">返回一个针对指定路径的 Folder 对象。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-getparentfoldername.html" target="_blank" rel="noopener">GetParentFolderName</a></td>
+<td align="left">返回在指定的路径中最后一个成分的父文件夹名称。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-getspecialfolder.html" target="_blank" rel="noopener">GetSpecialFolder</a></td>
+<td align="left">返回某些 Windows 的特殊文件夹的路径。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-gettempname.html" target="_blank" rel="noopener">GetTempName</a></td>
+<td align="left">返回一个随机生成的文件或文件夹。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-movefile.html" target="_blank" rel="noopener">MoveFile</a></td>
+<td align="left">从一个位置向另一个位置移动一个或多个文件。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-movefolder.html" target="_blank" rel="noopener">MoveFolder</a></td>
+<td align="left">从一个位置向另一个位置移动一个或多个文件夹。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-opentextfile.html" target="_blank" rel="noopener">OpenTextFile</a></td>
+<td align="left">打开文件，并返回一个用于访问此文件的 TextStream 对象。</td>
+</tr>
+</tbody></table>
+<h3 id="8-TextStream-对象-访问文本文件内容"><a href="#8-TextStream-对象-访问文本文件内容" class="headerlink" title="8.TextStream 对象 - 访问文本文件内容"></a>8.TextStream 对象 - 访问文本文件内容</h3><p>TextStream 对象用于访问文本文件的内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//创建一个文本文件 (c:\test.txt)，然后向这个文件写一些文本</span><br><span class="line">&lt;%</span><br><span class="line">dim fs,fname</span><br><span class="line"><span class="built_in">set</span> fs=Server.CreateObject(<span class="string">"Scripting.FileSystemObject"</span>)</span><br><span class="line"></span><br><span class="line">//变量 fname 是 TextStream 对象的一个实例</span><br><span class="line"><span class="built_in">set</span> fname=fs.CreateTextFile(<span class="string">"c:\test.txt"</span>,<span class="literal">true</span>)</span><br><span class="line">fname.WriteLine(<span class="string">"Hello World!"</span>)</span><br><span class="line">fname.Close</span><br><span class="line"><span class="built_in">set</span> fname=nothing</span><br><span class="line"><span class="built_in">set</span> fs=nothing</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>创建 TextStream 对象的一个实例，<ul>
+<li>可以使用 FileSystemObject 对象的 CreateTextFile 方法或者 OpenTextFile 方法</li>
+<li>也可以使用 File 对象的 OpenAsTextStream 方法</li>
+</ul>
+</li>
+</ul>
+<h4 id="TextStream-属性"><a href="#TextStream-属性" class="headerlink" title="TextStream 属性"></a>TextStream 属性</h4><table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-atendofline.html" target="_blank" rel="noopener">AtEndOfLine</a></td>
+<td align="left">如果文件指针正好位于 TextStream 文件中行尾标记的前面，则该属性值返回 True；否则返回 False。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-atendofstream.html" target="_blank" rel="noopener">AtEndOfStream</a></td>
+<td align="left">如果文件指针在 TextStream 文件末尾，则该属性值返回 True；否则返回 False。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-column.html" target="_blank" rel="noopener">Column</a></td>
+<td align="left">返回 TextStream 文件输入流中的当前字符位置的列号。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-line.html" target="_blank" rel="noopener">Line</a></td>
+<td align="left">返回 TextStream 文件中的当前行号。</td>
+</tr>
+</tbody></table>
+<h4 id="TextStream-方法"><a href="#TextStream-方法" class="headerlink" title="TextStream 方法"></a>TextStream 方法</h4><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-close.html" target="_blank" rel="noopener">Close</a></td>
+<td align="left">关闭一个打开的 TextStream 文件。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-read.html" target="_blank" rel="noopener">Read</a></td>
+<td align="left">从一个 TextStream 文件中读取指定数量的字符并返回结果。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-readall.html" target="_blank" rel="noopener">ReadAll</a></td>
+<td align="left">读取整个 TextStream 文件并返回结果。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-readline.html" target="_blank" rel="noopener">ReadLine</a></td>
+<td align="left">从一个 TextStream 文件读取一整行（到换行符但不包括换行符）并返回结果。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-skip.html" target="_blank" rel="noopener">Skip</a></td>
+<td align="left">当读取一个 TextStream 文件时跳过指定数量的字符。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-skipline.html" target="_blank" rel="noopener">SkipLine</a></td>
+<td align="left">当读取一个 TextStream 文件时跳过下一行。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-write.html" target="_blank" rel="noopener">Write</a></td>
+<td align="left">写入指定的文本到一个 TextStream 文件中。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-writeline.html" target="_blank" rel="noopener">WriteLine</a></td>
+<td align="left">写入指定的文本和换行符到一个 TextStream 文件中。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-writeblanklines.html" target="_blank" rel="noopener">WriteBlankLines</a></td>
+<td align="left">写入指定数量的换行符到一个 TextStream 文件中。</td>
+</tr>
+</tbody></table>
+<h3 id="9-Drive-对象-获取驱动器信息"><a href="#9-Drive-对象-获取驱动器信息" class="headerlink" title="9.Drive 对象 - 获取驱动器信息"></a>9.Drive 对象 - 获取驱动器信息</h3><p>Drive 对象用于返回关于本地磁盘驱动器或者网络共享驱动器的信息。</p>
+<ul>
+<li>Drive 对象可以返回有关驱动器的文件系统类型、剩余容量、序列号、卷标名等信息。</li>
+<li>无法通过 Drive 对象返回有关驱动器内容的信息。要达到这个目的，请使用 Folder 对象</li>
+<li><strong>如需操作 Drive 对象的相关属性，需要通过 <code>FileSystemObject</code> 对象来创建 Drive 对象的实例</strong><ul>
+<li>先创建一个 <code>FileSystemObject</code> 对象，</li>
+<li>然后通过 <code>FileSystemObject</code> 对象的 <code>GetDrive 方法</code>或者 <code>Drives 属性</code>来实例化 Drive 对象</li>
+</ul>
+</li>
+</ul>
+<h4 id="Drive-属性"><a href="#Drive-属性" class="headerlink" title="Drive 属性"></a>Drive 属性</h4><table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-availablespace.html" target="_blank" rel="noopener">AvailableSpace</a></td>
+<td align="left">向用户返回在指定的驱动器或网络共享驱动器上的可用空间容量。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-driveletter.html" target="_blank" rel="noopener">DriveLetter</a></td>
+<td align="left">返回识别本地驱动器或网络共享驱动器的大写字母。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-drivetype.html" target="_blank" rel="noopener">DriveType</a></td>
+<td align="left">返回指定驱动器的类型。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-filesystem.html" target="_blank" rel="noopener">FileSystem</a></td>
+<td align="left">返回指定驱动器所使用的文件系统。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-freespace.html" target="_blank" rel="noopener">FreeSpace</a></td>
+<td align="left">向用户返回在指定的驱动器或网络共享驱动器上的剩余空间容量。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-isready.html" target="_blank" rel="noopener">IsReady</a></td>
+<td align="left">如果指定驱动器已就绪，则返回 true。否则返回 false。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-path-drive.html" target="_blank" rel="noopener">Path</a></td>
+<td align="left">返回其后有一个冒号的大写字母，用来指示指定驱动器的路径名。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-rootfolder.html" target="_blank" rel="noopener">RootFolder</a></td>
+<td align="left">返回一个文件夹对象，该文件夹代表指定驱动器的根文件夹。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-serialnumber.html" target="_blank" rel="noopener">SerialNumber</a></td>
+<td align="left">返回指定驱动器的序列号。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-sharename.html" target="_blank" rel="noopener">ShareName</a></td>
+<td align="left">返回指定驱动器的网络共享名。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-totalsize.html" target="_blank" rel="noopener">TotalSize</a></td>
+<td align="left">返回指定的驱动器或网络共享驱动器的总容量。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-volumename.html" target="_blank" rel="noopener">VolumeName</a></td>
+<td align="left">设置或者返回指定驱动器的卷标名。</td>
+</tr>
+</tbody></table>
+<h3 id="10-File-对象-获取文件信息"><a href="#10-File-对象-获取文件信息" class="headerlink" title="10. File 对象 - 获取文件信息"></a>10. File 对象 - 获取文件信息</h3><p>File 对象用于返回关于指定文件的信息</p>
+<ul>
+<li>如需操作 File 对象的相关属性和方法，需要通过 <code>FileSystemObject</code> 对象来创建 File 对象的实例。<ul>
+<li>首先，创建一个 FileSystemObject 对象，</li>
+<li>然后通过 <code>FileSystemObject</code> 对象的 <code>GetFile</code> 方法，或者通过 <code>Folder 对象的 Files 属性</code>来实例化 File 对象</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//使用 FileSystemObject 对象的 GetFile 方法来实例化 File 对象，并使用 DateCreated 属性来返回指定文件的创建日期</span><br><span class="line">&lt;%</span><br><span class="line">Dim fs,f</span><br><span class="line">Set fs=Server.CreateObject(<span class="string">"Scripting.FileSystemObject"</span>)</span><br><span class="line">Set f=fs.GetFile(<span class="string">"c:\test.txt"</span>)</span><br><span class="line">Response.Write(<span class="string">"File created: "</span> &amp; f.DateCreated)</span><br><span class="line"><span class="built_in">set</span> f=nothing</span><br><span class="line"><span class="built_in">set</span> fs=nothing</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="File属性"><a href="#File属性" class="headerlink" title="File属性"></a>File属性</h4><table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-attributes-file.html" target="_blank" rel="noopener">Attributes</a></td>
+<td align="left">设置或返回指定文件的属性。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-datecreated-file.html" target="_blank" rel="noopener">DateCreated</a></td>
+<td align="left">返回指定文件被创建的日期和时间。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-datelastaccessed-file.html" target="_blank" rel="noopener">DateLastAccessed</a></td>
+<td align="left">返回指定文件最后被访问的日期和时间。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-datelastmodified-file.html" target="_blank" rel="noopener">DateLastModified</a></td>
+<td align="left">返回指定文件最后被修改的日期和时间。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-drive-file.html" target="_blank" rel="noopener">Drive</a></td>
+<td align="left">返回指定文件或文件夹所在的驱动器的驱动器字母。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-name-file.html" target="_blank" rel="noopener">Name</a></td>
+<td align="left">设置或返回指定文件的名称。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-parentfolder-file.html" target="_blank" rel="noopener">ParentFolder</a></td>
+<td align="left">返回指定文件的父文件夹对象。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-path-file.html" target="_blank" rel="noopener">Path</a></td>
+<td align="left">返回指定文件的路径。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-shortname-file.html" target="_blank" rel="noopener">ShortName</a></td>
+<td align="left">返回指定文件的短名称（8.3 命名约定）。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-shortpath-file.html" target="_blank" rel="noopener">ShortPath</a></td>
+<td align="left">返回指定文件的短路径（8.3 命名约定）。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-size-file.html" target="_blank" rel="noopener">Size</a></td>
+<td align="left">返回指定文件的尺寸（字节）。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-type-file.html" target="_blank" rel="noopener">Type</a></td>
+<td align="left">返回指定文件的类型。</td>
+</tr>
+</tbody></table>
+<h4 id="File方法"><a href="#File方法" class="headerlink" title="File方法"></a>File方法</h4><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-copy-file.html" target="_blank" rel="noopener">Copy</a></td>
+<td align="left">把指定文件从一个位置拷贝到另一个位置。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-delete-file.html" target="_blank" rel="noopener">Delete</a></td>
+<td align="left">删除指定文件。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-move-file.html" target="_blank" rel="noopener">Move</a></td>
+<td align="left">把指定文件从一个位置移动到另一个位置。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-openastextstream.html" target="_blank" rel="noopener">OpenAsTextStream</a></td>
+<td align="left">打开指定文件，并返回一个 TextStream 对象来访问此文件</td>
+</tr>
+</tbody></table>
+<h3 id="11-Folder-对象-获取文件夹信息"><a href="#11-Folder-对象-获取文件夹信息" class="headerlink" title="11.Folder 对象 - 获取文件夹信息"></a>11.Folder 对象 - 获取文件夹信息</h3><p>Folder 对象用于返回关于指定文件夹的信息。</p>
+<ul>
+<li>如需操作 Folder 对象的相关属性和方法，您需要通过 <code>FileSystemObject</code> 对象来创建 Folder 对象的实例。<ul>
+<li>首先，创建一个 <code>FileSystemObject</code> 对象，</li>
+<li>然后通过 <code>FileSystemObject</code> 对象的 <code>GetFolder 方法</code>来实例化这个 Folder 对象。</li>
+</ul>
+</li>
+</ul>
+<h4 id="Folder-集合"><a href="#Folder-集合" class="headerlink" title="Folder 集合"></a>Folder 集合</h4><table>
+<thead>
+<tr>
+<th align="left">集合</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a href="https://www.runoob.com/asp/coll-files.html" target="_blank" rel="noopener">Files</a></td>
+<td align="left">返回指定文件夹中所有文件的集合。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/coll-subfolders.html" target="_blank" rel="noopener">SubFolders</a></td>
+<td align="left">返回指定文件夹中所有子文件夹的集合。</td>
+</tr>
+</tbody></table>
+<h4 id="Folder-属性"><a href="#Folder-属性" class="headerlink" title="Folder 属性"></a>Folder 属性</h4><table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-attributes-folder.html" target="_blank" rel="noopener">Attributes</a></td>
+<td align="left">设置或返回指定文件夹的属性。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-datecreated-folder.html" target="_blank" rel="noopener">DateCreated</a></td>
+<td align="left">返回指定文件夹被创建的日期和时间。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-datelastaccessed-folder.html" target="_blank" rel="noopener">DateLastAccessed</a></td>
+<td align="left">返回指定文件夹最后被访问的日期和时间。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-datelastmodified-folder.html" target="_blank" rel="noopener">DateLastModified</a></td>
+<td align="left">返回指定文件夹最后被修改的日期和时间。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-drive-folder.html" target="_blank" rel="noopener">Drive</a></td>
+<td align="left">返回指定文件夹所在的驱动器的驱动器字母。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-isrootfolder.html" target="_blank" rel="noopener">IsRootFolder</a></td>
+<td align="left">如果文件夹是根文件夹，则返回 ture，否则返回 false。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-name-folder.html" target="_blank" rel="noopener">Name</a></td>
+<td align="left">设置或返回指定文件夹的名称。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-parentfolder-folder.html" target="_blank" rel="noopener">ParentFolder</a></td>
+<td align="left">返回指定文件夹的父文件夹。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-path-folder.html" target="_blank" rel="noopener">Path</a></td>
+<td align="left">返回指定文件夹的路径。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-shortname-folder.html" target="_blank" rel="noopener">ShortName</a></td>
+<td align="left">返回指定文件夹的短名称（8.3 命名约定）。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-shortpath-folder.html" target="_blank" rel="noopener">ShortPath</a></td>
+<td align="left">返回指定文件夹的短路径（8.3 命名约定）。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-size-folder.html" target="_blank" rel="noopener">Size</a></td>
+<td align="left">返回指定文件夹的大小。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-type-folder.html" target="_blank" rel="noopener">Type</a></td>
+<td align="left">返回指定文件夹的类型。</td>
+</tr>
+</tbody></table>
+<h4 id="Folder-方法"><a href="#Folder-方法" class="headerlink" title="Folder 方法"></a>Folder 方法</h4><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-copy-folder.html" target="_blank" rel="noopener">Copy</a></td>
+<td align="left">把指定文件夹从一个位置拷贝到另一个位置。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-delete-folder.html" target="_blank" rel="noopener">Delete</a></td>
+<td align="left">删除指定文件夹。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-move-folder.html" target="_blank" rel="noopener">Move</a></td>
+<td align="left">把指定文件夹从一个位置移动到另一个位置。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-createtextfile-folder.html" target="_blank" rel="noopener">CreateTextFile</a></td>
+<td align="left">在指定文件夹创建一个新的文本文件，并返回一个 TextStream 对象来访问此文件。</td>
+</tr>
+</tbody></table>
+<h3 id="12-Dictionary-对象-在名称-值对中存储信息"><a href="#12-Dictionary-对象-在名称-值对中存储信息" class="headerlink" title="12. Dictionary 对象 - 在名称/值对中存储信息"></a>12. Dictionary 对象 - 在名称/值对中存储信息</h3><p>Dictionary 对象用于在名称/值对（等同于键和项目）中存储信息</p>
+<ul>
+<li>看似比数组更为简单，Dictionary 对象是更好的处理关联数据的解决方案。</li>
+</ul>
+<p>比较 Dictionaries 和数组：</p>
+<ul>
+<li><code>键</code>用于识别 Dictionary 对象中的项目</li>
+<li>您<code>无需调用 ReDim</code> 来改变 Dictionary 对象的尺寸</li>
+<li>当从 Dictionary 中<code>删除</code>一个项目时，其余的项目会<code>自动上移</code></li>
+<li>Dictionary <code>不是多维</code>，而数组是多维</li>
+<li>Dictionary 比数组带有<code>更多的内建函数</code></li>
+<li>Dictionary 在<code>频繁地访问</code>随机元素时，比数组工作得更好</li>
+<li>Dictionary 在根据它们的<code>内容定位项目时</code>，比数组工作得更好</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//创建了一个 Dictionary 对象，并向对象添加了一些键/项目对，然后取回了键 gr 的项目值</span><br><span class="line">&lt;%</span><br><span class="line">Dim d</span><br><span class="line">Set d=Server.CreateObject(<span class="string">"Scripting.Dictionary"</span>)</span><br><span class="line">d.Add <span class="string">"re"</span>,<span class="string">"Red"</span></span><br><span class="line">d.Add <span class="string">"gr"</span>,<span class="string">"Green"</span></span><br><span class="line">d.Add <span class="string">"bl"</span>,<span class="string">"Blue"</span></span><br><span class="line">d.Add <span class="string">"pi"</span>,<span class="string">"Pink"</span></span><br><span class="line">Response.Write(<span class="string">"The value of key gr is: "</span> &amp; d.Item(<span class="string">"gr"</span>))</span><br><span class="line">%&gt;</span><br><span class="line"></span><br><span class="line">输出：</span><br><span class="line"></span><br><span class="line">The value of key gr is: Green</span><br></pre></td></tr></table></figure>
+
+<h4 id="Dictionary属性"><a href="#Dictionary属性" class="headerlink" title="Dictionary属性"></a>Dictionary属性</h4><table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-comparemode.html" target="_blank" rel="noopener">CompareMode</a></td>
+<td align="left">设置或返回用于在 Dictionary 对象中比较键的比较模式。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-count.html" target="_blank" rel="noopener">Count</a></td>
+<td align="left">返回 Dictionary 对象中键/项目对的数目。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-item.html" target="_blank" rel="noopener">Item</a></td>
+<td align="left">设置或返回 Dictionary 对象中一个项目的值。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/prop-key.html" target="_blank" rel="noopener">Key</a></td>
+<td align="left">为 Dictionary 对象中已有的键值设置新的键值。</td>
+</tr>
+</tbody></table>
+<h4 id="Dictionary方法"><a href="#Dictionary方法" class="headerlink" title="Dictionary方法"></a>Dictionary方法</h4><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-add.html" target="_blank" rel="noopener">Add</a></td>
+<td align="left">向 Dictionary 对象添加新的键/项目对。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-exists.html" target="_blank" rel="noopener">Exists</a></td>
+<td align="left">返回一个布尔值，这个值指示指定的键是否存在于 Dictionary 对象中。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-items.html" target="_blank" rel="noopener">Items</a></td>
+<td align="left">返回 Dictionary 对象中所有项目的一个数组。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-keys.html" target="_blank" rel="noopener">Keys</a></td>
+<td align="left">返回 Dictionary 对象中所有键的一个数组。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-remove.html" target="_blank" rel="noopener">Remove</a></td>
+<td align="left">从 Dictionary 对象中删除指定的键/项目对。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.runoob.com/asp/met-removeall.html" target="_blank" rel="noopener">RemoveAll</a></td>
+<td align="left">删除 Dictionary 对象中所有的键/项目对。</td>
+</tr>
+</tbody></table>
+<h3 id="13-ADO-从网页访问数据库"><a href="#13-ADO-从网页访问数据库" class="headerlink" title="13. ADO - 从网页访问数据库"></a>13. ADO - 从网页访问数据库</h3><blockquote>
+<ul>
+<li>ADO 代表 <strong>A</strong>ctiveX <strong>D</strong>ata <strong>O</strong>bjects</li>
+<li>ADO 是一个微软的 Active-X 组件</li>
+<li>ADO 会随着微软 IIS 自动安装</li>
+<li>ADO 是一个访问数据库中数据的编程接口</li>
+</ul>
+</blockquote>
+<h4 id="从-ASP-页面内部访问数据库的通常方式是"><a href="#从-ASP-页面内部访问数据库的通常方式是" class="headerlink" title="从 ASP 页面内部访问数据库的通常方式是"></a>从 ASP 页面内部访问数据库的通常方式是</h4><ol>
+<li>创建至数据库的 ADO 连接</li>
+<li>打开数据库连接</li>
+<li>创建 ADO 记录集</li>
+<li>打开记录集</li>
+<li>从数据集中提取您需要的数据</li>
+<li>关闭数据集</li>
+<li>关闭连接</li>
+</ol>
+<h4 id="ADO-教程"><a href="#ADO-教程" class="headerlink" title="ADO 教程"></a><a href="https://www.runoob.com/ado/ado-tutorial.html" target="_blank" rel="noopener">ADO 教程</a></h4><h2 id="三、ASP组件"><a href="#三、ASP组件" class="headerlink" title="三、ASP组件"></a>三、ASP组件</h2><h3 id="1-AdRotator-组件-刷新后显示一幅不同的图像"><a href="#1-AdRotator-组件-刷新后显示一幅不同的图像" class="headerlink" title="1. AdRotator 组件 - 刷新后显示一幅不同的图像"></a>1. AdRotator 组件 - 刷新后显示一幅不同的图像</h3><ul>
+<li><p>每当用户进入网站或刷新页面时，ASP AdRotator 组件就会创建一个 AdRotator 对象来显示一幅不同的图像。</p>
+</li>
+<li><p>有关图像的信息是包含在一个文本文件（txt)中。</p>
+</li>
+<li><p>AdRotator 在 Internet Information Server 7 (IIS7) 中不起作用</p>
+</li>
+<li><p>语法</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;%</span><br><span class="line"><span class="built_in">set</span> adrotator=server.createobject(<span class="string">"MSWC.AdRotator"</span>)</span><br><span class="line">adrotator.GetAdvertisement(<span class="string">"textfile.txt"</span>)</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">//txt文件</span><br><span class="line">REDIRECT banners.asp</span><br><span class="line">*</span><br><span class="line">runoob.gif</span><br><span class="line">http://www.runoob.com</span><br><span class="line">Free Tutorials from RUNOOB</span><br><span class="line">50</span><br><span class="line">xmlspy.gif</span><br><span class="line">http://www.altova.com</span><br><span class="line">XML Editor from Altova</span><br><span class="line">50</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//asp文件引用</span><br><span class="line">&lt;%</span><br><span class="line"><span class="built_in">set</span> adrotator=Server.CreateObject(<span class="string">"MSWC.AdRotator"</span>)</span><br><span class="line">response.write(adrotator.GetAdvertisement(<span class="string">"textfile.txt"</span>))</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h4 id="ASP-AdRotator-属性"><a href="#ASP-AdRotator-属性" class="headerlink" title="ASP AdRotator 属性"></a>ASP AdRotator 属性</h4><table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+<th align="left">实例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Border</td>
+<td align="left">规定围绕广告的边框的尺寸。</td>
+<td align="left"><% set adrot=Server.CreateObject("MSWC.AdRotator") adrot.Border="2" Response.Write(adrot.GetAdvertisement("ads.txt")) %></td>
+</tr>
+<tr>
+<td align="left">Clickable</td>
+<td align="left">规定广告本身是否是超链接。</td>
+<td align="left"><% set adrot=Server.CreateObject("MSWC.AdRotator") adrot.Clickable=false Response.Write(adrot.GetAdvertisement("ads.txt")) %></td>
+</tr>
+<tr>
+<td align="left">TargetFrame</td>
+<td align="left">显示广告的框架名称。</td>
+<td align="left"><% set adrot=Server.CreateObject("MSWC.AdRotator") adrot.TargetFrame="target='_blank'" Response.Write(adrot.GetAdvertisement("ads.txt")) %></td>
+</tr>
+</tbody></table>
+<h4 id="ASP-AdRotator-方法"><a href="#ASP-AdRotator-方法" class="headerlink" title="ASP AdRotator 方法"></a>ASP AdRotator 方法</h4><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">描述</th>
+<th align="left">实例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">GetAdvertisement</td>
+<td align="left">返回在页面中显示广告的 HTML。</td>
+<td align="left"><% set adrot=Server.CreateObject("MSWC.AdRotator") Response.Write(adrot.GetAdvertisement("ads.txt")) %></td>
+</tr>
+</tbody></table>
+<h3 id="2-Browser-Capabilities-组件-获取浏览器信息"><a href="#2-Browser-Capabilities-组件-获取浏览器信息" class="headerlink" title="2. Browser Capabilities 组件 - 获取浏览器信息"></a>2. Browser Capabilities 组件 - 获取浏览器信息</h3><p>ASP Browser Capabilities 组件会创建一个 BrowserType 对象，这个对象可测定访客浏览器的类型、性能和版本号。</p>
+<ul>
+<li><p>当浏览器连接到服务器时，就会向服务器发送一个 HTTP User Agent 报头。这个报头包含关于浏览器的信息</p>
+</li>
+<li><p>BrowserType 对象会把报头中的信息与服务器上名为 "Browscap.ini" 的文件中的信息作比较</p>
+<ul>
+<li>如果报头中的浏览器类型和版本号与 "Browsercap.ini" 文件中信息匹配，那么我们就可以使用 BrowserType 对象列出这个匹配的浏览器的相关属性。</li>
+<li>如果上述情况不匹配，这个对象会把每个属性设置为 "UNKNOWN"</li>
+</ul>
+</li>
+<li><p>语法</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;%</span><br><span class="line">Set MyBrow=Server.CreateObject(<span class="string">"MSWC.BrowserType"</span>)</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实例：创建一个 BrowserType 对象，并显示当前浏览器性能的一些信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;%</span><br><span class="line">Set MyBrow=Server.CreateObject(<span class="string">"MSWC.BrowserType"</span>)</span><br><span class="line">%&gt;</span><br><span class="line"></span><br><span class="line">&lt;table border=<span class="string">"0"</span> width=<span class="string">"100%"</span>&gt;</span><br><span class="line">&lt;tr&gt;</span><br><span class="line">&lt;th&gt;Client OS&lt;/th&gt;&lt;th&gt;&lt;%=MyBrow.platform%&gt;&lt;/th&gt;</span><br><span class="line">&lt;/tr&gt;&lt;tr&gt;</span><br><span class="line">&lt;td &gt;Web Browser&lt;/td&gt;&lt;td &gt;&lt;%=MyBrow.browser%&gt;&lt;/td&gt;</span><br><span class="line">&lt;/tr&gt;&lt;tr&gt;</span><br><span class="line">&lt;td&gt;Browser version&lt;/td&gt;&lt;td&gt;&lt;%=MyBrow.version%&gt;&lt;/td&gt;</span><br><span class="line">&lt;/tr&gt;&lt;tr&gt;</span><br><span class="line">&lt;td&gt;Frame support?&lt;/td&gt;&lt;td&gt;&lt;%=MyBrow.frames%&gt;&lt;/td&gt;</span><br><span class="line">&lt;/tr&gt;&lt;tr&gt;</span><br><span class="line">&lt;td&gt;Table support?&lt;/td&gt;&lt;td&gt;&lt;%=MyBrow.tables%&gt;&lt;/td&gt;</span><br><span class="line">&lt;/tr&gt;&lt;tr&gt;</span><br><span class="line">&lt;td&gt;Sound support?&lt;/td&gt;&lt;td&gt;&lt;%=MyBrow.backgroundsounds%&gt;&lt;/td&gt;</span><br><span class="line">&lt;/tr&gt;&lt;tr&gt;</span><br><span class="line">&lt;td&gt;Cookies support?&lt;/td&gt;&lt;td&gt;&lt;%=MyBrow.cookies%&gt;&lt;/td&gt;</span><br><span class="line">&lt;/tr&gt;&lt;tr&gt;</span><br><span class="line">&lt;td&gt;VBScript support?&lt;/td&gt;&lt;td&gt;&lt;%=MyBrow.vbscript%&gt;&lt;/td&gt;</span><br><span class="line">&lt;/tr&gt;&lt;tr&gt;</span><br><span class="line">&lt;td&gt;JavaScript support?&lt;/td&gt;&lt;td&gt;&lt;%=MyBrow.javascript%&gt;&lt;/td&gt;</span><br><span class="line">&lt;/tr&gt;</span><br><span class="line">&lt;/table&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="Browscap-ini-文件-详情"><a href="#Browscap-ini-文件-详情" class="headerlink" title="Browscap.ini 文件 - 详情"></a>Browscap.ini 文件 - <a href="https://www.runoob.com/asp/asp-browser.html" target="_blank" rel="noopener">详情</a></h4><p>"Browscap.ini" 文件用于声明属性，并设置各浏览器的默认值</p>
+<h3 id="3-Content-Linking-组件-创建快捷便利的导航系统"><a href="#3-Content-Linking-组件-创建快捷便利的导航系统" class="headerlink" title="3. Content Linking 组件  - 创建快捷便利的导航系统"></a>3. Content Linking 组件  - 创建快捷便利的导航系统</h3><p>Content Linking 组件会返回一个 Nextlink 对象，这个对象用于容纳需要导航网页的一个列表</p>
+<ul>
+<li><p>语法</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;%</span><br><span class="line">Set nl=Server.CreateObject(<span class="string">"MSWC.NextLink"</span>)</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="实例：通过txt文件创建导航"><a href="#实例：通过txt文件创建导航" class="headerlink" title="实例：通过txt文件创建导航"></a>实例：通过txt文件创建导航</h4><ol>
+<li>创建一个文本文件 - "<code>links.txt</code>"：<ul>
+<li>页面的排列顺序应该与它们的显示顺序相同，并包含对每个文件名的描述（使用制表符来分隔文件名和描述信息）</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">asp_intro.asp ASP 简介</span><br><span class="line">asp_syntax.asp ASP 语法</span><br><span class="line">asp_variables.asp ASP 变量</span><br><span class="line">asp_procedures.asp ASP 程序</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>创建一个引用文件，"nlcode.inc"<ul>
+<li>inc 文件创建一个 NextLink 对象来在 "<code>links.txt</code>" 中列出的页面间进行导航</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;%</span><br><span class="line">dim nl</span><br><span class="line">Set nl=Server.CreateObject(<span class="string">"MSWC.NextLink"</span>)</span><br><span class="line"><span class="keyword">if</span> (nl.GetListIndex(<span class="string">"links.txt"</span>)&gt;1) <span class="keyword">then</span></span><br><span class="line">Response.Write(<span class="string">"&lt;a href='"</span> &amp; nl.GetPreviousURL(<span class="string">"links.txt"</span>))</span><br><span class="line">Response.Write(<span class="string">"'&gt;Previous Page&lt;/a&gt;"</span>)</span><br><span class="line">end <span class="keyword">if</span></span><br><span class="line">Response.Write(<span class="string">"&lt;a href='"</span> &amp; nl.GetNextURL(<span class="string">"links.txt"</span>))</span><br><span class="line">Response.Write(<span class="string">"'&gt;Next Page&lt;/a&gt;"</span>)</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>在文本文件 "<code>links.txt</code>" 列出的每个 .asp 页面中放置一行代码：<code>&lt;!-- #include file=&quot;nlcode.inc&quot;--&gt;</code><ul>
+<li>这行代码会在 "<code>links.txt</code>" 中列出每个页面上引用 "<code>nlcode.inc</code>" 中的代码，这样导航就可以工作了。</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h4 id="Content-Linking-方法"><a href="#Content-Linking-方法" class="headerlink" title="Content Linking 方法"></a>Content Linking 方法</h4><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">描述</th>
+<th align="left">实例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">GetListCount</td>
+<td align="left">返回内容链接列表文件中所列项目的数量。</td>
+<td align="left"><% <br/>dim nl,c <br/>Set nl=Server.CreateObject("MSWC.NextLink") c=nl.GetListCount("links.txt") <br/>Response.Write("There are ") <br/>Response.Write(c) <br/>Response.Write(" items in the list") <br/>%><br/>输出：There are 4 items in the list</td>
+</tr>
+<tr>
+<td align="left">GetListIndex</td>
+<td align="left">返回在内容链接列表文件中当前条目的索引号。第一个条目的索引号是 1。如果当前页面不在内容链接列表文件中，则返回 0。</td>
+<td align="left"><% <br/>dim nl,c <br/>Set nl=Server.CreateObject("MSWC.NextLink") c=nl.GetListIndex("links.txt") <br/>Response.Write("Item number ") <br/>Response.Write(c) <br/>%><br/>输出：Item number 3</td>
+</tr>
+<tr>
+<td align="left">GetNextDescription</td>
+<td align="left">返回在内容链接列表文件中所列的下一个条目的文本描述。如果在列表文件中没有找到当前文件，则返回列表中最后一个页面的文本描述。</td>
+<td align="left"><%<br/> dim nl,c <br/>Set nl=Server.CreateObject("MSWC.NextLink") c=nl.GetNextDescription("links.txt") <br/>Response.Write("Next ") <br/>Response.Write("description is: ") <br/>Response.Write(c) <br/>%><br/>输出：Next description is: ASP Variables</td>
+</tr>
+<tr>
+<td align="left">GetNextURL</td>
+<td align="left">返回在内容链接列表文件中所列的下一个条目的 URL。如果在列表文件中没有找到当前文件，则返回列表中最后一个页面的 URL。</td>
+<td align="left"><% <br/>dim nl,c Set nl=Server.CreateObject("MSWC.NextLink") c=nl.GetNextURL("links.txt") Response.Write("Next ") Response.Write("URL is: ") Response.Write(c) %>输出：Next URL is: asp_variables.asp</td>
+</tr>
+<tr>
+<td align="left">GetNthDescription</td>
+<td align="left">返在内容链接列表文件中所列的第 N 个页面的描述信息。</td>
+<td align="left"><% <br/>dim nl,c <br/>Set nl=Server.CreateObject("MSWC.NextLink") c=nl.GetNthDescription("links.txt",3) <br/>Response.Write("Third ") <br/>Response.Write("description is: ") <br/>Response.Write(c) <br/>%><br/>输出：Third description is: ASP Variables</td>
+</tr>
+<tr>
+<td align="left">GetNthURL</td>
+<td align="left">返回在内容链接列表文件中所列的第 N 个页面的 URL。</td>
+<td align="left"><% <br/>dim nl,c <br/>Set nl=Server.CreateObject("MSWC.NextLink") c=nl.GetNthURL("links.txt",3) <br/>Response.Write("Third ") <br/>Response.Write("URL is: ") <br/>Response.Write(c) <br/>%><br/>输出：Third URL is: asp_variables.asp</td>
+</tr>
+<tr>
+<td align="left">GetPreviousDescription</td>
+<td align="left">返回在内容链接列表文件中所列的前一个条目的文本描述。如果在列表文件中没有找到当前文件，则返回列表中第一个页面的文本描述。</td>
+<td align="left"><% <br/>dim nl,c <br/>Set nl=Server.CreateObject("MSWC.NextLink") c=nl.GetPreviousDescription("links.txt") Response.Write("Previous ")<br/>Response.Write("description is: ") <br/>Response.Write(c) <br/>%><br/>输出：Previous description is: ASP Variables</td>
+</tr>
+<tr>
+<td align="left">GetPreviousURL</td>
+<td align="left">返回在内容链接列表文件中所列的前一个条目的 URL。如果在列表文件中没有找到当前文件，则返回列表中第一个页面的 URL。</td>
+<td align="left"><% <br/>dim nl,c <br/>Set nl=Server.CreateObject("MSWC.NextLink") c=nl.GetPreviousURL("links.txt") Response.Write("Previous ") <br/>Response.Write("URL is: ") <br/>Response.Write(c) <br/>%><br/>输出：Previous URL is: asp_variables.asp</td>
+</tr>
+</tbody></table>
+<h3 id="4-Content-Rotator-组件-刷新后显示一段不同的内容字符串"><a href="#4-Content-Rotator-组件-刷新后显示一段不同的内容字符串" class="headerlink" title="4. Content Rotator 组件 - 刷新后显示一段不同的内容字符串"></a>4. Content Rotator 组件 - 刷新后显示一段不同的内容字符串</h3><p>ASP Content Rotator 组件创建一个 ContentRotator 对象，每当访客进入网站或刷新页面时，该对象就会显示一段不同的内容字符串。</p>
+<ul>
+<li><p>有关内容字符串的信息是包含在一个名为内容目录文件（Content Schedule File）的文本文件中</p>
+</li>
+<li><p>内容字符串可包含 HTML 标签，这样您就可以显示 HTML 可呈现的任何类型的内容：文本、图像、颜色或者超链接</p>
+</li>
+<li><p>语法</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;%</span><br><span class="line">Set cr=Server.CreateObject(<span class="string">"MSWC.ContentRotator"</span>)</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="Content-Rotator实例"><a href="#Content-Rotator实例" class="headerlink" title="Content Rotator实例"></a>Content Rotator实例</h4><ol>
+<li><p>创建一个名为 "textads.txt" 的文本文件，并把它放置在名为 "text" 的子文件夹中</p>
+<ul>
+<li>有十分之一的几率显示第一个内容字符串</li>
+<li>有十分之二的几率显示第二个内容字符串</li>
+<li>有十分之三的几率显示第三个字符串</li>
+<li>第四个字符串为十分之四的几率。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">%% <span class="comment">#3</span></span><br><span class="line">&lt;h2&gt;This is a great day!!&lt;/h2&gt;</span><br><span class="line"></span><br><span class="line">%% <span class="comment">#3</span></span><br><span class="line">&lt;img src=<span class="string">"smiley.gif"</span>&gt;</span><br><span class="line"></span><br><span class="line">%% <span class="comment">#4</span></span><br><span class="line">&lt;a href=<span class="string">"http://www.runoob.com"</span>&gt;Visit RUNOOB&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>每个内容字符串起始位置的#号码，（可选）用来 HTML 内容字符串的相对权重</li>
+</ul>
+</li>
+<li><p>创建一个 ASP 文件，并插入下面的代码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;%</span><br><span class="line"><span class="built_in">set</span> cr=server.createobject(<span class="string">"MSWC.ContentRotator"</span>)</span><br><span class="line">response.write(cr.ChooseContent(<span class="string">"text/textads.txt"</span>))</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<h4 id="Content-Rotator方法"><a href="#Content-Rotator方法" class="headerlink" title="Content Rotator方法"></a>Content Rotator方法</h4><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">描述</th>
+<th align="left">实例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">ChooseContent</td>
+<td align="left">获取并显示某个内容字符串</td>
+<td align="left"><%    <br/>dim cr    <br/>Set cr=Server.CreateObject("MSWC.ContentRotator")     response.write(cr.ChooseContent("text/textads.txt"))    <br/>%><br/>输出：</td>
+</tr>
+<tr>
+<td align="left">GetAllContent</td>
+<td align="left">取回并显示文本文件中所有的内容字符串</td>
+<td align="left"><%    <br/>dim cr    <br/>Set cr=Server.CreateObject("MSWC.ContentRotator")     response.write(cr.GetAllContent("text/textads.txt"))    <br/>%><br/>输出：</td>
+</tr>
+</tbody></table>
+<p>参考：<a href="https://www.runoob.com/asp/asp-tutorial.html" target="_blank" rel="noopener">菜鸟教程</a></p>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Gkon</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://gxkon.top/posts/7e364ac5/">http://gxkon.top/posts/7e364ac5/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://gxkon.top" target="_blank">Gxkon's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/ASP/">ASP</a></div><div class="post_share"><div class="social-share" data-image="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/06/landscape-5282895_1280.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/posts/5f9102a/"><img class="prev_cover" data-src="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/06/horse-3765847_1280.jpg" onerror="onerror=null;src='/Pic/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">VBScript 教程</div></div></a></div><div class="next-post pull_right"><a href="/posts/fd261a78/"><img class="next_cover" data-src="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/06/ice-5266805_1280.jpg" onerror="onerror=null;src='/Pic/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">ASP.NET教程之Razor和WebPages</div></div></a></div></nav><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i><span> 评论</span></div><div id="gitalk-container"></div><script>var gitalk = new Gitalk({
+  clientID: '1ce3148e3133bf004c96',
+  clientSecret: '2a1e5c0f4d38387460b916843bfe5cac67ef2d07',
+  repo: 'blankwz.github.io',
+  owner: 'blankwz',
+  admin: ['blankwz'],
+  id: md5(decodeURI(location.pathname)),
+  language: 'zh-CN',
+  perPage: 10,
+  distractionFreeMode: false,
+  pagerDirection: 'last',
+  createIssueManually: false,
+  updateCountCallback: commentCount
+})
+gitalk.render('gitalk-container')
+
+function commentCount(n){
+  try {
+    document.getElementsByClassName('gitalk-comment-count')[0].innerHTML= n
+  } catch (e) {
+    return false
+  }
+}</script></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 By Gkon</div><div class="framework-info"><span>驱动 </span><a href="https://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="阅读模式"></i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">簡</a><i class="darkmode fa fa-moon-o" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><a id="to_comment" href="#post-comment" title="直达评论"><i class="scroll_to_comment fa fa-comments">  </i></a><i class="fa fa-list-ul close" id="mobile-toc-button" title="目录" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@3/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script><script src="/js/third-party/ClickShowText.js"></script></body></html>

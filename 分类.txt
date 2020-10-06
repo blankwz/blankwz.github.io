@@ -3,6 +3,9 @@ Web
 	hexo
 	抓包
 	前端
+	教程笔记
+Linux
+	
 系统
 	Mac
 	Windows
@@ -13,19 +16,32 @@ Java
 硬件折腾
 Python
 	基础
-	模块框架
+	库
+	Flask
 	问题
 	爬虫
 开发必会
 	Github
 	Linux   
 	工具软件（Chrome，vscode，VIM）
+	SQL
+	Docker
+	其他
+前端与脚本
+	JavaScript
+	vbscript
 破解
 IOS开发
 道与术（学习方法,Anki）
+	Markdown
+	笔记方法
+	道
+	术
+	
 英语
 资源（怎么查，哪里查）
 推荐
+其他
 梯子 (含梯子标签，则会自动加密)
 
 另含密码标签，也会自动加密

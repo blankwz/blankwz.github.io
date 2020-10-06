@@ -1,0 +1,503 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CentOS安装常用软件 | Gxkon's Blog</title><meta name="description" content="CentOS安装各种常用软件一、常用1. 常用命令软件类 安装前，检查是否安装：yum list installed | grep XXX  安装xx软件：sudo apt-get install xxx  检查是否已启动：ps -e | grep xxxx  查看安装目录：whereis xxx (whereis vsftpd )   端口类 查询指定端口号（端口占用）：sudo netstat"><meta name="keywords" content="CentOS"><meta name="author" content="Gkon"><meta name="copyright" content="Gkon"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="dns-prefetch" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="crossorigin"/><link rel="dns-prefetch" href="https://fonts.googleapis.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="dns-prefetch" href="//busuanzi.ibruce.info"/><meta name="twitter:card" content="summary"><meta name="twitter:title" content="CentOS安装常用软件"><meta name="twitter:description" content="CentOS安装各种常用软件一、常用1. 常用命令软件类 安装前，检查是否安装：yum list installed | grep XXX  安装xx软件：sudo apt-get install xxx  检查是否已启动：ps -e | grep xxxx  查看安装目录：whereis xxx (whereis vsftpd )   端口类 查询指定端口号（端口占用）：sudo netstat"><meta name="twitter:image" content="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/09/fishing-boat-5541327_1280.jpg"><meta property="og:type" content="article"><meta property="og:title" content="CentOS安装常用软件"><meta property="og:url" content="http://gxkon.top/posts/56edabca/"><meta property="og:site_name" content="Gxkon's Blog"><meta property="og:description" content="CentOS安装各种常用软件一、常用1. 常用命令软件类 安装前，检查是否安装：yum list installed | grep XXX  安装xx软件：sudo apt-get install xxx  检查是否已启动：ps -e | grep xxxx  查看安装目录：whereis xxx (whereis vsftpd )   端口类 查询指定端口号（端口占用）：sudo netstat"><meta property="og:image" content="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/09/fishing-boat-5541327_1280.jpg"><meta property="article:published_time" content="2020-09-06T13:18:11.000Z"><meta property="article:modified_time" content="2020-10-05T04:53:29.621Z"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>var autoChangeMode = '1'
+var t = Cookies.get("theme")
+if (autoChangeMode == '1'){
+  var isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+  var isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+  var isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined){
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport){
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour < 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+  }
+  } else if (t == 'light') activateLightMode()
+  else activateDarkMode()
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="canonical" href="http://gxkon.top/posts/56edabca/"><link rel="prev" title="CentOS7.8安装及更新换国内源" href="http://gxkon.top/posts/d893aa62/"><link rel="next" title="CentOS内外网同时使用问题（VPN无法链接）" href="http://gxkon.top/posts/cdda7c22/"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script><script src="https://cdn.jsdelivr.net/npm/blueimp-md5/js/md5.min.js"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: {"text":"本人,超帅,打钱","fontSize":"15px"},
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  highlightShrink: 'false',
+  isFontAwesomeV5: false,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false
+  
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isSidebar: true  
+  }</script><noscript><style>
+#page-header {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 4.2.0"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/Pic/avatar.png" onerror="onerror=null;src='/Pic/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">95</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">64</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">44</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 娱乐</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li></ul></div></div></div></div><i class="fa fa-arrow-right on" id="toggle-sidebar" aria-hidden="true">     </i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CentOS安装各种常用软件"><span class="toc-text">CentOS安装各种常用软件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、常用"><span class="toc-text">一、常用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-常用命令"><span class="toc-text">1. 常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#软件类"><span class="toc-text">软件类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#端口类"><span class="toc-text">端口类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#防火墙"><span class="toc-text">防火墙</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-国内加速（开源镜像站）"><span class="toc-text">2. 国内加速（开源镜像站）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#163开源镜像站"><span class="toc-text">163开源镜像站</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#阿里开源镜像站"><span class="toc-text">阿里开源镜像站</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#清华开源镜像站"><span class="toc-text">清华开源镜像站</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#其他开源镜像站：搜索引擎搜索-开源镜像站"><span class="toc-text">其他开源镜像站：搜索引擎搜索  开源镜像站</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、安装MySQL"><span class="toc-text">二、安装MySQL</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-卸载mariadb"><span class="toc-text">1.卸载mariadb</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-下载MySQL"><span class="toc-text">2.下载MySQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-MySQl设置"><span class="toc-text">3.MySQl设置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#设置简单的密码的方法"><span class="toc-text">设置简单的密码的方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-在CentOS中mysql的主要配置所在的目录："><span class="toc-text">4. 在CentOS中mysql的主要配置所在的目录：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、安装VSFTP"><span class="toc-text">三、安装VSFTP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Vsftpd配置详解"><span class="toc-text">Vsftpd配置详解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#防火墙、selinux、IPtables"><span class="toc-text">防火墙、selinux、IPtables</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置vsftpd-conf"><span class="toc-text">配置vsftpd.conf</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改vsftpd的默认根目录-var-ftp-pub到另一个目录"><span class="toc-text">修改vsftpd的默认根目录&#x2F;var&#x2F;ftp&#x2F;pub到另一个目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#限制用户只能访问-home-test，不能访问其他路径"><span class="toc-text">限制用户只能访问&#x2F;home&#x2F;test，不能访问其他路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他命令"><span class="toc-text">其他命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更多"><span class="toc-text">更多</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#中文说明"><span class="toc-text">中文说明</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实例1"><span class="toc-text">实例1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实例2"><span class="toc-text">实例2</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、安装SSH"><span class="toc-text">四、安装SSH</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、安装VNC-远程桌面"><span class="toc-text">五、安装VNC 远程桌面</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-安装GUI界面软件"><span class="toc-text">1. 安装GUI界面软件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-启动桌面环境"><span class="toc-text">2. 启动桌面环境</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#启动有两种方式："><span class="toc-text">启动有两种方式：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#系统启动时默认启动方式更改"><span class="toc-text">系统启动时默认启动方式更改</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#多个桌面环境设置及切换"><span class="toc-text">多个桌面环境设置及切换</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-VNC-配置"><span class="toc-text">3. VNC 配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#服务端"><span class="toc-text">服务端</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#客户端"><span class="toc-text">客户端</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#六、安装Python3"><span class="toc-text">六、安装Python3</span></a></li></ol></li></ol></div></div></div><div id="body-wrap"><div class="post-bg" id="nav" style="background-image: url(https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/09/fishing-boat-5541327_1280.jpg)"><div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">Gxkon's Blog</a></span><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 娱乐</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li></ul></div></div><span class="toggle-menu close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span></span></div><div id="post-info"><div id="post-title"><div class="posttitle">CentOS安装常用软件</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2020-09-06 21:18:11"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2020-09-06</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2020-10-05 12:53:29"><i class="fa fa-history" aria-hidden="true"></i> 更新于 2020-10-05</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/linux/">linux</a></span></div><div class="meta-secondline"> </div><div class="meta-thirdline"><span class="post-meta-pv-cv"><i class="fa fa-eye post-meta__icon" aria-hidden="true"> </i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"><span class="post-meta__separator">|</span><i class="post-meta__icon fa fa-comment-o" aria-hidden="true"></i><span>评论数:</span><a href="/posts/56edabca/#post-comment"><span class="gitalk-comment-count comment-count"></span></a></span></div></div></div></div><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h1 id="CentOS安装各种常用软件"><a href="#CentOS安装各种常用软件" class="headerlink" title="CentOS安装各种常用软件"></a>CentOS安装各种常用软件</h1><h2 id="一、常用"><a href="#一、常用" class="headerlink" title="一、常用"></a>一、常用</h2><h3 id="1-常用命令"><a href="#1-常用命令" class="headerlink" title="1. 常用命令"></a>1. 常用命令</h3><h4 id="软件类"><a href="#软件类" class="headerlink" title="软件类"></a>软件类</h4><ul>
+<li><p><strong>安装前，检查是否安装</strong>：<code>yum list installed | grep XXX</code></p>
+</li>
+<li><p><strong>安装xx软件</strong>：<code>sudo apt-get install xxx</code></p>
+</li>
+<li><p><strong>检查是否已启动</strong>：<code>ps -e | grep xxxx</code></p>
+</li>
+<li><p><strong>查看安装目录</strong>：<code>whereis xxx</code> (<code>whereis vsftpd</code> )</p>
+</li>
+</ul>
+<h4 id="端口类"><a href="#端口类" class="headerlink" title="端口类"></a>端口类</h4><ul>
+<li><strong>查询指定端口号</strong>（端口占用）：<code>sudo netstat  -anp  | grep  端口号</code><ul>
+<li><code>netstat -anp | grep ssh</code></li>
+</ul>
+</li>
+<li><strong>关闭占用端口的软件</strong>（关进程）：<code>&quot;kill -9 PID&quot; (PID：进程号)</code></li>
+<li>通过<code>iptables</code>工具将某端口禁掉<ul>
+<li><code>iptables -A INPUT -p tcp --dport $PORT -j DROP</code></li>
+<li><code>iptables -A OUTPUT -p tcp --dport $PORT -j DROP</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="防火墙"><a href="#防火墙" class="headerlink" title="防火墙"></a>防火墙</h4><ul>
+<li><p>首先判断<code>firewalld</code>是否启动：<code>sudo firewall-cmd --state</code></p>
+</li>
+<li><p>如果是<code>not running</code>，开启他：<code>sudo systemctl start firewalld</code></p>
+</li>
+<li><p>添加防火墙端口：<code>sudo firewall-cmd --permanent --zone=public --add-port=5901-5905/tcp</code>（端口自己改）</p>
+<ul>
+<li>重新加载防火墙：<code>sudo firewall-cmd --reload</code></li>
+<li>查看端口号是否被加入：<code>firewall-cmd --list-all-zones</code></li>
+</ul>
+</li>
+<li><p>添加服务规则：</p>
+<ul>
+<li>添加规则 ：<code>firewall-cmd --permanent --add-service 名称</code> （比如：<code>vnc-server</code>）</li>
+<li>重启服务 ：<code>systemctl restart firewalld.service</code></li>
+</ul>
+</li>
+<li><p>关闭防火墙：</p>
+<ul>
+<li>停止：<code>systemctl stop firewalld</code></li>
+<li>关闭开机启动：<code>systemctl disable firewalld</code></li>
+</ul>
+</li>
+<li><p>防火墙状态：</p>
+<ul>
+<li>重载：<code>firewall-cmd --reload</code></li>
+<li>状态：<code>firewall-cmd --list-all</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="2-国内加速（开源镜像站）"><a href="#2-国内加速（开源镜像站）" class="headerlink" title="2. 国内加速（开源镜像站）"></a>2. 国内加速（开源镜像站）</h3><h4 id="163开源镜像站"><a href="#163开源镜像站" class="headerlink" title="163开源镜像站"></a><a href="http://mirrors.163.com/" target="_blank" rel="noopener">163开源镜像站</a></h4><h4 id="阿里开源镜像站"><a href="#阿里开源镜像站" class="headerlink" title="阿里开源镜像站"></a><a href="https://developer.aliyun.com/mirror/" target="_blank" rel="noopener">阿里开源镜像站</a></h4><h4 id="清华开源镜像站"><a href="#清华开源镜像站" class="headerlink" title="清华开源镜像站"></a><a href="https://mirrors.tuna.tsinghua.edu.cn/" target="_blank" rel="noopener">清华开源镜像站</a></h4><h4 id="其他开源镜像站：搜索引擎搜索-开源镜像站"><a href="#其他开源镜像站：搜索引擎搜索-开源镜像站" class="headerlink" title="其他开源镜像站：搜索引擎搜索  开源镜像站"></a>其他开源镜像站：搜索引擎搜索  <code>开源镜像站</code></h4><h2 id="二、安装MySQL"><a href="#二、安装MySQL" class="headerlink" title="二、安装MySQL"></a>二、安装MySQL</h2><h3 id="1-卸载mariadb"><a href="#1-卸载mariadb" class="headerlink" title="1.卸载mariadb"></a>1.卸载mariadb</h3><blockquote>
+<p>MariaDB数据库管理系统是MySQL的一个分支，主要由开源社区在维护，采用GPL授权许可。</p>
+<p>开发这个分支的原因之一是：甲骨文公司收购了MySQL后，有将MySQL闭源的潜在风险，因此社区采用分支的方式来避开这个风险。</p>
+<p>MariaDB的目的是完全兼容MySQL，包括API和命令行，使之能轻松成为MySQL的代替品</p>
+</blockquote>
+<p>虽然安装MySQL会替换mariadb，但可能还会出现未知错误，干脆手动卸载掉</p>
+<ol>
+<li>查看 mariadb 的安装包 ：<code>rpm -qa | grep mariadb</code></li>
+<li>卸载：<code>rpm -e 上面出现的mariadb包名字 --nodeps</code><ul>
+<li>出现几个，就卸载几个</li>
+</ul>
+</li>
+<li>再次查看 mariadb 的安装包 ：<code>rpm -qa | grep mariadb</code></li>
+<li>卸载干净，即可</li>
+</ol>
+<h3 id="2-下载MySQL"><a href="#2-下载MySQL" class="headerlink" title="2.下载MySQL"></a>2.下载MySQL</h3><ol>
+<li><p>到<a href="https://dev.mysql.com/downloads/repo/yum/" target="_blank" rel="noopener">官方网站</a>找到下载链接</p>
+<ul>
+<li>找到对应版本，点击Download</li>
+<li>复制 <strong><a href="https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm" target="_blank" rel="noopener">No thanks, just start my download.</a></strong> 的rpm包链接</li>
+</ul>
+</li>
+<li><p>下载rpm包 ：<code>wget rpm包链接</code></p>
+</li>
+<li><p>查看下载的rpm包名：<code>ll</code>  或者 <code>ls</code></p>
+</li>
+<li><p>yum安装rpm包： <code>yum -y install rpm包名</code></p>
+</li>
+<li><p><strong>安装MySQL服务器</strong> ：<code>yum -y install mysql-community-server</code> </p>
+<ul>
+<li>这一步会有点久</li>
+</ul>
+</li>
+<li><p>查看mysql yum仓库中mysql版本 ：<code>yum repolist all | grep mysql</code></p>
+<ul>
+<li>可以看到 MySQL 5.5 5.6 5.7为禁用状态 而MySQL 8.0为启用状态</li>
+</ul>
+</li>
+</ol>
+<h3 id="3-MySQl设置"><a href="#3-MySQl设置" class="headerlink" title="3.MySQl设置"></a>3.MySQl设置</h3><ol>
+<li>启动 ：<code>systemctl start  mysqld.service</code></li>
+<li>查看状态 ：<code>systemctl status mysqld.service</code></li>
+<li>其他命令：<ul>
+<li>重新启动 <code>service mysqld restart</code>   </li>
+<li>停止  <code>systemctl stop mysqld.service</code>   </li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>为了加强安全性，MySQL8.0为root用户随机生成了一个密码，在error log中，关于error log的位置，如果安装的是RPM包，则默认是/var/log/mysqld.log。<br>只有启动过一次mysql才可以查看临时密码</p>
+</blockquote>
+<p><strong>MySQL能够正常运行后，需要从日志文件找到密码</strong></p>
+<ol>
+<li>日志文件中查看密码 <ul>
+<li><code>grep &quot;password&quot; /var/log/mysqld.log</code></li>
+<li>或者 <code>cat /var/log/mysqld.log | grep password</code></li>
+</ul>
+</li>
+<li>登陆root用户：<code>mysql -u root -p</code></li>
+<li>修改root密码，必须修改默认密码！！否则无法使用<ul>
+<li><code>ALTER USER &#39;root&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;新密码&#39;;</code></li>
+<li>密码需要复杂性！密码必须符合长度，且必须含有数字，小写或大写字母，特殊字符</li>
+<li>否则会提示 <code>Your password does not satisfy the current policy requirements</code></li>
+</ul>
+</li>
+<li>通过 <code>exit</code> 命令退出 MySQL，试试新密码登陆</li>
+</ol>
+<h4 id="设置简单的密码的方法"><a href="#设置简单的密码的方法" class="headerlink" title="设置简单的密码的方法"></a>设置简单的密码的方法</h4><p>如果想要设置简单的密码必须要修改约束，修改两个全局参数： </p>
+<p><strong>validate_password_policy</strong>代表密码策略，默认是1：符合长度，且必须含有数字，小写或大写字母，特殊字符。设置为0判断密码的标准就基于密码的长度了。一定要先修改两个参数再修改密码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; set global validate_password.policy&#x3D;0;</span><br></pre></td></tr></table></figure>
+
+<p><strong>validate_password_length</strong>代表密码长度，最小值为4</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; set global validate_password.length&#x3D;4;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-在CentOS中mysql的主要配置所在的目录："><a href="#4-在CentOS中mysql的主要配置所在的目录：" class="headerlink" title="4. 在CentOS中mysql的主要配置所在的目录："></a>4. 在CentOS中mysql的主要配置所在的目录：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1 &#x2F;etc&#x2F;my.cnf 这是mysql的主配置文件</span><br><span class="line">2 &#x2F;var&#x2F;lib&#x2F;mysql mysql数据库的数据库文件存放位置</span><br><span class="line">3 &#x2F;var&#x2F;log mysql数据库的日志输出存放位置</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、安装VSFTP"><a href="#三、安装VSFTP" class="headerlink" title="三、安装VSFTP"></a>三、安装VSFTP</h2><blockquote>
+<p>目前主流的FTP服务器端软件包括：<code>Vsftpd、ProFTPD、PureFTPd、Wuftpd、Server-U FTP、 FileZilla Serve</code>r等软件，其中Unix/Linux使用较为广泛的FTP服务器端软件为Vsftpd 。</p>
+<p>Vsftpd基于GPL开源协议发布，在中小企业中得到广泛的应用，Vsftpd可以快速上手，基于Vsftpd虚拟用户方式，访问验证更加安全。Vsftpd还可以基于MYSQL数据库做安全验证，多重安全防护。</p>
+<p>参考：阿里云 <a href="https://help.aliyun.com/knowledge_detail/60152.html" target="_blank" rel="noopener">FTP的搭建和使用</a></p>
+<p><a href="https://blog.csdn.net/aiynmimi/article/details/77012507" target="_blank" rel="noopener">关于Linux环境下安装配置vsftpd服务全攻略</a></p>
+</blockquote>
+<h3 id="Vsftpd配置详解"><a href="#Vsftpd配置详解" class="headerlink" title="Vsftpd配置详解"></a><strong>Vsftpd配置详解</strong></h3><table>
+<thead>
+<tr>
+<th>/etc/vsftpd/vsftpd.conf</th>
+<th>主配置文件</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>/usr/sbin/vsftpd</td>
+<td>Vsftpd的主程序</td>
+</tr>
+<tr>
+<td>/etc/rc.d/init.d/vsftpd</td>
+<td>启动脚本</td>
+</tr>
+<tr>
+<td>/etc/pam.d/vsftpd</td>
+<td>PAM认证文件（此文件中file=/etc/vsftpd/ftpusers字段，指明阻止访问的用户来自/etc/vsftpd/ftpusers文件中的用户）</td>
+</tr>
+<tr>
+<td>/etc/vsftpd/ftpusers</td>
+<td>禁止使用vsftpd的用户列表文件。记录不允许访问FTP服务器的用户名单，管理员可以把一些对系统安全有威胁的用户账号记录在此文件中，以免用户从FTP登录后获得大于上传下载操作的权利，而对系统造成损坏。（注意：linux-4中此文件在/etc/目录下）</td>
+</tr>
+<tr>
+<td>/etc/vsftpd/user_list</td>
+<td>禁止或允许使用vsftpd的用户列表文件。这个文件中指定的用户缺省情况（即在/etc/vsftpd/vsftpd.conf中设置userlist_deny=YES）下也不能访问FTP服务器，在设置了userlist_deny=NO时,仅允许user_list中指定的用户访问FTP服务器。（注意：linux-4中此文件在/etc/目录下）</td>
+</tr>
+<tr>
+<td>/var/ftp</td>
+<td>匿名用户主目录；本地用户主目录为：/home/用户主目录，即登录后进入自己家目录</td>
+</tr>
+<tr>
+<td>/var/ftp/pub</td>
+<td>匿名用户的下载目录，此目录需赋权根chmod 1777 pub（1为特殊权限，使上载后无法删除）</td>
+</tr>
+<tr>
+<td>/etc/logrotate.d/vsftpd.log</td>
+<td>Vsftpd的日志文件</td>
+</tr>
+</tbody></table>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ol>
+<li>查看是否已经安装：<code>rpm -qa | grep vsftpd</code></li>
+<li>没有显示，说明没有安装，进行安装：<code>yum -y install vsftpd</code></li>
+<li>若需要管理员权限，则：<code>su</code> 输入root密码  （当符号从$变成 # 则说明root成功）</li>
+<li>开启vsftpd服务：<code>systemctl start vsftpd.service</code></li>
+<li>设置vsftpd服务开机自启：<code>systemctl enable vsftpd.service</code></li>
+<li>查看vsftpd服务的状态：<code>systemctl status vsftpd.service</code><ul>
+<li>查看是否启动成功：<code>netstat -npal|grep vsftpd</code></li>
+</ul>
+</li>
+</ol>
+<h3 id="防火墙、selinux、IPtables"><a href="#防火墙、selinux、IPtables" class="headerlink" title="防火墙、selinux、IPtables"></a>防火墙、selinux、IPtables</h3><ol>
+<li><p>防火墙添加FTP服务：</p>
+<ul>
+<li>开启：<code>systemctl enable firewalld</code></li>
+<li>加入服务：<code>firewall-cmd --permanent --zone=public --add-service=ftp</code></li>
+<li>重启： <code>systemctl restart firewalld</code>  或者 <code>firewall-cmd --reload</code></li>
+<li>查看防火墙状态：<code>firewall-cmd --list-all</code></li>
+</ul>
+</li>
+<li><p>关闭SELinux限制：</p>
+<ul>
+<li>查看是否限制：<code>getsebool -a | grep ftp</code>   （off是关闭权限，on是打开权限）</li>
+<li>暂时让SELinux进入Permissive模式：<code>setenforce 0</code></li>
+<li>关闭限制（打开权限）：<ul>
+<li><code>setsebool -P ftpd_full_access on</code></li>
+<li><code>setsebool -P allow_ftpd_full_access=on</code> </li>
+<li><code>setsebool -P tftp_home_dir=on</code></li>
+</ul>
+</li>
+<li>SELinux进入Enforcing模式：<code>setenforce 1</code></li>
+</ul>
+</li>
+<li><p>IPtables设置：</p>
+<ul>
+<li>编辑 配置：<code>vi /etc/sysconfig/iptables</code></li>
+<li>添加如下：<ul>
+<li><code>-A INPUT -m state --state NEW -m tcp -p tcp --dport 21 -j ACCEPT</code> </li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="配置vsftpd-conf"><a href="#配置vsftpd-conf" class="headerlink" title="配置vsftpd.conf"></a>配置<code>vsftpd.conf</code></h3><ol>
+<li>配置之前先备份： <code>cp /etc/vsftpd/vsftpd.conf /etc/vsftpd/vsftpd.conf-bak</code></li>
+<li>配置vsftpd.conf文件： <code>vim /etc/vsftpd/vsftpd.conf</code> <ul>
+<li>按i进入编辑模式</li>
+<li>将配置文件中<code>”anonymous_enable=YES “改为 “anonymous_enable=NO”</code>  关闭匿名用户登录</li>
+<li>local_enable=YES  接受本地用户</li>
+<li><code>esc</code>退出编辑模式 </li>
+<li><code>:wq</code> 保存退出</li>
+</ul>
+</li>
+<li>编辑user_list文件 : <code>vim /etc/vsftpd/user_list</code>  允许XXX用户访问FTP  <ul>
+<li>当 vsftpd 里 <code>userlist_deny=NO</code>时，<code>只允许</code>这里的用户访问 ftp 服务，注意此时同时也检测 ftpusers 文件；</li>
+<li>当 vsftpd 里 <code>userlist_deny=YES</code>（默认） 时，<code>不允许</code>这里的用户 访问 ftp 服务</li>
+</ul>
+</li>
+<li>配置本地用户登录     创建ftp用户   （vsftp安装后默只支持匿名ftp登录）<ul>
+<li><code>useradd ftptest</code> # 创建ftptest用户</li>
+<li><code>passwd ftptest</code> # 修改ftptest用户密码</li>
+</ul>
+</li>
+<li>启动服务<ul>
+<li><code>service vsftpd start</code> //或者  <code>systemctl start vsftpd.service</code></li>
+</ul>
+</li>
+<li>重启服务<ul>
+<li><code>service vsftpd restart</code>  或者 <code>systemctl restart vsftpd.service</code></li>
+</ul>
+</li>
+</ol>
+<h3 id="修改vsftpd的默认根目录-var-ftp-pub到另一个目录"><a href="#修改vsftpd的默认根目录-var-ftp-pub到另一个目录" class="headerlink" title="修改vsftpd的默认根目录/var/ftp/pub到另一个目录"></a>修改vsftpd的默认根目录/var/ftp/pub到另一个目录</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">vsftpd的默认根目录是    /var/ftp/pub</span><br><span class="line"></span><br><span class="line">1）在   /etc/vsftpd/vsftpd.conf文件加入如下几行：</span><br><span class="line">local_root=/var/www/html</span><br><span class="line">chroot_local_user=YES</span><br><span class="line">anon_root=/var/www/html</span><br><span class="line"></span><br><span class="line">注：local_root 针对系统用户；anon_root 针对匿名用户</span><br><span class="line"></span><br><span class="line">2）重新启动服务</span><br><span class="line">service vsftpd restart</span><br><span class="line"></span><br><span class="line">任何一个用户ftp登录到这个服务器上都会chroot到/var/www/html目录下。</span><br></pre></td></tr></table></figure>
+
+<h3 id="限制用户只能访问-home-test，不能访问其他路径"><a href="#限制用户只能访问-home-test，不能访问其他路径" class="headerlink" title="限制用户只能访问/home/test，不能访问其他路径"></a>限制用户只能访问/home/test，不能访问其他路径</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">修改/etc/vsftpd/vsftpd.conf如下：</span><br><span class="line"></span><br><span class="line"><span class="comment">## 限制访问自身目录</span></span><br><span class="line">chroot_local_user=YES</span><br><span class="line">chroot_list_enable=YES</span><br><span class="line"></span><br><span class="line"><span class="comment">## 只有在chroot_list中的用户才能跳出自己的主目录</span></span><br><span class="line">chroot_list_file=/etc/vsftpd/chroot_list</span><br><span class="line">创建chroot_list文件并将ftp用户名写进去</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">改完配置文件，不要忘记重启vsFTPd服务器</span><br><span class="line">/etc/init.d/vsftpd restart</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">如果需要允许用户修改密码，但是又没有telnet登录系统的权限：</span><br><span class="line"><span class="comment">## 用户telnet后将直接进入改密界面</span></span><br><span class="line">usermod -s /usr/bin/passwd <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="其他命令"><a href="#其他命令" class="headerlink" title="其他命令"></a>其他命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">netstat -ntlp    检查21端口是否开启</span><br><span class="line">iptables -nvL    检查防火墙是否开启21端口</span><br><span class="line"></span><br><span class="line">service vsftpd start  启动 vsftpd</span><br><span class="line">service vsftpd stop  关闭 vsftpd</span><br><span class="line">service vsftpd restart 重启 vsftpd</span><br><span class="line">service vsftpd status  检查Vsftpd服务的运行状态</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h3><h4 id="中文说明"><a href="#中文说明" class="headerlink" title="中文说明"></a>中文说明</h4><p><img src= data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs= data-src="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/09/vsftpd%E9%85%8D%E7%BD%AE.png" alt="Peizhi"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 是否允许匿名登录FTP服务器，默认设置为YES允许</span></span><br><span class="line"><span class="comment"># 用户可使用用户名ftp或anonymous进行ftp登录，口令为用户的E-mail地址。</span></span><br><span class="line"><span class="comment"># 如不允许匿名访问则设置为NO</span></span><br><span class="line">anonymous_enable=YES</span><br><span class="line"></span><br><span class="line"><span class="comment"># 是否允许本地用户(即linux系统中的用户帐号)登录FTP服务器，默认设置为YES允许</span></span><br><span class="line"><span class="comment"># 本地用户登录后会进入用户主目录，而匿名用户登录后进入匿名用户的下载目录/var/ftp/pub</span></span><br><span class="line"><span class="comment"># 若只允许匿名用户访问，前面加上#注释掉即可阻止本地用户访问FTP服务器</span></span><br><span class="line">local_enable=YES</span><br><span class="line"></span><br><span class="line"><span class="comment"># 是否允许本地用户对FTP服务器文件具有写权限，默认设置为YES允许</span></span><br><span class="line">write_enable=YES </span><br><span class="line"></span><br><span class="line"><span class="comment"># 掩码，本地用户默认掩码为077</span></span><br><span class="line"><span class="comment"># 你可以设置本地用户的文件掩码为缺省022，也可根据个人喜好将其设置为其他值</span></span><br><span class="line"><span class="comment">#local_umask=022</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 是否允许匿名用户上传文件，须将全局的write_enable=YES。默认为YES</span></span><br><span class="line"><span class="comment">#anon_upload_enable=YES</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 是否允许匿名用户创建新文件夹</span></span><br><span class="line"><span class="comment">#anon_mkdir_write_enable=YES </span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 是否激活目录欢迎信息功能</span></span><br><span class="line"><span class="comment"># 当用户用CMD模式首次访问服务器上某个目录时，FTP服务器将显示欢迎信息</span></span><br><span class="line"><span class="comment"># 默认情况下，欢迎信息是通过该目录下的.message文件获得的</span></span><br><span class="line"><span class="comment"># 此文件保存自定义的欢迎信息，由用户自己建立</span></span><br><span class="line"><span class="comment">#dirmessage_enable=YES</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 是否让系统自动维护上传和下载的日志文件</span></span><br><span class="line"><span class="comment"># 默认情况该日志文件为/var/log/vsftpd.log,也可以通过下面的xferlog_file选项对其进行设定</span></span><br><span class="line"><span class="comment"># 默认值为NO</span></span><br><span class="line">xferlog_enable=YES</span><br><span class="line"></span><br><span class="line"><span class="comment"># Make sure PORT transfer connections originate from port 20 (ftp-data).</span></span><br><span class="line"><span class="comment"># 是否设定FTP服务器将启用FTP数据端口的连接请求</span></span><br><span class="line"><span class="comment"># ftp-data数据传输，21为连接控制端口</span></span><br><span class="line">connect_from_port_20=YES</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设定是否允许改变上传文件的属主，与下面一个设定项配合使用</span></span><br><span class="line"><span class="comment"># 注意，不推荐使用root用户上传文件</span></span><br><span class="line"><span class="comment">#chown_uploads=YES</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置想要改变的上传文件的属主，如果需要，则输入一个系统用户名</span></span><br><span class="line"><span class="comment"># 可以把上传的文件都改成root属主。whoever：任何人</span></span><br><span class="line"><span class="comment">#chown_username=whoever</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设定系统维护记录FTP服务器上传和下载情况的日志文件</span></span><br><span class="line"><span class="comment"># /var/log/vsftpd.log是默认的，也可以另设其它</span></span><br><span class="line"><span class="comment">#xferlog_file=/var/log/vsftpd.log</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 是否以标准xferlog的格式书写传输日志文件</span></span><br><span class="line"><span class="comment"># 默认为/var/log/xferlog，也可以通过xferlog_file选项对其进行设定</span></span><br><span class="line"><span class="comment"># 默认值为NO</span></span><br><span class="line"><span class="comment">#xferlog_std_format=YES</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 以下是附加配置，添加相应的选项将启用相应的设置</span></span><br><span class="line"><span class="comment"># 是否生成两个相似的日志文件</span></span><br><span class="line"><span class="comment"># 默认在/var/log/xferlog和/var/log/vsftpd.log目录下</span></span><br><span class="line"><span class="comment"># 前者是wu_ftpd类型的传输日志，可以利用标准日志工具对其进行分析；后者是vsftpd类型的日志</span></span><br><span class="line"><span class="comment">#dual_log_enable</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 是否将原本输出到/var/log/vsftpd.log中的日志，输出到系统日志</span></span><br><span class="line"><span class="comment">#syslog_enable</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置数据传输中断间隔时间，此语句表示空闲的用户会话中断时间为600秒</span></span><br><span class="line"><span class="comment"># 即当数据传输结束后，用户连接FTP服务器的时间不应超过600秒。可以根据实际情况对该值进行修改</span></span><br><span class="line"><span class="comment">#idle_session_timeout=600</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置数据连接超时时间，该语句表示数据连接超时时间为120秒，可根据实际情况对其个修改</span></span><br><span class="line"><span class="comment">#data_connection_timeout=120</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行vsftpd需要的非特权系统用户，缺省是nobody</span></span><br><span class="line"><span class="comment">#nopriv_user=ftpsecure</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 是否识别异步ABOR请求。</span></span><br><span class="line"><span class="comment"># 如果FTP client会下达“async ABOR”这个指令时，这个设定才需要启用</span></span><br><span class="line"><span class="comment"># 而一般此设定并不安全，所以通常将其取消</span></span><br><span class="line"><span class="comment">#async_abor_enable=YES</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 是否以ASCII方式传输数据。默认情况下，服务器会忽略ASCII方式的请求。</span></span><br><span class="line"><span class="comment"># 启用此选项将允许服务器以ASCII方式传输数据</span></span><br><span class="line"><span class="comment"># 不过，这样可能会导致由"SIZE /big/file"方式引起的DoS攻击</span></span><br><span class="line"><span class="comment">#ascii_upload_enable=YES</span></span><br><span class="line"><span class="comment">#ascii_download_enable=YES</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 登录FTP服务器时显示的欢迎信息</span></span><br><span class="line"><span class="comment"># 如有需要，可在更改目录欢迎信息的目录下创建名为.message的文件，并写入欢迎信息保存后</span></span><br><span class="line"><span class="comment">#ftpd_banner=Welcome to blah FTP service.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 黑名单设置。如果很讨厌某些email address，就可以使用此设定来取消他的登录权限</span></span><br><span class="line"><span class="comment"># 可以将某些特殊的email address抵挡住。</span></span><br><span class="line"><span class="comment">#deny_email_enable=YES</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 当上面的deny_email_enable=YES时，可以利用这个设定项来规定哪些邮件地址不可登录vsftpd服务器</span></span><br><span class="line"><span class="comment"># 此文件需用户自己创建，一行一个email address即可</span></span><br><span class="line"><span class="comment">#banned_email_file=/etc/vsftpd/banned_emails</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 用户登录FTP服务器后是否具有访问自己目录以外的其他文件的权限</span></span><br><span class="line"><span class="comment"># 设置为YES时，用户被锁定在自己的home目录中，vsftpd将在下面chroot_list_file选项值的位置寻找chroot_list文件</span></span><br><span class="line"><span class="comment"># 必须与下面的设置项配合</span></span><br><span class="line"><span class="comment">#chroot_list_enable=YES</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 被列入此文件的用户，在登录后将不能切换到自己目录以外的其他目录</span></span><br><span class="line"><span class="comment"># 从而有利于FTP服务器的安全管理和隐私保护。此文件需自己建立</span></span><br><span class="line"><span class="comment">#chroot_list_file=/etc/vsftpd/chroot_list</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 是否允许递归查询。默认为关闭，以防止远程用户造成过量的I/O</span></span><br><span class="line"><span class="comment">#ls_recurse_enable=YES</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 是否允许监听。</span></span><br><span class="line"><span class="comment"># 如果设置为YES，则vsftpd将以独立模式运行，由vsftpd自己监听和处理IPv4端口的连接请求</span></span><br><span class="line">listen=YES</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设定是否支持IPV6。如要同时监听IPv4和IPv6端口，</span></span><br><span class="line"><span class="comment"># 则必须运行两套vsftpd，采用两套配置文件</span></span><br><span class="line"><span class="comment"># 同时确保其中有一个监听选项是被注释掉的</span></span><br><span class="line"><span class="comment">#listen_ipv6=YES</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置PAM外挂模块提供的认证服务所使用的配置文件名，即/etc/pam.d/vsftpd文件</span></span><br><span class="line"><span class="comment"># 此文件中file=/etc/vsftpd/ftpusers字段，说明了PAM模块能抵挡的帐号内容来自文件/etc/vsftpd/ftpusers中</span></span><br><span class="line"><span class="comment">#pam_service_name=vsftpd</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 是否允许ftpusers文件中的用户登录FTP服务器，默认为NO</span></span><br><span class="line"><span class="comment"># 若此项设为YES，则user_list文件中的用户允许登录FTP服务器</span></span><br><span class="line"><span class="comment"># 而如果同时设置了userlist_deny=YES，则user_list文件中的用户将不允许登录FTP服务器，甚至连输入密码提示信息都没有</span></span><br><span class="line"><span class="comment">#userlist_enable=YES/NO</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置是否阻扯user_list文件中的用户登录FTP服务器，默认为YES</span></span><br><span class="line"><span class="comment">#userlist_deny=YES/NO</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 是否使用tcp_wrappers作为主机访问控制方式。</span></span><br><span class="line"><span class="comment"># tcp_wrappers可以实现linux系统中网络服务的基于主机地址的访问控制</span></span><br><span class="line"><span class="comment"># 在/etc目录中的hosts.allow和hosts.deny两个文件用于设置tcp_wrappers的访问控制</span></span><br><span class="line"><span class="comment"># 前者设置允许访问记录，后者设置拒绝访问记录。</span></span><br><span class="line"><span class="comment"># 如想限制某些主机对FTP服务器192.168.57.2的匿名访问，编缉/etc/hosts.allow文件，如在下面增加两行命令：</span></span><br><span class="line"><span class="comment"># vsftpd:192.168.57.1:DENY 和vsftpd:192.168.57.9:DENY</span></span><br><span class="line"><span class="comment"># 表明限制IP为192.168.57.1/192.168.57.9主机访问IP为192.168.57.2的FTP服务器</span></span><br><span class="line"><span class="comment"># 此时FTP服务器虽可以PING通，但无法连接</span></span><br><span class="line">tcp_wrappers=YES</span><br></pre></td></tr></table></figure>
+
+<h4 id="实例1"><a href="#实例1" class="headerlink" title="实例1"></a>实例1</h4><p>实现匿名用户的登录，可以上传下载，可以创建目录，创建权限掩码为022，可以删除文件，最大上传速度为100kbit/s。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#修改配置文件开放匿名用户上传、下载及其他权限，</span></span><br><span class="line">vim /etc/vsftpd/vsftpd.conf</span><br><span class="line"></span><br><span class="line">anonymous_enable=yes //允许匿名用户登录 </span><br><span class="line">anon_upload_enable=yes   //允许匿名用户上传</span><br><span class="line">write_enable=yes //赋予写权限</span><br><span class="line">anon_mkdir_write_enable=yes   //允许匿名用户新建文件夹</span><br><span class="line">anon_other_write_enable=yes  //匿名用户拥有除了上传和新建目录之外的其他权限</span><br><span class="line">anon_amask=022  //匿名用户的权限掩码</span><br><span class="line">anon_max_rate=102400  //最大上传速度100kbit/s</span><br><span class="line"></span><br><span class="line"><span class="comment">#重启服务</span></span><br><span class="line">systemctl restart vsftpd.service</span><br><span class="line"></span><br><span class="line"><span class="comment">#修改上传目录的权限</span></span><br><span class="line">mkdir /var/ftp/pub  <span class="comment">#新建目录 /var/ftp/pbu</span></span><br><span class="line">chmod 777 /var/ftp/pub  <span class="comment"># 给他777权限</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="实例2"><a href="#实例2" class="headerlink" title="实例2"></a>实例2</h4><p><strong>使用户不能离开主目录</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">当chroot_list_enable=YES，chroot_local_user=YES时，在/etc/vsftpd.chroot_list文件中列出的用户，可以切换到其他目录；</span><br><span class="line">未在文件中列出的用户，不能切换到其他目录</span><br><span class="line"></span><br><span class="line">chroot_local_user=YES</span><br><span class="line">chroot_list_enable=YES</span><br><span class="line">chroot_list_file=/etc/vsftpd/chroot_list</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#如果/etc/vsftpd/chroot_list不存在，则需要创建该文件</span></span><br><span class="line">vi /etc/vsftpd/chroot_list</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h2 id="四、安装SSH"><a href="#四、安装SSH" class="headerlink" title="四、安装SSH"></a>四、安装SSH</h2><ol>
+<li>检查是否已安装：<code>yum list installed | grep openssh-server</code></li>
+<li>没有显示，说明没有安装，进行安装：<code>yum install openssh-server</code></li>
+<li>开启  <code>sshd</code>  服务：<code>sudo service sshd start</code></li>
+<li>检查  <code>sshd</code>  服务是否已经开启：<code>ps -e | grep sshd</code></li>
+<li>检查  22 号端口是否开启监听：<code>netstat -an | grep 22</code></li>
+<li>将 <code>sshd</code> 服务添加至自启动列表中：<code>systemctl enable sshd.service</code></li>
+<li>查看是否开启了<code>sshd</code> 服务自启动 ：<code>systemctl list-unit-files | grep sshd</code></li>
+</ol>
+<h2 id="五、安装VNC-远程桌面"><a href="#五、安装VNC-远程桌面" class="headerlink" title="五、安装VNC 远程桌面"></a>五、安装VNC 远程桌面</h2><p>远程桌面技术有多种，例如<code>VNC, TeamViewer, RDP</code>等待，这里使用<code>VNC</code></p>
+<p><code>VNC</code>：分<code>控制端（客户端）</code>和<code>被控制端（服务端）</code></p>
+<p>可以配置多个用户，同时登陆！！！</p>
+<h3 id="1-安装GUI界面软件"><a href="#1-安装GUI界面软件" class="headerlink" title="1. 安装GUI界面软件"></a>1. 安装GUI界面软件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装X （必装）</span></span><br><span class="line">yum groups install <span class="string">"X Window System"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># GNOME桌面环境</span></span><br><span class="line">yum -y groups install <span class="string">"GNOME Desktop"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"exec gnome-session"</span> &gt;&gt; ~/.xinitrc</span><br><span class="line"></span><br><span class="line"><span class="comment"># kde 桌面环境</span></span><br><span class="line">yum -y groups install <span class="string">"KDE Plasma Workspaces"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"exec startkde"</span> &gt;&gt; ~/.xinitrc </span><br><span class="line"></span><br><span class="line"><span class="comment"># mate 桌面环境</span></span><br><span class="line">yum --enablerepo=epel -y groups install <span class="string">"MATE Desktop"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"exec /usr/bin/mate-session"</span> &gt;&gt; ~/.xinitrc</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建 .xinitrc文件，才可以在命令行下使用startx启动图形界面</span></span><br><span class="line"><span class="built_in">exec</span> startkde、<span class="built_in">exec</span> gnome-session、<span class="built_in">exec</span> /usr/bin/mate-session都是启用桌面的命令，把他们都保存在.xinitrc文件中</span><br><span class="line">让X桌面来替他们启动</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-启动桌面环境"><a href="#2-启动桌面环境" class="headerlink" title="2. 启动桌面环境"></a>2. 启动桌面环境</h3><h4 id="启动有两种方式："><a href="#启动有两种方式：" class="headerlink" title="启动有两种方式："></a><strong>启动有两种方式</strong>：</h4><ol>
+<li>一次性的：在终端里输入<code>startx</code>；</li>
+<li>系统启动时默认进入桌面环境： <code>systemctl set-default graphical.target</code>，然后重启；</li>
+</ol>
+<h4 id="系统启动时默认启动方式更改"><a href="#系统启动时默认启动方式更改" class="headerlink" title="系统启动时默认启动方式更改"></a>系统启动时默认启动方式更改</h4><ol>
+<li><strong>获取当前系统启动模式</strong>  <code>systemctl get-default</code><ul>
+<li><code>multi-user.target</code>   //命令行模式</li>
+<li><code>graphical.target</code>    //图形界面模式</li>
+</ul>
+</li>
+<li><strong>设置启动方式</strong><ul>
+<li><strong>由命令行模式更改为图形界面模式</strong>：<code>systemctl set-default graphical.target</code></li>
+<li><strong>由图形界面模式更改为命令行模式</strong>：<code>systemctl set-default multi-user.target</code></li>
+</ul>
+</li>
+</ol>
+<h4 id="多个桌面环境设置及切换"><a href="#多个桌面环境设置及切换" class="headerlink" title="多个桌面环境设置及切换"></a>多个桌面环境设置及切换</h4><ol>
+<li><p>设置GNOME或者KDE为默认的启动桌面环境</p>
+<ul>
+<li>修改/<code>etc/sysconfig/desktop</code>，根据需要将“DESKTOP”后面的内容改为KDE或GNOME</li>
+</ul>
+</li>
+<li><p>GNOME和KDE的切换</p>
+<ul>
+<li><p><code>switchdesk gnome</code></p>
+</li>
+<li><p>或<code>switchdesk kde</code></p>
+</li>
+<li><p>然后再<code>startx</code>就可以进入<code>gnome或kde</code></p>
+</li>
+<li><p>或者<code>vi ~/.xinitrc</code>，添加或修改成e<code>xec gnome-session 或exec startkde</code>，</p>
+<ul>
+<li>然后用<code>startx</code>启动X</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="3-VNC-配置"><a href="#3-VNC-配置" class="headerlink" title="3. VNC 配置"></a>3. VNC 配置</h3><h4 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h4><ol>
+<li><p>在服务器上先安装服务端：<code>yum install -y tigervnc-server</code>   （<code>tigervnc</code>是<code>tightvnc</code>的分支）</p>
+</li>
+<li><p>复杂一份新的VNC配置：<code>一个配置文件就是一个账户，想要多个账户就建立多个配置文件</code></p>
+<ul>
+<li><code>cp /lib/systemd/system/vncserver@.service /etc/systemd/system/vncserver@:1.service</code>（位置随便）</li>
+<li><code>cp /lib/systemd/system/vncserver@.service /lib/systemd/system/vncserver@:1.service</code></li>
+<li><code>cp /lib/systemd/system/vncserver@.service /lib/systemd/system/vncserver@:2.service</code></li>
+<li>上述命令参数重的“<code>@:1</code>”，可以将<code>数字1换成30000内的任意数字</code>，“<code>5900+数字</code>”即为程序的显示（监听）端口，如”@:1″表示监听5901端口</li>
+</ul>
+</li>
+<li><p>编辑配置文件：<code>vim /lib/systemd/system/vncserver@:1.service</code></p>
+</li>
+<li><p>用你需要连接的用户名代替<code>&lt;USER&gt;</code>， 一般建议第一个连接给<code>root</code>用户 （不要尖括号！）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Remote desktop service (VNC)</span><br><span class="line">After=syslog.target network.target</span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line"><span class="comment"># Clean any existing files in /tmp/.X11-unix environment</span></span><br><span class="line">ExecStartPre=/bin/sh -c <span class="string">'/usr/bin/vncserver -kill %i &gt; /dev/null 2&gt;&amp;1 || :'</span></span><br><span class="line">ExecStart=/sbin/runuser -l root -c <span class="string">"/usr/bin/vncserver %i"</span></span><br><span class="line"><span class="comment"># 也可以添加设置分辨率的参数，在这一行后面 添加  -geometry 1280x720</span></span><br><span class="line"><span class="comment"># ExecStart=/sbin/runuser -l oracle -c "/usr/bin/vncserver %i -geometry 1280x720" </span></span><br><span class="line">PIDFile=/root/.vnc/%H%i.pid</span><br><span class="line">ExecStop=/bin/sh -c <span class="string">'/usr/bin/vncserver -kill %i &gt; /dev/null 2&gt;&amp;1 || :'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果是其他用户 比如：John  （注意第二行)</span></span><br><span class="line">ExecStart=/sbin/runuser -l john -c <span class="string">"/usr/bin/vncserver %i"</span></span><br><span class="line">PIDFile=/home/john/.vnc/%H%i.pid</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>保存，然后重新加载配置：<code>systemctl daemon-reload</code></p>
+</li>
+<li><p>设置<code>vncserver</code>密码，输入：<code>vncpasswd</code> </p>
+<ul>
+<li>然后输入密码</li>
+<li><code>view-only password</code> 可以不设置，输入N</li>
+<li>连接密码与登录密码不同：连接密码用于显示远程桌面，登录密码用于用户登录系统</li>
+</ul>
+</li>
+<li><p>启动  <code>vnc server</code>: <code>systemctl start vncserver@:1.service</code></p>
+</li>
+<li><p>查看<code>vnc</code>的运行转态：<code>systemctl status vncserver@:1.service</code></p>
+</li>
+<li><p>设置开机自动开启：<code>systemctl enable vncserver@:1.service</code></p>
+</li>
+<li><p>查看<code>vnc</code> 端口号：<code>ss -tulpn|grep vnc</code></p>
+</li>
+<li><p>防火墙配置，如果开了防火墙，需要开通规则</p>
+<ul>
+<li><code>firewall-cmd --permanent --add-service vnc-server</code></li>
+<li><code>systemctl restart firewalld.service</code></li>
+</ul>
+</li>
+<li><p>如果用了 <code>iptable</code>，则 <code>vim /etc/sysconfig/iptables</code> 中添加</p>
+<ul>
+<li><code>-A INPUT -m state --state NEW -m tcp -p tcp --dport 5900:5903 -j ACCEPT</code> （端口号按自己的设置）</li>
+<li><code>service iptables restart</code> （重启iptavles)</li>
+</ul>
+</li>
+<li><p>其他命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 关闭vnc连接</span></span><br><span class="line">vncserver -<span class="built_in">kill</span> :1     <span class="comment">#或者  /usr/bin/vncserver -kill :1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看5901端口</span></span><br><span class="line">netstat -antulp | grep 5901</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看vnc</span></span><br><span class="line">ps -ef | grep vnc</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+</li>
+</ol>
+<h4 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h4><ol>
+<li><p><a href="https://www.realvnc.com/en/connect/download/viewer/" target="_blank" rel="noopener">官网</a> 下载安装客户端</p>
+</li>
+<li><p>配置</p>
+<ul>
+<li><code>vnc server</code>：<code>IP:端口</code> （例如：<code>172.23.1.101:5901</code>）</li>
+</ul>
+</li>
+<li><p>问题：色彩模糊，色彩太低</p>
+<ul>
+<li><strong>解决办法</strong>：在建立好的远程连接点 —&gt;&gt;右键—&gt;&gt;选择 Properties —&gt;&gt;选择 Options 选项卡 —&gt;&gt; 在 General 下面的 Picture quality 选择 High—&gt;&gt; 保存</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>参考：</p>
+<p><a href="https://www.cnblogs.com/haiyabtx/p/10762745.html" target="_blank" rel="noopener">CentOS7 FTP安装与配置</a></p>
+</blockquote>
+<h2 id="六、安装Python3"><a href="#六、安装Python3" class="headerlink" title="六、安装Python3"></a>六、安装Python3</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装必备</span></span><br><span class="line">yum -y install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel kernel-devel libffi-devel</span><br><span class="line"></span><br><span class="line"><span class="comment"># 官网找Python3最新版本Linux下载包</span></span><br><span class="line">https://www.python.org/downloads/release/python-386/</span><br><span class="line">https://www.python.org/ftp/python/3.8.6/Python-3.8.6.tar.xz</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载包</span></span><br><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/src/</span><br><span class="line">wget https://www.python.org/ftp/python/3.8.6/Python-3.8.6.tar.xz</span><br><span class="line"></span><br><span class="line"><span class="comment">#解压</span></span><br><span class="line">ls  <span class="comment"># 查看包名</span></span><br><span class="line">tar -Jxvf Python-3.8.6.tar.xz （包名）</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译安装</span></span><br><span class="line"><span class="built_in">cd</span> ./Python-3.8.6</span><br><span class="line">./configure prefix=/usr/<span class="built_in">local</span>/python3  <span class="comment"># 配置编译的的路径（这里--prefix是指定编译安装的文件夹）</span></span><br><span class="line">make &amp;&amp; make install</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置软链接：</span></span><br><span class="line">ln -s /usr/<span class="built_in">local</span>/python3/bin/python3 /usr/bin/python3</span><br><span class="line">ln -s /usr/<span class="built_in">local</span>/python3/bin/pip3 /usr/bin/pip3</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将/usr/local/python3/bin加入PATH</span></span><br><span class="line">vim /etc/profile</span><br><span class="line"><span class="comment">#然后在文件末尾添加</span></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/usr/<span class="built_in">local</span>/python3/bin</span><br><span class="line"><span class="comment"># 使其生效</span></span><br><span class="line"><span class="built_in">source</span> /etc/profile</span><br></pre></td></tr></table></figure>
+
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Gkon</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://gxkon.top/posts/56edabca/">http://gxkon.top/posts/56edabca/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://gxkon.top" target="_blank">Gxkon's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/CentOS/">CentOS</a></div><div class="post_share"><div class="social-share" data-image="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/06/landscape-5282895_1280.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/posts/d893aa62/"><img class="prev_cover" data-src="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/09/beach-5548446_1280.jpg" onerror="onerror=null;src='/Pic/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">CentOS7.8安装及更新换国内源</div></div></a></div><div class="next-post pull_right"><a href="/posts/cdda7c22/"><img class="next_cover" data-src="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/09/blue-hour-3848856_1280.jpg" onerror="onerror=null;src='/Pic/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">CentOS内外网同时使用问题（VPN无法链接）</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fa fa-fw fa-thumbs-up" aria-hidden="true"></i><span> 相关推荐</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/posts/cdda7c22/" title="CentOS内外网同时使用问题（VPN无法链接）"><img class="relatedPosts_cover" data-src="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/09/blue-hour-3848856_1280.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2020-09-06</div><div class="relatedPosts_title">CentOS内外网同时使用问题（VPN无法链接）</div></div></a></div><div class="relatedPosts_item"><a href="/posts/d893aa62/" title="CentOS7.8安装及更新换国内源"><img class="relatedPosts_cover" data-src="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/09/beach-5548446_1280.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2020-09-09</div><div class="relatedPosts_title">CentOS7.8安装及更新换国内源</div></div></a></div></div><div class="clear_both"></div></div><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i><span> 评论</span></div><div id="gitalk-container"></div><script>var gitalk = new Gitalk({
+  clientID: '1ce3148e3133bf004c96',
+  clientSecret: '2a1e5c0f4d38387460b916843bfe5cac67ef2d07',
+  repo: 'blankwz.github.io',
+  owner: 'blankwz',
+  admin: ['blankwz'],
+  id: md5(decodeURI(location.pathname)),
+  language: 'zh-CN',
+  perPage: 10,
+  distractionFreeMode: false,
+  pagerDirection: 'last',
+  createIssueManually: false,
+  updateCountCallback: commentCount
+})
+gitalk.render('gitalk-container')
+
+function commentCount(n){
+  try {
+    document.getElementsByClassName('gitalk-comment-count')[0].innerHTML= n
+  } catch (e) {
+    return false
+  }
+}</script></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 By Gkon</div><div class="framework-info"><span>驱动 </span><a href="https://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="阅读模式"></i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">簡</a><i class="darkmode fa fa-moon-o" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><a id="to_comment" href="#post-comment" title="直达评论"><i class="scroll_to_comment fa fa-comments">  </i></a><i class="fa fa-list-ul close" id="mobile-toc-button" title="目录" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@3/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script><script src="/js/third-party/ClickShowText.js"></script></body></html>
