@@ -1,0 +1,556 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NotePad++使用技巧 | Gxkon's Blog</title><meta name="description" content="NotePad++使用技巧零、快捷键 剪切当前行：CTRL+L  复制并生成当前行：CTRL+D  选择当前行：  Shift + End  全选一行 Shift + End+ End  行很长，则需要按两次END   列编辑：ALT + SHIFT + 方向键  代码缩进  往左边缩进 shift+tab 往右边缩进 tab   代码注释与释放：CTRL + Q  也可以用 Ctrl+K 行注释"><meta name="author" content="Gkon"><meta name="copyright" content="Gkon"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="dns-prefetch" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="crossorigin"/><link rel="dns-prefetch" href="https://fonts.googleapis.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="dns-prefetch" href="//busuanzi.ibruce.info"/><meta name="twitter:card" content="summary"><meta name="twitter:title" content="NotePad++使用技巧"><meta name="twitter:description" content="NotePad++使用技巧零、快捷键 剪切当前行：CTRL+L  复制并生成当前行：CTRL+D  选择当前行：  Shift + End  全选一行 Shift + End+ End  行很长，则需要按两次END   列编辑：ALT + SHIFT + 方向键  代码缩进  往左边缩进 shift+tab 往右边缩进 tab   代码注释与释放：CTRL + Q  也可以用 Ctrl+K 行注释"><meta name="twitter:image" content="http://gxkon.top/Pic/post.jpg"><meta property="og:type" content="article"><meta property="og:title" content="NotePad++使用技巧"><meta property="og:url" content="http://gxkon.top/posts/df149c86/"><meta property="og:site_name" content="Gxkon's Blog"><meta property="og:description" content="NotePad++使用技巧零、快捷键 剪切当前行：CTRL+L  复制并生成当前行：CTRL+D  选择当前行：  Shift + End  全选一行 Shift + End+ End  行很长，则需要按两次END   列编辑：ALT + SHIFT + 方向键  代码缩进  往左边缩进 shift+tab 往右边缩进 tab   代码注释与释放：CTRL + Q  也可以用 Ctrl+K 行注释"><meta property="og:image" content="http://gxkon.top/Pic/post.jpg"><meta property="article:published_time" content="2020-11-08T12:07:07.000Z"><meta property="article:modified_time" content="2020-12-04T12:51:12.752Z"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>var autoChangeMode = '1'
+var t = Cookies.get("theme")
+if (autoChangeMode == '1'){
+  var isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+  var isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+  var isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined){
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport){
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour < 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+  }
+  } else if (t == 'light') activateLightMode()
+  else activateDarkMode()
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="canonical" href="http://gxkon.top/posts/df149c86/"><link rel="prev" title="Crontab用法简解「转」" href="http://gxkon.top/posts/b6588d45/"><link rel="next" title="Python中级之Pyinstaller打包成exe" href="http://gxkon.top/posts/dcbec147/"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script><script src="https://cdn.jsdelivr.net/npm/blueimp-md5/js/md5.min.js"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: {"text":"本人,超帅,打钱","fontSize":"15px"},
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  highlightShrink: 'false',
+  isFontAwesomeV5: false,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false
+  
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isSidebar: true  
+  }</script><noscript><style>
+#page-header {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 4.2.0"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/Pic/avatar.png" onerror="onerror=null;src='/Pic/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">156</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">83</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">54</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 娱乐</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li></ul></div></div></div></div><i class="fa fa-arrow-right on" id="toggle-sidebar" aria-hidden="true">     </i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#NotePad-使用技巧"><span class="toc-text">NotePad++使用技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#零、快捷键"><span class="toc-text">零、快捷键</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一、强大的宏"><span class="toc-text">一、强大的宏</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#方法"><span class="toc-text">方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#备份宏"><span class="toc-text">备份宏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#宏中如何自定义变量"><span class="toc-text">宏中如何自定义变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例子"><span class="toc-text">例子</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#用宏剪切当前文档中指针所在的行"><span class="toc-text">用宏剪切当前文档中指针所在的行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数字自动生成"><span class="toc-text">数字自动生成</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、正则表达式"><span class="toc-text">二、正则表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-基本表达式"><span class="toc-text">1. 基本表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-标记和分组"><span class="toc-text">2. 标记和分组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-特殊符号"><span class="toc-text">3. 特殊符号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-字符类"><span class="toc-text">4. 字符类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-替换操作"><span class="toc-text">5 替换操作!!!</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、查找、替换、标记"><span class="toc-text">三、查找、替换、标记</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-利用替换方法给行头行尾加数据"><span class="toc-text">1. 利用替换方法给行头行尾加数据</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#给行头加数据"><span class="toc-text">给行头加数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#给行尾加数据"><span class="toc-text">给行尾加数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#整理"><span class="toc-text">整理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-给所有行的前后加空行"><span class="toc-text">2. 给所有行的前后加空行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-包含内容的实例用法-1"><span class="toc-text">3. 包含内容的实例用法  - \1</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#目的"><span class="toc-text">目的</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#方法-1"><span class="toc-text">方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-匹配第二个字符-2"><span class="toc-text">4. 匹配第二个字符   - \2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-在字符串上加上引号"><span class="toc-text">5. 在字符串上加上引号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-更多"><span class="toc-text">6. 更多</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-将数字开头替换为数字-开头"><span class="toc-text">1 将数字开头替换为数字.开头</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-多个-1"><span class="toc-text">2 多个 \1</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3"><span class="toc-text">3</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、列编辑"><span class="toc-text">四、列编辑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、设置"><span class="toc-text">五、设置</span></a></li></ol></li></ol></div></div></div><div id="body-wrap"><div class="post-bg" id="nav" style="background-image: url(/Pic/post.jpg)"><div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">Gxkon's Blog</a></span><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 娱乐</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li></ul></div></div><span class="toggle-menu close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span></span></div><div id="post-info"><div id="post-title"><div class="posttitle">NotePad++使用技巧</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2020-11-08 20:07:07"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2020-11-08</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2020-12-04 20:51:12"><i class="fa fa-history" aria-hidden="true"></i> 更新于 2020-12-04</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E8%BD%AF%E4%BB%B6%E6%8A%98%E8%85%BE/">软件折腾</a></span></div><div class="meta-secondline"> </div><div class="meta-thirdline"><span class="post-meta-pv-cv"><i class="fa fa-eye post-meta__icon" aria-hidden="true"> </i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"><span class="post-meta__separator">|</span><i class="post-meta__icon fa fa-comment-o" aria-hidden="true"></i><span>评论数:</span><a href="/posts/df149c86/#post-comment"><span class="gitalk-comment-count comment-count"></span></a></span></div></div></div></div><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h1 id="NotePad-使用技巧"><a href="#NotePad-使用技巧" class="headerlink" title="NotePad++使用技巧"></a>NotePad++使用技巧</h1><h2 id="零、快捷键"><a href="#零、快捷键" class="headerlink" title="零、快捷键"></a>零、快捷键</h2><ol>
+<li><p>剪切当前行：<code>CTRL+L</code></p>
+</li>
+<li><p>复制并生成当前行：<code>CTRL+D</code></p>
+</li>
+<li><p>选择当前行：</p>
+<ol>
+<li><code>Shift + End</code>  全选一行</li>
+<li><code>Shift + End+ End</code>  行很长，则需要按两次END</li>
+</ol>
+</li>
+<li><p>列编辑：<code>ALT + SHIFT + 方向键</code></p>
+</li>
+<li><p>代码缩进</p>
+<ol>
+<li>往左边缩进 <code>shift+tab</code></li>
+<li>往右边缩进 <code>tab</code></li>
+</ol>
+</li>
+<li><p>代码注释与释放：<code>CTRL + Q</code></p>
+<ul>
+<li>也可以用 <strong><code>Ctrl+K</code></strong> 行注释(取消<strong><code>Ctrl+Shift+K</code></strong>)</li>
+<li>区块注释  <strong><code>Ctrl+Shift+Q</code></strong></li>
+</ul>
+</li>
+<li><p>转为大写 <strong><code>Ctrl+Shift+U</code></strong> </p>
+<ul>
+<li>转为小写 <strong><code>Ctrl+U</code></strong></li>
+</ul>
+</li>
+<li><p>分割行 <code>Ctrl+I</code> </p>
+<ul>
+<li>合并行 <code>Ctrl+J</code> </li>
+</ul>
+</li>
+<li><p>上移当前行 <strong><code>Ctrl+Shift+Up</code></strong> </p>
+<ul>
+<li>下移当前行 <strong><code>Ctrl+Shift+Down</code></strong></li>
+</ul>
+</li>
+<li><p>行定位 <strong><code>Ctrl+G</code></strong> </p>
+</li>
+<li><p>定位匹配括号 <strong><code>Ctrl+B</code></strong> </p>
+</li>
+<li><p>层次</p>
+<ol>
+<li>折叠所有层次 <strong><code>Alt+0</code></strong> </li>
+<li>展开所有层次 <strong><code>Alt+Shift+0</code></strong> </li>
+<li>折叠当前层次 <strong><code>Ctrl+Alt+F</code></strong> </li>
+<li>展开当前层次 <strong><code>Ctrl+Alt+Shift+F</code></strong> </li>
+</ol>
+</li>
+</ol>
+<h2 id="一、强大的宏"><a href="#一、强大的宏" class="headerlink" title="一、强大的宏"></a>一、强大的宏</h2><p>经常需要对某些固定文件进行正则表达式、替换、删除未标记行等等</p>
+<p><strong>熟悉快捷键，更好的录制宏</strong></p>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><ol>
+<li>宏 - 开始录制</li>
+<li>执行你的操作</li>
+<li>停止宏</li>
+<li>保存宏</li>
+</ol>
+<h3 id="备份宏"><a href="#备份宏" class="headerlink" title="备份宏"></a>备份宏</h3><p>有时需要共享你的宏，需要导出，系统不带导出功能，只有宏文件</p>
+<p>把宏文件复制出来即可！！（注意：如果您要“导出”任何新宏，则需要关闭Notepad ++）</p>
+<p><strong>宏的位置：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">在Windows中，宏保存在</span><br><span class="line">C:\Users\%username%\AppData\Roaming\Notepad++\shortcuts.xml</span><br><span class="line">（Windows徽标键+ E和复制＆粘贴%AppData%\Notepad++\）</span><br><span class="line"></span><br><span class="line">要么：</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在Windows7（包括Win2008 / R2）宏保存在</span></span><br><span class="line">C:\Users\%username%\AppData\Roaming\Notepad++\shortcuts.xml</span><br><span class="line"><span class="comment"># 在Windows 7 | 8 | 10中</span></span><br><span class="line">C:\Users\%username%\AppData\Roaming\Notepad++\shortcuts.xml</span><br></pre></td></tr></table></figure>
+
+<p><strong>或者</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">在Notepad中点击F6</span><br><span class="line">插入：</span><br><span class="line">npp_open $(PLUGINS_CONFIG_DIR)\..\..\shortcuts.xml</span><br><span class="line">单击确定</span><br></pre></td></tr></table></figure>
+
+<h3 id="宏中如何自定义变量"><a href="#宏中如何自定义变量" class="headerlink" title="宏中如何自定义变量"></a>宏中如何自定义变量</h3><p>宏中无法自定义变量，但是可以想到办法</p>
+<p>把需要的变量放在文件中（每一行一个变量），然后通过快捷键来复制剪切变量，用来 <code>查找、替换、标记</code></p>
+<p><strong>举例</strong></p>
+<ol>
+<li>我要三个变量，放置每一行一个</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">变量1</span><br><span class="line">变量2</span><br><span class="line">变量3</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>然后需要操作的文本放在 变量3 后面</p>
+</li>
+<li><p>开始录制</p>
+</li>
+<li><p>需要变量1时</p>
+<ol>
+<li>通过快捷键 Ctrl+G ，然后输入1，就调到第一行了</li>
+</ol>
+</li>
+<li><p>再  <code>Shift + End</code> ，全选第一行  </p>
+<ul>
+<li>若是这一行变量很长，可以 <code>Shift + End+ End</code> 两次end跳到 行尾</li>
+</ul>
+</li>
+<li><p>然后 <code>CTRL+X 或者 CRTRL +C</code>  复制或剪切变量</p>
+</li>
+<li><p>自行做<code>查找、替换、标记</code>操作</p>
+</li>
+<li><p>需要变量2时</p>
+<ol>
+<li>通过快捷键 Ctrl+G ，然后输入2，就调到第二行了</li>
+</ol>
+</li>
+<li><p>….如此操作。即可变相的拥有变量</p>
+</li>
+<li><ol>
+<li></li>
+</ol>
+</li>
+</ol>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><h4 id="用宏剪切当前文档中指针所在的行"><a href="#用宏剪切当前文档中指针所在的行" class="headerlink" title="用宏剪切当前文档中指针所在的行"></a>用宏剪切当前文档中指针所在的行</h4><p>宏-&gt; 开始录制 -&gt; 按CTRL+L (快捷键剪切当前行) -&gt; 停止录制 -&gt; 保存宏</p>
+<h4 id="数字自动生成"><a href="#数字自动生成" class="headerlink" title="数字自动生成"></a>数字自动生成</h4><p><strong>目标</strong>：<code>输入一个数字</code>比如3,自动写出<code>300.到399.</code>之间的所有内容</p>
+<p><strong>方法分解</strong></p>
+<ol>
+<li><p>先录制1-10 ，<strong>数字序列10</strong>的宏</p>
+</li>
+<li><p>再录制到100的，<strong>数字序列100</strong>的宏</p>
+</li>
+<li><p>下面的第2-3步骤，可以通过Ctrl+D方式，快速复制一行</p>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">录制宏——数字序列10——F9</span><br><span class="line">(1)首先将数字输入好比如：18，1是改行第一字符，光标放在18的紧接着8后面。</span><br><span class="line">(2)开始录制宏，按住Shift+Home键，选中改行光标所有内容，再按Ctrl+C复制。</span><br><span class="line">(3)按End键将光标放到该行最后，按一次回车，接着按一次Ctrl+V粘贴原先复制的内容，反复9次。</span><br><span class="line">(4)目前光标是在最后一个18的8后面，输入9和<span class="string">"."</span>，按上方向键，再输入8和<span class="string">"."</span>，按上方向键，以此类推到输入0和<span class="string">"."</span></span><br><span class="line">(5)停止录制，保存录制宏，Name上填写数字序列10,快捷键选择F9。</span><br><span class="line">自此数字序列10的宏已经制作完毕，可以实现的功能:输入数字xx，自动完成后从xx0.到xx9.都输出来了</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">同样的思想可以录制宏——数字序列100——F10</span><br><span class="line">(1)首先输入数字比如：3,3是改行第一个字符，光标放在紧接着3后面。</span><br><span class="line">(2)开始录制宏，按住Shift+Home键，选中改行光标所有内容，再按Ctrl+C复制。</span><br><span class="line">(3)按End键将光标放到该行最后，按一次回车，接着按一次Ctrl+V粘贴原先复制的内容，反复9次。</span><br><span class="line">(4)目前光标是在最后一个3的3后面，输入9，按上方向键，再输入8，按上方向键，以此类推到输入0。</span><br><span class="line">(5)目前光标在30后面，按F9运行数字序列10的宏，将光标移动到31后面，按F9，一次类推，直到光标移动到39后面，按F9</span><br><span class="line">(6)停止录制，保存录制宏，Name上填写数字序列100,快捷键选择F10。</span><br><span class="line">自此数字序列100的宏已经制作完毕，可以实现的功能:输入数字xx，自动完成后从xx00.到xx99.都输出来了</span><br><span class="line">针对SQL语句需求的录制宏</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="二、正则表达式"><a href="#二、正则表达式" class="headerlink" title="二、正则表达式"></a>二、正则表达式</h2><h3 id="1-基本表达式"><a href="#1-基本表达式" class="headerlink" title="1. 基本表达式"></a>1. 基本表达式</h3><table>
+<thead>
+<tr>
+<th>符号</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>.</td>
+<td>匹配任意字符，除了新一行(\n)。也就是说 “.”可以匹配 \r ，当文件中同时含有\r and \n时，会引起混乱。要匹配所有的字符，使用\s\S。</td>
+</tr>
+<tr>
+<td>(…)</td>
+<td>这个匹配一个标签区域. 这个标签可以被访问，通过语法 \1访问第一个标签, \2 访问第二个, 同理 \3 \4 … \9。 这些标签可以用在当前正则表达式中，或则替search和replace中的换字符串。</td>
+</tr>
+<tr>
+<td>\1, \2, etc</td>
+<td>在替换中代表1到9的标签区域(\1 to \9)。例如, 查找字符串 Fred([1-9])XXX 并替换为字符串 Sam\1YYY的方法，当在文件中找到Fred2XXX的字符串时，会替换为Sam2YYY。注意: 只有9个区域能使用，所以我们在使用时很安全，像\10\2 表示区域1和文本”0”以及区域2。</td>
+</tr>
+<tr>
+<td>[…]</td>
+<td>表示一个字符集合, 例如 [abc]表示任意字符 a, b or c.我们也可以使用范围例如[a-z] 表示所以的小写字母。</td>
+</tr>
+<tr>
+<td>[^…]</td>
+<td>表示字符补集. 例如, [^A-Za-z] 表示任意字符除了字母表。</td>
+</tr>
+<tr>
+<td>^</td>
+<td>匹配一行的开始(除非在集合中, 如下).</td>
+</tr>
+<tr>
+<td>$</td>
+<td>匹配行尾.</td>
+</tr>
+<tr>
+<td>*</td>
+<td>匹配0或多次, 例如 Sa*m 匹配 Sm, Sam, Saam, Saaam 等等.</td>
+</tr>
+<tr>
+<td>+</td>
+<td>匹配1次或多次,例如 Sa+m 匹配 Sam, Saam, Saaam 等等.</td>
+</tr>
+<tr>
+<td>?</td>
+<td>匹配0或者1次, 例如 Sa?m 匹配 Sm, Sam.</td>
+</tr>
+<tr>
+<td>{n}</td>
+<td>匹配确定的 n 次.例如, ‘Sa{2}m’ 匹配 Saam.</td>
+</tr>
+<tr>
+<td>{m,n}</td>
+<td>匹配至少m次，至多n次(如果n缺失，则任意次数).例如, ‘Sa{2,3}m’ 匹配 Saam or Saaam. ‘Sa{2,}m’ 与 ‘Saa+m’相同</td>
+</tr>
+<tr>
+<td>*?, +?, ??, {n,m}?</td>
+<td>非贪心匹配，匹配第一个有效的匹配，通常 ‘&lt;.&gt;’ 会匹配整个 ‘content’字符串 –但 ‘&lt;.?&gt;’ 只匹配 ” .这个标记一个标签区域，这些区域可以用语法\1 \2 等访问多个对应1-9区域。</td>
+</tr>
+</tbody></table>
+<h3 id="2-标记和分组"><a href="#2-标记和分组" class="headerlink" title="2. 标记和分组"></a>2. 标记和分组</h3><table>
+<thead>
+<tr>
+<th>符号</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>(…)</td>
+<td>一组捕获. 可以通过\1 访问第一个组, \2 访问第二个.</td>
+</tr>
+<tr>
+<td>(?:…)</td>
+<td>非捕获组.</td>
+</tr>
+<tr>
+<td>(?=…)</td>
+<td>非捕获组 – 向前断言. 例如’(.*)(?=ton)’ 表达式，当 遇到’Appleton’字符串时，会匹配为’Apple’.</td>
+</tr>
+<tr>
+<td>(?&lt;=…)</td>
+<td>非捕获组 – 向后断言. 例如’(?&lt;=sir) (.*)’ 表示式，当遇到’sir William’ 字符串时，匹配为’ William’.</td>
+</tr>
+<tr>
+<td>(?!…)</td>
+<td>非捕获组 – 消极的向前断言. 例如’.(?!e)’ 表达式，当遇到’Apple’时，会找到每个字母除了 ‘l’，因为它紧跟着 ‘e’.</td>
+</tr>
+<tr>
+<td>(?</td>
+<td>非捕获组 – 消极向后断言. 例如 ‘(?</td>
+</tr>
+<tr>
+<td>(?P…)</td>
+<td>命名所捕获的组. 提交一个名称到组中供后续使用，例如’(?PA[^\s]+)\s(?P=first)’ 会找到 ‘Apple Apple’. 类似的 ‘(A[^\s]+)\s\1’ 使用组名而不是数字.</td>
+</tr>
+<tr>
+<td>(?=name)</td>
+<td>匹配名为name的组. (?P…).</td>
+</tr>
+<tr>
+<td>(?#comment)</td>
+<td>批注 –括号中的内容在匹配时将被忽略。</td>
+</tr>
+</tbody></table>
+<h3 id="3-特殊符号"><a href="#3-特殊符号" class="headerlink" title="3. 特殊符号"></a>3. 特殊符号</h3><table>
+<thead>
+<tr>
+<th>符号</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>\s</td>
+<td>匹配空格. 注意，会匹配标记的末尾. 使用 [[:blank:]] 来避免匹配新一行。</td>
+</tr>
+<tr>
+<td>\S</td>
+<td>匹配非空白</td>
+</tr>
+<tr>
+<td>\w</td>
+<td>匹配单词字符</td>
+</tr>
+<tr>
+<td>\W</td>
+<td>匹配非单词字符</td>
+</tr>
+<tr>
+<td>\d</td>
+<td>匹配数字字符</td>
+</tr>
+<tr>
+<td>\D</td>
+<td>匹配非数字字符</td>
+</tr>
+<tr>
+<td>\b</td>
+<td>匹配单词边界. ‘\bW\w+’ 找到W开头的单词</td>
+</tr>
+<tr>
+<td>\B</td>
+<td>匹配非单词边界. ‘\Be\B+’ – 找到位于单子中间的字母’e’</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>This matches the start of a word using Scintilla’s definitions of words.</td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td>This matches the end of a word using Scintilla’s definition of words.</td>
+</tr>
+<tr>
+<td>\x</td>
+<td>运行用x来表达可能具有其他意思的字符。例如, [ 用来插入到文本中作为[ 而不是作为字符集的开始.</td>
+</tr>
+</tbody></table>
+<h3 id="4-字符类"><a href="#4-字符类" class="headerlink" title="4. 字符类"></a>4. 字符类</h3><table>
+<thead>
+<tr>
+<th>符号</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[[:alpha:]]</td>
+<td>匹配字母字符: [A-Za-z]</td>
+</tr>
+<tr>
+<td>[[:digit:]]</td>
+<td>匹配数字字符: [0-9]</td>
+</tr>
+<tr>
+<td>[[:xdigit:]]</td>
+<td>匹配16进制字符: [0-9A-Fa-f]</td>
+</tr>
+<tr>
+<td>[[:alnum:]]</td>
+<td>匹配字母数字字符: [0-9A-Za-z]</td>
+</tr>
+<tr>
+<td>[[:lower:]]</td>
+<td>匹配小写字符: [a-z]</td>
+</tr>
+<tr>
+<td>[[:upper:]]</td>
+<td>匹配大写字符: [A-Z]</td>
+</tr>
+<tr>
+<td>[[:blank:]]</td>
+<td>匹配空白 (空格 or tab):[ \t]</td>
+</tr>
+<tr>
+<td>[[:space:]]</td>
+<td>匹配空白字符:[ \t\r\n\v\f]</td>
+</tr>
+<tr>
+<td>[[:punct:]]</td>
+<td>匹配标点字符: [-!”#$%&amp;’()*+,./:;&lt;=&gt;?@[]_`{</td>
+</tr>
+<tr>
+<td>[[:graph:]]</td>
+<td>匹配图形字符: [\x21-\x7E]</td>
+</tr>
+<tr>
+<td>[[:print:]]</td>
+<td>匹配可打印的字符 (graphical characters and spaces)</td>
+</tr>
+<tr>
+<td>[[:cntrl:]]</td>
+<td>匹配控制字符</td>
+</tr>
+</tbody></table>
+<h3 id="5-替换操作"><a href="#5-替换操作" class="headerlink" title="5 替换操作!!!"></a>5 替换操作!!!</h3><p>使用正则表达式的标记，<code>通过（）来包围想要用的字符，然后用\1 来替换字符串，第一个匹配文本</code>。</p>
+<ul>
+<li>也可以 \2 ，匹配第二个文本</li>
+</ul>
+<p>例如:</p>
+<table>
+<thead>
+<tr>
+<th>Text body</th>
+<th>Search string</th>
+<th>Replace string</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Hi my name is Fred</td>
+<td>my name is (.+)</td>
+<td>my name is not \1</td>
+<td>Hi my name is not Fred</td>
+</tr>
+<tr>
+<td>The quick brown fox jumped over the fat lazy dog</td>
+<td>brown (.+) jumped over the (.+)</td>
+<td>brown \2 jumped over the \1</td>
+<td>The quick brown fat jumped over the fox lazy dog</td>
+</tr>
+</tbody></table>
+<h2 id="三、查找、替换、标记"><a href="#三、查找、替换、标记" class="headerlink" title="三、查找、替换、标记"></a>三、查找、替换、标记</h2><h3 id="1-利用替换方法给行头行尾加数据"><a href="#1-利用替换方法给行头行尾加数据" class="headerlink" title="1. 利用替换方法给行头行尾加数据"></a>1. 利用替换方法给行头行尾加数据</h3><p>此方法也可直接用 <code>列编辑</code>，更迅速</p>
+<ul>
+<li>(<strong>但列编辑有个问题</strong>，行尾如果没有对齐的话，长短不一的话，会出现多余的空格)</li>
+</ul>
+<h4 id="给行头加数据"><a href="#给行头加数据" class="headerlink" title="给行头加数据"></a>给行头加数据</h4><p><strong>替换</strong></p>
+<ul>
+<li>查找目标：  <code>^</code></li>
+<li>替换为  <code>,&#39;</code></li>
+<li>勾选<ul>
+<li>循环查找</li>
+<li>正则表达式</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">,<span class="string">'3EAA64A5-3701-4E6A-87C3-2AC3A7613458</span></span><br><span class="line"><span class="string">,'</span>784FCC9D-F967-4230-9B5B-1713A0E5F94F</span><br><span class="line">,<span class="string">'9DBD3BEE-EFDB-4124-A7D9-A0D24596B40E</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="给行尾加数据"><a href="#给行尾加数据" class="headerlink" title="给行尾加数据"></a>给行尾加数据</h4><p><strong>替换</strong></p>
+<ul>
+<li>查找目标：  <code>\r\n</code></li>
+<li>替换为  <code>‘\r\n</code></li>
+<li>勾选<ul>
+<li>循环查找</li>
+<li>正则表达式</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">,<span class="string">'3EAA64A5-3701-4E6A-87C3-2AC3A7613458'</span></span><br><span class="line">,<span class="string">'784FCC9D-F967-4230-9B5B-1713A0E5F94F'</span></span><br><span class="line">,<span class="string">'9DBD3BEE-EFDB-4124-A7D9-A0D24596B40E'</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="整理"><a href="#整理" class="headerlink" title="整理"></a>整理</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">SELECT [Key], [Name] as CityName  </span><br><span class="line">FROM KBSERVICE.DBO.GEOGRAPHYTIER_New  A  </span><br><span class="line">WHERE [Key]  </span><br><span class="line">IN  </span><br><span class="line">(  </span><br><span class="line">    <span class="string">'3EAA64A5-3701-4E6A-87C3-2AC3A7613458'</span>  </span><br><span class="line">    ,<span class="string">'784FCC9D-F967-4230-9B5B-1713A0E5F94F'</span>  </span><br><span class="line">    ,<span class="string">'9DBD3BEE-EFDB-4124-A7D9-A0D24596B40E'</span>  </span><br><span class="line">    ------   </span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-给所有行的前后加空行"><a href="#2-给所有行的前后加空行" class="headerlink" title="2. 给所有行的前后加空行"></a>2. 给所有行的前后加空行</h3><p><strong>替换</strong></p>
+<ul>
+<li>查找目标：  <code>\r\n</code></li>
+<li>替换为  <code>\r\n\1\r\n</code></li>
+<li>勾选<ul>
+<li>循环查找</li>
+<li>正则表达式</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-包含内容的实例用法-1"><a href="#3-包含内容的实例用法-1" class="headerlink" title="3. 包含内容的实例用法  - \1"></a>3. 包含内容的实例用法  - \1</h3><p>可以多次使用</p>
+<h4 id="目的"><a href="#目的" class="headerlink" title="目的"></a><strong>目的</strong></h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">把</span><br><span class="line">&lt;%	<span class="keyword">case</span> <span class="string">"用户管理"</span>	%&gt;</span><br><span class="line">&lt;%	<span class="keyword">case</span> <span class="string">"业务大类"</span>	%&gt;</span><br><span class="line">&lt;%	<span class="keyword">case</span> <span class="string">"业务子类"</span>	%&gt;</span><br><span class="line">&lt;%	<span class="keyword">case</span> <span class="string">"业务收件"</span>	%&gt;</span><br><span class="line">换为</span><br><span class="line">INSERT INTO [jingan].[dbo].[xtqx] ([xtqx_name]) VALUES(<span class="string">'用户管理'</span>);</span><br><span class="line">INSERT INTO [jingan].[dbo].[xtqx] ([xtqx_name]) VALUES(<span class="string">'业务大类'</span>);</span><br><span class="line">INSERT INTO [jingan].[dbo].[xtqx] ([xtqx_name]) VALUES(<span class="string">'业务子类'</span>);</span><br><span class="line">INSERT INTO [Jingan].[dbo].[xtqx] ([xtqx_name]) VALUES(<span class="string">'业务收件'</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h4><ul>
+<li>查找目标：  <code>&lt;%\scase\s&quot;(.*)&quot;\s*%&gt;</code>     （写你自己的表达式）</li>
+<li>替换为  <code>INSERT INTO [jingan].[dbo].[xtqx] \([xtqx_name]\) VALUES\(&#39;\1&#39;\);</code></li>
+<li>勾选<ul>
+<li>循环查找</li>
+<li>正则表达式</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-匹配第二个字符-2"><a href="#4-匹配第二个字符-2" class="headerlink" title="4. 匹配第二个字符   - \2"></a>4. 匹配第二个字符   - \2</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">输入：</span><br><span class="line">population</span><br><span class="line">fossils-fossil</span><br><span class="line">artists-artist</span><br><span class="line">design</span><br><span class="line"><span class="built_in">source</span></span><br><span class="line">activities-activity</span><br><span class="line"></span><br><span class="line">查找目标：(.+)-(.+)</span><br><span class="line">替换为：\2</span><br><span class="line"></span><br><span class="line">其中.表示匹配任何字符</span><br><span class="line">+表示匹配一次到多次</span><br><span class="line">通过()来包围想要用的字符，然后用\1表示第一个匹配文本，\2表示第二个匹配文本</span><br><span class="line">activities-activity对应(.+)-(.+)</span><br><span class="line">\1就是activities；\2就是activity</span><br><span class="line"></span><br><span class="line">输出：</span><br><span class="line">population</span><br><span class="line">fossil</span><br><span class="line">artist</span><br><span class="line">design</span><br><span class="line"><span class="built_in">source</span></span><br><span class="line">activity</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="5-在字符串上加上引号"><a href="#5-在字符串上加上引号" class="headerlink" title="5. 在字符串上加上引号"></a>5. 在字符串上加上引号</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">查找目标   (\w+)</span><br><span class="line">替换为   <span class="string">'\1'</span></span><br><span class="line"></span><br><span class="line">input:</span><br><span class="line">c, i, nd, o, p, u</span><br><span class="line"></span><br><span class="line">output:</span><br><span class="line"><span class="string">'c'</span>, <span class="string">'i'</span>, <span class="string">'nd'</span>, <span class="string">'o'</span>, <span class="string">'p'</span>, <span class="string">'u'</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="6-更多"><a href="#6-更多" class="headerlink" title="6. 更多"></a>6. 更多</h3><h5 id="1-将数字开头替换为数字-开头"><a href="#1-将数字开头替换为数字-开头" class="headerlink" title="1 将数字开头替换为数字.开头"></a>1 将数字开头替换为数字.开头</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">1.os.sep    可以取代</span><br><span class="line">2.os.name</span><br><span class="line">3os</span><br><span class="line">4aaa</span><br><span class="line">aaaaaaaa</span><br><span class="line"></span><br><span class="line">查找目标：</span><br><span class="line">^(\d+)\.*</span><br><span class="line"></span><br><span class="line">替换为：</span><br><span class="line">\1.</span><br><span class="line"></span><br><span class="line">结果：</span><br><span class="line">1.os.sep    可以取代</span><br><span class="line">2.os.name</span><br><span class="line">3.os</span><br><span class="line">4.aaa</span><br><span class="line">aaaaaaaa</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="2-多个-1"><a href="#2-多个-1" class="headerlink" title="2 多个 \1"></a>2 多个 \1</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">正则表达式：(^\w+$)</span><br><span class="line">替换式：db2 \"<span class="built_in">export</span> to \.\/data\/\1\.ixf of ixf select \* from \1 \"</span><br><span class="line"></span><br><span class="line">输入：</span><br><span class="line">PERMODLOG</span><br><span class="line">RESERVEDETAIL</span><br><span class="line">RESERVEMAIN</span><br><span class="line"></span><br><span class="line">输出：</span><br><span class="line">db2 <span class="string">"export to ./data/PERMODLOG.ixf of ixf select * from PERMODLOG "</span></span><br><span class="line">db2 <span class="string">"export to ./data/RESERVEDETAIL.ixf of ixf select * from RESERVEDETAIL "</span></span><br><span class="line">db2 <span class="string">"export to ./data/RESERVEMAIN.ixf of ixf select * from RESERVEMAIN "</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="3"><a href="#3" class="headerlink" title="3"></a>3</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">正则表达式：^select \*(.+)$</span><br><span class="line">替换式：delete \1 ;</span><br><span class="line">作用：把select * 替换成delete , 同时在行尾加分号</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line">正则表达式：^INSERT INTO</span><br><span class="line">替换式：go\r\nINSERT INTO</span><br><span class="line">作用：每一行的前面增加一个新行，内容为go</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line">正则表达式：^(\w+.+)$</span><br><span class="line">替换式：\1\r\ngo</span><br><span class="line">作用：每隔一行增加一个新行，内容为go</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">正则表达式：^(--.*)$</span><br><span class="line">替换式：空</span><br><span class="line">作用：去掉以“--”开始的注释</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="四、列编辑"><a href="#四、列编辑" class="headerlink" title="四、列编辑"></a>四、列编辑</h2><p><strong>快捷键</strong> </p>
+<ul>
+<li><code>ALT + SHIFT + 方向键</code>  可以任意修改行头或者行尾、甚至多选。<ul>
+<li>方向键 包括 ： 上下左右、Home、End、PageUp、PageDown</li>
+</ul>
+</li>
+<li><code>ALT + C</code>  行头部增加数据</li>
+<li><code>ALT + 鼠标点击</code> 更方便的选择</li>
+</ul>
+<h2 id="五、设置"><a href="#五、设置" class="headerlink" title="五、设置"></a>五、设置</h2><p>参考：<a href="https://blog.csdn.net/so_geili/article/details/79317001" target="_blank" rel="noopener">Notepad++的实用技巧</a></p>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Gkon</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://gxkon.top/posts/df149c86/">http://gxkon.top/posts/df149c86/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://gxkon.top" target="_blank">Gxkon's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/10/7/68coffee-5567269_1280.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/posts/b6588d45/"><img class="prev_cover" data-src="/Pic/post.jpg" onerror="onerror=null;src='/Pic/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Crontab用法简解「转」</div></div></a></div><div class="next-post pull_right"><a href="/posts/dcbec147/"><img class="next_cover" data-src="/Pic/post.jpg" onerror="onerror=null;src='/Pic/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Python中级之Pyinstaller打包成exe</div></div></a></div></nav><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i><span> 评论</span></div><div id="gitalk-container"></div><script>var gitalk = new Gitalk({
+  clientID: '1ce3148e3133bf004c96',
+  clientSecret: '2a1e5c0f4d38387460b916843bfe5cac67ef2d07',
+  repo: 'blankwz.github.io',
+  owner: 'blankwz',
+  admin: ['blankwz'],
+  id: md5(decodeURI(location.pathname)),
+  language: 'zh-CN',
+  perPage: 10,
+  distractionFreeMode: false,
+  pagerDirection: 'last',
+  createIssueManually: false,
+  updateCountCallback: commentCount
+})
+gitalk.render('gitalk-container')
+
+function commentCount(n){
+  try {
+    document.getElementsByClassName('gitalk-comment-count')[0].innerHTML= n
+  } catch (e) {
+    return false
+  }
+}</script></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By Gkon</div><div class="framework-info"><span>驱动 </span><a href="https://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="阅读模式"></i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">簡</a><i class="darkmode fa fa-moon-o" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><a id="to_comment" href="#post-comment" title="直达评论"><i class="scroll_to_comment fa fa-comments">  </i></a><i class="fa fa-list-ul close" id="mobile-toc-button" title="目录" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@3/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script><script src="/js/third-party/ClickShowText.js"></script></body></html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Gxkon's Blog</title><meta name="description" content="边学边做"><meta name="author" content="Gkon"><meta name="copyright" content="Gkon"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="dns-prefetch" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="crossorigin"/><link rel="dns-prefetch" href="https://fonts.googleapis.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="dns-prefetch" href="//busuanzi.ibruce.info"/><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Gxkon's Blog"><meta name="twitter:description" content="边学边做"><meta name="twitter:image" content="http://gxkon.top/Pic/avatar.png"><meta property="og:type" content="website"><meta property="og:title" content="Gxkon's Blog"><meta property="og:url" content="http://gxkon.top/page/13/"><meta property="og:site_name" content="Gxkon's Blog"><meta property="og:description" content="边学边做"><meta property="og:image" content="http://gxkon.top/Pic/avatar.png"><meta property="article:published_time" content="2021-02-18T06:15:16.373Z"><meta property="article:modified_time" content="2021-02-18T06:15:16.373Z"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>var autoChangeMode = '1'
+var t = Cookies.get("theme")
+if (autoChangeMode == '1'){
+  var isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+  var isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+  var isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined){
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport){
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour < 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+  }
+  } else if (t == 'light') activateLightMode()
+  else activateDarkMode()
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="canonical" href="http://gxkon.top/page/13/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: {"text":"本人,超帅,打钱","fontSize":"15px"},
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  highlightShrink: 'false',
+  isFontAwesomeV5: false,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false
+  
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: false,
+  isHome: true,
+  isSidebar: false  
+  }</script><noscript><style>
+#page-header {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 4.2.0"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/Pic/avatar.png" onerror="onerror=null;src='/Pic/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">156</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">83</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">54</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 娱乐</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li></ul></div></div></div></div><div id="body-wrap"><div class="full_page" id="nav" style="background-image: url(/Pic/d.jpg)"><div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">Gxkon's Blog</a></span><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 娱乐</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li></ul></div></div><span class="toggle-menu close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span></span></div><div id="site-info"><h1 id="site_title">Gxkon's Blog</h1><div id="site_subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/blankwz" target="_blank" title="Github"><i class="fa fa-github" aria-hidden="true"></i></a><a class="social-icon" href="mailto:hetiwz@gmail.com" target="_blank" title="Email"><i class="fa fa-envelope" aria-hidden="true"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fa fa-rss" aria-hidden="true"></i></a></div></div><div id="scroll_down"><i class="fa fa-angle-down scroll-down-effects"></i></div></div><main class="layout_page" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left_radius"><a href="/posts/c983fd2e/" title="Hexo教程一之安装并链接到Github">     <img class="post_bg" data-src="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/05/waffles-5192625_1280.jpg" onerror="this.onerror=null;this.src='/Pic/404.jpg'" alt="Hexo教程一之安装并链接到Github"></a></div><div class="recent-post-info"><a class="article-title" href="/posts/c983fd2e/" title="Hexo教程一之安装并链接到Github">Hexo教程一之安装并链接到Github</a><div class="article-meta-wrap"><time class="post-meta__date" title="发表于 2020-05-16 20:38:33"><i class="fa fa-calendar" aria-hidden="true"></i>2020-05-16</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/Web/">Web</a><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/Web/Hexo/">Hexo</a></span></div><div class="content">Hexo教程一之安装Hexo并链接到Github
+Hexo是一款基于Node.js的静态博客框架，依赖少易于安装使用，可以方便的生成静态网页托管在GitHub和Heroku上，是搭建博客的首选框架。这里我们选用的是GitHub
+
+
+技巧：如果下载主题太慢，就找国内的镜像，或者导入到码云，通过码云来下 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/posts/4e2300e2/" title="利用Cryptomator加密网盘重要数据">     <img class="post_bg" data-src="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/05/dream-4827288_1280.jpg" onerror="this.onerror=null;this.src='/Pic/404.jpg'" alt="利用Cryptomator加密网盘重要数据"></a></div><div class="recent-post-info"><a class="article-title" href="/posts/4e2300e2/" title="利用Cryptomator加密网盘重要数据">利用Cryptomator加密网盘重要数据</a><div class="article-meta-wrap"><time class="post-meta__date" title="发表于 2020-05-16 20:11:11"><i class="fa fa-calendar" aria-hidden="true"></i>2020-05-16</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/%E8%BD%AF%E4%BB%B6%E6%8A%98%E8%85%BE/">软件折腾</a></span></div><div class="content">利用Cryptomator加密网盘重要数据
+Cryptomator,它可以在云同步文件夹中创建资料库（即保险库），来帮你加密和保管资料。跨平台的 Cryptomator 不止可以在本地创建资料库，它的 iOS、Android 客户端也支持连接到常见的云同步服务，例如 Dropbox，或使用 WebD ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/posts/221b3980/" title="Onedrive和OneNote梯子加速">     <img class="post_bg" data-src="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/05/lonely-5122894_1280.jpg" onerror="this.onerror=null;this.src='/Pic/404.jpg'" alt="Onedrive和OneNote梯子加速"></a></div><div class="recent-post-info"><a class="article-title" href="/posts/221b3980/" title="Onedrive和OneNote梯子加速">Onedrive和OneNote梯子加速</a><div class="article-meta-wrap"><time class="post-meta__date" title="发表于 2020-05-07 21:13:15"><i class="fa fa-calendar" aria-hidden="true"></i>2020-05-07</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/%E8%BD%AF%E4%BB%B6%E6%8A%98%E8%85%BE/">软件折腾</a></span></div><div class="content">Onedrive和OneNote梯子加速
+两种梯子方式：
+
+软路由（我用的软路由），推荐各位经常需要梯子的朋友，还是买个软路由吧，真的非常有用！速度快的不是一点点。
+ShadowsocksR，配置PAC代理规则（或者开启HTTP全局代理）
+
+设置完成后，可能需要重启Onedrive和OneNote！ ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/posts/fded7f59/" title="终于解决-VirtualBOX安装失败">     <img class="post_bg" data-src="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/05/alpaca-5126291_1280.jpg" onerror="this.onerror=null;this.src='/Pic/404.jpg'" alt="终于解决-VirtualBOX安装失败"></a></div><div class="recent-post-info"><a class="article-title" href="/posts/fded7f59/" title="终于解决-VirtualBOX安装失败">终于解决-VirtualBOX安装失败</a><div class="article-meta-wrap"><time class="post-meta__date" title="发表于 2020-05-06 21:32:11"><i class="fa fa-calendar" aria-hidden="true"></i>2020-05-06</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/%E5%BC%80%E5%8F%91%E5%BF%85%E4%BC%9A/">开发必会</a><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/%E5%BC%80%E5%8F%91%E5%BF%85%E4%BC%9A/linux/">linux</a></span></div><div class="content">VirtualBOX安装失败
+出现问题：出现回滚，无法安装！
+提示：your system has not been modified，没有错误代码
+
+一、找出错误原因
+到安装包 VirtualBox-6.1.6-137129-Win.exe （名字无所谓，这是我下载的版本）目录下
+Shift +  ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/posts/2bf7c002/" title="Windows下通过Vagrant安装Linux系统进行学习">     <img class="post_bg" data-src="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/05/coffee-5037804_1280.jpg" onerror="this.onerror=null;this.src='/Pic/404.jpg'" alt="Windows下通过Vagrant安装Linux系统进行学习"></a></div><div class="recent-post-info"><a class="article-title" href="/posts/2bf7c002/" title="Windows下通过Vagrant安装Linux系统进行学习">Windows下通过Vagrant安装Linux系统进行学习</a><div class="article-meta-wrap"><time class="post-meta__date" title="发表于 2020-05-06 17:12:11"><i class="fa fa-calendar" aria-hidden="true"></i>2020-05-06</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div><div class="content">Windows下通过Vagrant安装Linux系统进行学习一、工具
+VirtualBox:
+
+VirtualBox 是一款开源虚拟机软件
+
+下载 
+
+
+
+Vagrant: 
+
+Vagrant是一个基于Ruby的工具，用于创建和部署虚拟化开发环境。
+
+
+
+
+拿VirtualBox举例，Virtual ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/posts/4e2300e2/" title="利用腾讯COS制作个人图床">     <img class="post_bg" data-src="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/05/green-5124174_1280.jpg" onerror="this.onerror=null;this.src='/Pic/404.jpg'" alt="利用腾讯COS制作个人图床"></a></div><div class="recent-post-info"><a class="article-title" href="/posts/4e2300e2/" title="利用腾讯COS制作个人图床">利用腾讯COS制作个人图床</a><div class="article-meta-wrap"><time class="post-meta__date" title="发表于 2020-05-05 13:18:11"><i class="fa fa-calendar" aria-hidden="true"></i>2020-05-05</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/%E5%BF%85%E7%8E%A9%E7%B3%BB%E5%88%97/">必玩系列</a></span></div><div class="content">利用腾讯COS制作个人图床
+COS:对象存储（Cloud Object Storage，COS）    
+参考：这
+官方教程
+
+一、环境搭建
+安装 nodejs （LTS版本就好）
+
+在windows环境变量中增加一项NODE_PATH，最好同时指向2处，例如：C:\Users\ZNMLR\node ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/posts/75d068a9/" title="超简单Windows系统密码破解">     <img class="post_bg" data-src="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/05/girl-447701_1280.jpg" onerror="this.onerror=null;this.src='/Pic/404.jpg'" alt="超简单Windows系统密码破解"></a></div><div class="recent-post-info"><a class="article-title" href="/posts/75d068a9/" title="超简单Windows系统密码破解">超简单Windows系统密码破解</a><div class="article-meta-wrap"><time class="post-meta__date" title="发表于 2020-05-01 12:56:52"><i class="fa fa-calendar" aria-hidden="true"></i>2020-05-01</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/%E7%B3%BB%E7%BB%9F/Windows/">Windows</a></span></div><div class="content">超简单Windows系统密码破解一、制作U盘启动 微PE系统工具下载微PE工具箱   （官网)
+2.0版下载32位或64位
+老系统适用工具下载64位、32位
+
+
+安装到U盘
+准备个空U盘
+打开软件 — 右下角 选择 —-   安装PE到U盘
+
+
+
+选择U盘
+
+立即安装（其他不用管）
+
+
+
+
+等待安装 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/posts/605133db/" title="娱乐网站整理收集">     <img class="post_bg" data-src="https://tva3.sinaimg.cn/large/4a9e9735gy1gecwqr247cj20zk0np45f.jpg" onerror="this.onerror=null;this.src='/Pic/404.jpg'" alt="娱乐网站整理收集"></a></div><div class="recent-post-info"><a class="article-title" href="/posts/605133db/" title="娱乐网站整理收集">娱乐网站整理收集</a><div class="article-meta-wrap"><time class="post-meta__date" title="发表于 2020-05-01 11:13:39"><i class="fa fa-calendar" aria-hidden="true"></i>2020-05-01</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/%E6%8E%A8%E8%8D%90/">推荐</a></span></div><div class="content">您好, 这里需要密码.9929b7063a09fb2fd49c84de8c40ea4c3003f70e35068eddf05a8c6cabb1869e91ab2a6dd7373c70e95f567a804d991ad1210d32090b5321c9c3aa9a1fad5eb3541cff53955 ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/posts/789367a8/" title="VIM学习与快捷键">     <img class="post_bg" data-src="https://tva1.sinaimg.cn/large/4a9e9735gy1ged3tpnprnj20zk0nndim.jpg" onerror="this.onerror=null;this.src='/Pic/404.jpg'" alt="VIM学习与快捷键"></a></div><div class="recent-post-info"><a class="article-title" href="/posts/789367a8/" title="VIM学习与快捷键">VIM学习与快捷键</a><div class="article-meta-wrap"><time class="post-meta__date" title="发表于 2020-04-28 19:22:28"><i class="fa fa-calendar" aria-hidden="true"></i>2020-04-28</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/%E5%BC%80%E5%8F%91%E5%BF%85%E4%BC%9A/">开发必会</a><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/%E5%BC%80%E5%8F%91%E5%BF%85%E4%BC%9A/%E5%B7%A5%E5%85%B7%E8%BD%AF%E4%BB%B6/">工具软件</a></span></div><div class="content">   中文文档
+VIM学习
+超强配置文件
+
+下载安装
+在Mac和Linux上，都会预先安装一个简版的Vim，如果需要更多功能，则需要安装Vim
+
+
+Mac：Github
+Windows：下载
+
+学习方法与学习参考
+通过游戏学习VIM：网站
+菜鸟教程简易版教程
+vim简明教程
+vim入门教程
+简明 V ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/posts/10d765aa/" title="Windows软件静默安装">     <img class="post_bg" data-src="https://tvax4.sinaimg.cn/large/4a9e9735gy1ged3tp7doqj20zk0mbwi0.jpg" onerror="this.onerror=null;this.src='/Pic/404.jpg'" alt="Windows软件静默安装"></a></div><div class="recent-post-info"><a class="article-title" href="/posts/10d765aa/" title="Windows软件静默安装">Windows软件静默安装</a><div class="article-meta-wrap"><time class="post-meta__date" title="发表于 2020-04-28 19:22:28"><i class="fa fa-calendar" aria-hidden="true"></i>2020-04-28</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/%E7%B3%BB%E7%BB%9F/Windows/">Windows</a></span></div><div class="content">软件静默安装一、各种安装器的静默安装方式与参数1. installshield安装器123456安装参数:-R 用于记录安装过程-s 用于进行软件的自动安装-f1 指定setup.iss应答文件的路径例如:start /wait x:\phtoshop\setup.exe -s -f1 "y:\se ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/12/"><i class="fa fa-fw fa-chevron-left" aria-hidden="true"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/14/"><i class="fa fa-fw fa-chevron-right" aria-hidden="true"></i></a></div></nav></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" src="/Pic/avatar.png" onerror="this.onerror=null;this.src='/Pic/friend_404.gif'" alt="avatar"/><div class="author-info__name">Gkon</div><div class="author-info__description">边学边做</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives"><div class="headline">文章</div><div class="length_num">156</div></a></div><div class="card-info-data-item is-center">      <a href="/tags"><div class="headline">标签</div><div class="length_num">83</div></a></div><div class="card-info-data-item is-center">     <a href="/categories"><div class="headline">分类</div><div class="length_num">54</div></a></div></div><div class="card-info-bookmark is-center"><a class="bookmark button--primary button--animated" id="bookmark-it" href="javascript:;" title="加入书签" target="_self"><i class="fa fa-bookmark" aria-hidden="true"></i><span>加入书签</span></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/blankwz" target="_blank" title="Github"><i class="fa fa-github" aria-hidden="true"></i></a><a class="social-icon" href="mailto:hetiwz@gmail.com" target="_blank" title="Email"><i class="fa fa-envelope" aria-hidden="true"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fa fa-rss" aria-hidden="true"></i></a></div></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fa fa-bullhorn card-announcement-animation" aria-hidden="true"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div></div><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fa fa-history" aria-hidden="true"></i><span>最新文章</span></div><div class="aside-recent-item"><div class="aside-recent-post"><a href="/posts/9de052a3/"><div class="aside-post-cover"><img class="aside-post-bg" data-src="/Pic/post.jpg" onerror="this.onerror=null;this.src='/Pic/404.jpg'" title="使用RSS订阅信息" alt="使用RSS订阅信息"/></div><div class="aside-post-title"><div class="aside-post_title" href="/posts/9de052a3/" title="使用RSS订阅信息">使用RSS订阅信息</div><time class="aside-post_meta post-meta__date" title="发表于 2021-02-17 21:20:55">2021-02-17</time></div></a></div><div class="aside-recent-post"><a href="/posts/aa580810/"><div class="aside-post-cover"><img class="aside-post-bg" data-src="/Pic/post.jpg" onerror="this.onerror=null;this.src='/Pic/404.jpg'" title="TelegramBot制作" alt="TelegramBot制作"/></div><div class="aside-post-title"><div class="aside-post_title" href="/posts/aa580810/" title="TelegramBot制作">TelegramBot制作</div><time class="aside-post_meta post-meta__date" title="发表于 2021-02-16 21:20:55">2021-02-16</time></div></a></div><div class="aside-recent-post"><a href="/posts/d02aa405/"><div class="aside-post-cover"><img class="aside-post-bg" data-src="/Pic/post.jpg" onerror="this.onerror=null;this.src='/Pic/404.jpg'" title="JuPyter Book使用教程" alt="JuPyter Book使用教程"/></div><div class="aside-post-title"><div class="aside-post_title" href="/posts/d02aa405/" title="JuPyter Book使用教程">JuPyter Book使用教程</div><time class="aside-post_meta post-meta__date" title="发表于 2021-02-16 11:05:01">2021-02-16</time></div></a></div><div class="aside-recent-post"><a href="/posts/e487a5bb/"><div class="aside-post-cover"><img class="aside-post-bg" data-src="/Pic/post.jpg" onerror="this.onerror=null;this.src='/Pic/404.jpg'" title="梯子搭建相关" alt="梯子搭建相关"/></div><div class="aside-post-title"><div class="aside-post_title" href="/posts/e487a5bb/" title="梯子搭建相关">梯子搭建相关</div><time class="aside-post_meta post-meta__date" title="发表于 2021-02-13 21:23:39">2021-02-13</time></div></a></div><div class="aside-recent-post"><a href="/posts/55fea11e/"><div class="aside-post-cover"><img class="aside-post-bg" data-src="/Pic/post.jpg" onerror="this.onerror=null;this.src='/Pic/404.jpg'" title="梯子相关资源" alt="梯子相关资源"/></div><div class="aside-post-title"><div class="aside-post_title" href="/posts/55fea11e/" title="梯子相关资源">梯子相关资源</div><time class="aside-post_meta post-meta__date" title="发表于 2021-02-13 21:13:39">2021-02-13</time></div></a></div></div></div></div><div class="card-widget card-categories"><div class="card-content"><div class="item-headline"><i class="fa fa-folder-open" aria-hidden="true"></i><span>分类</span></div><ul class="card-category-list">
+            <li class="card-category-list-item"><a class="card-category-list-link" href="/categories/JAVA/"><span class="card-category-list-name">JAVA</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item"><a class="card-category-list-link" href="/categories/Linux/"><span class="card-category-list-name">Linux</span><span class="card-category-list-count">6</span></a></li><li class="card-category-list-item"><a class="card-category-list-link" href="/categories/Python/"><span class="card-category-list-name">Python</span><span class="card-category-list-count">38</span></a></li><ul class="card-category-list child"><li class="card-category-list-item"><a class="card-category-list-link" href="/categories/Python/FastApi/"><span class="card-category-list-name">FastApi</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item"><a class="card-category-list-link" href="/categories/Python/Flask/"><span class="card-category-list-name">Flask</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item"><a class="card-category-list-link" href="/categories/Python/GUI/"><span class="card-category-list-name">GUI</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item"><a class="card-category-list-link" href="/categories/Python/%E4%B8%AD%E7%BA%A7/"><span class="card-category-list-name">中级</span><span class="card-category-list-count">9</span></a></li><li class="card-category-list-item"><a class="card-category-list-link" href="/categories/Python/%E5%9F%BA%E7%A1%80/"><span class="card-category-list-name">基础</span><span class="card-category-list-count">4</span></a></li></ul>
+            <li class="card-category-list-item more is-center"><a class="card-category-list-link-more" href="/categories">
+                <span>查看更多</span><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>           
+            </ul></div></div><div class="card-widget card-tags"><div class="card-content"><div class="item-headline"><i class="fa fa-tags" aria-hidden="true"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/ADO/" style="font-size: 16px; color: #999">ADO</a> <a href="/tags/AJAX/" style="font-size: 16px; color: #999">AJAX</a> <a href="/tags/ASP/" style="font-size: 16px; color: #999">ASP</a> <a href="/tags/ASP-NET/" style="font-size: 16px; color: #999">ASP.NET</a> <a href="/tags/Aria2/" style="font-size: 16px; color: #999">Aria2</a> <a href="/tags/AutoHotkey/" style="font-size: 17.2px; color: #999ca1">AutoHotkey</a> <a href="/tags/BAT%E6%89%B9%E5%A4%84%E7%90%86/" style="font-size: 19.6px; color: #99a3b0">BAT批处理</a> <a href="/tags/COS/" style="font-size: 16px; color: #999">COS</a> <a href="/tags/CSS/" style="font-size: 16px; color: #999">CSS</a> <a href="/tags/CentOS/" style="font-size: 18.4px; color: #999fa8">CentOS</a> <a href="/tags/Chrome/" style="font-size: 16px; color: #999">Chrome</a> <a href="/tags/Crontab/" style="font-size: 16px; color: #999">Crontab</a> <a href="/tags/DDNS/" style="font-size: 16px; color: #999">DDNS</a> <a href="/tags/Docker/" style="font-size: 18.4px; color: #999fa8">Docker</a> <a href="/tags/ESXi/" style="font-size: 16px; color: #999">ESXi</a> <a href="/tags/FRP/" style="font-size: 16px; color: #999">FRP</a> <a href="/tags/Floccus/" style="font-size: 16px; color: #999">Floccus</a> <a href="/tags/Git/" style="font-size: 17.2px; color: #999ca1">Git</a> <a href="/tags/Github/" style="font-size: 17.2px; color: #999ca1">Github</a> <a href="/tags/HTML/" style="font-size: 16px; color: #999">HTML</a> <a href="/tags/Hexo/" style="font-size: 20.8px; color: #99a6b7">Hexo</a> <a href="/tags/IIS/" style="font-size: 16px; color: #999">IIS</a> <a href="/tags/IOS/" style="font-size: 16px; color: #999">IOS</a> <a href="/tags/IPV6/" style="font-size: 16px; color: #999">IPV6</a> <a href="/tags/JAVA/" style="font-size: 17.2px; color: #999ca1">JAVA</a> <a href="/tags/JSP/" style="font-size: 16px; color: #999">JSP</a> <a href="/tags/JavaScript/" style="font-size: 17.2px; color: #999ca1">JavaScript</a> <a href="/tags/Linux%E5%91%BD%E4%BB%A4/" style="font-size: 16px; color: #999">Linux命令</a> <a href="/tags/Mac/" style="font-size: 16px; color: #999">Mac</a> <a href="/tags/Markdown/" style="font-size: 19.6px; color: #99a3b0">Markdown</a> <a href="/tags/NAT/" style="font-size: 16px; color: #999">NAT</a> <a href="/tags/NextCloud/" style="font-size: 17.2px; color: #999ca1">NextCloud</a> <a href="/tags/OneNote/" style="font-size: 16px; color: #999">OneNote</a> <a href="/tags/Onedrive/" style="font-size: 16px; color: #999">Onedrive</a> <a href="/tags/Openwrt/" style="font-size: 17.2px; color: #999ca1">Openwrt</a> <a href="/tags/PHP/" style="font-size: 16px; color: #999">PHP</a> <a href="/tags/Python/" style="font-size: 22px; color: #99a9bf">Python</a> <a href="/tags/Quantumult-X/" style="font-size: 16px; color: #999">Quantumult X</a> <a href="/tags/RSS/" style="font-size: 16px; color: #999">RSS</a> <a href="/tags/SQL/" style="font-size: 17.2px; color: #999ca1">SQL</a></div></div></div><div class="card-widget card-archives"><div class="card-content"><div class="item-headline"><i class="fa fa-archive" aria-hidden="true"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/02/"><span class="card-archive-list-date">二月 2021</span><span class="card-archive-list-count">10</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/01/"><span class="card-archive-list-date">一月 2021</span><span class="card-archive-list-count">17</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/12/"><span class="card-archive-list-date">十二月 2020</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/11/"><span class="card-archive-list-date">十一月 2020</span><span class="card-archive-list-count">23</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/10/"><span class="card-archive-list-date">十月 2020</span><span class="card-archive-list-count">21</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/09/"><span class="card-archive-list-date">九月 2020</span><span class="card-archive-list-count">6</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/08/"><span class="card-archive-list-date">八月 2020</span><span class="card-archive-list-count">9</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/07/"><span class="card-archive-list-date">七月 2020</span><span class="card-archive-list-count">6</span></a></li><li class="card-archive-list-item more is-center"><a class="card-archive-list-link-more" href="/archives">
+              <span>查看更多</span><i class="fa fa-angle-right" aria-hidden="true"></i></a></li></ul></div></div><div class="card-widget card-webinfo"><div class="card-content"><div class="item-headline"><i class="fa fa-line-chart" aria-hidden="true"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="webinfo-article-name">文章数目 :</div><div class="webinfo-article-count">156</div></div><div class="webinfo-item"><div class="webinfo-runtime-name">已运行时间 :</div><div class="webinfo-runtime-count" id="webinfo-runtime-count" start_date="3/25/2020 00:00:00">     </div></div><div class="webinfo-item">      <div class="webinfo-site-uv-name">本站访客数 :</div><div class="webinfo-site-uv-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="webinfo-site-name">本站总访问量 :</div><div class="webinfo-site-pv-count" id="busuanzi_value_site_pv"></div></div></div></div></div></div></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By Gkon</div><div class="framework-info"><span>驱动 </span><a href="https://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">簡</a><i class="darkmode fa fa-moon-o" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@3/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script><script src="/js/third-party/ClickShowText.js"></script><script src="https://cdn.jsdelivr.net/npm/typed.js"></script><script>var subtitleEffect = true
+if (subtitleEffect) { 
+  var typed = new Typed("#subtitle", {
+    strings: '今日事&#44;今日畢,Never put off till tomorrow what you can do today'.split(","),
+    startDelay: 300,
+    typeSpeed: 150,
+    loop: false,
+    backSpeed: 50
+  })
+} else {
+  document.getElementById("subtitle").innerHTML = '今日事&#44;今日畢'
+}</script></body></html>

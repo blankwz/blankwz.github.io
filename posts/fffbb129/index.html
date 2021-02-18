@@ -1,0 +1,587 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Quantumult X教程 | Gxkon's Blog</title><meta name="description" content="Quantumult X教程 作者Github：地址 以下简称 Quantunmult X右下角的图标   — &gt; QX图标  一、介绍Quantumult X 是 Quantumult 作者的另一款网络代理工具。  界面设计更漂亮，支持目前流行的 JavaScript 脚本  1. What他除了代理，还可以具体做什么  解决本地 DNS 可能带来的干扰 解决部分网站跳转问题 可突破部分内"><meta name="keywords" content="Quantumult X"><meta name="author" content="Gkon"><meta name="copyright" content="Gkon"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="dns-prefetch" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="crossorigin"/><link rel="dns-prefetch" href="https://fonts.googleapis.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="dns-prefetch" href="//busuanzi.ibruce.info"/><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Quantumult X教程"><meta name="twitter:description" content="Quantumult X教程 作者Github：地址 以下简称 Quantunmult X右下角的图标   — &gt; QX图标  一、介绍Quantumult X 是 Quantumult 作者的另一款网络代理工具。  界面设计更漂亮，支持目前流行的 JavaScript 脚本  1. What他除了代理，还可以具体做什么  解决本地 DNS 可能带来的干扰 解决部分网站跳转问题 可突破部分内"><meta name="twitter:image" content="http://gxkon.top/Pic/post.jpg"><meta property="og:type" content="article"><meta property="og:title" content="Quantumult X教程"><meta property="og:url" content="http://gxkon.top/posts/fffbb129/"><meta property="og:site_name" content="Gxkon's Blog"><meta property="og:description" content="Quantumult X教程 作者Github：地址 以下简称 Quantunmult X右下角的图标   — &gt; QX图标  一、介绍Quantumult X 是 Quantumult 作者的另一款网络代理工具。  界面设计更漂亮，支持目前流行的 JavaScript 脚本  1. What他除了代理，还可以具体做什么  解决本地 DNS 可能带来的干扰 解决部分网站跳转问题 可突破部分内"><meta property="og:image" content="http://gxkon.top/Pic/post.jpg"><meta property="article:published_time" content="2020-11-03T12:07:07.000Z"><meta property="article:modified_time" content="2020-12-04T12:51:12.752Z"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>var autoChangeMode = '1'
+var t = Cookies.get("theme")
+if (autoChangeMode == '1'){
+  var isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+  var isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+  var isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined){
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport){
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour < 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+  }
+  } else if (t == 'light') activateLightMode()
+  else activateDarkMode()
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="canonical" href="http://gxkon.top/posts/fffbb129/"><link rel="prev" title="通俗易懂之 vlan、三层交换机、网关、DNS、子网掩码、MAC地址「转」" href="http://gxkon.top/posts/fa17e296/"><link rel="next" title="VPS测速" href="http://gxkon.top/posts/7f389fce/"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script><script src="https://cdn.jsdelivr.net/npm/blueimp-md5/js/md5.min.js"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: {"text":"本人,超帅,打钱","fontSize":"15px"},
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  highlightShrink: 'false',
+  isFontAwesomeV5: false,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false
+  
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isSidebar: true  
+  }</script><noscript><style>
+#page-header {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 4.2.0"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/Pic/avatar.png" onerror="onerror=null;src='/Pic/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">156</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">83</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">54</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 娱乐</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li></ul></div></div></div></div><i class="fa fa-arrow-right on" id="toggle-sidebar" aria-hidden="true">     </i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Quantumult-X教程"><span class="toc-text">Quantumult X教程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、介绍"><span class="toc-text">一、介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-What"><span class="toc-text">1. What</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-对于此类软件的进阶过程"><span class="toc-text">2. 对于此类软件的进阶过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-代理模式"><span class="toc-text">3.代理模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-QX大致分为四种大功能"><span class="toc-text">4. QX大致分为四种大功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、四大功能"><span class="toc-text">二、四大功能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-节点"><span class="toc-text">1. 节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-分流（策略）"><span class="toc-text">2. 分流（策略）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#主要功能"><span class="toc-text">主要功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#策略组"><span class="toc-text">策略组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#添加策略组方法（配置文件方法）"><span class="toc-text">添加策略组方法（配置文件方法）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#机场订阅地址转换策略组方法"><span class="toc-text">机场订阅地址转换策略组方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分流规则搭配策略组"><span class="toc-text">分流规则搭配策略组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#为单条分流规则绑定策略组"><span class="toc-text">为单条分流规则绑定策略组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#策略更改节点方法"><span class="toc-text">策略更改节点方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Rewrite-重写-与-MitM"><span class="toc-text">3. Rewrite 重写 与 MitM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-脚本"><span class="toc-text">4. 脚本</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、使用"><span class="toc-text">三、使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-简单-使用节点"><span class="toc-text">1.简单 - 使用节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-中级-使用（远程）懒人包配置文件"><span class="toc-text">2. 中级 - 使用（远程）懒人包配置文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1）添加大佬们的配置文件"><span class="toc-text">1）添加大佬们的配置文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2）安装证书"><span class="toc-text">2）安装证书</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、文件"><span class="toc-text">四、文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-文件存放"><span class="toc-text">1. 文件存放</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-配置文件-conf"><span class="toc-text">2. 配置文件 .conf</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Quantumult-X-预配置文件"><span class="toc-text">Quantumult X 预配置文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#重写-脚本配置文件"><span class="toc-text">重写 脚本配置文件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-远程QX配置文件"><span class="toc-text">3. 远程QX配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Working-Copy远程挂载到本地配置文件"><span class="toc-text">4. Working Copy远程挂载到本地配置文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#更新方法"><span class="toc-text">更新方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#搭配苹果捷径自动化更新"><span class="toc-text">搭配苹果捷径自动化更新</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、脚本"><span class="toc-text">五、脚本</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-要素"><span class="toc-text">1. 要素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-js脚本文件位置"><span class="toc-text">2.  js脚本文件位置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-脚本使用"><span class="toc-text">3.脚本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-问题"><span class="toc-text">4. 问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#某些脚本js文件没有效果"><span class="toc-text">某些脚本js文件没有效果</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#淘宝比价没有用"><span class="toc-text">淘宝比价没有用</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#六、资源"><span class="toc-text">六、资源</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-各大佬"><span class="toc-text">1. 各大佬</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-预配置文件"><span class="toc-text">2.预配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-分流规则"><span class="toc-text">3.分流规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-重写-脚本"><span class="toc-text">4. 重写(脚本)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#BoxJs"><span class="toc-text">BoxJs</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NobyDa大神脚本"><span class="toc-text">NobyDa大神脚本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#其他脚本源"><span class="toc-text">其他脚本源</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SSID"><span class="toc-text">SSID</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#八、各种功能"><span class="toc-text">八、各种功能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#京东"><span class="toc-text">京东</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解锁TikTok"><span class="toc-text">解锁TikTok</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#九、技巧"><span class="toc-text">九、技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-高效管理节点"><span class="toc-text">1. 高效管理节点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#为什么需要"><span class="toc-text">为什么需要</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#解析器的使用"><span class="toc-text">解析器的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#常用正则表达式-筛选公式"><span class="toc-text">常用正则表达式 筛选公式</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#机场筛选"><span class="toc-text">机场筛选</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-隐藏-VPN图标"><span class="toc-text">2. 隐藏 VPN图标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-切换最上方的策略组图标排列方式"><span class="toc-text">3. 切换最上方的策略组图标排列方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-图标组更改"><span class="toc-text">4. 图标组更改</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#图标要求："><span class="toc-text">图标要求：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#图标更改"><span class="toc-text">图标更改</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#工具"><span class="toc-text">工具</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-更新GeoLite2数据库"><span class="toc-text">5. 更新GeoLite2数据库</span></a></li></ol></li></ol></li></ol></div></div></div><div id="body-wrap"><div class="post-bg" id="nav" style="background-image: url(/Pic/post.jpg)"><div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">Gxkon's Blog</a></span><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 娱乐</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li></ul></div></div><span class="toggle-menu close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span></span></div><div id="post-info"><div id="post-title"><div class="posttitle">Quantumult X教程</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2020-11-03 20:07:07"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2020-11-03</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2020-12-04 20:51:12"><i class="fa fa-history" aria-hidden="true"></i> 更新于 2020-12-04</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E8%BD%AF%E4%BB%B6%E6%8A%98%E8%85%BE/">软件折腾</a></span></div><div class="meta-secondline"> </div><div class="meta-thirdline"><span class="post-meta-pv-cv"><i class="fa fa-eye post-meta__icon" aria-hidden="true"> </i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"><span class="post-meta__separator">|</span><i class="post-meta__icon fa fa-comment-o" aria-hidden="true"></i><span>评论数:</span><a href="/posts/fffbb129/#post-comment"><span class="gitalk-comment-count comment-count"></span></a></span></div></div></div></div><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h1 id="Quantumult-X教程"><a href="#Quantumult-X教程" class="headerlink" title="Quantumult X教程"></a>Quantumult X教程</h1><blockquote>
+<p>作者Github：<a href="https://github.com/crossutility/Quantumult-X" target="_blank" rel="noopener">地址</a></p>
+<p>以下简称</p>
+<p><code>Quantunmult X</code>右下角的图标   — &gt; <code>QX图标</code></p>
+</blockquote>
+<h2 id="一、介绍"><a href="#一、介绍" class="headerlink" title="一、介绍"></a>一、介绍</h2><p>Quantumult X 是 Quantumult 作者的另一款网络代理工具。</p>
+<ul>
+<li>界面设计更漂亮，支持目前流行的 JavaScript 脚本</li>
+</ul>
+<h3 id="1-What"><a href="#1-What" class="headerlink" title="1. What"></a>1. What</h3><p><strong>他除了代理，还可以具体做什么</strong></p>
+<ul>
+<li>解决本地 DNS 可能带来的干扰</li>
+<li>解决部分网站跳转问题</li>
+<li>可突破部分内网限制（公司、学校）</li>
+<li>拦截部分挖矿 JS 插件</li>
+<li>拦截常用应用程序及网页的行为分析</li>
+<li>拦截常用应用程序及网页的数据统计</li>
+<li>拦截常用应用程序及网页的隐私跟踪</li>
+<li>拦截各大购物网站的运营商劫持</li>
+<li>拦截 Content Security Policy 劫持</li>
+<li>拦截 CNNIC 根证书劫持</li>
+<li>屏蔽部分应用程序的启动广告</li>
+<li>屏蔽部分运营商劫持网页弹出的流量统计</li>
+<li>屏蔽部分运营商劫持网页弹出的漂浮球广告</li>
+<li>屏蔽常用视频广告</li>
+<li>屏蔽常用网站广告、其他流媒体网站广告</li>
+<li>屏蔽法轮功等反华势力网站</li>
+<li>所有国内网站直线连接</li>
+<li>Apple 服务加速（App Store、Apple Music、Apple流媒体、iCloud备份、iCloud Drive、iTunes 等）</li>
+<li>国外常用网站加速（Google/Youtube/Twitter/Facebook/instagram/wikipedia/Github 等）</li>
+</ul>
+<h3 id="2-对于此类软件的进阶过程"><a href="#2-对于此类软件的进阶过程" class="headerlink" title="2. 对于此类软件的进阶过程"></a>2. 对于此类软件的进阶过程</h3><ol>
+<li><code>青铜</code>：使用订阅节点，可以翻</li>
+<li><code>白银</code>：会使用网络大佬们的脚本、规则</li>
+<li><code>黄金</code>：除了运用自如脚本和规则，更了解脚本和规则的原理，可以整合搬运各种脚本和规则</li>
+<li><code>白金</code>：可以简单编写脚本和规则</li>
+<li><code>大佬</code>：脚本和规则，手到擒来。</li>
+</ol>
+<blockquote>
+<p>能达到手到擒来级别，需要的知识，包含但并不限于网页前端、网页后端、正则表达式、破解</p>
+</blockquote>
+<h3 id="3-代理模式"><a href="#3-代理模式" class="headerlink" title="3.代理模式"></a>3.代理模式</h3><p>Quantumult X 有三种代理模式：</p>
+<ul>
+<li>全部代理</li>
+<li>全部直连</li>
+<li>规则分流 （推荐）</li>
+</ul>
+<p><strong>如何开启规则分流模式：</strong> 请点击软件右下角的功能按钮，然后在新窗口点击右上角三个点的标志，选择<strong>”规则分流“</strong>。</p>
+<h3 id="4-QX大致分为四种大功能"><a href="#4-QX大致分为四种大功能" class="headerlink" title="4. QX大致分为四种大功能"></a>4. QX大致分为四种大功能</h3><ul>
+<li>节点</li>
+<li>分流(规则)</li>
+<li>重写(规则)</li>
+<li>强大的脚本</li>
+</ul>
+<h2 id="二、四大功能"><a href="#二、四大功能" class="headerlink" title="二、四大功能"></a>二、四大功能</h2><h3 id="1-节点"><a href="#1-节点" class="headerlink" title="1. 节点"></a>1. 节点</h3><p>用代理的都懂，不用讲了吧</p>
+<p>它支持 ss，ssr 订阅，以及 Quanx 格式的 vmess / https / trojan 订阅</p>
+<ul>
+<li>引用（订阅）的节点，对应配置文件的 [server_remote] 部分</li>
+</ul>
+<h3 id="2-分流（策略）"><a href="#2-分流（策略）" class="headerlink" title="2. 分流（策略）"></a>2. 分流（策略）</h3><p><strong>规则分流模式下，网络请求的走向由分流规则中的所匹配到的策略决定</strong></p>
+<p>我们建立了不同的规则（道路)，它会检测你访问的网址的域名或者DNS</p>
+<h4 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a><strong>主要功能</strong></h4><ul>
+<li><code>对于梯子来说</code>，自定义你的某些网络请求是走哪些<code>线路、节点、流量</code><ul>
+<li>指定奈飞线路</li>
+<li>指定TikTok线路</li>
+<li>如果定义为电报（Telegram）的数据访问，就会把数据归到电报策略节点位</li>
+<li>一些屏蔽国内IP的应用，切换线路</li>
+</ul>
+</li>
+<li><code>对于破解来说</code>，自定义某些域名的直连、拒绝访问等等功能<ul>
+<li>去广告 ：当它检测到广告数据（域名、资源等）时，就进行拦截</li>
+</ul>
+</li>
+</ul>
+<h4 id="策略组"><a href="#策略组" class="headerlink" title="策略组"></a>策略组</h4><p>策略组的意义在于精细化控制</p>
+<ul>
+<li>策略组里选择 PROXY 意味着和默认节点保持一致</li>
+<li>选择 DIRECT 意味着将使用国内网络直接进行连接</li>
+</ul>
+<p>关于策略组的深层理解，请参考F大的<a href="https://github.com/Fndroid/jsbox_script/wiki/%E5%85%B3%E4%BA%8E%E7%AD%96%E7%95%A5%E7%BB%84%E7%9A%84%E7%90%86%E8%A7%A3" target="_blank" rel="noopener">wiki</a></p>
+<h4 id="添加策略组方法（配置文件方法）"><a href="#添加策略组方法（配置文件方法）" class="headerlink" title="添加策略组方法（配置文件方法）"></a>添加策略组方法（配置文件方法）</h4><p>在<code>配置文件</code>中 的 <code>[policy]</code> 中添加</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">static=Maying,resource-tag-regex=魅影，img-url=xxxx.png</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加一个名为Maying策略组，节点源用 魅影 机场</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="机场订阅地址转换策略组方法"><a href="#机场订阅地址转换策略组方法" class="headerlink" title="机场订阅地址转换策略组方法"></a>机场订阅地址转换策略组方法</h4><p>在 资源列表（节点）中，向右划动你想转换的节点列表 - 点击更多 - 选择一个策略即可 - 到主页中查看，是否多了一个策略组</p>
+<ol>
+<li><code>QX图标</code> - 找到<code>节点</code>模块下<code>引用</code>，点击</li>
+<li>往<code>右滑</code>任意订阅，点击<code>更多</code>即可<code>创建策略</code></li>
+<li>三个策略选择一个</li>
+</ol>
+<p><strong>静态策略-手动选择：</strong> 跟PROXY一样；（<em>需至少配置一个节点）<br>*</em>健康检查-自动选择：** 从第一个<code>节点</code>进行可用性检查，如果可用即选择第一个节点，不可用则继续检查直到<code>节点</code>可用；（*需至少配置两个节点）</p>
+<p><strong>负载均衡-轮询调度：</strong> 轮流调用节点使用，如果使用该策略则访问谷歌时你的ip是一直<code>变化</code>的；（*需至少配置两个节点）</p>
+<blockquote>
+<p>每个策略下都可以有很多<code>节点</code>，这些节点是由你自己选择的（可长按策略图标进行增减），<code>PROXY</code>默认拥有所有订阅而来的<code>节点</code>，随每次更新<code>节点</code>订阅时而有所增减，其中的<code>节点</code>需要手动选择使用；</p>
+</blockquote>
+<h4 id="分流规则搭配策略组"><a href="#分流规则搭配策略组" class="headerlink" title="分流规则搭配策略组"></a>分流规则搭配策略组</h4><ol>
+<li>QX图标 - 分流下 - 引用</li>
+<li>左滑任意分流订阅链接 - 编辑 - 开启策略偏好 - 选取刚刚新建的策略组</li>
+</ol>
+<h4 id="为单条分流规则绑定策略组"><a href="#为单条分流规则绑定策略组" class="headerlink" title="为单条分流规则绑定策略组"></a><code>为单条分流规则</code>绑定策略组</h4><ol>
+<li>QX图标 - 分流 - 添加</li>
+<li>填写相应<code>类型</code>，<code>参数</code>，<code>策略</code>选择刚刚创建的即可</li>
+</ol>
+<h4 id="策略更改节点方法"><a href="#策略更改节点方法" class="headerlink" title="策略更改节点方法"></a>策略更改节点方法</h4><p>策略组模块上有白色环形标志的代表可以长按以添加或删除其中的节点，长按策略图标</p>
+<ul>
+<li>把需要的节点添加上去</li>
+<li>不需要的删除掉</li>
+</ul>
+<h3 id="3-Rewrite-重写-与-MitM"><a href="#3-Rewrite-重写-与-MitM" class="headerlink" title="3. Rewrite 重写 与 MitM"></a>3. Rewrite 重写 与 MitM</h3><p>这两个功能主要作用是辅助广告拦截。可以根据自己的情况按需开启</p>
+<p><strong>用于修改HTTP或HTTPS请求与响应</strong></p>
+<h3 id="4-脚本"><a href="#4-脚本" class="headerlink" title="4. 脚本"></a>4. 脚本</h3><p>这就更厉害了，自动执行某些脚本，达到自动化目的</p>
+<ol>
+<li>获取Cookie</li>
+<li>访问API</li>
+<li>签到、领取金币等等</li>
+</ol>
+<ul>
+<li><p>一个名为xxx.js 的文件(它可以是本地文件，也可以是别人放在GitHub的远程)</p>
+</li>
+<li><p>有了JS文件之后，你当然还需要告诉 Quantumult X，你要如何使用这个xxx.js</p>
+<ul>
+<li>写法的通用表达 ： <strong><code>匹配网址 url 复写类型 脚本文件</code></strong></li>
+</ul>
+</li>
+<li><p>这个语句是一句 rewrite，可以放在本地配置(rewrite_local)，也可以放远程引用(rewrite_remote)</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">; 匹配网址请求  url  复写类型  脚本文件</span><br><span class="line">http:<span class="comment">//example\\.com/resource5/ url script-response-body  123.js</span></span><br><span class="line">        </span><br><span class="line">解读上面的语句：当访问网址匹配 “http:<span class="comment">//example\.com/resource5/” 时，将会执行 123.js 的脚本文件， </span></span><br><span class="line">而 url script-response-body ，则是 复写类型</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>各类型的具体说明，参见作者:  <a href="https://github.com/crossutility/Quantumult-X" target="_blank" rel="noopener">https://github.com/crossutility/Quantumult-X</a></li>
+</ul>
+<blockquote>
+<p>由于某些人提供制作破解 VIP 的脚本，甚至在作者稍加限制之后(设备ID)，仍旧自作聪明的公然想办法破解，甚至拿来当作服务出售。因此开发者一度取消了远程 js 脚本。 </p>
+<p>但在版本 1.0.12后，作者重新开放了 远程脚本的一键更新 ， </p>
+<p>但需满足一个条件：<code>购买时间&gt;30天</code> 否则，你依旧可以使用远程 js 脚本，但<code>只能一个个手动更新</code></p>
+</blockquote>
+<h2 id="三、使用"><a href="#三、使用" class="headerlink" title="三、使用"></a>三、使用</h2><blockquote>
+<p><strong>软件基本操作</strong></p>
+<p><code>Quantunmult X</code> 中有很多隐藏操作，一般分为</p>
+<ul>
+<li><code>点按</code> </li>
+<li><code>长按</code> ，很多时候找不到设置方法，可以长按试试</li>
+</ul>
+</blockquote>
+<h3 id="1-简单-使用节点"><a href="#1-简单-使用节点" class="headerlink" title="1.简单 - 使用节点"></a>1.简单 - 使用节点</h3><p>点击 - QX图标 - 节点</p>
+<ul>
+<li><code>添加</code>：添加单个SS节点</li>
+<li><code>引用（订阅）</code>： 添加订阅信息（机场节点）</li>
+<li><code>SS URI</code></li>
+<li><code>扫码</code></li>
+</ul>
+<blockquote>
+<p><strong>节点测速方法</strong>:</p>
+<p>单个测速：<strong>长按节点名称 - 网页响应测试</strong></p>
+<p>全部测速：进入某个策略组 - 下拉 - 即可测速</p>
+</blockquote>
+<h3 id="2-中级-使用（远程）懒人包配置文件"><a href="#2-中级-使用（远程）懒人包配置文件" class="headerlink" title="2. 中级 - 使用（远程）懒人包配置文件"></a>2. 中级 - 使用（远程）懒人包配置文件</h3><p>预配置文件的意义在于帮助新手用户（或懒人用户）一键导入软件运行所必需的一些配置，<code>包括分流规则、策略、策略组、DNS、MitM、Rewrite规则等</code>。导入预配置文件后，仅需要手动添加节点即可享受这款软件带来的畅快科学上网体验。</p>
+<h4 id="1）添加大佬们的配置文件"><a href="#1）添加大佬们的配置文件" class="headerlink" title="1）添加大佬们的配置文件"></a>1）添加大佬们的配置文件</h4><ol>
+<li><p>找个大佬的懒人配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Sabrina</span></span><br><span class="line">https://raw.githubusercontent.com/solikethis/QuantumultX-demo/master/SabrinaQuanxConf.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># Orz-3</span></span><br><span class="line">教程：https://github.com/Orz-3/QuantumultX</span><br><span class="line">raw：https://raw.githubusercontent.com/Orz-3/QuantumultX/master/Orz-3.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># nzw9314</span></span><br><span class="line">https://github.com/nzw9314/QuantumultX/tree/master</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>QX图标 - 配置文件 - 下载</code> - 输入远程配置文件raw地址  （会覆盖当前所有配置，包括节点）</p>
+</li>
+<li><p>保存</p>
+</li>
+</ol>
+<h4 id="2）安装证书"><a href="#2）安装证书" class="headerlink" title="2）安装证书"></a>2）安装证书</h4><ol>
+<li>点击QX图标 - 往下拖- 打开 <code>重写 和 MitM</code><ol>
+<li>点击MitM的 <code>生成证书</code>，再点击安装证书 （描述文件）<ul>
+<li>若提示已经有了有效的配置文件，则点击 <code>配置证书</code></li>
+<li>设置 - 顶部 - 已下载的证书 - 点击后，安装</li>
+</ul>
+</li>
+<li>在设置 - 通用 - 关于本机 - 证书信任设置 中可以找到，刚刚安装的Quantunmult信任证书 - 信任它</li>
+</ol>
+</li>
+<li><code>QX图标</code> - 最下面的<code>其他设置 - VPN - 打开 始终开启</code>  （为了方便测试）</li>
+<li>点击 <code>QX图标</code>，添加你的节点</li>
+<li>添加完成后，打开右上角VPN开关</li>
+</ol>
+<blockquote>
+<p>重新生成MitM的证书方法（此方法适用于证书无效时急救）</p>
+<ol>
+<li>到 配置文件 中，最下方的 <code>[mitm]</code> - 删除其下方内容</li>
+<li>到 QX图标 - Mitm - 生成证书</li>
+<li>再配置证书，下载证书，后面就是安装证书和信任证书了</li>
+</ol>
+</blockquote>
+<h2 id="四、文件"><a href="#四、文件" class="headerlink" title="四、文件"></a>四、文件</h2><h3 id="1-文件存放"><a href="#1-文件存放" class="headerlink" title="1. 文件存放"></a>1. 文件存放</h3><p>Quantumult X的文件都在 IOS的<code>文件app</code>中，下载完Quantumult X，打开IOS的<code>文件</code></p>
+<ol>
+<li><p>可以看到<code>iCloud Drive</code>和 <code>我的iPhone</code>中都自动创建了<code>Quantunmult X</code>文件夹，其中含有</p>
+<ul>
+<li>Images：图标图片文件</li>
+<li>Profiles：配置关联地址</li>
+<li>Scripts：脚本文件</li>
+<li>顾名思义，若想让 Quantumult X 使用哪些资源，就要在改资源的文件夹下有文件。</li>
+</ul>
+</li>
+<li><p>至于到底存放在<code>iCloud Drive</code>还是 <code>我的iPhone</code>，看你自己选择</p>
+<ul>
+<li>若用<code>iCloud Drive</code>，需要在设置 - 其他设置 - 开启资源文件夹的iCloud</li>
+</ul>
+</li>
+</ol>
+<h3 id="2-配置文件-conf"><a href="#2-配置文件-conf" class="headerlink" title="2. 配置文件 .conf"></a>2. 配置文件 .conf</h3><p>Quantumult X 有很多配置，各个配置各有分工</p>
+<ul>
+<li>Quantumult X <strong>配置文件</strong></li>
+<li><code>重写</code> 脚本配置文件</li>
+</ul>
+<p>配置文件分为远程配置文件及本地配置文件，<code>任选其一！！！！</code></p>
+<ul>
+<li>远程配置文件：通过 <code>QX图标 - 配置文件 - 下载</code> - 输入远程配置文件raw地址</li>
+<li>本地配置文件：<code>远程挂载方式</code>下载到 苹果的 <code>文件app</code>中</li>
+</ul>
+<h4 id="Quantumult-X-预配置文件"><a href="#Quantumult-X-预配置文件" class="headerlink" title="Quantumult X 预配置文件"></a>Quantumult X 预<strong>配置文件</strong></h4><ul>
+<li>是一个完整的配置文件，包含 Quantumult X 的<strong>所有配置</strong>项目，如 <strong>分流</strong>，<strong>策略及图标</strong>设置，脚本等等</li>
+<li>打开 - [Quantumult X] - [配置文件] - [编辑] 即可查阅当前你已配置的各个项目</li>
+<li>一次性只能用一个配置文件<ul>
+<li>用了远程配置文件就不能使用本地配置文件</li>
+<li>新增一个配置文件需要重新配置证书和设置</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[general] 一般用作连通测试配置</span><br><span class="line">[dns] - dns配置</span><br><span class="line">[policy] - 策略组及其图标配置</span><br><span class="line">[server_remote] - 节点 引用</span><br><span class="line">[filter_remote] - 分流 引用</span><br><span class="line">[rewrite_remote] - 重写 引用（js.conf 脚本配置）</span><br><span class="line">[server_local] - 节点 本地（手动添加节点，例如自己搭建的SS）</span><br><span class="line">[filter_local] - 分流 本地</span><br><span class="line">[rewrite_local] - 重写 本地</span><br><span class="line">[mitm] - 证书 等</span><br><span class="line">hostname - 配置主机名</span><br><span class="line"></span><br><span class="line">引用和本地的区别：</span><br><span class="line">引用 即从云端下载配置资源，例如你的机场节点，大家喜欢的神机规则等，均需从外部进行引用下载；</span><br><span class="line">本地 则属于在 Quantumult X 上手动配置；</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="重写-脚本配置文件"><a href="#重写-脚本配置文件" class="headerlink" title="重写 脚本配置文件"></a><code>重写</code> 脚本配置文件</h4><ul>
+<li><code>重写</code> 为<strong>JS脚本配置文件</strong>，该文件内含：<ul>
+<li>hostname配置</li>
+<li>各种JS脚本<strong>详细配置</strong></li>
+</ul>
+</li>
+<li><strong>JS脚本配置文件</strong>对应位置在：[Quantumult X] - [配置文件] - [编辑] - <code>[rewrite_remote]</code> - 粘贴<strong>脚本配置文件</strong>地址</li>
+</ul>
+<h3 id="3-远程QX配置文件"><a href="#3-远程QX配置文件" class="headerlink" title="3. 远程QX配置文件"></a>3. 远程QX配置文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 以Orz-3大佬为例</span></span><br><span class="line">1.点击Github库中的Orz-3.conf文件，点击raw获取真实地址，复制地址备用</span><br><span class="line">2.Quan X主界面，点击QX图标，然后弹出界面下拉至 配置文件-下载，点击下载，将上一步复制的地址粘贴到弹出窗口，然后点确定</span><br><span class="line">3.Quan X主界面，点击QX图标，然后弹出界面下拉至 Mitm ，点击生成证书</span><br><span class="line">4.然后回到Quan X，继续点击配置证书，根据提示安装证书</span><br><span class="line">5.安装成功后启用证书，并到系统的 设置-通用-关于本机 点击信任证书</span><br><span class="line">6.打开重写和Mitm</span><br><span class="line">7.添加节点/订阅，并左滑添加订阅标签（重要，不添加标签是无法筛选的！！！）</span><br><span class="line">8.开始使用</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="4-Working-Copy远程挂载到本地配置文件"><a href="#4-Working-Copy远程挂载到本地配置文件" class="headerlink" title="4. Working Copy远程挂载到本地配置文件"></a>4. Working Copy远程挂载到本地配置文件</h3><blockquote>
+<p><a href="https://apps.apple.com/us/app/working-copy/id896694807" target="_blank" rel="noopener">Working Copy</a> 是 iOS 平台上的一款全功能 Git 客户端，其支持新建本地仓库，并与 GitHub，GitLab，BitBucket，甚至是自建 Git 服务器上的远程仓库同步。</p>
+<p>Q：为什么使用它？</p>
+<p>A：我们需要把大佬们的 各种策略下载到iPhone的QX本地文件夹中，通过Working Copy可以方便的把Github的内容下载到本地，并且方便的更新。</p>
+</blockquote>
+<ol>
+<li>IOS下载Working Copy</li>
+<li>到<code>文件app</code>中的 <code>iCloud Drive</code>或者 <code>我的iPhone</code> - <code>Quantunmult X</code> - <code>Script文件夹内</code>- 长按空白处<code>建立个空文件夹</code></li>
+<li>打开Working Copy ， 右上角 <code>+</code> ，选择 <code>Setup Synced Directory</code> - 找到刚刚建立的空文件夹</li>
+<li>进去后 - 点击 <code>Repository - Add Remote</code> - 把脚本库的地址复制过来<ul>
+<li>脚本库地址一定是带git后缀的<ul>
+<li>Github - Code下载按钮 - HTTPS - 复制地址</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>关掉 <code>Allow Push</code>，点击保存</li>
+<li>点击刚刚进里的 Remote，点击左上角的Fetch，等待<ol>
+<li>如果是Nzw9314大佬的脚本，第一次一般都会报错 ：<code>Reference &#39;refs/heads/maste&#39;r not found</code>，没关系，后退</li>
+<li>点击 <code>Branch</code> - 选择默认分支</li>
+<li>点击Checkout</li>
+</ol>
+</li>
+<li>完成后，后退，可以看到都出来了</li>
+<li>去刚刚 <code>文件app</code>中建立的空文件夹内，是否已经全部下载完成 （完成远程挂载）<ul>
+<li>Nzw9314大佬的脚本的话，点击文件夹内的名为<code>Quantunmult X</code>配置文件 - （自动打开了<code>Quantunmult X</code>）右上角保存Working Copy</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">大佬脚本库：</span><br><span class="line">野比大佬：https://github.com/NobyDa/Script</span><br><span class="line">yichahucha:  https://github.com/yichahucha/surge</span><br><span class="line">Sazs34: https://github.com/sazs34/TaskConfig</span><br><span class="line">Chavyleung：https://github.com/chavyleung/scripts</span><br><span class="line">Navepnow：https://github.com/NavePnow/Profiles</span><br><span class="line">Nzw9314（整合版，推荐）:https://github.com/nzw9314/QuantumultX  (需要手动选择Master分支）</span><br></pre></td></tr></table></figure>
+
+<h4 id="更新方法"><a href="#更新方法" class="headerlink" title="更新方法"></a>更新方法</h4><p>下拉Working Copy列表，如果有更新，会提示更新。</p>
+<h4 id="搭配苹果捷径自动化更新"><a href="#搭配苹果捷径自动化更新" class="headerlink" title="搭配苹果捷径自动化更新"></a>搭配苹果捷径自动化更新</h4><p><a href="https://www.youtube.com/watch?v=vBk-8s0W0u8&ab_channel=HellCell" target="_blank" rel="noopener">视频教程</a></p>
+<h2 id="五、脚本"><a href="#五、脚本" class="headerlink" title="五、脚本"></a>五、脚本</h2><h3 id="1-要素"><a href="#1-要素" class="headerlink" title="1. 要素"></a>1. 要素</h3><p>一个完整的脚本使用，需要</p>
+<ul>
+<li>正确的复写语句(rewrite)</li>
+<li>正确的域名解析（hostname,中间人攻击）</li>
+<li>正确的本地脚本放置路径(xx.js)</li>
+</ul>
+<p>一般好的脚本js文件，里面都会有完整的使用说明，按照说明操作</p>
+<h3 id="2-js脚本文件位置"><a href="#2-js脚本文件位置" class="headerlink" title="2.  js脚本文件位置"></a>2.  js脚本文件位置</h3><blockquote>
+<p>请大佬们 <strong>千万别</strong> 直接把js脚本链接直接丢进rewrite引用，然后还跑来问“怎么报错？”</p>
+<p> 同时，放对位置后，需要去 rewrite_local里添加引用</p>
+</blockquote>
+<ol>
+<li>可以放 <code>github 远程使用（raw 链接）</code>，（仅限新TF版本可以使用远程）</li>
+<li>也可以放入本机文件夹中 /<code>On My iPhone/Quantumult X/Scripts</code> 目录下</li>
+<li>当然也可以放入<strong><code>iCloud Drive</code></strong>下的<code>Quantumult X/Scripts</code> 目录 </li>
+</ol>
+<h3 id="3-脚本使用"><a href="#3-脚本使用" class="headerlink" title="3.脚本使用"></a>3.脚本使用</h3><ol start="2">
+<li><p>如何引用 <strong>JS脚本配置文件</strong>：<code>[Quantumult X] - [重写] - [引用] - [+]</code> </p>
+<ul>
+<li>有的脚本需要把hostname 添加到 配置文件中（ <code>QX图标 - 配置文件 - 编辑</code>）</li>
+</ul>
+</li>
+<li><p>脚本执行： <code>QX图标 - 构造请求 - 找到对应脚本 - 向右滑动 - 执行按钮</code></p>
+</li>
+<li><p>脚本需要更新才能使用</p>
+<ul>
+<li>如果你购买Quantumult X还不足30天，脚本是无法一键全部更新的</li>
+</ul>
+</li>
+<li><p>各脚本具体使用方法，直接点击脚本，查看脚本</p>
+<ul>
+<li>一般脚本都会有详细的使用说明</li>
+</ul>
+</li>
+<li><p>部分脚本的运行，需要手动加入Cookies</p>
+</li>
+<li><p>脚本可以定期执行，在请求列表右上角 的时钟按钮，开关定期执行功能</p>
+<ul>
+<li>具体的执行时间，在代码可以看到</li>
+</ul>
+</li>
+<li><p>不需要的脚本，建议禁用（注释掉）</p>
+<ul>
+<li>注释方法： 在QX配置文件中，行前面 添加 <code>半角;</code>即可注释</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>当需要抓包（获取Cookie）时，需要开启 <code>调试</code> （QX图标 - 调试）的开关</p>
+</blockquote>
+<h3 id="4-问题"><a href="#4-问题" class="headerlink" title="4. 问题"></a>4. 问题</h3><h4 id="某些脚本js文件没有效果"><a href="#某些脚本js文件没有效果" class="headerlink" title="某些脚本js文件没有效果"></a>某些脚本js文件没有效果</h4><ol>
+<li>QX图标 - 重新- 搜索</li>
+<li>输入 js脚本关键字，比如jd</li>
+<li>更新它</li>
+</ol>
+<h4 id="淘宝比价没有用"><a href="#淘宝比价没有用" class="headerlink" title="淘宝比价没有用"></a>淘宝比价没有用</h4><ol>
+<li>QX图标 - 重新- 搜索</li>
+<li>输入 taobao</li>
+<li>找到比价的js，更新</li>
+<li>试试看</li>
+<li>如果还是不行，就卸载了重新安装</li>
+</ol>
+<h2 id="六、资源"><a href="#六、资源" class="headerlink" title="六、资源"></a>六、资源</h2><h3 id="1-各大佬"><a href="#1-各大佬" class="headerlink" title="1. 各大佬"></a>1. 各大佬</h3><ul>
+<li><p><a href="https://github.com/Orz-3/mini" target="_blank" rel="noopener">Orz</a></p>
+</li>
+<li><p><a href="https://github.com/lhie1" target="_blank" rel="noopener">@lhie1</a></p>
+</li>
+<li><p><a href="https://github.com/DivineEngine/Profiles/tree/master" target="_blank" rel="noopener">@ConnersHua</a></p>
+</li>
+<li><p><a href="https://github.com/yichahucha" target="_blank" rel="noopener">@yichahucha</a></p>
+</li>
+<li><p><a href="https://github.com/langkhach270389" target="_blank" rel="noopener">@langkhach270389</a></p>
+</li>
+<li><p><a href="https://github.com/Choler" target="_blank" rel="noopener">@Choler</a></p>
+</li>
+<li><p><a href="https://github.com/onewayticket255" target="_blank" rel="noopener">@onewayticket255</a></p>
+</li>
+<li><p><a href="https://github.com/NavePnow" target="_blank" rel="noopener">@NavePnow</a></p>
+</li>
+<li><p><a href="https://github.com/MeetaGit" target="_blank" rel="noopener">@Meeta</a></p>
+</li>
+<li><p><a href="https://github.com/Neurogram-R" target="_blank" rel="noopener">@Neurogram-R</a></p>
+</li>
+<li><p><a href="https://github.com/sazs34" target="_blank" rel="noopener">@sazs34</a></p>
+</li>
+<li><p><a href="https://github.com/uniqueque" target="_blank" rel="noopener">@uniqueque</a></p>
+</li>
+<li><p><a href="https://github.com/eHpo1/Rules" target="_blank" rel="noopener">@eHpo</a></p>
+</li>
+<li><p><a href="https://github.com/Sunert/Scripts" target="_blank" rel="noopener">@Sunert</a></p>
+</li>
+<li><p><a href="https://github.com/songyangzz/QuantumultX.git" target="_blank" rel="noopener">@songyangzz</a></p>
+</li>
+<li><p><a href="https://github.com/zZPiglet/Task.git" target="_blank" rel="noopener">@zZPiglet</a></p>
+</li>
+<li><p><a href="https://github.com/Peng-YM/QuanX" target="_blank" rel="noopener">@Peng-YM</a></p>
+</li>
+<li><p><a href="https://github.com/evilbutcher/Quantumult_X/tree/master" target="_blank" rel="noopener">@evilbutcher</a></p>
+</li>
+<li><p><a href="https://gitee.com/lxk0301/scripts" target="_blank" rel="noopener">@lxk0301</a></p>
+</li>
+<li><p><a href="https://github.com/toulanboy/scripts" target="_blank" rel="noopener">@toulanboy</a></p>
+</li>
+<li><p><a href="https://github.com/lowking/Scripts" target="_blank" rel="noopener">@lowking</a></p>
+</li>
+<li><p><a href="https://github.com/scomper/Surge" target="_blank" rel="noopener">scomper / Surge</a></p>
+</li>
+<li><p><a href="https://github.com/KOP-XIAO/QuantumultX" target="_blank" rel="noopener">KOP-XIAO / QuantumultX</a></p>
+</li>
+<li><p><a href="https://github.com/onewayticket255/Surge-Script" target="_blank" rel="noopener">onewayticket255 / Surge-Script</a></p>
+</li>
+<li><p><a href="https://github.com/Koolson/Qure" target="_blank" rel="noopener">Koolson / Qure</a></p>
+</li>
+<li><p><a href="https://github.com/17mon/china_ip_list" target="_blank" rel="noopener">17mon / china_ip_list</a></p>
+</li>
+<li><p><a href="https://github.com/blackmatrix7/ios_rule_script" target="_blank" rel="noopener">blackmatrix7 / ios_rule_script</a></p>
+</li>
+</ul>
+<h3 id="2-预配置文件"><a href="#2-预配置文件" class="headerlink" title="2.预配置文件"></a>2.预配置文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ConnersHua</span></span><br><span class="line">https://raw.githubusercontent.com/ConnersHua/Profiles/master/Quantumult/X/Pro.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># Sabrina</span></span><br><span class="line">https://raw.githubusercontent.com/solikethis/QuantumultX-demo/master/SabrinaQuanxConf.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># Orz-3</span></span><br><span class="line">教程：https://github.com/Orz-3/QuantumultX</span><br><span class="line">raw：https://raw.githubusercontent.com/Orz-3/QuantumultX/master/Orz-3.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># nzw9314</span></span><br><span class="line">https://github.com/nzw9314/QuantumultX/tree/master</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-分流规则"><a href="#3-分流规则" class="headerlink" title="3.分流规则"></a>3.分流规则</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/ConnersHua/Profiles/tree/master/Quantumult/X/Filter  <span class="comment"># 神机规则</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-重写-脚本"><a href="#4-重写-脚本" class="headerlink" title="4. 重写(脚本)"></a>4. 重写(脚本)</h3><h4 id="BoxJs"><a href="#BoxJs" class="headerlink" title="BoxJs"></a>BoxJs</h4><p><a href="https://chavyleung.gitbook.io/boxjs/" target="_blank" rel="noopener">地址</a></p>
+<p><a href="https://t.me/chavyscripts" target="_blank" rel="noopener">telegram</a></p>
+<p><a href="https://github.com/chavyleung" target="_blank" rel="noopener">Github</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装路径: </span></span><br><span class="line"> ​ 风车 &gt; 重写 &gt; 引用</span><br><span class="line"></span><br><span class="line"><span class="comment"># QuanX 商店版 (AppStore)</span></span><br><span class="line">  https://gitee.com/chavyleung/scripts/raw/master/box/rewrite/boxjs.rewrite.quanx.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># QuanX 测试版 (TestFlight)</span></span><br><span class="line">  https://gitee.com/chavyleung/scripts/raw/master/box/rewrite/boxjs.rewrite.quanx.tf.conf</span><br></pre></td></tr></table></figure>
+
+<h4 id="NobyDa大神脚本"><a href="#NobyDa大神脚本" class="headerlink" title="NobyDa大神脚本"></a>NobyDa大神脚本</h4><p><a href="https://github.com/NobyDa/Script/tree/master" target="_blank" rel="noopener">Github地址</a></p>
+<h4 id="其他脚本源"><a href="#其他脚本源" class="headerlink" title="其他脚本源"></a>其他脚本源</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. https://t.me/meetashare</span><br><span class="line">2. https://github.com/yichahucha/surge/tree/master  （京东 / 淘宝 商品历史价格显示，Netflix 电影评分显示）</span><br><span class="line">3. https://github.com/chavyleung/scripts 签到狂魔 大佬的地址,  bilibili, 喜马拉雅，腾讯视频 爱奇艺 什么值得买 等）</span><br><span class="line">https://raw.githubusercontent.com/ConnersHua/Profiles/master/Quantumult/X/Rewrite.conf</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="SSID"><a href="#SSID" class="headerlink" title="SSID"></a>SSID</h3><p>若你家里是软路由，全局翻墙模式</p>
+<p>你不喜欢你在家的时候，还用QX代理运行，SSID就可以达到这种效果</p>
+<p>它会识别家里的WIFI的SSID名称，走的就是直连模式</p>
+<h2 id="八、各种功能"><a href="#八、各种功能" class="headerlink" title="八、各种功能"></a>八、各种功能</h2><h3 id="京东"><a href="#京东" class="headerlink" title="京东"></a>京东</h3><p>京东需要获取Cookies</p>
+<p>各种京东薅羊毛工具：<a href="https://github.com/lxk0301/scripts" target="_blank" rel="noopener">lxk0301 Github</a></p>
+<p>用脚本获取Cookies时，需要开启调试的开关</p>
+<h3 id="解锁TikTok"><a href="#解锁TikTok" class="headerlink" title="解锁TikTok"></a>解锁TikTok</h3><p>无需下载旧版TikTok，开启配置，直接可以使用！！！</p>
+<p>配置列表：<a href="https://github.com/DivineEngine/Profiles/tree/master/Quantumult/Rewrite/Unlock" target="_blank" rel="noopener">这里</a></p>
+<p><strong>注意：TikTok 区域解锁重写一次只可启用一个，不可多个地区同时使用。</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 详细地址</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># JP</span></span><br><span class="line">https://raw.githubusercontent.com/DivineEngine/Profiles/master/Quantumult/Rewrite/Unlock/TikTokJP.conf</span><br><span class="line"><span class="comment"># KR</span></span><br><span class="line">https://raw.githubusercontent.com/DivineEngine/Profiles/master/Quantumult/Rewrite/Unlock/TikTokKR.conf</span><br><span class="line"><span class="comment"># TW</span></span><br><span class="line">https://raw.githubusercontent.com/DivineEngine/Profiles/master/Quantumult/Rewrite/Unlock/TikTokTW.conf</span><br><span class="line"><span class="comment"># UK</span></span><br><span class="line">https://raw.githubusercontent.com/DivineEngine/Profiles/master/Quantumult/Rewrite/Unlock/TikTokUK.conf</span><br><span class="line"><span class="comment"># US</span></span><br><span class="line">https://raw.githubusercontent.com/DivineEngine/Profiles/master/Quantumult/Rewrite/Unlock/TikTokUS.conf</span><br></pre></td></tr></table></figure>
+
+<h2 id="九、技巧"><a href="#九、技巧" class="headerlink" title="九、技巧"></a>九、技巧</h2><h3 id="1-高效管理节点"><a href="#1-高效管理节点" class="headerlink" title="1. 高效管理节点"></a>1. 高效管理节点</h3><h4 id="为什么需要"><a href="#为什么需要" class="headerlink" title="为什么需要"></a>为什么需要</h4><p>机场的订阅地址都是，一个订阅地址含有各种地区（日本、美国等）或功能（奈飞等）的节点列表</p>
+<p>这样做设置时很麻烦，需要一个个的给他们分类</p>
+<p>那能不能把订阅地址的节点列表，分开来，让他能实现，一个订阅地址一个地区（功能），这样的话，设置地区或功能时，只需要统一设置成一个订阅地址就可以了。</p>
+<ul>
+<li>机场订阅地址转换策略组方法</li>
+</ul>
+<p><code>如何解决</code></p>
+<p>通过工具，把一个订阅地址，按你的要求分类，拆分成多个订阅地址，方便自己的设置</p>
+<p><del>方法一：<a href="https://www.youtube.com/watch?v=v0v7o-fohOg&ab_channel=HellCell" target="_blank" rel="noopener">视频教程</a>，视频中的地址好像失效了</del></p>
+<p>方法二：利用解析器功能</p>
+<h4 id="解析器的使用"><a href="#解析器的使用" class="headerlink" title="解析器的使用"></a>解析器的使用</h4><p>shadn大佬解析器：<a href="https://github.com/KOP-XIAO/QuantumultX" target="_blank" rel="noopener">github</a></p>
+<p>若是通过 <a href="#添加策略组方法">policy方法</a>添加策略组 ，则可以下面的(正则表达式)方法来筛选节点</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 筛选出带v4的节点</span></span><br><span class="line"></span><br><span class="line">[policy]</span><br><span class="line">static=Maying,resource-tag-regex=魅影，img-url=xxxx.png</span><br><span class="line"></span><br><span class="line">改为</span><br><span class="line">[policy]</span><br><span class="line">static=Maying,resource-tag-regex=魅影，server-tag-regex=v4,img-url=xxxx.png</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>筛选出带v4的节点：<code>server-tag-regex=v4</code></li>
+<li>只剔除V4节点：<code>server-tag-regex=^((?!v4).)*$</code> </li>
+</ul>
+<h5 id="常用正则表达式-筛选公式"><a href="#常用正则表达式-筛选公式" class="headerlink" title="常用正则表达式 筛选公式"></a>常用正则表达式 筛选公式</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">常用正则表达筛选公式：</span><br><span class="line">(A).*(B)             节点名既有 A又有 B</span><br><span class="line">(A)|(B)              节点名有 A 或者 B  </span><br><span class="line">^((?!A).)*$            节点名不含有 A</span><br><span class="line">^((?!A|B).)*$            节点名不含有 A,不含有B</span><br><span class="line">(?!.*(A)).*(B)         节点名不含有 A，同时含有 B</span><br></pre></td></tr></table></figure>
+
+<h5 id="机场筛选"><a href="#机场筛选" class="headerlink" title="机场筛选"></a>机场筛选</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[policy]</span><br><span class="line">static=Maying,resource-tag-regex=(魅影)|(N3RO)，server-tag-regex=(HK)|(香港),img-url=xxxx.png</span><br><span class="line"></span><br><span class="line"><span class="comment"># 筛选魅影和N3RO机场中，含有HK和香港关键字的节点</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="2-隐藏-VPN图标"><a href="#2-隐藏-VPN图标" class="headerlink" title="2. 隐藏 VPN图标"></a>2. 隐藏 VPN图标</h3><p><code>QX图标</code> - 最下面的<code>其他设置 - 打开 排除路由0.0.0.0/31</code></p>
+<h3 id="3-切换最上方的策略组图标排列方式"><a href="#3-切换最上方的策略组图标排列方式" class="headerlink" title="3. 切换最上方的策略组图标排列方式"></a>3. 切换最上方的策略组图标排列方式</h3><p>策略组那一栏图标，<code>向右滑动到最左边</code></p>
+<ul>
+<li>继续用力一拉，即可进入单行的精简模式</li>
+<li>再拉一次，进入双行精简模式</li>
+<li>再拉一次，退回 普通显示模式</li>
+</ul>
+<p>更好图标栏的显示模式同时，<code>QX图标</code>里的设置内容，也会随着切换</p>
+<h3 id="4-图标组更改"><a href="#4-图标组更改" class="headerlink" title="4. 图标组更改"></a>4. 图标组更改</h3><h4 id="图标要求："><a href="#图标要求：" class="headerlink" title="图标要求："></a><strong>图标要求：</strong></h4><ol>
+<li>PNG格式</li>
+<li>图片分辨率 108*108</li>
+<li>最好含有通道（更好融合背景）</li>
+</ol>
+<h4 id="图标更改"><a href="#图标更改" class="headerlink" title="图标更改"></a>图标更改</h4><ol>
+<li>图标存放地址：iCloud中QX的Images文件夹内，记录好名字(不含后缀)</li>
+<li>编辑 - <code>配置文件</code> - 修改 <code>[policy] 中的 ssid -  img-url=</code> - 改为刚刚的图片名称.PNG</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#推荐远程，本地方法不推荐所以不做讲解</span></span><br><span class="line">在 Quantumult X 的 “配置文件 - 编辑” 中找到 [policy] 下的策略组字段，并在该策略组的最后一个节点后方加上 </span><br><span class="line">img-url=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/IconName.png</span><br><span class="line"></span><br><span class="line">例：static=netflix, proxy, img-url=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Netflix.png</span><br><span class="line"></span><br><span class="line">同理如果是 google 的，就改成 img-url=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Google.png</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h4><ol>
+<li>免费icon图标<a href="https://icons8.cn/icons" target="_blank" rel="noopener">网站</a></li>
+<li><a href="https://github.com/Koolson/Qure" target="_blank" rel="noopener">Qure的图标组</a></li>
+</ol>
+<h3 id="5-更新GeoLite2数据库"><a href="#5-更新GeoLite2数据库" class="headerlink" title="5. 更新GeoLite2数据库"></a>5. 更新GeoLite2数据库</h3><p>这个数据库的作用是辅助软件进行分流判定，提高规则命中的准确性。</p>
+<p>可点击首页功能键，再点击右上角三个点，向下找到 GeoLite2 更新按钮。</p>
+<p>建议每月更新一次。</p>
+<blockquote>
+<p>参考：</p>
+<p><a href="https://www.youtube.com/watch?v=laqB-SMHO1w&ab_channel=HellCell" target="_blank" rel="noopener">Quantumult X 从小白到高玩，完整教学！</a></p>
+<p><a href="https://www.notion.so/Quantumult-X-1d32ddc6e61c4892ad2ec5ea47f00917" target="_blank" rel="noopener">Quantumult X 不完全教程</a> - 更多进阶玩法，看这里</p>
+<p><a href="https://merlinblog.xyz/wiki/quanx.html" target="_blank" rel="noopener">https://merlinblog.xyz/wiki/quanx.html</a></p>
+</blockquote>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Gkon</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://gxkon.top/posts/fffbb129/">http://gxkon.top/posts/fffbb129/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://gxkon.top" target="_blank">Gxkon's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Quantumult-X/">Quantumult X</a></div><div class="post_share"><div class="social-share" data-image="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/10/7/68coffee-5567269_1280.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/posts/fa17e296/"><img class="prev_cover" data-src="/Pic/post.jpg" onerror="onerror=null;src='/Pic/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">通俗易懂之 vlan、三层交换机、网关、DNS、子网掩码、MAC地址「转」</div></div></a></div><div class="next-post pull_right"><a href="/posts/7f389fce/"><img class="next_cover" data-src="/Pic/post.jpg" onerror="onerror=null;src='/Pic/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">VPS测速</div></div></a></div></nav><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i><span> 评论</span></div><div id="gitalk-container"></div><script>var gitalk = new Gitalk({
+  clientID: '1ce3148e3133bf004c96',
+  clientSecret: '2a1e5c0f4d38387460b916843bfe5cac67ef2d07',
+  repo: 'blankwz.github.io',
+  owner: 'blankwz',
+  admin: ['blankwz'],
+  id: md5(decodeURI(location.pathname)),
+  language: 'zh-CN',
+  perPage: 10,
+  distractionFreeMode: false,
+  pagerDirection: 'last',
+  createIssueManually: false,
+  updateCountCallback: commentCount
+})
+gitalk.render('gitalk-container')
+
+function commentCount(n){
+  try {
+    document.getElementsByClassName('gitalk-comment-count')[0].innerHTML= n
+  } catch (e) {
+    return false
+  }
+}</script></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By Gkon</div><div class="framework-info"><span>驱动 </span><a href="https://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="阅读模式"></i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">簡</a><i class="darkmode fa fa-moon-o" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><a id="to_comment" href="#post-comment" title="直达评论"><i class="scroll_to_comment fa fa-comments">  </i></a><i class="fa fa-list-ul close" id="mobile-toc-button" title="目录" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@3/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script><script src="/js/third-party/ClickShowText.js"></script></body></html>

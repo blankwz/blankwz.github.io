@@ -1,0 +1,447 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Python中级之Pyinstaller打包成exe | Gxkon's Blog</title><meta name="description" content="Python中级之Pyinstaller打包成exe一、简单使用1. 安装pyinstaller1pip install pyinstaller  2. 常用参数 尽量把打包后的文件放在英文目录下 使用-d制作出来的exe比使用-f的快很多，因为-f把所有dll文件都打包到一个exe中了 生成的exe在dist文件夹中  12345678910111213141516171819常用参数说明：–i"><meta name="keywords" content="Python"><meta name="author" content="Gkon"><meta name="copyright" content="Gkon"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="dns-prefetch" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="crossorigin"/><link rel="dns-prefetch" href="https://fonts.googleapis.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="dns-prefetch" href="//busuanzi.ibruce.info"/><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Python中级之Pyinstaller打包成exe"><meta name="twitter:description" content="Python中级之Pyinstaller打包成exe一、简单使用1. 安装pyinstaller1pip install pyinstaller  2. 常用参数 尽量把打包后的文件放在英文目录下 使用-d制作出来的exe比使用-f的快很多，因为-f把所有dll文件都打包到一个exe中了 生成的exe在dist文件夹中  12345678910111213141516171819常用参数说明：–i"><meta name="twitter:image" content="http://gxkon.top/Pic/post.jpg"><meta property="og:type" content="article"><meta property="og:title" content="Python中级之Pyinstaller打包成exe"><meta property="og:url" content="http://gxkon.top/posts/dcbec147/"><meta property="og:site_name" content="Gxkon's Blog"><meta property="og:description" content="Python中级之Pyinstaller打包成exe一、简单使用1. 安装pyinstaller1pip install pyinstaller  2. 常用参数 尽量把打包后的文件放在英文目录下 使用-d制作出来的exe比使用-f的快很多，因为-f把所有dll文件都打包到一个exe中了 生成的exe在dist文件夹中  12345678910111213141516171819常用参数说明：–i"><meta property="og:image" content="http://gxkon.top/Pic/post.jpg"><meta property="article:published_time" content="2020-11-07T13:40:07.000Z"><meta property="article:modified_time" content="2021-01-23T13:54:01.712Z"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>var autoChangeMode = '1'
+var t = Cookies.get("theme")
+if (autoChangeMode == '1'){
+  var isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+  var isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+  var isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined){
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport){
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour < 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+  }
+  } else if (t == 'light') activateLightMode()
+  else activateDarkMode()
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="canonical" href="http://gxkon.top/posts/dcbec147/"><link rel="prev" title="NotePad++使用技巧" href="http://gxkon.top/posts/df149c86/"><link rel="next" title="玩转京东自动化脚本" href="http://gxkon.top/posts/39c91c27/"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script><script src="https://cdn.jsdelivr.net/npm/blueimp-md5/js/md5.min.js"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: {"text":"本人,超帅,打钱","fontSize":"15px"},
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  highlightShrink: 'false',
+  isFontAwesomeV5: false,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false
+  
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isSidebar: true  
+  }</script><noscript><style>
+#page-header {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 4.2.0"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/Pic/avatar.png" onerror="onerror=null;src='/Pic/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">156</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">83</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">54</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 娱乐</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li></ul></div></div></div></div><i class="fa fa-arrow-right on" id="toggle-sidebar" aria-hidden="true">     </i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Python中级之Pyinstaller打包成exe"><span class="toc-text">Python中级之Pyinstaller打包成exe</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、简单使用"><span class="toc-text">一、简单使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-安装pyinstaller"><span class="toc-text">1. 安装pyinstaller</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-常用参数"><span class="toc-text">2. 常用参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-打包文件成exe程序"><span class="toc-text">3. 打包文件成exe程序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1）-F-打包-成单个文件"><span class="toc-text">1）-F 打包 成单个文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2）-W-打包-不含控制台"><span class="toc-text">2） -W 打包 不含控制台</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-有依赖文件如何打包后可以运行-只打包主文件"><span class="toc-text">4. 有依赖文件如何打包后可以运行 - 只打包主文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-安装UPX（可选）"><span class="toc-text">5. 安装UPX（可选）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-所有参数"><span class="toc-text">6. 所有参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-高级"><span class="toc-text">7. 高级</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#打包指定模块"><span class="toc-text">打包指定模块</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#打包指定文件"><span class="toc-text">打包指定文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#打包后调用静态文件"><span class="toc-text">打包后调用静态文件</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、打包需要的资源及依赖文件-spec方法"><span class="toc-text">二、打包需要的资源及依赖文件 - spec方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#0-打包前须知"><span class="toc-text">0 打包前须知</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-流程："><span class="toc-text">1 流程：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-两种形式"><span class="toc-text">2 两种形式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#文件夹形式的可执行程序"><span class="toc-text">文件夹形式的可执行程序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#单个文件形式的可执行程序"><span class="toc-text">单个文件形式的可执行程序</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-示例"><span class="toc-text">3 示例</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#打包后加入某一个dll"><span class="toc-text">打包后加入某一个dll</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#打包后加入某些py文件"><span class="toc-text">打包后加入某些py文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#主程序需外部参数文件，例如json-、txt"><span class="toc-text">主程序需外部参数文件，例如json 、txt</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#完整-spec文件"><span class="toc-text">完整 .spec文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#我完整的-spec"><span class="toc-text">我完整的 .spec</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#我的文件树"><span class="toc-text">我的文件树</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#需求"><span class="toc-text">需求</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#spec文件设置"><span class="toc-text">.spec文件设置</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-开发环境和生产环境"><span class="toc-text">4 开发环境和生产环境</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#同时在两种环境下测试"><span class="toc-text">同时在两种环境下测试</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#打包后，获取当前路径"><span class="toc-text">打包后，获取当前路径</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他"><span class="toc-text">其他</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#如果是图片"><span class="toc-text">如果是图片</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、打包后文件太大"><span class="toc-text">三、打包后文件太大</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#教程一"><span class="toc-text">教程一</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-去除不必要的库"><span class="toc-text">1. 去除不必要的库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-共享依赖"><span class="toc-text">2. 共享依赖</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-虚拟环境"><span class="toc-text">3. 虚拟环境</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-UPX压缩大法"><span class="toc-text">4.  UPX压缩大法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-python-embedded-嵌入式python版本"><span class="toc-text">5. python-embedded 嵌入式python版本</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#教程二"><span class="toc-text">教程二</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#流程"><span class="toc-text">流程</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、错误合集"><span class="toc-text">四、错误合集</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#0）调试错误"><span class="toc-text">0）调试错误</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1）TypeError-expected-str-bytes-or-os-PathLike-object-not-NoneType"><span class="toc-text">1）TypeError: expected str, bytes or os.PathLike object, not NoneType</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2）failed-to-execute-script"><span class="toc-text">2）failed to execute script</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3）引用本地py文件问题：no-module-named"><span class="toc-text">3）引用本地py文件问题：no module named</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4）为exe添加图标出错"><span class="toc-text">4）为exe添加图标出错</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5）切换Python版本出错：ImportError-unable-to-find-Qt5Core-dll-on-PATH"><span class="toc-text">5）切换Python版本出错：ImportError: unable to find Qt5Core.dll on PATH</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6）使用UPX错误，vcruntime140-dll没有被指定在Windows上运行"><span class="toc-text">6）使用UPX错误，vcruntime140.dll没有被指定在Windows上运行</span></a></li></ol></li></ol></li></ol></div></div></div><div id="body-wrap"><div class="post-bg" id="nav" style="background-image: url(/Pic/post.jpg)"><div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">Gxkon's Blog</a></span><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 娱乐</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li></ul></div></div><span class="toggle-menu close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span></span></div><div id="post-info"><div id="post-title"><div class="posttitle">Python中级之Pyinstaller打包成exe</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2020-11-07 21:40:07"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2020-11-07</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2021-01-23 21:54:01"><i class="fa fa-history" aria-hidden="true"></i> 更新于 2021-01-23</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Python/">Python</a><i class="fa fa-angle-right post-meta__separator" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Python/%E4%B8%AD%E7%BA%A7/">中级</a></span></div><div class="meta-secondline"> </div><div class="meta-thirdline"><span class="post-meta-pv-cv"><i class="fa fa-eye post-meta__icon" aria-hidden="true"> </i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"><span class="post-meta__separator">|</span><i class="post-meta__icon fa fa-comment-o" aria-hidden="true"></i><span>评论数:</span><a href="/posts/dcbec147/#post-comment"><span class="gitalk-comment-count comment-count"></span></a></span></div></div></div></div><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h1 id="Python中级之Pyinstaller打包成exe"><a href="#Python中级之Pyinstaller打包成exe" class="headerlink" title="Python中级之Pyinstaller打包成exe"></a>Python中级之Pyinstaller打包成exe</h1><h2 id="一、简单使用"><a href="#一、简单使用" class="headerlink" title="一、简单使用"></a>一、简单使用</h2><h3 id="1-安装pyinstaller"><a href="#1-安装pyinstaller" class="headerlink" title="1. 安装pyinstaller"></a><strong>1. 安装pyinstaller</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pyinstaller</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-常用参数"><a href="#2-常用参数" class="headerlink" title="2. 常用参数"></a>2. 常用参数</h3><ul>
+<li>尽量把打包后的文件放在英文目录下</li>
+<li>使用-d制作出来的exe比使用-f的快很多，因为-f把所有dll文件都打包到一个exe中了</li>
+<li>生成的exe在dist文件夹中</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">常用参数说明：</span><br><span class="line">–icon=图标路径</span><br><span class="line">-F 打包成一个exe文件</span><br><span class="line">-w 使用窗口，无控制台</span><br><span class="line">-c 使用控制台，无窗口</span><br><span class="line">-D 创建一个目录，里面包含exe以及其他一些依赖性文件</span><br><span class="line">pyinstaller -h 来查看参数</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打包成单个文件夹</span></span><br><span class="line">pyinstaller 文件名.py <span class="comment">#完成后在dist文件夹下</span></span><br><span class="line"><span class="comment"># 打包为单个文件 -F</span></span><br><span class="line">pyinstaller -F 文件名.py</span><br><span class="line"><span class="comment"># 不要命令行 -w</span></span><br><span class="line">pyinstaller -F -w 文件名.py</span><br><span class="line"><span class="comment"># 换图标</span></span><br><span class="line">pyinstaller -F -w -i 图标路径（路径要\\） 文件名.py</span><br><span class="line"></span><br><span class="line"><span class="comment"># 多个.py文件打包命令格式如下：</span></span><br><span class="line">pyinstaller [主文件] -p [其他文件1] -p [其他文件2] --hidden-import [自建模块1] --hidden-import [自建模块2]</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-打包文件成exe程序"><a href="#3-打包文件成exe程序" class="headerlink" title="3. 打包文件成exe程序"></a><strong>3. 打包文件成exe程序</strong></h3><ol>
+<li><strong>将cmd的目录切换至需要打包的py文件目录下</strong></li>
+<li>执行下面的打包命令</li>
+<li>打包一遍以后，会在py文件目录下生成spec文件，是一个打包脚本<ul>
+<li>编辑其中内容实现高级功能</li>
+<li>也可以直接打包spec文件</li>
+</ul>
+</li>
+</ol>
+<h4 id="1）-F-打包-成单个文件"><a href="#1）-F-打包-成单个文件" class="headerlink" title="1）-F 打包 成单个文件"></a>1）-F 打包 成单个文件</h4><p><strong>运行</strong>：会出现 <code>控制台 （cmd的黑框）+ gui窗口</code></p>
+<ul>
+<li><p>py文件夹下打包：<code>pyinstaller -F 文件名.py</code></p>
+</li>
+<li><p>换图标：<code>pyinstaller -F --icon=图标名.ico 文件名.py</code></p>
+</li>
+<li><p>完成后在<code>dist文件夹</code>下</p>
+</li>
+</ul>
+<blockquote>
+<p>如果你的包存在各种依赖，有多个PY文件，而非所有代码都在一个文件中的，不要用这个！！！</p>
+</blockquote>
+<h4 id="2）-W-打包-不含控制台"><a href="#2）-W-打包-不含控制台" class="headerlink" title="2） -W 打包 不含控制台"></a>2） -W 打包 不含控制台</h4><ul>
+<li>py文件夹下打包：<code>pyinstaller -w --icon=myy.ico 文件名.py</code></li>
+<li>生成：会出现很多文件</li>
+<li>也可以搭配 -F使用：<code>pyinstaller -F -w 文件名.py</code></li>
+<li>完成后在<code>dist文件夹</code>下</li>
+</ul>
+<h3 id="4-有依赖文件如何打包后可以运行-只打包主文件"><a href="#4-有依赖文件如何打包后可以运行-只打包主文件" class="headerlink" title="4. 有依赖文件如何打包后可以运行 - 只打包主文件"></a>4. 有依赖文件如何打包后可以运行 - 只打包主文件</h3><blockquote>
+<p>这个方法是偷懒法，如果你其他文件py源码程序不介意给别人看，就用这种</p>
+<p>否则用下放的 [二、打包需要的资源文件 - <code>spec方法</code>](#二、打包需要的资源文件 - <code>spec方法</code>)</p>
+</blockquote>
+<ol>
+<li>先打包主程序，例如 <code>main.py</code>，打包好的程序会在dlist文件夹中</li>
+<li>复制其他的依赖文件：<code>.py、.ini、.json、.jpg、.txt 等等</code>各种文件或者文件夹</li>
+<li>粘贴到dlist文件夹中</li>
+<li>完成！</li>
+</ol>
+<h3 id="5-安装UPX（可选）"><a href="#5-安装UPX（可选）" class="headerlink" title="5. 安装UPX（可选）"></a>5. 安装UPX（可选）</h3><p>如果没有安装UPX，默认打包时会提示 <code>UPX is not available</code>（可在spec中修改成false）</p>
+<ol>
+<li>到<a href="https://upx.github.io/" target="_blank" rel="noopener">官网</a> 下载了UPX</li>
+<li>解压后，只需要 <code>UPX.exe</code>，放入 <code>python\Scripts</code>下 （与 <code>pyinstaller.exe同目录</code>）</li>
+<li>完成</li>
+</ol>
+<h3 id="6-所有参数"><a href="#6-所有参数" class="headerlink" title="6. 所有参数"></a>6. 所有参数</h3><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-F, –onefile</td>
+<td>打包一个单个文件，如果你的代码都写在一个.py文件的话，可以用这个，如果是多个.py文件就别用</td>
+</tr>
+<tr>
+<td>-D, –onedir</td>
+<td>打包多个文件，在dist中生成很多依赖文件，适合以框架形式编写工具代码，我个人比较推荐这样，代码易于维护</td>
+</tr>
+<tr>
+<td>-K, –tk</td>
+<td>在部署时包含 TCL/TK</td>
+</tr>
+<tr>
+<td>-a, –ascii</td>
+<td>不包含编码.在支持Unicode的python版本上默认包含所有的编码.</td>
+</tr>
+<tr>
+<td>-d, –debug</td>
+<td>产生debug版本的可执行文件</td>
+</tr>
+<tr>
+<td>-w,–windowed,–noconsole</td>
+<td>使用Windows子系统执行.当程序启动的时候不会打开命令行(只对Windows有效)</td>
+</tr>
+<tr>
+<td>-c,–nowindowed,–console</td>
+<td>使用控制台子系统执行(默认)(只对Windows有效)pyinstaller -c xxxx.pypyinstaller xxxx.py –console</td>
+</tr>
+<tr>
+<td>-s,–strip</td>
+<td>可执行文件和共享库将run through strip.注意Cygwin的strip往往使普通的win32 Dll无法使用.</td>
+</tr>
+<tr>
+<td>-X, –upx</td>
+<td>如果有UPX安装(执行Configure.py时检测),会压缩执行文件(Windows系统中的DLL也会)(参见note)</td>
+</tr>
+<tr>
+<td>-o DIR, –out=DIR</td>
+<td>指定spec文件的生成目录,如果没有指定,而且当前目录是PyInstaller的根目录,会自动创建一个用于输出(spec和生成的可执行文件)的目录.如果没有指定,而当前目录不是PyInstaller的根目录,则会输出到当前的目录下.</td>
+</tr>
+<tr>
+<td>-p DIR, –path=DIR</td>
+<td>设置导入路径(和使用PYTHONPATH效果相似).可以用路径分割符(Windows使用分号,Linux使用冒号)分割,指定多个目录.也可以使用多个-p参数来设置多个导入路径，让pyinstaller自己去找程序需要的资源</td>
+</tr>
+<tr>
+<td>–icon=&lt;FILE.ICO&gt;</td>
+<td>将file.ico添加为可执行文件的资源(只对Windows系统有效)，改变程序的图标 pyinstaller -i ico路径 xxxxx.py</td>
+</tr>
+<tr>
+<td>–icon=&lt;FILE.EXE,N&gt;</td>
+<td>将file.exe的第n个图标添加为可执行文件的资源(只对Windows系统有效)</td>
+</tr>
+<tr>
+<td>-v FILE, –version=FILE</td>
+<td>将verfile作为可执行文件的版本资源(只对Windows系统有效)</td>
+</tr>
+<tr>
+<td>-n NAME, –name=NAME</td>
+<td>可选的项目(产生的spec的)名字.如果省略,第一个脚本的主文件名将作为spec的名字</td>
+</tr>
+</tbody></table>
+<h3 id="7-高级"><a href="#7-高级" class="headerlink" title="7. 高级"></a>7. 高级</h3><h4 id="打包指定模块"><a href="#打包指定模块" class="headerlink" title="打包指定模块"></a>打包指定模块</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#####      命令行模式：</span></span><br><span class="line"></span><br><span class="line"> --hidden-import Modulename 可以多次使用</span><br><span class="line">例：--hidden-import docx --hidden-import Pillow</span><br><span class="line"></span><br><span class="line"><span class="comment">#####      修改spec模式：</span></span><br><span class="line"></span><br><span class="line">hiddenimports=[<span class="string">'docx'</span>],</span><br><span class="line">例：hiddenimports=[<span class="string">'docx'</span>, <span class="string">'Pillow'</span>],</span><br></pre></td></tr></table></figure>
+
+<h4 id="打包指定文件"><a href="#打包指定文件" class="headerlink" title="打包指定文件"></a>打包指定文件</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#####      命令行模式：</span></span><br><span class="line">--add-data file  可以多次使用，注意格式为引号里面有一个文件名，有一个分号，一个点。</span><br><span class="line">例： --add-data <span class="string">"default.docx;."</span></span><br><span class="line"><span class="comment">#####      修改spec模式：</span></span><br><span class="line">datas=[(<span class="string">'default.docx'</span>, <span class="string">'.'</span>)],</span><br></pre></td></tr></table></figure>
+
+<h4 id="打包后调用静态文件"><a href="#打包后调用静态文件" class="headerlink" title="打包后调用静态文件"></a>打包后调用静态文件</h4><p>详细看</p>
+<h2 id="二、打包需要的资源及依赖文件-spec方法"><a href="#二、打包需要的资源及依赖文件-spec方法" class="headerlink" title="二、打包需要的资源及依赖文件 - spec方法"></a>二、打包需要的资源及依赖文件 - <code>spec方法</code></h2><p>更多spec文件用法，参考<a href="https://pyinstaller.readthedocs.io/en/stable/spec-files.html" target="_blank" rel="noopener">官方</a></p>
+<h3 id="0-打包前须知"><a href="#0-打包前须知" class="headerlink" title="0 打包前须知"></a>0 打包前须知</h3><p>1、除python自带的模块、包之外（自带是指，pip install xxx 安装上的），其他的例如dll文件类，pyinstaller不负责打包进去，所以需要指定文件所在路径。帮助打包，否则importerror。<br>2、所有的外部参数，都可以在第一次打包后的scripts文件夹下的spec文件内修改。</p>
+<h3 id="1-流程："><a href="#1-流程：" class="headerlink" title="1 流程："></a><strong>1 流程：</strong></h3><ol>
+<li><strong>生成spec文件</strong></li>
+</ol>
+<ul>
+<li><code>pyinstaller yourprogram.py</code><ul>
+<li>或者 <code>pyinstaller -makespec yourprogram.py</code> （推荐）</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li><p><strong>在spec文件中，手工写入数据文件等路径</strong></p>
+<ul>
+<li>修改spec文件，仅调整datas列表参数，其他地方不动</li>
+<li>修改<code>datas = [(&#39;xxxx.ini&#39;, &#39;.&#39;  )],</code><ul>
+<li>或 <code>datas=[(&#39;xxx1.dll&#39;, &quot;.&quot;), (&#39;xxx2.dll&#39;, &quot;.&quot;), (&#39;xxx3.csv&#39;, &quot;.&quot;)],</code></li>
+<li>或 <code>datas=[ (&#39;src/README.txt&#39;, &#39;.&#39;) ],</code></li>
+<li>前一个参数是文件名，后一个参数是相对路径（这里的 <code>.</code> 为当前目录下）</li>
+<li><code>(&#39;欲打包的源文件路径（相对、绝对均可）&#39;, &#39;.（打包后对应的程序内的路径，一个.代表打包至程序运行时根目录）&#39;)</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>然后通过spec生成可执行程序</strong></p>
+<ul>
+<li><code>pyinstaller yourprogram.spec</code></li>
+</ul>
+</li>
+</ol>
+<h3 id="2-两种形式"><a href="#2-两种形式" class="headerlink" title="2 两种形式"></a>2 两种形式</h3><h4 id="文件夹形式的可执行程序"><a href="#文件夹形式的可执行程序" class="headerlink" title="文件夹形式的可执行程序"></a>文件夹形式的可执行程序</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span>生成spec文件</span><br><span class="line">pyinstaller -D student.py</span><br><span class="line"><span class="number">2.</span></span><br><span class="line">手工修改上述spec文件,datas 中的路径</span><br><span class="line"><span class="number">3.</span>通过spec生成</span><br><span class="line">pyinstaller student.spec</span><br></pre></td></tr></table></figure>
+
+<h4 id="单个文件形式的可执行程序"><a href="#单个文件形式的可执行程序" class="headerlink" title="单个文件形式的可执行程序"></a>单个文件形式的可执行程序</h4><ul>
+<li><p><strong>基本步骤同上，仅需将参数-D，调整为-F</strong></p>
+</li>
+<li><p>但因为单个exe文件类似zip文件，运行时有解压动作。</p>
+<ul>
+<li>故此需要修改源码，即：读写txt文件代码。</li>
+<li><code>如果</code><strong>文件夹形式</strong>的源代码是：<code>open(&#39;students.txt&#39;, &#39;a&#39;)</code></li>
+<li>那<strong>单文件形式</strong>的源代码要这么写</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#代码一</span></span><br><span class="line">open(resource_path(<span class="string">'students.txt'</span>), <span class="string">'a'</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">resource_path</span><span class="params">(relative_path)</span>:</span></span><br><span class="line">    <span class="string">""" Get absolute path to resource, works for dev and for PyInstaller """</span></span><br><span class="line">    base_path = getattr(sys, <span class="string">'_MEIPASS'</span>, os.path.dirname(os.path.abspath(__file__)))</span><br><span class="line">    <span class="keyword">return</span> os.path.join(base_path, relative_path)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 代码二</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">resource_path</span><span class="params">(relative_path)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> getattr(sys, <span class="string">'frozen'</span>, <span class="literal">False</span>):</span><br><span class="line">        base_path = sys._MEIPASS</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        base_path = os.path.abspath(<span class="string">"."</span>)</span><br><span class="line">    <span class="keyword">return</span> os.path.join(base_path, relative_path)</span><br><span class="line"></span><br><span class="line">filename = resource_path(os.path.join(<span class="string">"res"</span>,<span class="string">"a.txt"</span>))</span><br><span class="line">print(filename)</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(filename) <span class="keyword">as</span> f:</span><br><span class="line">    lines = f.readlines()</span><br><span class="line">    print(lines)</span><br><span class="line">    f.close()</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-示例"><a href="#3-示例" class="headerlink" title="3 示例"></a>3 示例</h3><h4 id="打包后加入某一个dll"><a href="#打包后加入某一个dll" class="headerlink" title="打包后加入某一个dll"></a>打包后加入某一个dll</h4><p>比如导入 <code>d:\\test\\need.dll</code></p>
+<ol>
+<li>编辑生成的  <code>xxxx.spec</code>文件</li>
+<li>修改 <code>datas=[]</code> 为 <code>datas=[(&#39;D:\\test\\need1.dll&#39;,&#39;.&#39;)],</code></li>
+<li>若 发现显示“NoModuleNamed…”或者显示找不到dll<ul>
+<li>则继续将dll的文件路径添加到pathex内</li>
+<li><code>pathex=[&#39;D:\\test\\need1.dll&#39;]</code></li>
+</ul>
+</li>
+<li>再打包 <code>pyinstaller -F xxxx.spec</code></li>
+</ol>
+<h4 id="打包后加入某些py文件"><a href="#打包后加入某些py文件" class="headerlink" title="打包后加入某些py文件"></a>打包后加入某些py文件</h4><p>主程序为：test_2.py，但是需要用到 class_for_test_2_1.py 和class_for_test_2_2.py</p>
+<ol>
+<li><p>修改 生成的 <code>test_2.spec</code> 文件</p>
+</li>
+<li><p>修改  <code>a = Analysis([&#39;test_2.py&#39;]</code>中</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = Analysis([<span class="string">'test_2.py'</span>,</span><br><span class="line">		<span class="string">'C:\\test\\class_for_test_2_1.py'</span>,</span><br><span class="line">		<span class="string">'C:\\test\\class_for_test_2_2.py'</span>],</span><br><span class="line">		...</span><br><span class="line">		...</span><br><span class="line">		...</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>再打包 <code>pyinstaller -F test_2.spec</code></p>
+</li>
+</ol>
+<h4 id="主程序需外部参数文件，例如json-、txt"><a href="#主程序需外部参数文件，例如json-、txt" class="headerlink" title="主程序需外部参数文件，例如json 、txt"></a>主程序需外部参数文件，例如json 、txt</h4><p>看下一条  [开发环境和生产环境](#4 开发环境和生产环境)</p>
+<h4 id="完整-spec文件"><a href="#完整-spec文件" class="headerlink" title="完整 .spec文件"></a>完整 .spec文件</h4><ol>
+<li>第一个列表中写所有的py文件，与main一个文件夹的可以直接写文件名，不一个文件夹的需要写完整的文件路径。</li>
+<li>datas是静态资源，其中的元素是tuple类型<ol>
+<li>第一个参数是python项目中data文件（非py文件）的路径，</li>
+<li>第二个参数是data在exe中保存此资源的文件夹名，要和项目中的文件夹名相同</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- mode: python -*-</span></span><br><span class="line">block_cipher = None</span><br><span class="line"> </span><br><span class="line">a = Analysis([<span class="string">'main.py'</span>, <span class="string">'monitor.py'</span>,  </span><br><span class="line"><span class="string">'E:\\py_project\\test_wpf_python_msg\\src\\recognition_module\\caption_recognizer.py'</span>, </span><br><span class="line"><span class="string">'E:\\py_project\\test_wpf_python_msg\\src\\recognition_module\\image_recognizer.py'</span>,</span><br><span class="line"><span class="string">'E:\\py_project\\test_wpf_python_msg\\src\\recognition_module\\image_vectorizer.py'</span>,</span><br><span class="line"><span class="string">'E:\\py_project\\test_wpf_python_msg\\src\\recognition_module\\network2.py'</span>,</span><br><span class="line"><span class="string">'E:\\py_project\\test_wpf_python_msg\\src\\recognition_module\\test_fun.py'</span>,</span><br><span class="line"><span class="string">'E:\\py_project\\test_wpf_python_msg\\src\\recognition_module\\unicom_area.py'</span>,</span><br><span class="line"><span class="string">'E:\\py_project\\test_wpf_python_msg\\src\\recognition_module\\unicom_area_finder.py'</span>,</span><br><span class="line"><span class="string">'E:\\py_project\\test_wpf_python_msg\\src\\recognition_module\\unicom_area_include_caption_judger.py'</span>,</span><br><span class="line"><span class="string">'E:\\py_project\\test_wpf_python_msg\\src\\recognition_module\\value_vectorizer.py'</span>],</span><br><span class="line">             pathex=[<span class="string">'E:\\py_project\\test_wpf_python_msg'</span>],</span><br><span class="line">             binaries=[],</span><br><span class="line">             datas=[(<span class="string">'E:\\py_project\\test_wpf_python_msg\\images'</span>, <span class="string">'images'</span>),</span><br><span class="line">			(<span class="string">'E:\\py_project\\test_wpf_python_msg\\network_parameters'</span>, <span class="string">'network_parameters'</span>)],</span><br><span class="line">             hiddenimports=[],</span><br><span class="line">             hookspath=[],</span><br><span class="line">             runtime_hooks=[],</span><br><span class="line">             excludes=[],</span><br><span class="line">             win_no_prefer_redirects=False,</span><br><span class="line">             win_private_assemblies=False,</span><br><span class="line">             cipher=block_cipher)</span><br><span class="line">pyz = PYZ(a.pure, a.zipped_data,</span><br><span class="line">             cipher=block_cipher)</span><br><span class="line">exe = EXE(pyz,</span><br><span class="line">          a.scripts,</span><br><span class="line">          exclude_binaries=True,</span><br><span class="line">          name=<span class="string">'main'</span>,</span><br><span class="line">          debug=False,</span><br><span class="line">          strip=False,</span><br><span class="line">          upx=True,</span><br><span class="line">          console=True )</span><br><span class="line">coll = COLLECT(exe,</span><br><span class="line">               a.binaries,</span><br><span class="line">               a.zipfiles,</span><br><span class="line">               a.datas,</span><br><span class="line">               strip=False,</span><br><span class="line">               upx=True,</span><br><span class="line">               name=<span class="string">'main'</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="我完整的-spec"><a href="#我完整的-spec" class="headerlink" title="我完整的 .spec"></a>我完整的 .spec</h4><h5 id="我的文件树"><a href="#我的文件树" class="headerlink" title="我的文件树"></a><strong>我的文件树</strong></h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">C:.</span><br><span class="line">│  autofill.ini</span><br><span class="line">│  Data.json</span><br><span class="line">│  favicon.ico</span><br><span class="line">│  main.spec</span><br><span class="line">│  vpn.py</span><br><span class="line">│  vpn.spec</span><br><span class="line">│  vpnconfig.ini</span><br><span class="line">│  </span><br><span class="line">│          </span><br><span class="line">├─config</span><br><span class="line">│      anping.ini</span><br><span class="line">│      baishui.ini</span><br><span class="line">│      </span><br><span class="line">│                  </span><br><span class="line">├─svconfig</span><br><span class="line">│      donglin.ini</span><br><span class="line">│      dongxiang.ini</span><br><span class="line">│      gaoxin.ini</span><br><span class="line">│      svconfig.ini</span><br><span class="line">│      </span><br><span class="line">├─utils</span><br><span class="line">│  │  checkSoft.py</span><br><span class="line">│  │  ComboBox_Pinyin.py</span><br><span class="line">│  │  config.py</span><br><span class="line">│  │  connectMysql.py</span><br><span class="line">│  │  encode.py</span><br><span class="line">│  │  jm2.py</span><br><span class="line">│  │  logs.py</span><br><span class="line">│  │  timeFormat.py</span><br><span class="line">│  │  toPinYin.py</span><br><span class="line">│  │  word.data</span><br><span class="line">│  │  __init__.py</span><br><span class="line">│          </span><br><span class="line">├─v</span><br><span class="line">│  │  alias.ini</span><br><span class="line">│  │  ReadHill.py</span><br><span class="line">│  │  ReadSeco.py</span><br><span class="line">│  │  ReadSV.py</span><br></pre></td></tr></table></figure>
+
+<h5 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h5><ol>
+<li>需要使用config文件夹和svconfig 中的配置文件  （静态文件）</li>
+<li>依赖 utils 文件夹下的 大部分 py文件</li>
+<li>v 文件夹下的 alias.ini （静态文件）</li>
+<li>utils文件夹下的 word.data （静态文件）</li>
+<li>根目录的 vpnconfig.ini 、 favicon.ico  （静态文件）</li>
+</ol>
+<h5 id="spec文件设置"><a href="#spec文件设置" class="headerlink" title=".spec文件设置"></a>.spec文件设置</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- mode: python ; coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line">block_cipher = None</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">a = Analysis([<span class="string">'vpn.py'</span>,<span class="string">'C:\\Users\\Gkon\\OneDrive\\4 Company\\Remote Desktop\\3 vpn\\utils\\ComboBox_Pinyin.py'</span>,<span class="string">'C:\\Users\\Gkon\\OneDrive\\4 Company\\Remote Desktop\\3 vpn\\utils\\config.py'</span>,<span class="string">'C:\\Users\\Gkon\\OneDrive\\4 Company\\Remote Desktop\\3 vpn\\utils\\connectMysql.py'</span>,<span class="string">'C:\\Users\\Gkon\\OneDrive\\4 Company\\Remote Desktop\\3 vpn\\utils\\encode.py'</span>,<span class="string">'C:\\Users\\Gkon\\OneDrive\\4 Company\\Remote Desktop\\3 vpn\\utils\\jm2.py'</span>,<span class="string">'C:\\Users\\Gkon\\OneDrive\\4 Company\\Remote Desktop\\3 vpn\\utils\\logs.py'</span>,<span class="string">'C:\\Users\\Gkon\\OneDrive\\4 Company\\Remote Desktop\\3 vpn\\utils\\timeFormat.py'</span>,<span class="string">'C:\\Users\\Gkon\\OneDrive\\4 Company\\Remote Desktop\\3 vpn\\utils\\toPinYin.py'</span>,<span class="string">'C:\\Users\\Gkon\\OneDrive\\4 Company\\Remote Desktop\\3 vpn\\v\\ReadHill.py'</span>,<span class="string">'C:\\Users\\Gkon\\OneDrive\\4 Company\\Remote Desktop\\3 vpn\\v\\ReadSeco.py'</span>,<span class="string">'C:\\Users\\Gkon\\OneDrive\\4 Company\\Remote Desktop\\3 vpn\\v\\ReadSV.py'</span>],</span><br><span class="line">             pathex=[<span class="string">'C:\\Users\\Gkon\\OneDrive\\4 Company\\Remote Desktop\\3 vpn'</span>],</span><br><span class="line">             binaries=[],</span><br><span class="line">             datas=[(<span class="string">'C:\\Users\\Gkon\\OneDrive\\4 Company\\Remote Desktop\\3 vpn\\utils\\word.data'</span>,<span class="string">'.\\utils'</span>),(<span class="string">'C:\\Users\\Gkon\\OneDrive\\4 Company\\Remote Desktop\\3 vpn\\v\\alias.ini'</span>,<span class="string">'.\\v'</span>),(<span class="string">'C:\\Users\\Gkon\\OneDrive\\4 Company\\Remote Desktop\\3 vpn\\config'</span>,<span class="string">'config'</span>),(<span class="string">'C:\\Users\\Gkon\\OneDrive\\4 Company\\Remote Desktop\\3 vpn\\svconfig'</span>,<span class="string">'svconfig'</span>),(<span class="string">'vpnconfig.ini'</span>,<span class="string">'.'</span>),(<span class="string">'favicon.ico'</span>,<span class="string">'.'</span>)],</span><br><span class="line">             hiddenimports=[],</span><br><span class="line">             hookspath=[],</span><br><span class="line">             runtime_hooks=[],</span><br><span class="line">             excludes=[],</span><br><span class="line">             win_no_prefer_redirects=False,</span><br><span class="line">             win_private_assemblies=False,</span><br><span class="line">             cipher=block_cipher,</span><br><span class="line">             noarchive=False)</span><br><span class="line">pyz = PYZ(a.pure, a.zipped_data,</span><br><span class="line">             cipher=block_cipher)</span><br><span class="line">exe = EXE(pyz,</span><br><span class="line">          a.scripts,</span><br><span class="line">          [],</span><br><span class="line">          exclude_binaries=True,</span><br><span class="line">          name=<span class="string">'vpn'</span>,</span><br><span class="line">          debug=False,</span><br><span class="line">          bootloader_ignore_signals=False,</span><br><span class="line">          strip=False,</span><br><span class="line">          upx=True,</span><br><span class="line">          console=True )</span><br><span class="line">coll = COLLECT(exe,</span><br><span class="line">               a.binaries,</span><br><span class="line">               a.zipfiles,</span><br><span class="line">               a.datas,</span><br><span class="line">               strip=False,</span><br><span class="line">               upx=True,</span><br><span class="line">               upx_exclude=[],</span><br><span class="line">               name=<span class="string">'vpn'</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="4-开发环境和生产环境"><a href="#4-开发环境和生产环境" class="headerlink" title="4 开发环境和生产环境"></a>4 开发环境和生产环境</h3><blockquote>
+<p>运行PyInstaller的打包后的程序模块的属性<code>__file__</code>是不生效的，所以程序需要知道当前是在PyInstaller打包后的环境运行还是在本地环境运行</p>
+</blockquote>
+<ul>
+<li>当程序是属于PyInstaller打包后的，它会在sys模块中添加’frozen’属性<ul>
+<li>pyinstaller工具打包的可执行文件，运行时sys，frozen会被设置成True</li>
+</ul>
+</li>
+<li>通过简单的代码可以知道当前运行环境<ul>
+<li>因此可以<strong>通过sys.frozen的值</strong>区分是开发环境还是打包后的生成环境</li>
+</ul>
+</li>
+</ul>
+<h4 id="同时在两种环境下测试"><a href="#同时在两种环境下测试" class="headerlink" title="同时在两种环境下测试"></a>同时在两种环境下测试</h4><blockquote>
+<p>当我们是本地测试时候，<strong>file</strong>属性就能满足要求，当到当前的配置文件，</p>
+</blockquote>
+<ul>
+<li>当我们是<strong>本地测试</strong>时候，<code>__file__</code>属性就能满足要求，能够轻松得到当前的配置文件路径，</li>
+<li>当使用PyInstaller打包程序<ul>
+<li>选择的是<code>单文件夹打包</code>，PyInstaller会将文件夹的路径信息存储在<code>sys.MEIPASS</code>中</li>
+<li>选择的是<code>单文件打包</code>，<code>sys.MEIPASS</code>的值就是程序运行时创建<code>_MEIxxxxxx临时目录</code>的绝对路径。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#下面的方法， 当程序不管是以PyInstaller打包后形式运行，还是本地测试，都能找到正确的配置文件</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">if</span> getattr( sys, <span class="string">'frozen'</span>, <span class="literal">False</span> ) :</span><br><span class="line">        <span class="comment"># running in a bundle</span></span><br><span class="line"><span class="keyword">else</span> :</span><br><span class="line">        <span class="comment"># running live</span></span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line"><span class="comment"># 示例1</span></span><br><span class="line"><span class="keyword">if</span> getattr(sys, <span class="string">'frozen'</span>, <span class="literal">False</span>):</span><br><span class="line">    <span class="comment">#basedir = sys._MEIPASS</span></span><br><span class="line">    <span class="comment"># basedir = "D:\\"   # 也可以指定路径</span></span><br><span class="line">    basedir = os.path.dirname(os.path.realpath(sys.argv[<span class="number">0</span>]))</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    basedir = os.path.split(os.path.realpath(__file__))[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例2</span></span><br><span class="line"><span class="keyword">import</span> sys,os</span><br><span class="line"><span class="keyword">if</span> getattr( sys, <span class="string">'frozen'</span>, <span class="literal">False</span> ) :</span><br><span class="line">        bundle_dir=sys._MEIPASS</span><br><span class="line"><span class="keyword">else</span> :</span><br><span class="line">        bundle_dir=os.path.dirname(os.path.abspath(__file__))</span><br></pre></td></tr></table></figure>
+
+<h4 id="打包后，获取当前路径"><a href="#打包后，获取当前路径" class="headerlink" title="打包后，获取当前路径"></a>打包后，获取当前路径</h4><p>官方说明：<a href="https://pyinstaller.readthedocs.io/en/stable/runtime-information.html" target="_blank" rel="noopener">地址</a></p>
+<p>IDE界面测试时和打包后，获取的路径不一样，一定要注意！</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">获取文件路径的方式有四种，可以在打包成exe文件后，获取.exe文件的当前路径</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">print(sys.path[<span class="number">0</span>])</span><br><span class="line">print(sys.argv[<span class="number">0</span>])</span><br><span class="line">print(os.path.dirname(os.path.realpath(sys.executable)))</span><br><span class="line">print(os.path.dirname(os.path.realpath(sys.argv[<span class="number">0</span>])))</span><br><span class="line"></span><br><span class="line">上面结果分别是：</span><br><span class="line">----IDE界面测试时</span><br><span class="line">当前文件夹路径  sys.path[<span class="number">0</span>]</span><br><span class="line">当前文件路径+文件名 sys.argv[<span class="number">0</span>]</span><br><span class="line">Python路径   os.path.dirname(os.path.realpath(sys.executable))</span><br><span class="line">当前文件夹路径</span><br><span class="line"></span><br><span class="line">----打包后！！！！！</span><br><span class="line">exe解包后的临时文件夹 sys.path[<span class="number">0</span>]</span><br><span class="line">当前文件路径+文件名  sys.argv[<span class="number">0</span>]</span><br><span class="line">当前文件夹路径  os.path.dirname(os.path.realpath(sys.executable))</span><br><span class="line">当前文件夹路径  os.path.dirname(os.path.realpath(sys.argv[<span class="number">0</span>]))</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><h4 id="如果是图片"><a href="#如果是图片" class="headerlink" title="如果是图片"></a>如果是图片</h4><p>使用base64 把图片编码，然后放到.py 文件中，引入到 主文件中</p>
+<h2 id="三、打包后文件太大"><a href="#三、打包后文件太大" class="headerlink" title="三、打包后文件太大"></a>三、打包后文件太大</h2><p>在代码里面尽量不要用import，能from…..import….就尽量用这个，因为如果是import的话，在打包的时候，会将整个包都打包到exe里面，没有意义的增大了工具的大小！</p>
+<h3 id="教程一"><a href="#教程一" class="headerlink" title="教程一"></a>教程一</h3><p>参考：<a href="https://www.zhihu.com/people/qaucodingdog/posts" target="_blank" rel="noopener">知乎</a></p>
+<p><code>结论</code>：虚拟环境加upx，更小！</p>
+<h4 id="1-去除不必要的库"><a href="#1-去除不必要的库" class="headerlink" title="1. 去除不必要的库"></a>1. 去除不必要的库</h4><ol>
+<li>先打包，生成后缀名为 <strong>.spec</strong> 的文件</li>
+<li>打开它，修改第13行的 <code>excludes</code>,输入自己不需要的库</li>
+<li>用clean参数重新打包 <code>pyinstaller --clean -F test.spec</code></li>
+</ol>
+<p>或者直接 这样打包：<code>pyinstaller --clean -F test.py --exclude-module matplotlib ^ ......(此处省略）</code></p>
+<h4 id="2-共享依赖"><a href="#2-共享依赖" class="headerlink" title="2. 共享依赖"></a>2. 共享依赖</h4><p>package multiple exe(s) sharing the same dependencies:<a href="https://link.zhihu.com/?target=https%3A//pyinstaller.readthedocs.io/en/stable/spec-files.html%23multipackage-bundles">Using Spec Files</a></p>
+<p>意思大概是打包多个exe用同一个”依赖库“</p>
+<p>详情看：<a href="https://stackoverflow.com/questions/47610050/importing-python-modules-from-a-select-location" target="_blank" rel="noopener">这里</a></p>
+<h4 id="3-虚拟环境"><a href="#3-虚拟环境" class="headerlink" title="3. 虚拟环境"></a>3. 虚拟环境</h4><p>看教程二</p>
+<h4 id="4-UPX压缩大法"><a href="#4-UPX压缩大法" class="headerlink" title="4.  UPX压缩大法"></a>4.  <strong>UPX压缩大法</strong></h4><p>开源的upx压缩：<a href="https://upx.github.io/" target="_blank" rel="noopener">地址</a></p>
+<p>缺点：打包时间会长一点</p>
+<h4 id="5-python-embedded-嵌入式python版本"><a href="#5-python-embedded-嵌入式python版本" class="headerlink" title="5. python-embedded 嵌入式python版本"></a>5. python-embedded 嵌入式python版本</h4><p>参考：<a href="https://zhuanlan.zhihu.com/p/77317765" target="_blank" rel="noopener">知乎</a></p>
+<ol>
+<li>下载python的embedded版本</li>
+<li>这个版本没有pip，需要手动安装<ol>
+<li>找到自己python-embedded文件夹下的<strong>python37.pth</strong>，用记事本打开</li>
+<li>把<code># import site</code>前面的注释符号<code>#</code>删除 （取消注释）</li>
+<li>去<a href="https://pip.pypa.io/en/stable/installing/#installing-with-get-pip-py" target="_blank" rel="noopener">官网</a>下载<code>get-pip.py</code>,保存到你的python-embedded文件夹下</li>
+<li>用cmd cd到python-embedded文件夹下,运行 <code>get-pip.py</code></li>
+</ol>
+</li>
+</ol>
+<h3 id="教程二"><a href="#教程二" class="headerlink" title="教程二"></a>教程二</h3><p>参考：<a href="https://www.zhihu.com/question/268397385/answer/611317903" target="_blank" rel="noopener">知乎</a></p>
+<p>关键点就一个：<strong>要在虚拟环境里安装pyinstaller</strong></p>
+<ul>
+<li>如果你没有在虚拟环境中安装pyinstaller，你同样可以使用pyinstaller命令，<ul>
+<li>但是调用的是你系统原本的那个python编译器，内含很多关联库，</li>
+<li>导致即使在虚拟环境中，你打包的exe文件仍然非常大。</li>
+</ul>
+</li>
+</ul>
+<h4 id="流程"><a href="#流程" class="headerlink" title="流程"></a><strong>流程</strong></h4><p>安装好pipenv。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#建立虚拟环境</span></span><br><span class="line">pipenv install</span><br><span class="line"><span class="comment">#进入虚拟环境（上一步可省略,因为没有虚拟环境的话会自动建立一个）</span></span><br><span class="line">pipenv shell</span><br><span class="line"><span class="comment">#安装模块， 你的.py里面用到的模块</span></span><br><span class="line">pip install requests pyquery pysimplegui fake_useragent</span><br><span class="line"><span class="comment">#打包的模块也要安装</span></span><br><span class="line">pip install pyinstaller</span><br><span class="line"><span class="comment">#开始打包</span></span><br><span class="line">pyinstaller -Fw E:\test\url_crawler.py</span><br></pre></td></tr></table></figure>
+
+<h2 id="四、错误合集"><a href="#四、错误合集" class="headerlink" title="四、错误合集"></a>四、错误合集</h2><h3 id="0）调试错误"><a href="#0）调试错误" class="headerlink" title="0）调试错误"></a>0）调试错误</h3><ol>
+<li>打包的时候先不关闭 窗口（不要使用<code>-w</code>）</li>
+<li>错误会一闪而过，就录屏或者手机录像，回看</li>
+<li>一般应该是依赖文件不存在，导致的 <code>Failed to execute script</code><ul>
+<li>我打包了pyqt，也没什么问题</li>
+</ul>
+</li>
+</ol>
+<h3 id="1）TypeError-expected-str-bytes-or-os-PathLike-object-not-NoneType"><a href="#1）TypeError-expected-str-bytes-or-os-PathLike-object-not-NoneType" class="headerlink" title="1）TypeError: expected str, bytes or os.PathLike object, not NoneType"></a>1）TypeError: expected str, bytes or os.PathLike object, not NoneType</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这是个已知的故障，官方已经修改，但是没有正式的版本支持。下载https://github.com/Loran425/pyinstaller/tree/14b6e65642e4b07a4358bab278019a48dedf7460中PyInstaller里的bindepend.py文件，然后替换掉本地安装包里的bindepend.py文件即可。</span><br></pre></td></tr></table></figure>
+
+<h3 id="2）failed-to-execute-script"><a href="#2）failed-to-execute-script" class="headerlink" title="2）failed to execute script"></a>2）failed to execute script</h3><p>【报错】pyqt5工程，运行打包结果exe，报错<code>failed to execute script</code><br>【原因】代码有错误：编译成exe的时候打开命令行 –&gt;调试正确后再去掉命令行</p>
+<h3 id="3）引用本地py文件问题：no-module-named"><a href="#3）引用本地py文件问题：no-module-named" class="headerlink" title="3）引用本地py文件问题：no module named"></a>3）引用本地py文件问题：no module named</h3><p>【背景】代码在pycharm中运行正常，打包成exe后报错<code>no module named</code><br>【工程情况】<br><img src= data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs= data-src="https://img-blog.csdnimg.cn/20190127210100857.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N1bW1lcl9kZXc=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>【修改成】运行成功<br><img src= data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs= data-src="https://img-blog.csdnimg.cn/20190127210149195.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3N1bW1lcl9kZXc=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="4）为exe添加图标出错"><a href="#4）为exe添加图标出错" class="headerlink" title="4）为exe添加图标出错"></a>4）为exe添加图标出错</h3><p>【加入图标】执行命令<code>pyinstaller -F -w -i D:\\mycode\\icon.png mainfile.py</code><br>【报错】</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">  File &quot;c:\python37\lib\site-packages\PyInstaller\building\build_main.py&quot;, line 784, in build</span><br><span class="line">    exec(text, spec_namespace)</span><br><span class="line">  File &quot;&lt;string&gt;&quot;, line 32, in &lt;module&gt;</span><br><span class="line">  File &quot;c:\python37\lib\site-packages\PyInstaller\building\api.py&quot;, line 433, in __init__</span><br><span class="line">    self.__postinit__()</span><br><span class="line">  File &quot;c:\python37\lib\site-packages\PyInstaller\building\datastruct.py&quot;, line 158, in __postinit__</span><br><span class="line">    self.assemble()</span><br><span class="line">  File &quot;c:\python37\lib\site-packages\PyInstaller\building\api.py&quot;, line 522, in assemble</span><br><span class="line">    icon.CopyIcons(tmpnm, self.icon)</span><br><span class="line">  File &quot;c:\python37\lib\site-packages\PyInstaller\utils\win32\icon.py&quot;, line 190, in CopyIcons</span><br><span class="line">    except win32api.error as W32E:</span><br><span class="line">AttributeError: module &#39;win32ctypes.pywin32.win32api&#39; has no attribute &#39;error&#39;</span><br><span class="line">123456789101112</span><br></pre></td></tr></table></figure>
+
+<p>【原因】</p>
+<ol>
+<li>图标的大小严格限制（32*32）：在这个网址进行转换 <a href="https://www.easyicon.net/covert/" target="_blank" rel="noopener">https://www.easyicon.net/covert/</a></li>
+<li>图标的颜色严格限制：256，真彩色是不行的</li>
+</ol>
+<h3 id="5）切换Python版本出错：ImportError-unable-to-find-Qt5Core-dll-on-PATH"><a href="#5）切换Python版本出错：ImportError-unable-to-find-Qt5Core-dll-on-PATH" class="headerlink" title="5）切换Python版本出错：ImportError: unable to find Qt5Core.dll on PATH"></a>5）切换Python版本出错：<code>ImportError: unable to find Qt5Core.dll on PATH</code></h3><p>在<a href="https://stackoverflow.com/questions/57244083/pyinstaller-packed-exe-failed-to-run-script-on-other-pc-says-qt5core-dll-not-f找到了解决办法：" target="_blank" rel="noopener">https://stackoverflow.com/questions/57244083/pyinstaller-packed-exe-failed-to-run-script-on-other-pc-says-qt5core-dll-not-f找到了解决办法：</a> </p>
+<p><img src= data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs= data-src="https://img-blog.csdnimg.cn/20190808143203458.png" alt="img"></p>
+<h3 id="6）使用UPX错误，vcruntime140-dll没有被指定在Windows上运行"><a href="#6）使用UPX错误，vcruntime140-dll没有被指定在Windows上运行" class="headerlink" title="6）使用UPX错误，vcruntime140.dll没有被指定在Windows上运行"></a>6）使用UPX错误，vcruntime140.dll没有被指定在Windows上运行</h3><p><strong>问题：</strong>不适用UPX压缩没问题，一用就回出现这个问题。</p>
+<p><strong>原因</strong>：vcruntime140版本不对或者版本过低。</p>
+<ol>
+<li>查看你Python的vcruntime140版本<ol>
+<li>路径：<code>C:\python385\vcruntime140</code></li>
+<li>右键 - 属性 - 详细信息 - 产品版本</li>
+</ol>
+</li>
+<li>查看你系统的vcruntime140版本<ol>
+<li>路径：<code>C:\Windows\System32\vcruntime140</code></li>
+<li>同上</li>
+</ol>
+</li>
+<li>发现，Python的版本比系统的版本高。</li>
+</ol>
+<p><strong>具体原因</strong>：<code>Visual C++ 2015、2017 和 2019 都共享相同的可再发行软件文件,之前的版本使用独立runtime</code>。</p>
+<p><strong>解决：</strong> 微软<a href="https://visualstudio.microsoft.com/zh-hans/downloads/" target="_blank" rel="noopener">官网</a>，下载安装最新VC++</p>
+<ul>
+<li>最下方 - 其他工具和框架 - Microsoft Visual C++ Redistributable for Visual Studio 2019</li>
+</ul>
+<p><strong>如果还是不行</strong>，就换台电脑，配置环境，重装VC吧，<a href="https://blog.csdn.net/mycsdn_367/article/details/96484897" target="_blank" rel="noopener">参考</a></p>
+<blockquote>
+<p>参考：<a href="https://blog.csdn.net/summer_dew/article/details/86535311" target="_blank" rel="noopener">Pyinstaller将python代码打包成exe | Pyinstaller错误合集</a></p>
+<p><a href="https://blog.csdn.net/qq_38412868/article/details/92800524" target="_blank" rel="noopener">如何将python3 gui界面（py文件）打包成exe文件</a></p>
+<p><a href="https://blog.csdn.net/iv_zzy/article/details/107462210" target="_blank" rel="noopener">pyinstaller 打包exe有依赖文件 py文件、dll文件、外部参数txt、json文件</a></p>
+<p>其他打包方法：<a href="https://zhuanlan.zhihu.com/p/82287516" target="_blank" rel="noopener">用gcc编译c调用python</a></p>
+</blockquote>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Gkon</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://gxkon.top/posts/dcbec147/">http://gxkon.top/posts/dcbec147/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://gxkon.top" target="_blank">Gxkon's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Python/">Python</a></div><div class="post_share"><div class="social-share" data-image="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/10/7/68coffee-5567269_1280.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/posts/df149c86/"><img class="prev_cover" data-src="/Pic/post.jpg" onerror="onerror=null;src='/Pic/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">NotePad++使用技巧</div></div></a></div><div class="next-post pull_right"><a href="/posts/39c91c27/"><img class="next_cover" data-src="/Pic/post.jpg" onerror="onerror=null;src='/Pic/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">玩转京东自动化脚本</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fa fa-fw fa-thumbs-up" aria-hidden="true"></i><span> 相关推荐</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/posts/ffb5fdc7/" title="Python GUI编程(Tkinter)"><img class="relatedPosts_cover" data-src="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/09/night-4011992_1280.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2020-09-24</div><div class="relatedPosts_title">Python GUI编程(Tkinter)</div></div></a></div><div class="relatedPosts_item"><a href="/posts/1ed47f5b/" title="Python基础之列表"><img class="relatedPosts_cover" data-src="https://tvax3.sinaimg.cn/large/4a9e9735gy1gdait9noiwj24802diqp3.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2020-03-28</div><div class="relatedPosts_title">Python基础之列表</div></div></a></div><div class="relatedPosts_item"><a href="/posts/f1154067/" title="Python基础之库、Pip、Pypi"><img class="relatedPosts_cover" data-src="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/09/norway-4970081_1280.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2020-05-28</div><div class="relatedPosts_title">Python基础之库、Pip、Pypi</div></div></a></div><div class="relatedPosts_item"><a href="/posts/49a688a0/" title="Python基础之字符串"><img class="relatedPosts_cover" data-src="https://tvax3.sinaimg.cn/large/4a9e9735gy1gdaiuzfg25j24002o0b29.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2020-03-28</div><div class="relatedPosts_title">Python基础之字符串</div></div></a></div><div class="relatedPosts_item"><a href="/posts/bbbc4a2f/" title="Python基础之安装与部署"><img class="relatedPosts_cover" data-src="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/09/geyser-4766105_1280.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2020-05-27</div><div class="relatedPosts_title">Python基础之安装与部署</div></div></a></div><div class="relatedPosts_item"><a href="/posts/636b49f9/" title="Python之FTP"><img class="relatedPosts_cover" data-src="/Pic/post.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2021-02-07</div><div class="relatedPosts_title">Python之FTP</div></div></a></div></div><div class="clear_both"></div></div><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i><span> 评论</span></div><div id="gitalk-container"></div><script>var gitalk = new Gitalk({
+  clientID: '1ce3148e3133bf004c96',
+  clientSecret: '2a1e5c0f4d38387460b916843bfe5cac67ef2d07',
+  repo: 'blankwz.github.io',
+  owner: 'blankwz',
+  admin: ['blankwz'],
+  id: md5(decodeURI(location.pathname)),
+  language: 'zh-CN',
+  perPage: 10,
+  distractionFreeMode: false,
+  pagerDirection: 'last',
+  createIssueManually: false,
+  updateCountCallback: commentCount
+})
+gitalk.render('gitalk-container')
+
+function commentCount(n){
+  try {
+    document.getElementsByClassName('gitalk-comment-count')[0].innerHTML= n
+  } catch (e) {
+    return false
+  }
+}</script></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By Gkon</div><div class="framework-info"><span>驱动 </span><a href="https://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="阅读模式"></i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">簡</a><i class="darkmode fa fa-moon-o" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><a id="to_comment" href="#post-comment" title="直达评论"><i class="scroll_to_comment fa fa-comments">  </i></a><i class="fa fa-list-ul close" id="mobile-toc-button" title="目录" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@3/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script><script src="/js/third-party/ClickShowText.js"></script></body></html>

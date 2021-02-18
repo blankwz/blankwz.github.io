@@ -1,0 +1,187 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PyQT5教程一之安装使用 | Gxkon's Blog</title><meta name="description" content="PyQT5教程一之安装使用 教程资源：  官方 文档 WiKi 教程 ：https:&#x2F;&#x2F;iowiki.com&#x2F;pyqt&#x2F;pyqt_quick_guide.html PyQt5快速开发与实战 全套随书源码   一、安装安装PyQt5工具执行：pip install PyQt5  下载速度慢，用阿里云镜像站点：pip install PyQt5 -i https:&#x2F;&#x2F;mirrors.aliyun.co"><meta name="keywords" content="Python"><meta name="author" content="Gkon"><meta name="copyright" content="Gkon"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="dns-prefetch" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="crossorigin"/><link rel="dns-prefetch" href="https://fonts.googleapis.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="dns-prefetch" href="//busuanzi.ibruce.info"/><meta name="twitter:card" content="summary"><meta name="twitter:title" content="PyQT5教程一之安装使用"><meta name="twitter:description" content="PyQT5教程一之安装使用 教程资源：  官方 文档 WiKi 教程 ：https:&#x2F;&#x2F;iowiki.com&#x2F;pyqt&#x2F;pyqt_quick_guide.html PyQt5快速开发与实战 全套随书源码   一、安装安装PyQt5工具执行：pip install PyQt5  下载速度慢，用阿里云镜像站点：pip install PyQt5 -i https:&#x2F;&#x2F;mirrors.aliyun.co"><meta name="twitter:image" content="http://gxkon.top/Pic/post.jpg"><meta property="og:type" content="article"><meta property="og:title" content="PyQT5教程一之安装使用"><meta property="og:url" content="http://gxkon.top/posts/a4a43afa/"><meta property="og:site_name" content="Gxkon's Blog"><meta property="og:description" content="PyQT5教程一之安装使用 教程资源：  官方 文档 WiKi 教程 ：https:&#x2F;&#x2F;iowiki.com&#x2F;pyqt&#x2F;pyqt_quick_guide.html PyQt5快速开发与实战 全套随书源码   一、安装安装PyQt5工具执行：pip install PyQt5  下载速度慢，用阿里云镜像站点：pip install PyQt5 -i https:&#x2F;&#x2F;mirrors.aliyun.co"><meta property="og:image" content="http://gxkon.top/Pic/post.jpg"><meta property="article:published_time" content="2020-10-28T11:07:07.000Z"><meta property="article:modified_time" content="2021-01-23T12:12:21.445Z"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>var autoChangeMode = '1'
+var t = Cookies.get("theme")
+if (autoChangeMode == '1'){
+  var isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+  var isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+  var isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined){
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport){
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour < 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+  }
+  } else if (t == 'light') activateLightMode()
+  else activateDarkMode()
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="canonical" href="http://gxkon.top/posts/a4a43afa/"><link rel="prev" title="Python高级之构建命令行工具" href="http://gxkon.top/posts/67e1056b/"><link rel="next" title="跨平台浏览器「书签同步」插件 - Floccus" href="http://gxkon.top/posts/235eb1dd/"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script><script src="https://cdn.jsdelivr.net/npm/blueimp-md5/js/md5.min.js"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: {"text":"本人,超帅,打钱","fontSize":"15px"},
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  highlightShrink: 'false',
+  isFontAwesomeV5: false,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false
+  
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isSidebar: true  
+  }</script><noscript><style>
+#page-header {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 4.2.0"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/Pic/avatar.png" onerror="onerror=null;src='/Pic/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">156</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">83</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">54</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 娱乐</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li></ul></div></div></div></div><i class="fa fa-arrow-right on" id="toggle-sidebar" aria-hidden="true">     </i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#PyQT5教程一之安装使用"><span class="toc-text">PyQT5教程一之安装使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、安装"><span class="toc-text">一、安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装PyQt5工具"><span class="toc-text">安装PyQt5工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装PyQt5-tools"><span class="toc-text">安装PyQt5-tools</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Qt-Designer基本控件介绍"><span class="toc-text">Qt Designer基本控件介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#（1）显示控件"><span class="toc-text">（1）显示控件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（2）输入控件，提供与用户输入交互"><span class="toc-text">（2）输入控件，提供与用户输入交互</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#（3）控件按钮，供用户选择与执行"><span class="toc-text">（3）控件按钮，供用户选择与执行</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、将-ui-文件转换为Py文件"><span class="toc-text">二、将 ui 文件转换为Py文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Pyuic5转换"><span class="toc-text">1.Pyuic5转换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-VScode-插件转换"><span class="toc-text">2.  VScode 插件转换</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1）设计并生成UI文件"><span class="toc-text">1）设计并生成UI文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2）使用插件把UI文件转换为Py文件"><span class="toc-text">2）使用插件把UI文件转换为Py文件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-使用生成的UI-py文件"><span class="toc-text">3. 使用生成的UI.py文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#同目录下创建-逻辑代码-call-login-py文件"><span class="toc-text">同目录下创建 逻辑代码 call_login.py文件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-注意"><span class="toc-text">4. 注意</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1）注意import写法"><span class="toc-text">1）注意import写法</span></a></li></ol></li></ol></li></ol></li></ol></div></div></div><div id="body-wrap"><div class="post-bg" id="nav" style="background-image: url(/Pic/post.jpg)"><div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">Gxkon's Blog</a></span><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 娱乐</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li></ul></div></div><span class="toggle-menu close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span></span></div><div id="post-info"><div id="post-title"><div class="posttitle">PyQT5教程一之安装使用</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2020-10-28 19:07:07"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2020-10-28</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2021-01-23 20:12:21"><i class="fa fa-history" aria-hidden="true"></i> 更新于 2021-01-23</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Python/">Python</a><i class="fa fa-angle-right post-meta__separator" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Python/GUI/">GUI</a></span></div><div class="meta-secondline"> </div><div class="meta-thirdline"><span class="post-meta-pv-cv"><i class="fa fa-eye post-meta__icon" aria-hidden="true"> </i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"><span class="post-meta__separator">|</span><i class="post-meta__icon fa fa-comment-o" aria-hidden="true"></i><span>评论数:</span><a href="/posts/a4a43afa/#post-comment"><span class="gitalk-comment-count comment-count"></span></a></span></div></div></div></div><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h1 id="PyQT5教程一之安装使用"><a href="#PyQT5教程一之安装使用" class="headerlink" title="PyQT5教程一之安装使用"></a>PyQT5教程一之安装使用</h1><blockquote>
+<p>教程资源：</p>
+<ol>
+<li>官方 <a href="https://www.riverbankcomputing.com/static/Docs/PyQt5/" target="_blank" rel="noopener">文档</a></li>
+<li>WiKi 教程 ：<a href="https://iowiki.com/pyqt/pyqt_quick_guide.html" target="_blank" rel="noopener">https://iowiki.com/pyqt/pyqt_quick_guide.html</a></li>
+<li>PyQt5快速开发与实战 <a href="https://github.com/cxinping/PyQt5" target="_blank" rel="noopener">全套随书源码</a></li>
+</ol>
+</blockquote>
+<h2 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h2><h3 id="安装PyQt5工具"><a href="#安装PyQt5工具" class="headerlink" title="安装PyQt5工具"></a>安装PyQt5工具</h3><p>执行：<strong><code>pip install PyQt5</code></strong></p>
+<ul>
+<li>下载速度慢，用阿里云镜像站点：<code>pip install PyQt5 -i https://mirrors.aliyun.com/pypi/simple/</code></li>
+</ul>
+<h3 id="安装PyQt5-tools"><a href="#安装PyQt5-tools" class="headerlink" title="安装PyQt5-tools"></a>安装PyQt5-tools</h3><p>Qt Designer图形界面开发工具，执行：<strong><code>pip install PyQt5-tools</code></strong></p>
+<ol>
+<li>速度慢，则用<code>pip install pyqt5-tools -i https://mirrors.aliyun.com/pypi/simple/</code></li>
+<li>安装完后，<code>Designer程序</code>在：<code>python\Lib\site-packages\pyqt5_tools\Qt\bin</code></li>
+<li>将PyQt5-tools的安装目录下qt/bin所在目录添加到系统环境变量path，就可以使用cmd启动<strong>designer</strong></li>
+<li>如果出现启动失败，<code>This application failed to start because no Qt platform plugin could be initialized. Reinstalling the application may fix this problem.</code><ul>
+<li>将<em>pyqt5_tools</em>里面qt/plugins/platforms目录粘贴至与qt/bin/desinger.exe文件同级就解决了</li>
+</ul>
+</li>
+</ol>
+<h3 id="Qt-Designer基本控件介绍"><a href="#Qt-Designer基本控件介绍" class="headerlink" title="Qt Designer基本控件介绍"></a>Qt Designer基本控件介绍</h3><p> Widget Box控件工具箱是按照控件作用类别进行划分的</p>
+<h4 id="（1）显示控件"><a href="#（1）显示控件" class="headerlink" title="（1）显示控件"></a>（1）显示控件</h4><p>   <strong>Lable</strong>：文本标签，显示文本，可以用来标记控件。</p>
+<p>   <strong>Text Browser</strong>：显示文本控件。用于后台命令执行结果显示。</p>
+<h4 id="（2）输入控件，提供与用户输入交互"><a href="#（2）输入控件，提供与用户输入交互" class="headerlink" title="（2）输入控件，提供与用户输入交互"></a>（2）输入控件，提供与用户输入交互</h4><p>   <strong>Line Edit</strong>：单行文本框，输入单行字符串。控件对象常用函数为Text() 返回文本框内容，用于获取输入。setText() 用于设置文本框显示。</p>
+<p>   <strong>Text Edit</strong>：多行文本框，输入多行字符串。控件 对象常用函数同Line Edit控件。</p>
+<p> <strong>Combo Box</strong>：下拉框列表。用于输入指定枚举值。</p>
+<h4 id="（3）控件按钮，供用户选择与执行"><a href="#（3）控件按钮，供用户选择与执行" class="headerlink" title="（3）控件按钮，供用户选择与执行"></a>（3）控件按钮，供用户选择与执行</h4><p>​    <strong>Push Button</strong>：命令按钮。常见的确认、取消、关闭等按钮就是这个控件。<strong>clicked信号一定要记住</strong>。clicked信号就是指鼠标左键按下然后释放时会发送信号，从而触发相应操作。</p>
+<p>​    <strong>Radio Button</strong>：单选框按钮。</p>
+<p>​    <strong>Check Box</strong>：多选框按钮。</p>
+<h2 id="二、将-ui-文件转换为Py文件"><a href="#二、将-ui-文件转换为Py文件" class="headerlink" title="二、将 ui 文件转换为Py文件"></a>二、将 ui 文件转换为Py文件</h2><h3 id="1-Pyuic5转换"><a href="#1-Pyuic5转换" class="headerlink" title="1.Pyuic5转换"></a>1.Pyuic5转换</h3><p>转换命令：<code>pyuic5 -o {输出文件名} {输入.ui文件}</code></p>
+<ul>
+<li>例如：<code>pyuic5 -o login.py login.ui</code></li>
+</ul>
+<h3 id="2-VScode-插件转换"><a href="#2-VScode-插件转换" class="headerlink" title="2.  VScode 插件转换"></a>2.  VScode 插件转换</h3><ol>
+<li>Vscode安装插件<strong>PYQT Integration</strong><ul>
+<li>系统会自动配置pyuic，该工具是用于将Qt Designer工具开发完成的.ui文件转化为.py文件</li>
+</ul>
+</li>
+<li>文件 -&gt; 首选项–&gt;设置–&gt;搜索<strong>pyqt</strong></li>
+<li>最后一个 <code>Pyqt-integration &gt; Qtdesigner:path</code>填写designer路径<ul>
+<li><code>C:\python385\Lib\site-packages\pyqt5_tools\Qt\bin\designer.exe</code></li>
+</ul>
+</li>
+</ol>
+<h4 id="1）设计并生成UI文件"><a href="#1）设计并生成UI文件" class="headerlink" title="1）设计并生成UI文件"></a>1）设计并生成UI文件</h4><ol>
+<li>打开 Designer程序（ <code>python\Lib\site-packages\pyqt5_tools\Qt\bin</code>）</li>
+<li>设计UI</li>
+<li>另存为，UI文件</li>
+</ol>
+<h4 id="2）使用插件把UI文件转换为Py文件"><a href="#2）使用插件把UI文件转换为Py文件" class="headerlink" title="2）使用插件把UI文件转换为Py文件"></a>2）使用插件把UI文件转换为Py文件</h4><ol>
+<li>通过Vscode的文件夹方式，打开UI文件</li>
+<li>右键 Vscode左侧文件夹列表的 UI文件 - 选择 <code>PYQT:Compile Form</code></li>
+<li>转换完成  UI的 Py文件  (命名为：<code>Ui_login.py</code>)</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Form implementation generated from reading ui file 'login.ui'</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Created by: PyQt5 UI code generator 5.14.2</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># WARNING! All changes made in this file will be lost!</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">from PyQt5 import QtCore, QtGui, QtWidgets</span><br><span class="line"></span><br><span class="line">class Ui_Form(object):</span><br><span class="line">    def setupUi(self, Form):</span><br><span class="line">        Form.setObjectName(<span class="string">"Form"</span>)</span><br><span class="line">        Form.resize(542, 311)</span><br><span class="line">        Form.setMaximumSize(QtCore.QSize(699, 499))</span><br><span class="line">        self.user_lable = QtWidgets.QLabel(Form)</span><br><span class="line">        self.user_lable.setGeometry(QtCore.QRect(40, 60, 55, 16))</span><br><span class="line">        self.user_lable.setObjectName(<span class="string">"user_lable"</span>)</span><br><span class="line">        self.pwd_lable = QtWidgets.QLabel(Form)</span><br><span class="line">        self.pwd_lable.setGeometry(QtCore.QRect(40, 100, 55, 16))</span><br><span class="line">        self.pwd_lable.setObjectName(<span class="string">"pwd_lable"</span>)</span><br><span class="line">        self.user_lineEdit = QtWidgets.QLineEdit(Form)</span><br><span class="line">        self.user_lineEdit.setGeometry(QtCore.QRect(130, 60, 113, 22))</span><br><span class="line">        self.user_lineEdit.setObjectName(<span class="string">"user_lineEdit"</span>)</span><br><span class="line">        self.pwd_lineEdit = QtWidgets.QLineEdit(Form)</span><br><span class="line">        self.pwd_lineEdit.setGeometry(QtCore.QRect(130, 100, 113, 22))</span><br><span class="line">        self.pwd_lineEdit.setObjectName(<span class="string">"pwd_lineEdit"</span>)</span><br><span class="line">        self.login_Button = QtWidgets.QPushButton(Form)</span><br><span class="line">        self.login_Button.setGeometry(QtCore.QRect(40, 180, 93, 28))</span><br><span class="line">        self.login_Button.setObjectName(<span class="string">"login_Button"</span>)</span><br><span class="line">        self.cancel_Button = QtWidgets.QPushButton(Form)</span><br><span class="line">        self.cancel_Button.setGeometry(QtCore.QRect(170, 180, 93, 28))</span><br><span class="line">        self.cancel_Button.setObjectName(<span class="string">"cancel_Button"</span>)</span><br><span class="line">        self.user_textBrowser = QtWidgets.QTextBrowser(Form)</span><br><span class="line">        self.user_textBrowser.setGeometry(QtCore.QRect(290, 61, 231, 131))</span><br><span class="line">        self.user_textBrowser.setObjectName(<span class="string">"user_textBrowser"</span>)</span><br><span class="line"></span><br><span class="line">        self.retranslateUi(Form)</span><br><span class="line">        QtCore.QMetaObject.connectSlotsByName(Form)</span><br><span class="line"></span><br><span class="line">    def retranslateUi(self, Form):</span><br><span class="line">        _translate = QtCore.QCoreApplication.translate</span><br><span class="line">        Form.setWindowTitle(_translate(<span class="string">"Form"</span>, <span class="string">"Form"</span>))</span><br><span class="line">        self.user_lable.setText(_translate(<span class="string">"Form"</span>, <span class="string">"用户名"</span>))</span><br><span class="line">        self.pwd_lable.setText(_translate(<span class="string">"Form"</span>, <span class="string">"密码"</span>))</span><br><span class="line">        self.login_Button.setText(_translate(<span class="string">"Form"</span>, <span class="string">"登录"</span>))</span><br><span class="line">        self.cancel_Button.setText(_translate(<span class="string">"Form"</span>, <span class="string">"退出"</span>))</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-使用生成的UI-py文件"><a href="#3-使用生成的UI-py文件" class="headerlink" title="3. 使用生成的UI.py文件"></a>3. 使用生成的UI.py文件</h3><h4 id="同目录下创建-逻辑代码-call-login-py文件"><a href="#同目录下创建-逻辑代码-call-login-py文件" class="headerlink" title="同目录下创建 逻辑代码 call_login.py文件"></a>同目录下创建 逻辑代码 call_login.py文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">import sys</span><br><span class="line">#PyQt5中使用的基本控件都在PyQt5.QtWidgets模块中</span><br><span class="line">from PyQt5.QtWidgets import QApplication, QMainWindow</span><br><span class="line">#导入designer工具生成的login模块</span><br><span class="line">from Ui_login import Ui_Form</span><br><span class="line"></span><br><span class="line">class MyMainForm(QMainWindow, Ui_Form):</span><br><span class="line">    def __init__(self, parent&#x3D;None):</span><br><span class="line">        super(MyMainForm, self).__init__(parent)</span><br><span class="line">        self.setupUi(self)</span><br><span class="line">        #添加登录按钮信号和槽。注意display函数不加小括号()</span><br><span class="line">        self.login_Button.clicked.connect(self.display)</span><br><span class="line">        #添加退出按钮信号和槽。调用close函数</span><br><span class="line">        self.cancel_Button.clicked.connect(self.close)</span><br><span class="line">        </span><br><span class="line">    def display(self):</span><br><span class="line">        #利用line Edit控件对象text()函数获取界面输入</span><br><span class="line">        username &#x3D; self.user_lineEdit.text()</span><br><span class="line">        password &#x3D; self.pwd_lineEdit.text()</span><br><span class="line">        #利用text Browser控件对象setText()函数设置界面显示</span><br><span class="line">        self.user_textBrowser.setText(&quot;登录成功!\n&quot; + &quot;用户名是: &quot;+ username+ &quot;,密码是： &quot;+ password)</span><br><span class="line"></span><br><span class="line">if __name__ &#x3D;&#x3D; &quot;__main__&quot;:</span><br><span class="line">    #固定的，PyQt5程序都需要QApplication对象。sys.argv是命令行参数列表，确保程序可以双击运行</span><br><span class="line">    app &#x3D; QApplication(sys.argv)</span><br><span class="line">    #初始化</span><br><span class="line">    myWin &#x3D; MyMainForm()</span><br><span class="line">    #将窗口控件显示在屏幕上</span><br><span class="line">    myWin.show()</span><br><span class="line">    #程序运行，sys.exit方法确保程序完整退出。</span><br><span class="line">    sys.exit(app.exec_())</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="4-注意"><a href="#4-注意" class="headerlink" title="4. 注意"></a>4. 注意</h3><h4 id="1）注意import写法"><a href="#1）注意import写法" class="headerlink" title="1）注意import写法"></a>1）注意import写法</h4><p>参考：<a href="https://ilmvfx.wordpress.com/2016/07/15/from-pyqt4-qtcore-import-convert-script/" target="_blank" rel="noopener">文章</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">导入模块时，最好用</span><br><span class="line">from PyQt4.QtCore import Qt</span><br><span class="line">from PyQt4.QtGui import QDialog, QPushButton</span><br><span class="line"></span><br><span class="line">也可以</span><br><span class="line">from PyQt4 import QtCore, QtGui</span><br><span class="line"></span><br><span class="line">尽量不要用</span><br><span class="line">from PyQt4.QtCore import *</span><br><span class="line">from PyQt4.QtGui import *</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<blockquote>
+<p>参考：<a href="https://blog.csdn.net/weimeibuqieryu/article/details/106580462" target="_blank" rel="noopener">pyqt5安装及基础使用教程</a></p>
+<p><a href="https://www.jqhtml.com/58042.html" target="_blank" rel="noopener">Qt Designer工具的使用</a></p>
+</blockquote>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Gkon</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://gxkon.top/posts/a4a43afa/">http://gxkon.top/posts/a4a43afa/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://gxkon.top" target="_blank">Gxkon's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Python/">Python</a></div><div class="post_share"><div class="social-share" data-image="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/10/7/68coffee-5567269_1280.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/posts/67e1056b/"><img class="prev_cover" data-src="/Pic/post.jpg" onerror="onerror=null;src='/Pic/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Python高级之构建命令行工具</div></div></a></div><div class="next-post pull_right"><a href="/posts/235eb1dd/"><img class="next_cover" data-src="/Pic/post.jpg" onerror="onerror=null;src='/Pic/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">跨平台浏览器「书签同步」插件 - Floccus</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fa fa-fw fa-thumbs-up" aria-hidden="true"></i><span> 相关推荐</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/posts/ffb5fdc7/" title="Python GUI编程(Tkinter)"><img class="relatedPosts_cover" data-src="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/09/night-4011992_1280.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2020-09-24</div><div class="relatedPosts_title">Python GUI编程(Tkinter)</div></div></a></div><div class="relatedPosts_item"><a href="/posts/1ed47f5b/" title="Python基础之列表"><img class="relatedPosts_cover" data-src="https://tvax3.sinaimg.cn/large/4a9e9735gy1gdait9noiwj24802diqp3.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2020-03-28</div><div class="relatedPosts_title">Python基础之列表</div></div></a></div><div class="relatedPosts_item"><a href="/posts/f1154067/" title="Python基础之库、Pip、Pypi"><img class="relatedPosts_cover" data-src="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/09/norway-4970081_1280.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2020-05-28</div><div class="relatedPosts_title">Python基础之库、Pip、Pypi</div></div></a></div><div class="relatedPosts_item"><a href="/posts/49a688a0/" title="Python基础之字符串"><img class="relatedPosts_cover" data-src="https://tvax3.sinaimg.cn/large/4a9e9735gy1gdaiuzfg25j24002o0b29.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2020-03-28</div><div class="relatedPosts_title">Python基础之字符串</div></div></a></div><div class="relatedPosts_item"><a href="/posts/bbbc4a2f/" title="Python基础之安装与部署"><img class="relatedPosts_cover" data-src="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/09/geyser-4766105_1280.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2020-05-27</div><div class="relatedPosts_title">Python基础之安装与部署</div></div></a></div><div class="relatedPosts_item"><a href="/posts/dcbec147/" title="Python中级之Pyinstaller打包成exe"><img class="relatedPosts_cover" data-src="/Pic/post.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2020-11-07</div><div class="relatedPosts_title">Python中级之Pyinstaller打包成exe</div></div></a></div></div><div class="clear_both"></div></div><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i><span> 评论</span></div><div id="gitalk-container"></div><script>var gitalk = new Gitalk({
+  clientID: '1ce3148e3133bf004c96',
+  clientSecret: '2a1e5c0f4d38387460b916843bfe5cac67ef2d07',
+  repo: 'blankwz.github.io',
+  owner: 'blankwz',
+  admin: ['blankwz'],
+  id: md5(decodeURI(location.pathname)),
+  language: 'zh-CN',
+  perPage: 10,
+  distractionFreeMode: false,
+  pagerDirection: 'last',
+  createIssueManually: false,
+  updateCountCallback: commentCount
+})
+gitalk.render('gitalk-container')
+
+function commentCount(n){
+  try {
+    document.getElementsByClassName('gitalk-comment-count')[0].innerHTML= n
+  } catch (e) {
+    return false
+  }
+}</script></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By Gkon</div><div class="framework-info"><span>驱动 </span><a href="https://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="阅读模式"></i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">簡</a><i class="darkmode fa fa-moon-o" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><a id="to_comment" href="#post-comment" title="直达评论"><i class="scroll_to_comment fa fa-comments">  </i></a><i class="fa fa-list-ul close" id="mobile-toc-button" title="目录" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@3/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script><script src="/js/third-party/ClickShowText.js"></script></body></html>

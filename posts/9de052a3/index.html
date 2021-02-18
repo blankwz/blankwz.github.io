@@ -1,0 +1,370 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>使用RSS订阅信息 | Gxkon's Blog</title><meta name="description" content="使用RSS订阅信息 RSS 的全称有三种说法，RDF Site Summary（资源描述框架站点摘要）、Rich Site Summary（网站内容摘要）和 Really Simple Syndication（简易资讯聚合）  对于多数人，你这样理解就够了： RSS是一个能让你在一个地方订阅各种感兴趣网站的工具,且让用户在不打开网站的情况下快速地获取到自己订阅的信息 为什么要用RSS  拒绝推荐算"><meta name="keywords" content="RSS"><meta name="author" content="Gkon"><meta name="copyright" content="Gkon"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="dns-prefetch" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="crossorigin"/><link rel="dns-prefetch" href="https://fonts.googleapis.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="dns-prefetch" href="//busuanzi.ibruce.info"/><meta name="twitter:card" content="summary"><meta name="twitter:title" content="使用RSS订阅信息"><meta name="twitter:description" content="使用RSS订阅信息 RSS 的全称有三种说法，RDF Site Summary（资源描述框架站点摘要）、Rich Site Summary（网站内容摘要）和 Really Simple Syndication（简易资讯聚合）  对于多数人，你这样理解就够了： RSS是一个能让你在一个地方订阅各种感兴趣网站的工具,且让用户在不打开网站的情况下快速地获取到自己订阅的信息 为什么要用RSS  拒绝推荐算"><meta name="twitter:image" content="http://gxkon.top/Pic/post.jpg"><meta property="og:type" content="article"><meta property="og:title" content="使用RSS订阅信息"><meta property="og:url" content="http://gxkon.top/posts/9de052a3/"><meta property="og:site_name" content="Gxkon's Blog"><meta property="og:description" content="使用RSS订阅信息 RSS 的全称有三种说法，RDF Site Summary（资源描述框架站点摘要）、Rich Site Summary（网站内容摘要）和 Really Simple Syndication（简易资讯聚合）  对于多数人，你这样理解就够了： RSS是一个能让你在一个地方订阅各种感兴趣网站的工具,且让用户在不打开网站的情况下快速地获取到自己订阅的信息 为什么要用RSS  拒绝推荐算"><meta property="og:image" content="http://gxkon.top/Pic/post.jpg"><meta property="article:published_time" content="2021-02-17T13:20:55.000Z"><meta property="article:modified_time" content="2021-02-18T05:29:41.395Z"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>var autoChangeMode = '1'
+var t = Cookies.get("theme")
+if (autoChangeMode == '1'){
+  var isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+  var isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+  var isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined){
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport){
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour < 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+  }
+  } else if (t == 'light') activateLightMode()
+  else activateDarkMode()
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="canonical" href="http://gxkon.top/posts/9de052a3/"><link rel="next" title="TelegramBot制作" href="http://gxkon.top/posts/aa580810/"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script><script src="https://cdn.jsdelivr.net/npm/blueimp-md5/js/md5.min.js"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: {"text":"本人,超帅,打钱","fontSize":"15px"},
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  highlightShrink: 'false',
+  isFontAwesomeV5: false,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false
+  
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isSidebar: true  
+  }</script><noscript><style>
+#page-header {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 4.2.0"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/Pic/avatar.png" onerror="onerror=null;src='/Pic/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">156</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">83</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">54</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 娱乐</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li></ul></div></div></div></div><i class="fa fa-arrow-right on" id="toggle-sidebar" aria-hidden="true">     </i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#使用RSS订阅信息"><span class="toc-text">使用RSS订阅信息</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、如何使用"><span class="toc-text">一、如何使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一些源规则"><span class="toc-text">一些源规则</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、RSS工具"><span class="toc-text">二、RSS工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-阅读工具"><span class="toc-text">1 阅读工具</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Win／Mac端"><span class="toc-text">Win／Mac端</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#iOS端"><span class="toc-text">iOS端</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-发现源"><span class="toc-text">2 发现源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-生成-制作-RSS订阅源"><span class="toc-text">3 生成(制作)RSS订阅源</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、Reeder使用"><span class="toc-text">三、Reeder使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#在-Reeder-3-中如何导入-RSS-源和账号"><span class="toc-text">在 Reeder 3 中如何导入 RSS 源和账号</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#通过其它-RSS-阅读器导入"><span class="toc-text">通过其它 RSS 阅读器导入</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#客户端中登陆"><span class="toc-text">客户端中登陆</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、推荐源的网站"><span class="toc-text">四、推荐源的网站</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#A君私藏的超好用-RSS-订阅源"><span class="toc-text">A君私藏的超好用 RSS 订阅源</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、自建RSS订阅服务平台"><span class="toc-text">五、自建RSS订阅服务平台</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#FreshRss"><span class="toc-text">FreshRss</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#简单安装"><span class="toc-text">简单安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#安装错误"><span class="toc-text">安装错误</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#更新Feed"><span class="toc-text">更新Feed</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#手机访问"><span class="toc-text">手机访问</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#注意"><span class="toc-text">注意</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#六、其他玩法"><span class="toc-text">六、其他玩法</span></a></li></ol></li></ol></div></div></div><div id="body-wrap"><div class="post-bg" id="nav" style="background-image: url(/Pic/post.jpg)"><div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">Gxkon's Blog</a></span><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 娱乐</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li></ul></div></div><span class="toggle-menu close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span></span></div><div id="post-info"><div id="post-title"><div class="posttitle">使用RSS订阅信息</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2021-02-17 21:20:55"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2021-02-17</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2021-02-18 13:29:41"><i class="fa fa-history" aria-hidden="true"></i> 更新于 2021-02-18</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E5%BF%85%E7%8E%A9%E7%B3%BB%E5%88%97/">必玩系列</a></span></div><div class="meta-secondline"> </div><div class="meta-thirdline"><span class="post-meta-pv-cv"><i class="fa fa-eye post-meta__icon" aria-hidden="true"> </i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"><span class="post-meta__separator">|</span><i class="post-meta__icon fa fa-comment-o" aria-hidden="true"></i><span>评论数:</span><a href="/posts/9de052a3/#post-comment"><span class="gitalk-comment-count comment-count"></span></a></span></div></div></div></div><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h1 id="使用RSS订阅信息"><a href="#使用RSS订阅信息" class="headerlink" title="使用RSS订阅信息"></a>使用RSS订阅信息</h1><blockquote>
+<p>RSS 的全称有三种说法，RDF Site Summary（资源描述框架站点摘要）、Rich Site Summary（网站内容摘要）和 Really Simple Syndication（简易资讯聚合）</p>
+</blockquote>
+<p>对于多数人，你这样理解就够了：</p>
+<p>RSS是一个<strong>能让你在一个地方订阅</strong>各种感兴趣网站的工具,且让用户在不打开网站的情况下快速地获取到自己订阅的信息</p>
+<p>为什么要用RSS</p>
+<ol>
+<li>拒绝推荐算法</li>
+<li>只获取自己想要的信息，避免无效信息；</li>
+<li>提高效率，节省大量浏览时间；</li>
+<li>真正做到内容聚合</li>
+</ol>
+<h2 id="一、如何使用"><a href="#一、如何使用" class="headerlink" title="一、如何使用"></a>一、如何使用</h2><ul>
+<li>部分网站有自己的RSS源，直接复制地址，粘贴到RSS工具中即可<ul>
+<li>通常在顶部菜单、右侧菜单、底部菜单等地方会有RSS图标。</li>
+<li>如果没有，可以尝试在网站地址后面加上/rss或者/feed，有时会出现在二级域名里</li>
+</ul>
+</li>
+<li>没有RSS源，就通过第三方工具，生成订阅源，比如下面的 <code>RSSHub</code></li>
+</ul>
+<h3 id="一些源规则"><a href="#一些源规则" class="headerlink" title="一些源规则"></a>一些源规则</h3><ul>
+<li><p><strong>Reddit：</strong>在当前链接后面加入<code>.rss</code></p>
+<ul>
+<li>比如 <a href="https://www.reddit.com/r/nba/top/改成" target="_blank" rel="noopener">https://www.reddit.com/r/nba/top/改成</a> <a href="https://www.reddit.com/r/nba/top/.rss" target="_blank" rel="noopener">https://www.reddit.com/r/nba/top/.rss</a></li>
+</ul>
+</li>
+<li><p>V2EX</p>
+<ul>
+<li>周报：<a href="http://vdaily.iu.vc/old-weekly.xml" target="_blank" rel="noopener">http://vdaily.iu.vc/old-weekly.xml</a></li>
+</ul>
+</li>
+<li><p><strong>Github：</strong></p>
+<ul>
+<li>用户动态: 地址 + .atom，比如 <a href="https://github.com/runningcheese.atom" target="_blank" rel="noopener">https://github.com/runningcheese.atom</a></li>
+<li>仓库releases: 地址 + .atom，比如 <a href="https://github.com/soimort/you-get/releases.atom" target="_blank" rel="noopener">https://github.com/soimort/you-get/releases.atom</a></li>
+<li>仓库commits: 地址 + .atom，比如 <a href="https://github.com/runningcheese/RunningCheese-Firefox/commits/master.atom" target="_blank" rel="noopener">https://github.com/runningcheese/RunningCheese-Firefox/commits/master.atom</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="二、RSS工具"><a href="#二、RSS工具" class="headerlink" title="二、RSS工具"></a>二、RSS工具</h2><h3 id="1-阅读工具"><a href="#1-阅读工具" class="headerlink" title="1 阅读工具"></a>1 阅读工具</h3><p>iOS 和 Mac 平台基本上公认最好用的RSS客户端：<strong>Reeder</strong></p>
+<ul>
+<li>由于国内政策问题，不久前这款软件在国区 App Store 已下架</li>
+</ul>
+<h4 id="Win／Mac端"><a href="#Win／Mac端" class="headerlink" title="Win／Mac端"></a>Win／Mac端</h4><ul>
+<li><a href="http://irreader.fatecore.com/" target="_blank" rel="noopener">irreader</a>（Win／Mac）</li>
+<li><a href="https://hyliu.me/fluent-reader/" target="_blank" rel="noopener">Fluent Rader</a>（Win／Mac）</li>
+</ul>
+<h4 id="iOS端"><a href="#iOS端" class="headerlink" title="iOS端"></a>iOS端</h4><ul>
+<li>Reeder</li>
+<li><a href="https://apps.apple.com/cn/app/id1455175018" target="_blank" rel="noopener">ssRSS</a></li>
+<li><a href="https://apps.apple.com/cn/app/id1480640210" target="_blank" rel="noopener">NetNewsWire</a></li>
+<li><a href="https://apps.apple.com/cn/app/id1212717344" target="_blank" rel="noopener">ReadOn</a></li>
+<li>免费的：Fiery Feeds（外区才能下载）</li>
+</ul>
+<h3 id="2-发现源"><a href="#2-发现源" class="headerlink" title="2 发现源"></a>2 发现源</h3><ol>
+<li><p><code>RSSHub Radar</code>：<a href="https://github.com/DIYgod/RSSHub-Radar" target="_blank" rel="noopener">地址</a></p>
+<ul>
+<li>一个可以帮助你快速发现和订阅当前网站 RSS 和 RSSHub 的浏览器扩展<ul>
+<li>快速发现和订阅当前页面自带的 RSS</li>
+<li>快速发现和订阅当前页面支持的 RSSHub</li>
+<li>快速发现当前网站支持的 RSSHub</li>
+<li>支持一键订阅 RSS 到 Tiny Tiny RSS、Miniflux、FreshRSS、Feedly、Inoreader、Feedbin、The Old Reader、Feeds.Pub、BazQux Reader、本地阅读器</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>搭配<a href="https://greasyfork.org/zh-CN/scripts/373252-rss-show-site-all-rss" target="_blank" rel="noopener">油猴脚本</a>使用</p>
+</li>
+</ol>
+<h3 id="3-生成-制作-RSS订阅源"><a href="#3-生成-制作-RSS订阅源" class="headerlink" title="3 生成(制作)RSS订阅源"></a>3 生成(制作)RSS订阅源</h3><ul>
+<li><p><a href="https://docs.rsshub.app" target="_blank" rel="noopener">RSSHub</a></p>
+<ul>
+<li>可以给任何奇奇怪怪的内容生成 RSS 订阅源</li>
+<li>但是 它的域名被很多网站给B了，所以需要另想办法<ul>
+<li>借用他人搭建好的 RSSHub 服务</li>
+<li>自己搭建 RSSHub 服务 （请看<a href="https://zhuanlan.zhihu.com/p/349349861" target="_blank" rel="noopener">知乎大佬的教程</a>）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a href="https://feed43.com/" target="_blank" rel="noopener">Feed43</a></p>
+<ul>
+<li>为任意网页定制RSS格式订阅源</li>
+</ul>
+</li>
+<li><p><a href="http://createfeed.fivefilters.org/" target="_blank" rel="noopener">fivefilters.org</a> </p>
+</li>
+<li><p><a href="https://feedity.com/default.aspx" target="_blank" rel="noopener">feedity</a></p>
+</li>
+<li><p>对于一些只提供了摘要RSS的网站，可以使用 <a href="https://feedex.net/" target="_blank" rel="noopener">FeedEx.Net</a> 来制作全文RSS</p>
+</li>
+<li><p>或者自学一些编程知识后用 Huginn、Feed43 等工具自编写一个源，更甚之可以到知乎等地方联系一些作者付费帮你制作</p>
+</li>
+</ul>
+<h2 id="三、Reeder使用"><a href="#三、Reeder使用" class="headerlink" title="三、Reeder使用"></a>三、Reeder使用</h2><p>Reeder 3 就是一款 iOS 和 macOS 系统下非常好用的软件（在 A 君眼里，把它称之为 Google Reader 之后最好用的 RSS 阅读器也不为过），它足够简单、美观</p>
+<h3 id="在-Reeder-3-中如何导入-RSS-源和账号"><a href="#在-Reeder-3-中如何导入-RSS-源和账号" class="headerlink" title="在 Reeder 3 中如何导入 RSS 源和账号"></a>在 Reeder 3 中如何导入 RSS 源和账号</h3><p>要在 RSS 阅读器中进行阅读，首先你必须要把 RSS 源加入到阅读器中，就像微信公众号一样，你只有关注了它，才能收到它推送的文章。</p>
+<h4 id="通过其它-RSS-阅读器导入"><a href="#通过其它-RSS-阅读器导入" class="headerlink" title="通过其它 RSS 阅读器导入"></a>通过其它 RSS 阅读器导入</h4><p>首先，你需要创建一个账号。这里推荐创建 <a href="https://feedly.com" target="_blank" rel="noopener">Feedly</a> 账号，因为 Feedly 是目前最好用的 RSS 服务网站。</p>
+<p>打开 Reeder 3 之后，点击顶部的「Tap to add an account」- 第三个服务「Feedly」- 「Continue with feedly」，没有账号则点击最底部的「New user? Sign up」注册新账号，有账号则直接输入账号密码登录即可。</p>
+<h3 id="客户端中登陆"><a href="#客户端中登陆" class="headerlink" title="客户端中登陆"></a>客户端中登陆</h3><p>客户端登陆后即可使用</p>
+<h2 id="四、推荐源的网站"><a href="#四、推荐源的网站" class="headerlink" title="四、推荐源的网站"></a>四、推荐源的网站</h2><ul>
+<li><p><a href="https://rss-source.com/" target="_blank" rel="noopener">订阅源推荐站</a></p>
+</li>
+<li><p><a href="https://getpodcast.xyz/" target="_blank" rel="noopener">播客 Feed 订阅</a></p>
+</li>
+<li><p><a href="https://rss.mifaw.com/" target="_blank" rel="noopener">RSS屋</a></p>
+</li>
+<li><p><a href="https://github.com/zhengjim/Chinese-Security-RSS/" target="_blank" rel="noopener">国内安全资讯的RSS地址</a></p>
+</li>
+<li><p><a href="https://github.com/Gracker/Rss-IT" target="_blank" rel="noopener">Rss-IT人</a></p>
+</li>
+</ul>
+<h3 id="A君私藏的超好用-RSS-订阅源"><a href="#A君私藏的超好用-RSS-订阅源" class="headerlink" title="A君私藏的超好用 RSS 订阅源"></a>A君私藏的超好用 RSS 订阅源</h3><ul>
+<li>爱范儿<a href="https://www.ifanr.com/feed" target="_blank" rel="noopener">https://www.ifanr.com/feed</a></li>
+<li>知乎日报<a href="https://feedx.net/rss/zhihudaily.xml" target="_blank" rel="noopener">https://feedx.net/rss/zhihudaily.xml</a></li>
+<li>苹果 fans 博客<a href="http://www.mac52ipod.cn/feed.php" target="_blank" rel="noopener">http://www.mac52ipod.cn/feed.php</a></li>
+<li>cnBeta.COM<a href="http://www.cnbeta.com/backend.php" target="_blank" rel="noopener">http://www.cnbeta.com/backend.php</a></li>
+<li>Engadget<a href="http://cn.engadget.com/rss.xml" target="_blank" rel="noopener">http://cn.engadget.com/rss.xml</a> </li>
+<li>抽屉新热榜<a href="http://dig.chouti.com/feed.xml" target="_blank" rel="noopener">http://dig.chouti.com/feed.xml</a></li>
+<li>泛见志<a href="http://www.fanjian.net/rss" target="_blank" rel="noopener">http://www.fanjian.net/rss</a></li>
+<li>纽约时报双语版<a href="https://feedx.net/rss/nytimesdual.xml" target="_blank" rel="noopener">https://feedx.net/rss/nytimesdual.xml</a></li>
+<li>36氪 <a href="https://36kr.com/feed" target="_blank" rel="noopener">https://36kr.com/feed</a></li>
+<li>独立开发者社区<a href="https://indiehackers.net/topics/feed" target="_blank" rel="noopener">https://indiehackers.net/topics/feed</a></li>
+<li>阮一峰 <a href="http://www.ruanyifeng.com/blog/atom.xml" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/atom.xml</a></li>
+<li>利器 <a href="https://liqi.io/feed/" target="_blank" rel="noopener">https://liqi.io/feed/</a></li>
+<li>极客公园 <a href="http://www.geekpark.net/rss" target="_blank" rel="noopener">http://www.geekpark.net/rss</a></li>
+<li>互联网早读课 <a href="http://zaodula.com/feed" target="_blank" rel="noopener">http://zaodula.com/feed</a></li>
+<li>月光博客 <a href="https://www.williamlong.info/rss.xml" target="_blank" rel="noopener">https://www.williamlong.info/rss.xml</a></li>
+<li>Blog|Phodal <a href="https://www.phodal.com/blog/feeds/rss/" target="_blank" rel="noopener">https://www.phodal.com/blog/feeds/rss/</a></li>
+<li>站长之家 <a href="http://app.chinaz.com/?app=rss" target="_blank" rel="noopener">http://app.chinaz.com/?app=rss</a></li>
+<li>猎云网 <a href="http://www.lieyunwang.com/feed" target="_blank" rel="noopener">http://www.lieyunwang.com/feed</a></li>
+<li>动点科技 <a href="http://cn.technode.com/feed/" target="_blank" rel="noopener">http://cn.technode.com/feed/</a></li>
+<li>PingWest品玩 <a href="https://www.pingwest.com/feed/all" target="_blank" rel="noopener">https://www.pingwest.com/feed/all</a></li>
+<li>互联网的一些事 <a href="http://feed.yixieshi.com/" target="_blank" rel="noopener">http://feed.yixieshi.com/</a></li>
+<li>IT之家 <a href="http://www.ithome.com/rss/" target="_blank" rel="noopener">http://www.ithome.com/rss/</a></li>
+<li>反斗限免 <a href="http://free.apprcn.com/feed/" target="_blank" rel="noopener">http://free.apprcn.com/feed/</a></li>
+<li>小众软件 <a href="https://feeds.appinn.com/appinns/" target="_blank" rel="noopener">https://feeds.appinn.com/appinns/</a></li>
+<li>异次元软件世界 <a href="http://feed.iplaysoft.com" target="_blank" rel="noopener">http://feed.iplaysoft.com</a></li>
+<li>少数派 <a href="https://sspai.com/feed" target="_blank" rel="noopener">https://sspai.com/feed</a></li>
+<li>新趣集 <a href="https://xinquji.com/rss" target="_blank" rel="noopener">https://xinquji.com/rss</a></li>
+<li>精品MAC应用分享 <a href="http://xclient.info/feed/" target="_blank" rel="noopener">http://xclient.info/feed/</a></li>
+<li>最美应用 <a href="http://zuimeia.com/feed/" target="_blank" rel="noopener">http://zuimeia.com/feed/</a></li>
+<li>厘米天空 <a href="http://www.cmsky.com/feed/" target="_blank" rel="noopener">http://www.cmsky.com/feed/</a></li>
+<li>有趣网址之家 <a href="http://youquhome.com/?feed=rss2" target="_blank" rel="noopener">http://youquhome.com/?feed=rss2</a></li>
+<li>知乎每日精选 <a href="https://www.zhihu.com/rss" target="_blank" rel="noopener">https://www.zhihu.com/rss</a></li>
+<li>虎嗅网 <a href="https://www.huxiu.com/rss/0.xml" target="_blank" rel="noopener">https://www.huxiu.com/rss/0.xml</a></li>
+<li>科学松鼠会 <a href="http://songshuhui.net/feed" target="_blank" rel="noopener">http://songshuhui.net/feed</a></li>
+<li>果壳网 <a href="https://www.guokr.com/handpick/rss/" target="_blank" rel="noopener">https://www.guokr.com/handpick/rss/</a></li>
+<li>理想生活实验室 <a href="http://www.toodaylab.com/feed" target="_blank" rel="noopener">http://www.toodaylab.com/feed</a></li>
+<li>飞射天狼 <a href="http://shihb.blog.sohu.com/rss" target="_blank" rel="noopener">http://shihb.blog.sohu.com/rss</a></li>
+<li>钛媒体 <a href="http://www.tmtpost.com/feed" target="_blank" rel="noopener">http://www.tmtpost.com/feed</a></li>
+<li>游研社 <a href="http://www.yystv.cn/rss/feed" target="_blank" rel="noopener">http://www.yystv.cn/rss/feed</a></li>
+<li>机核 <a href="https://www.gcores.com/rss" target="_blank" rel="noopener">https://www.gcores.com/rss</a></li>
+<li>触乐 <a href="http://www.chuapp.com/feed" target="_blank" rel="noopener">http://www.chuapp.com/feed</a></li>
+<li>游戏时光头条 <a href="http://www.vgtime.com/rss.jhtml" target="_blank" rel="noopener">http://www.vgtime.com/rss.jhtml</a></li>
+<li>游戏邦 <a href="http://gamerboom.com/feed" target="_blank" rel="noopener">http://gamerboom.com/feed</a></li>
+<li>GameLook <a href="http://www.gamelook.com.cn/feed" target="_blank" rel="noopener">http://www.gamelook.com.cn/feed</a></li>
+<li>拆盒网 <a href="http://www.chaihezi.com/feed/" target="_blank" rel="noopener">http://www.chaihezi.com/feed/</a></li>
+<li>游戏葡萄 <a href="http://youxiputao.com/feed" target="_blank" rel="noopener">http://youxiputao.com/feed</a></li>
+<li>ACG批评 <a href="http://www.acgpiping.net/feed/" target="_blank" rel="noopener">http://www.acgpiping.net/feed/</a></li>
+<li>安妮薇时报 <a href="https://www.thetype.com/feed/" target="_blank" rel="noopener">https://www.thetype.com/feed/</a></li>
+<li>优设网 <a href="http://www.uisdc.com/feed" target="_blank" rel="noopener">http://www.uisdc.com/feed</a></li>
+<li>安妮薇时报 <a href="https://www.thetype.com/feed/" target="_blank" rel="noopener">https://www.thetype.com/feed/</a></li>
+<li>胶片的味道 <a href="http://letsfilm.org/feed" target="_blank" rel="noopener">http://letsfilm.org/feed</a></li>
+<li>音范丝 <a href="http://www.yinfans.me/feed" target="_blank" rel="noopener">http://www.yinfans.me/feed</a></li>
+<li>ZAPRO·杂铺 <a href="https://tmioe.com/feed" target="_blank" rel="noopener">https://tmioe.com/feed</a></li>
+<li>标志情报局 <a href="http://www.logonews.cn/feed" target="_blank" rel="noopener">http://www.logonews.cn/feed</a></li>
+<li>VOICER <a href="http://www.voicer.me/feed" target="_blank" rel="noopener">http://www.voicer.me/feed</a></li>
+<li>TOPYS <a href="https://www.topys.cn/rss" target="_blank" rel="noopener">https://www.topys.cn/rss</a></li>
+<li>YOHO <a href="http://www.yohoboys.com/rss" target="_blank" rel="noopener">http://www.yohoboys.com/rss</a></li>
+<li>HYPEBEAST <a href="https://hypebeast.cn/feed" target="_blank" rel="noopener">https://hypebeast.cn/feed</a></li>
+<li>FOTOMEN <a href="https://fotomen.cn/rss" target="_blank" rel="noopener">https://fotomen.cn/rss</a></li>
+<li>华丽志 <a href="http://luxe.co/feed/" target="_blank" rel="noopener">http://luxe.co/feed/</a></li>
+<li>书格 <a href="https://new.shuge.org/feed/" target="_blank" rel="noopener">https://new.shuge.org/feed/</a></li>
+<li>四季书评 <a href="http://www.4sbooks.com/feed" target="_blank" rel="noopener">http://www.4sbooks.com/feed</a></li>
+<li>左岸读书 <a href="http://www.zreading.cn/feed" target="_blank" rel="noopener">http://www.zreading.cn/feed</a></li>
+<li>酷壳 <a href="https://coolshell.cn/feed" target="_blank" rel="noopener">https://coolshell.cn/feed</a></li>
+<li>技术小黑屋 <a href="https://droidyue.com/atom.xml" target="_blank" rel="noopener">https://droidyue.com/atom.xml</a></li>
+<li>美团技术团队 <a href="https://tech.meituan.com/feed/" target="_blank" rel="noopener">https://tech.meituan.com/feed/</a></li>
+<li>OSCHINA <a href="https://www.oschina.net/news/rss" target="_blank" rel="noopener">https://www.oschina.net/news/rss</a></li>
+<li>腾讯Alloyteam <a href="http://www.alloyteam.com/feed/" target="_blank" rel="noopener">http://www.alloyteam.com/feed/</a></li>
+<li>JustPod  <a href="https://justpodnews.com/rss/" target="_blank" rel="noopener">https://justpodnews.com/rss/</a></li>
+<li>界面新闻<a href="https://a.jiemian.com/index.php?m=article&amp;a=rss" target="_blank" rel="noopener">https://a.jiemian.com/index.php?m=article&amp;a=rss</a></li>
+<li>tech <a href="http://www.techweb.com.cn/rss/" target="_blank" rel="noopener">http://www.techweb.com.cn/rss/</a> </li>
+<li>数字尾巴 <a href="http://www.dgtle.com/rss/dgtle.xml" target="_blank" rel="noopener">http://www.dgtle.com/rss/dgtle.xml</a></li>
+<li>威锋网 <a href="http://news.feng.com/rss.xml" target="_blank" rel="noopener">http://news.feng.com/rss.xml</a></li>
+<li>财新博客 <a href="http://blog.caixin.com/feed" target="_blank" rel="noopener">http://blog.caixin.com/feed</a> </li>
+<li>证券之星<a href="http://news.stockstar.com/rss/xml.aspx?file=xml/stock/2.xml" target="_blank" rel="noopener">http://news.stockstar.com/rss/xml.aspx?file=xml/stock/2.xml</a></li>
+<li>今日话题 - 雪球 <a href="https://xueqiu.com/hots/topic/rss" target="_blank" rel="noopener">https://xueqiu.com/hots/topic/rss</a></li>
+<li>中证时报 大盘 <a href="http://app.stcn.com/?app=rss&amp;controller=index&amp;action=feed&amp;catid=28" target="_blank" rel="noopener">http://app.stcn.com/?app=rss&amp;controller=index&amp;action=feed&amp;catid=28</a></li>
+<li>路透: 国际财经  <a href="http://cn.reuters.com/rssFeed/CNIntlBizNews/" target="_blank" rel="noopener">http://cn.reuters.com/rssFeed/CNIntlBizNews/</a></li>
+<li>经济学人 <a href="https://www.economist.com/sections/china/rss.xml" target="_blank" rel="noopener">https://www.economist.com/sections/china/rss.xml</a></li>
+<li>博客园 cnblog<a href="http://feed.cnblogs.com/blog/sitehome/rss" target="_blank" rel="noopener">http://feed.cnblogs.com/blog/sitehome/rss</a></li>
+<li>廖雪峰的博客<a href="https://www.liaoxuefeng.com/feed" target="_blank" rel="noopener">https://www.liaoxuefeng.com/feed</a></li>
+<li>V2EX - 技术<a href="https://www.v2ex.com/feed/tab/tech.xml" target="_blank" rel="noopener">https://www.v2ex.com/feed/tab/tech.xml</a></li>
+<li>爱应用  <a href="http://www.iapps.im/feed/index" target="_blank" rel="noopener">http://www.iapps.im/feed/inde</a></li>
+<li>创业邦  <a href="http://www.cyzone.cn/rss/" target="_blank" rel="noopener">http://www.cyzone.cn/rss/</a></li>
+<li>有格调<a href="https://www.ugediao.com/feed" target="_blank" rel="noopener">https://www.ugediao.com/feed</a></li>
+</ul>
+<h2 id="五、自建RSS订阅服务平台"><a href="#五、自建RSS订阅服务平台" class="headerlink" title="五、自建RSS订阅服务平台"></a>五、自建RSS订阅服务平台</h2><h3 id="FreshRss"><a href="#FreshRss" class="headerlink" title="FreshRss"></a>FreshRss</h3><ul>
+<li><p><a href="https://github.com/FreshRSS/FreshRSS" target="_blank" rel="noopener">Github</a></p>
+</li>
+<li></li>
+<li><p>官网地址：<a href="https://freshrss.org/" target="_blank" rel="noopener">https://freshrss.org</a></p>
+<p>演示地址：<a href="https://demo.freshrss.org/" target="_blank" rel="noopener">https://demo.freshrss.org</a></p>
+</li>
+<li><p>安装</p>
+<ul>
+<li><a href="https://hooo.win/2020/08/02/%E6%90%AD%E5%BB%BAFreshRSS/" target="_blank" rel="noopener">无宝塔面板，安装方法</a></li>
+<li><a href="https://sspai.com/post/64289" target="_blank" rel="noopener">Docker安装方法</a></li>
+<li>还有下面的利用宝塔的简单安装</li>
+</ul>
+</li>
+</ul>
+<h4 id="简单安装"><a href="#简单安装" class="headerlink" title="简单安装"></a>简单安装</h4><ol>
+<li><p>宝塔后台先添加新站点和数据库</p>
+<ul>
+<li>写个二级域名，再域名绑定IP</li>
+</ul>
+</li>
+<li><p>环境要求：<strong>Nginx PHP &gt;= 5.3 MySQL &gt;= 5.5</strong> </p>
+<ul>
+<li>需要Fileinfo组建支持（软件商店 - php设置 - 安装扩展 - 安装Fileinfo）</li>
+</ul>
+</li>
+<li><p><strong>下载 <a href="https://github.com/FreshRSS/FreshRSS/releases" target="_blank" rel="noopener">FreshRSS 源码</a>，上传至网站根目录，并解压所有文件至根目录</strong></p>
+</li>
+<li><p><strong>打开你的域名就可以进入 FreshRSS 的安装界面了</strong></p>
+</li>
+<li><p><strong>跟着提示进行设置就行了，数据库名和用户密码在宝塔后台数据库都能看到，照着填写就OK了</strong></p>
+</li>
+</ol>
+<p>参考：<a href="https://sunpma.com/198.html" target="_blank" rel="noopener">参考1</a> 和 <a href="https://www.mianao.info/2020/05/30/%E5%86%8D%E6%AC%A1%E8%87%AA%E5%BB%BARSS%E8%AE%A2%E9%98%85%E6%9C%8D%E5%8A%A1%E5%B9%B3%E5%8F%B0" target="_blank" rel="noopener">参考2</a></p>
+<h4 id="安装错误"><a href="#安装错误" class="headerlink" title="安装错误"></a>安装错误</h4><p>openlog 报错：<code>Warning: openlog() has been disabled for security reasons in /www/wwwroot/rss.mianao.info/lib/lib_rss.php on line 15</code></p>
+<p><strong>解决办法</strong>：</p>
+<p>到 <code>/www/server/php/70/etc/php.ini</code> 打开 php.ini 文件到 299 行（附近），删除 <code>disable_functions =</code> 后面的 <code>openlog,</code> 就好了</p>
+<p>然后重启 PHP（可在宝塔面板重启，也可以用命令）</p>
+<h4 id="更新Feed"><a href="#更新Feed" class="headerlink" title="更新Feed"></a>更新Feed</h4><ol>
+<li>下载扩展 <a href="https://github.com/Eisa01/FreshRSS---Auto-Refresh-Extension" target="_blank" rel="noopener">Auto-Refresh</a> </li>
+<li>将解压后的 xExtension-AutoRefresh 文件夹放到<code>/www/wwwroot/你的站点/extensions</code> 目录下</li>
+<li>到 FreshRSS <strong>设置</strong>-&gt; <strong>扩展</strong>启用就好了</li>
+<li>默认是 1 分钟刷新一次，想修改可以到 <code>xExtension-AutoRefresh/static/script.js</code> 打开这个 js 文件，里面是 60000，单位应该是 ms</li>
+</ol>
+<h4 id="手机访问"><a href="#手机访问" class="headerlink" title="手机访问"></a>手机访问</h4><ol>
+<li>FreshRSS <strong>设置</strong>-&gt;<strong>用户账户</strong>-&gt;<strong>API 管理</strong>，设置API密码。</li>
+<li>管理 - 认证 - 勾选  <code>允许API访问（用于手机应用）</code></li>
+<li>打开Reeder，添加账号 - 选择FreshRSS<ul>
+<li>Server：<code>https://域名/p/api/</code> </li>
+<li>user：<code>FreshRSS 的登录名</code></li>
+<li>密码：上面设置的<code>API密码</code></li>
+</ul>
+</li>
+</ol>
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><ol>
+<li>在订阅管理中，Tag和 Category 不能相同，否则无法创建</li>
+</ol>
+<h2 id="六、其他玩法"><a href="#六、其他玩法" class="headerlink" title="六、其他玩法"></a>六、其他玩法</h2><p>1、<strong>监视网页内任意内容的变化。</strong><br>有一款叫 <strong><code>Distill Web Monitor</code></strong> 的拓展 （支持 Firefox / Chrome），可以让你监视网页某处内容的变化，并在第一时间通知你。</p>
+<p>使用的场景非常多，比如监控某商城网站商品是否有货是否有降价，某网站上的房价涨跌提醒，某个页面是否有内容更新，某视频网站Po主发布新视频的提醒，再比如你是做运营的，想要监视竞争对手产品的动态，这款拓展都能做到。更加强大的地方在于它可以自定义提醒的条件，比如价格变化超过10%才提醒你。</p>
+<p>2，<strong>指定新闻内容动态提醒。</strong></p>
+<p><a href="https://www.google.com/alerts" target="_blank" rel="noopener">Google Alerts</a> 可以让用户指定监控的关键词，Google 会在第一时间内向用户推送新内容更新提醒，支持邮件提醒，也支持RSS提醒，非常方便，用户可以用这个功能来跟踪一些新闻报道，业界动态，获取最新的国际事件等等。</p>
+<p>Google Alerts的最大作用就是：让用户能迅速而方便地获得其所关注的信息。Google Alerts能将有价值的信息主动推给用户，大大减少了用户获取信息的时间。实现了“不上网而知天下事”。百度也有<a href="https://www.baidu.com/search/rss.html" target="_blank" rel="noopener">类似产品</a>。</p>
+<p>3，<strong>RSS 配合 IFTTT</strong></p>
+<p>IFTTT是“if this then that”的缩写，可以让你的网络行为能够引发连锁反应。以RSS为例，比如在你的RSS订阅源里出现了有关于”iPhone8”的信息，联接上IFTTT后就可以在手机上弹窗通知我们了。</p>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Gkon</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://gxkon.top/posts/9de052a3/">http://gxkon.top/posts/9de052a3/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://gxkon.top" target="_blank">Gxkon's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/RSS/">RSS</a></div><div class="post_share"><div class="social-share" data-image="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/10/7/68coffee-5567269_1280.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><nav class="pagination_post" id="pagination"><div class="next-post pull-full"><a href="/posts/aa580810/"><img class="next_cover" data-src="/Pic/post.jpg" onerror="onerror=null;src='/Pic/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">TelegramBot制作</div></div></a></div></nav><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i><span> 评论</span></div><div id="gitalk-container"></div><script>var gitalk = new Gitalk({
+  clientID: '1ce3148e3133bf004c96',
+  clientSecret: '2a1e5c0f4d38387460b916843bfe5cac67ef2d07',
+  repo: 'blankwz.github.io',
+  owner: 'blankwz',
+  admin: ['blankwz'],
+  id: md5(decodeURI(location.pathname)),
+  language: 'zh-CN',
+  perPage: 10,
+  distractionFreeMode: false,
+  pagerDirection: 'last',
+  createIssueManually: false,
+  updateCountCallback: commentCount
+})
+gitalk.render('gitalk-container')
+
+function commentCount(n){
+  try {
+    document.getElementsByClassName('gitalk-comment-count')[0].innerHTML= n
+  } catch (e) {
+    return false
+  }
+}</script></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By Gkon</div><div class="framework-info"><span>驱动 </span><a href="https://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="阅读模式"></i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">簡</a><i class="darkmode fa fa-moon-o" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><a id="to_comment" href="#post-comment" title="直达评论"><i class="scroll_to_comment fa fa-comments">  </i></a><i class="fa fa-list-ul close" id="mobile-toc-button" title="目录" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@3/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script><script src="/js/third-party/ClickShowText.js"></script></body></html>

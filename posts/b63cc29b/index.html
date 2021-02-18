@@ -1,0 +1,1277 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Python高级之pywin32与窗口句柄 | Gxkon's Blog</title><meta name="description" content="pywin32一、介绍pywin32是一个Python库，它为Python提供访问Windows API的扩展，提供了齐全的windows常量、接口、线程以及COM机制等等 安装：pip install pywin32 三大模块： win32api 定义了常用的一些API函数 Windows开发接口模块。主要负责模拟键盘和鼠标操作,对win32gui获取的标签进行点击&#x2F;获取值&#x2F;修改值等操作   w"><meta name="keywords" content="Python"><meta name="author" content="Gkon"><meta name="copyright" content="Gkon"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="dns-prefetch" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="crossorigin"/><link rel="dns-prefetch" href="https://fonts.googleapis.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="dns-prefetch" href="//busuanzi.ibruce.info"/><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Python高级之pywin32与窗口句柄"><meta name="twitter:description" content="pywin32一、介绍pywin32是一个Python库，它为Python提供访问Windows API的扩展，提供了齐全的windows常量、接口、线程以及COM机制等等 安装：pip install pywin32 三大模块： win32api 定义了常用的一些API函数 Windows开发接口模块。主要负责模拟键盘和鼠标操作,对win32gui获取的标签进行点击&#x2F;获取值&#x2F;修改值等操作   w"><meta name="twitter:image" content="http://gxkon.top/Pic/post.jpg"><meta property="og:type" content="article"><meta property="og:title" content="Python高级之pywin32与窗口句柄"><meta property="og:url" content="http://gxkon.top/posts/b63cc29b/"><meta property="og:site_name" content="Gxkon's Blog"><meta property="og:description" content="pywin32一、介绍pywin32是一个Python库，它为Python提供访问Windows API的扩展，提供了齐全的windows常量、接口、线程以及COM机制等等 安装：pip install pywin32 三大模块： win32api 定义了常用的一些API函数 Windows开发接口模块。主要负责模拟键盘和鼠标操作,对win32gui获取的标签进行点击&#x2F;获取值&#x2F;修改值等操作   w"><meta property="og:image" content="http://gxkon.top/Pic/post.jpg"><meta property="article:published_time" content="2021-01-02T13:37:02.000Z"><meta property="article:modified_time" content="2021-02-13T12:49:38.792Z"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>var autoChangeMode = '1'
+var t = Cookies.get("theme")
+if (autoChangeMode == '1'){
+  var isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+  var isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+  var isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined){
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport){
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour < 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+  }
+  } else if (t == 'light') activateLightMode()
+  else activateDarkMode()
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="canonical" href="http://gxkon.top/posts/b63cc29b/"><link rel="prev" title="Clash for Windows 教程 | 汉化 | 使用" href="http://gxkon.top/posts/1b320349/"><link rel="next" title="Python中级之操作6种数据库" href="http://gxkon.top/posts/83dbd91b/"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script><script src="https://cdn.jsdelivr.net/npm/blueimp-md5/js/md5.min.js"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: {"text":"本人,超帅,打钱","fontSize":"15px"},
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  highlightShrink: 'false',
+  isFontAwesomeV5: false,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false
+  
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isSidebar: true  
+  }</script><noscript><style>
+#page-header {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 4.2.0"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/Pic/avatar.png" onerror="onerror=null;src='/Pic/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">156</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">83</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">54</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 娱乐</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li></ul></div></div></div></div><i class="fa fa-arrow-right on" id="toggle-sidebar" aria-hidden="true">     </i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#pywin32"><span class="toc-text">pywin32</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、介绍"><span class="toc-text">一、介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#三大模块："><span class="toc-text">三大模块：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他模块和宏"><span class="toc-text">其他模块和宏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#工具"><span class="toc-text">工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他模块和使用方法查看"><span class="toc-text">其他模块和使用方法查看</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pyqt5自绘的控件自动化"><span class="toc-text">Pyqt5自绘的控件自动化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、常用"><span class="toc-text">二、常用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-FindWindow-查找主窗体"><span class="toc-text">1 FindWindow 查找主窗体</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-FindWindowEx-查找子窗体"><span class="toc-text">2 FindWindowEx 查找子窗体</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-查找句柄的类名和标题"><span class="toc-text">3 查找句柄的类名和标题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-win32gui-枚举所有窗口句柄"><span class="toc-text">4 win32gui.枚举所有窗口句柄</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#EnumWindows-枚举所有的顶级窗口句柄"><span class="toc-text">EnumWindows()枚举所有的顶级窗口句柄</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#EnumChildWindows-枚举所有的子窗口"><span class="toc-text">EnumChildWindows 枚举所有的子窗口</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-窗口设置"><span class="toc-text">5 窗口设置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#SetForegroundWindow-置顶窗口"><span class="toc-text">SetForegroundWindow() 置顶窗口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取置顶窗口句柄（当前焦点的窗口）"><span class="toc-text">获取置顶窗口句柄（当前焦点的窗口）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关闭窗口句柄"><span class="toc-text">关闭窗口句柄</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#方法一："><span class="toc-text">方法一：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#方法二："><span class="toc-text">方法二：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#方法三："><span class="toc-text">方法三：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#案例"><span class="toc-text">案例</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#win32process方法"><span class="toc-text">win32process方法</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#移动窗口-MoveWindow"><span class="toc-text">移动窗口  MoveWindow</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#窗口最大化与最小化"><span class="toc-text">窗口最大化与最小化</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#最大化最小化"><span class="toc-text">最大化最小化</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#最小化判断-win32gui-IsIconic"><span class="toc-text">最小化判断 win32gui.IsIconic</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#窗口隐藏"><span class="toc-text">窗口隐藏</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取窗口左边及大小"><span class="toc-text">获取窗口左边及大小</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#设置指定窗口的大小"><span class="toc-text">设置指定窗口的大小</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-进程线程"><span class="toc-text">6 进程线程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#GetWindowThreadProcessId"><span class="toc-text">GetWindowThreadProcessId</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OpenProcess"><span class="toc-text">OpenProcess</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ReadProcessMemory"><span class="toc-text">ReadProcessMemory</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-中文编码"><span class="toc-text">7 中文编码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-发送信息"><span class="toc-text">8 发送信息</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#SendMessage"><span class="toc-text">SendMessage</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#获取窗口文本的字符数"><span class="toc-text">获取窗口文本的字符数</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PostMessage"><span class="toc-text">PostMessage</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#区别"><span class="toc-text">区别:</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#WM-GETTEXT-获取信息"><span class="toc-text">WM_GETTEXT 获取信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#示例：文本框写入与读取"><span class="toc-text">示例：文本框写入与读取</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-消息框"><span class="toc-text">9 消息框</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#消息框置顶"><span class="toc-text">消息框置顶</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-位置"><span class="toc-text">10 位置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-Menu-菜单"><span class="toc-text">11 Menu 菜单</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#GetMenu-hwnd"><span class="toc-text">GetMenu(hwnd)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GetSubMenu-hMenu-nPos"><span class="toc-text">GetSubMenu(hMenu, nPos)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GetMenuItemID-hMenu-nPos"><span class="toc-text">GetMenuItemID(hMenu, nPos)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-打开程序"><span class="toc-text">12 打开程序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ShellExecute"><span class="toc-text">ShellExecute</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-控件"><span class="toc-text">13 控件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#GetDlgItem"><span class="toc-text">GetDlgItem</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GetDlgItemText"><span class="toc-text">GetDlgItemText</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-显示器屏幕大小"><span class="toc-text">14 显示器屏幕大小</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15-权限问题"><span class="toc-text">15 权限问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#pywintypes-error-5-39-PostMessage-39-39-拒绝访问。-39"><span class="toc-text">pywintypes.error: (5, &#39;PostMessage&#39;, &#39;拒绝访问。&#39;)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、鼠标键盘"><span class="toc-text">三、鼠标键盘</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#获取鼠标点击位置-GetCursorPos"><span class="toc-text">获取鼠标点击位置 GetCursorPos</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移动鼠标至指定坐标位-SetCursorPos"><span class="toc-text">移动鼠标至指定坐标位 SetCursorPos</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#鼠标单击"><span class="toc-text">鼠标单击</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#keybd-event"><span class="toc-text">keybd_event</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mouse-event"><span class="toc-text">mouse_event</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SetCursorPos"><span class="toc-text">SetCursorPos</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#虚拟键值表"><span class="toc-text">虚拟键值表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、注册表"><span class="toc-text">五、注册表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RegOpenKey"><span class="toc-text">RegOpenKey</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RegQueryValueEx"><span class="toc-text">RegQueryValueEx</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RegCloseKey"><span class="toc-text">RegCloseKey</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#六、Win32con-函数"><span class="toc-text">六、Win32con 函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#WM-COMMAND"><span class="toc-text">WM_COMMAND</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CB-GETCOUNT"><span class="toc-text">CB_GETCOUNT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HKEY-LOCAL-MACHINE"><span class="toc-text">HKEY_LOCAL_MACHINE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SW-XXXX"><span class="toc-text">SW_XXXX</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#KEY-ALL-ACCESS"><span class="toc-text">KEY_ALL_ACCESS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#KEYEVENTF-KEYUP"><span class="toc-text">KEYEVENTF_KEYUP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BM-CLICK"><span class="toc-text">BM_CLICK</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MOUSEEVENTF-LEFTDOWN"><span class="toc-text">MOUSEEVENTF_LEFTDOWN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#VK-RETURN"><span class="toc-text">VK_RETURN</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#示例"><span class="toc-text">示例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#文件的读写"><span class="toc-text">文件的读写</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1"><span class="toc-text">1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2"><span class="toc-text">2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3"><span class="toc-text">3</span></a></li></ol></li></ol></li></ol></div></div></div><div id="body-wrap"><div class="post-bg" id="nav" style="background-image: url(/Pic/post.jpg)"><div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">Gxkon's Blog</a></span><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 娱乐</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li></ul></div></div><span class="toggle-menu close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span></span></div><div id="post-info"><div id="post-title"><div class="posttitle">Python高级之pywin32与窗口句柄</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2021-01-02 21:37:02"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2021-01-02</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2021-02-13 20:49:38"><i class="fa fa-history" aria-hidden="true"></i> 更新于 2021-02-13</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Python/">Python</a><i class="fa fa-angle-right post-meta__separator" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Python/%E9%AB%98%E7%BA%A7/">高级</a></span></div><div class="meta-secondline"> </div><div class="meta-thirdline"><span class="post-meta-pv-cv"><i class="fa fa-eye post-meta__icon" aria-hidden="true"> </i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"><span class="post-meta__separator">|</span><i class="post-meta__icon fa fa-comment-o" aria-hidden="true"></i><span>评论数:</span><a href="/posts/b63cc29b/#post-comment"><span class="gitalk-comment-count comment-count"></span></a></span></div></div></div></div><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h1 id="pywin32"><a href="#pywin32" class="headerlink" title="pywin32"></a>pywin32</h1><h2 id="一、介绍"><a href="#一、介绍" class="headerlink" title="一、介绍"></a>一、介绍</h2><p>pywin32是一个Python库，它为Python提供访问Windows API的扩展，提供了齐全的windows常量、接口、线程以及COM机制等等</p>
+<p>安装：<code>pip install pywin32</code></p>
+<h3 id="三大模块："><a href="#三大模块：" class="headerlink" title="三大模块："></a><strong>三大模块</strong>：</h3><ul>
+<li><strong><code>win32api</code></strong><ul>
+<li><strong>定义了常用的一些API函数</strong></li>
+<li>Windows开发接口模块。主要负责模拟键盘和鼠标操作,对win32gui获取的标签进行点击/获取值/修改值等操作</li>
+</ul>
+</li>
+<li><code>win32gui</code><ul>
+<li><strong>定义了一些有关图形操作的API</strong></li>
+<li>Windows图形界面接口模块。主要负责操作窗口切换以及窗口中元素id标签的获取</li>
+</ul>
+</li>
+<li><code>win32con</code><ul>
+<li><code>定义了windows API内的宏</code></li>
+<li>全面的库函数，提供Win32gui和Win32api需要的操作参数</li>
+</ul>
+</li>
+</ul>
+<h3 id="其他模块和宏"><a href="#其他模块和宏" class="headerlink" title="其他模块和宏"></a>其他模块和宏</h3><p><strong>最常用的2个宏定义文件即是:win32con和winerror</strong></p>
+<ul>
+<li><p><strong>win32con：基本上所有宏都集成在这里(5k+)</strong></p>
+</li>
+<li><p><strong>winerror：系统错误码的宏定义 来源于winerror.h</strong></p>
+</li>
+</ul>
+<p><strong>其他模块</strong>：</p>
+<p><strong>win32api 提供了常用的用户API</strong></p>
+<p><strong>win32clipboard 提供了有关粘贴板的API</strong></p>
+<p><strong>win32console 提供了有关控制台的API</strong></p>
+<p><strong>win32gui 提供了有关windows用户界面图形操作的API</strong></p>
+<p><strong>win32service 提供了有关服务操作的API</strong></p>
+<p><strong>win32file 提供了有关文件操作的API</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 弹窗</span></span><br><span class="line">win32api.MessageBox(0,<span class="string">"Hello PYwin32"</span>,<span class="string">"MessageBox"</span>,win32con.MB_OK | win32con.MB_ICONWARNING)</span><br></pre></td></tr></table></figure>
+
+<h3 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h3><ul>
+<li><p>精易编程助手，方便查看各种句柄和类名信息</p>
+</li>
+<li><p>微软的Spy++</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Spy++里显示的都是十六进制整型，这个要注意下，调试的时候用十六进制输出句柄，如下：<span class="built_in">print</span> <span class="string">"%x"</span> % (handle)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="其他模块和使用方法查看"><a href="#其他模块和使用方法查看" class="headerlink" title="其他模块和使用方法查看"></a>其他模块和使用方法查看</h3><p>可以查看 pywin32的模块路径：</p>
+<ul>
+<li><code>C:\python379\Lib\site-packages\win32\test</code> 其中有使用方法</li>
+<li>官方<a href="https://github.com/mhammond/pywin32/tree/master/win32/Demos" target="_blank" rel="noopener">Github</a></li>
+</ul>
+<h3 id="Pyqt5自绘的控件自动化"><a href="#Pyqt5自绘的控件自动化" class="headerlink" title="Pyqt5自绘的控件自动化"></a>Pyqt5自绘的控件自动化</h3><p><code>一些软件的窗口控件是自绘的控件，无法获取控件的句柄！比如Pyqt5！</code></p>
+<p><strong>那如何实现自动化？</strong></p>
+<ol>
+<li>获取主窗口的句柄</li>
+<li>通过位置坐标，移动鼠标到控件上</li>
+<li>或者通过按键执行</li>
+</ol>
+<h2 id="二、常用"><a href="#二、常用" class="headerlink" title="二、常用"></a>二、常用</h2><p>在win32编程的世界里，包括窗口到文本框的所有控件都是窗体，所有的窗体都有独立的句柄。</p>
+<ul>
+<li><p>要操作任意一个窗体，都需要找到这个窗体的句柄。</p>
+</li>
+<li><p>句柄是一个32位整数，在windows中用于标记对象</p>
+</li>
+</ul>
+<h3 id="1-FindWindow-查找主窗体"><a href="#1-FindWindow-查找主窗体" class="headerlink" title="1 FindWindow 查找主窗体"></a>1 FindWindow 查找主窗体</h3><p><code>win32gui.FindWindow()</code>属于win32gui的模块，</p>
+<ul>
+<li>它自顶层窗口（也就是桌面）开始搜索条件匹配的窗体，并返回这个窗体的句柄。</li>
+<li>该函数仅能查找主窗口，因此无法搜索子窗口，也不区分大小写，未找到则返回0。</li>
+</ul>
+<p><code>FindWindow(lpClassName=None, lpWindowName=None):</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">HWND FindWindowA(  LPCSTR lpClassName,//窗口类名  </span><br><span class="line">					LPCSTR lpWindowName//窗口名称，例如计算器);</span><br><span class="line">					</span><br><span class="line"><span class="comment"># 例</span></span><br><span class="line">para_hld = win32gui.FindWindow(None, <span class="string">"Snipping Tool"</span>)<span class="comment"># 1836416</span></span><br><span class="line">para_hld = win32gui.FindWindow(None, <span class="string">"New Text Document.txt - Notepad"</span>)<span class="comment"># 591410</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>参数</strong>：<ul>
+<li><code>lpClassName</code>：字符型，是窗体的类名，这个可以在Spy++里找到。</li>
+<li><code>lpWindowName</code>：字符型，是窗口名，也就是标题栏上你能看见的那个标题。</li>
+</ul>
+</li>
+<li><strong>说明</strong>：这个函数我们仅能用来找主窗口。</li>
+</ul>
+<h3 id="2-FindWindowEx-查找子窗体"><a href="#2-FindWindowEx-查找子窗体" class="headerlink" title="2 FindWindowEx 查找子窗体"></a>2 FindWindowEx 查找子窗体</h3><p><code>FindWindowEx(hwndParent=0, hwndChildAfter=0, lpszClass=None, lpszWindow=None);</code></p>
+<ul>
+<li><strong>描述</strong>：搜索类名和窗体名匹配的窗体，并返回这个窗体的句柄。不区分大小写，找不到就返回0。</li>
+<li><strong>参数</strong>：<ul>
+<li><code>hwndParent</code>：若不为0，则搜索句柄为hwndParent窗体的子窗体。</li>
+<li><code>hwndChildAfter</code>：若不为0，则按照z-index的顺序从hwndChildAfter向后开始搜索子窗体，否则从第一个子窗体开始搜索。</li>
+<li><code>lpClassName</code>：字符型，是窗体的类名，这个可以在Spy++里找到。</li>
+<li><code>lpWindowName</code>：字符型，是窗口名，也就是标题栏上你能看见的那个标题。</li>
+</ul>
+</li>
+<li><strong>说明</strong>：找到了主窗口以后就靠它来定位子窗体啦。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">edtextHwnd = win32gui.FindWindowEx(pHwnd, <span class="number">0</span>, <span class="string">'Qt5QWindowIcon'</span>, <span class="string">'登录'</span>)</span><br><span class="line">print(edtextHwnd)</span><br><span class="line"></span><br><span class="line"><span class="comment">#获取父句柄hwnd类名为clsname的子句柄</span></span><br><span class="line">hwnd1= win32gui.FindWindowEx(pHwnd, <span class="literal">None</span>, clsname, <span class="literal">None</span>)</span><br><span class="line">print(hwnd1)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">find_idxSubHandle</span><span class="params">(pHandle, winClass, index=<span class="number">0</span>)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    已知子窗口的窗体类名</span></span><br><span class="line"><span class="string">    寻找第index号个同类型的兄弟窗口</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="keyword">assert</span> type(index) == int <span class="keyword">and</span> index &gt;= <span class="number">0</span></span><br><span class="line">    handle = win32gui.FindWindowEx(pHandle, <span class="number">0</span>, winClass, <span class="literal">None</span>)</span><br><span class="line">    <span class="keyword">while</span> index &gt; <span class="number">0</span>:</span><br><span class="line">        handle = win32gui.FindWindowEx(pHandle, handle, winClass, <span class="literal">None</span>)</span><br><span class="line">        index -= <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> handle</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">find_subHandle</span><span class="params">(pHandle, winClassList)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    递归寻找子窗口的句柄</span></span><br><span class="line"><span class="string">    pHandle是祖父窗口的句柄</span></span><br><span class="line"><span class="string">    winClassList是各个子窗口的class列表，父辈的list-index小于子辈</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="keyword">assert</span> type(winClassList) == list</span><br><span class="line">    <span class="keyword">if</span> len(winClassList) == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> find_idxSubHandle(pHandle, winClassList[<span class="number">0</span>][<span class="number">0</span>], winClassList[<span class="number">0</span>][<span class="number">1</span>])</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        pHandle = find_idxSubHandle(pHandle, winClassList[<span class="number">0</span>][<span class="number">0</span>], winClassList[<span class="number">0</span>][<span class="number">1</span>])</span><br><span class="line">        <span class="keyword">return</span> find_subHandle(pHandle, winClassList[<span class="number">1</span>:])</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-查找句柄的类名和标题"><a href="#3-查找句柄的类名和标题" class="headerlink" title="3 查找句柄的类名和标题"></a><strong>3 查找句柄的类名和标题</strong></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#获取某个句柄的类名和标题</span></span><br><span class="line">title = win32gui.GetWindowText(pHwnd)     </span><br><span class="line">clsname = win32gui.GetClassName(pHwnd)     </span><br><span class="line"></span><br><span class="line"><span class="comment"># 根据应用窗口名找到窗口控件编号（单个）</span></span><br><span class="line"><span class="comment"># 用win32gui的FindWindow方法查找有一个缺点，就是当有重名的窗口时只会找到一个</span></span><br><span class="line"> def find_window_by_title(title):</span><br><span class="line">        window_found = win32gui.FindWindow(None, title)</span><br><span class="line">        <span class="built_in">return</span> window_found</span><br><span class="line">        </span><br><span class="line"><span class="comment"># 根据应用窗口名找到窗口控件编号（多个）</span></span><br><span class="line">   def find_windows_by_title(self, title):</span><br><span class="line">        windows = []</span><br><span class="line">        handlers = self.get_window_handlers()</span><br><span class="line">        <span class="keyword">for</span> handler <span class="keyword">in</span> handlers:</span><br><span class="line">            <span class="keyword">if</span> win32gui.GetWindowText(handler) == title:</span><br><span class="line">                windows.append(handler)</span><br><span class="line">        <span class="built_in">return</span> windows</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取所有窗口的标题名  </span></span><br><span class="line"><span class="comment"># 也可以用于检测程序是否运行！！</span></span><br><span class="line">    def get_window_title_all(handlers):  <span class="comment"># handlers为所有的句柄</span></span><br><span class="line">        titles = []</span><br><span class="line">        <span class="keyword">for</span> handler <span class="keyword">in</span> handlers:</span><br><span class="line">            title = win32gui.GetWindowText(handler)</span><br><span class="line">            titles.append(title)</span><br><span class="line">        <span class="built_in">return</span> titles</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="4-win32gui-枚举所有窗口句柄"><a href="#4-win32gui-枚举所有窗口句柄" class="headerlink" title="4 win32gui.枚举所有窗口句柄"></a><strong>4 win32gui.</strong>枚举所有窗口句柄</h3><h4 id="EnumWindows-枚举所有的顶级窗口句柄"><a href="#EnumWindows-枚举所有的顶级窗口句柄" class="headerlink" title="EnumWindows()枚举所有的顶级窗口句柄"></a><strong>EnumWindows()枚举所有的顶级窗口句柄</strong></h4><p><strong>枚举所有窗口句柄，</strong>直到最后一个顶层窗口被枚举则停止枚举过程。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> win32api, win32gui, win32con</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">hWndList = []</span><br><span class="line">win32gui.EnumWindows(<span class="keyword">lambda</span> hWnd, param: param.append(hWnd), hWndList)</span><br><span class="line">print(hWndList)</span><br><span class="line"><span class="keyword">for</span> hwnd <span class="keyword">in</span> hWndList:</span><br><span class="line">    title = win32gui.GetWindowText(hwnd)</span><br><span class="line">    print(title)</span><br></pre></td></tr></table></figure>
+
+<h4 id="EnumChildWindows-枚举所有的子窗口"><a href="#EnumChildWindows-枚举所有的子窗口" class="headerlink" title="EnumChildWindows 枚举所有的子窗口"></a>EnumChildWindows 枚举所有的子窗口</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show_windows</span><span class="params">(hWndList)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> h <span class="keyword">in</span> hWndList:</span><br><span class="line">        show_window_attr(h)</span><br><span class="line">        </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">demo_child_windows</span><span class="params">(parent)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    列出所有的子窗口</span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> parent:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"> 	hWndChildList = []</span><br><span class="line">    win32gui.EnumChildWindows(parent, <span class="keyword">lambda</span> hWnd, param: param.append(hWnd),  hWndChildList)</span><br><span class="line">    show_windows(hWndChildList)</span><br><span class="line">    <span class="keyword">return</span> hWndChildList</span><br><span class="line"></span><br><span class="line"><span class="comment">#或者</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_child_windows</span><span class="params">(parent)</span>:</span>        </span><br><span class="line">    <span class="string">'''     </span></span><br><span class="line"><span class="string">    获得parent的所有子窗口句柄</span></span><br><span class="line"><span class="string">     返回子窗口句柄列表</span></span><br><span class="line"><span class="string">     '''</span>     </span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> parent:         </span><br><span class="line">        <span class="keyword">return</span>      </span><br><span class="line">    hwndChildList = []     </span><br><span class="line">    win32gui.EnumChildWindows(parent, <span class="keyword">lambda</span> hwnd, param: param.append(hwnd),  hwndChildList)</span><br><span class="line">    print(len(hwndChildList))</span><br><span class="line">    <span class="keyword">for</span> hwnd <span class="keyword">in</span> hwndChildList:</span><br><span class="line">        title = win32gui.GetWindowText(hwnd)</span><br><span class="line">        print(title)</span><br><span class="line">    <span class="keyword">return</span> hwndChildList</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="5-窗口设置"><a href="#5-窗口设置" class="headerlink" title="5 窗口设置"></a>5 窗口设置</h3><h4 id="SetForegroundWindow-置顶窗口"><a href="#SetForegroundWindow-置顶窗口" class="headerlink" title="SetForegroundWindow() 置顶窗口"></a>SetForegroundWindow() 置顶窗口</h4><p><strong>win32gui.SetForegroundWindow()函数将指定窗体设置到最顶层，并且激活该窗口</strong></p>
+<p>调用SetForegroundWindow()会有很多限制，参考官网的<a href="https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setforegroundwindow" target="_blank" rel="noopener">说明</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">win32gui.SetForegroundWindow（hwnd）</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取置顶窗口句柄（当前焦点的窗口）"><a href="#获取置顶窗口句柄（当前焦点的窗口）" class="headerlink" title="获取置顶窗口句柄（当前焦点的窗口）"></a>获取置顶窗口句柄（当前焦点的窗口）</h4><ul>
+<li><strong>SetForegroundWindow</strong> ：设置某窗口为当前活动窗口</li>
+<li><strong>GetForegroundWindow</strong> : 获取当前活动窗口</li>
+</ul>
+<p>比如：光标所在的输入框句柄</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hwnd = win32gui.GetForegroundWindow（）</span><br></pre></td></tr></table></figure>
+
+<h4 id="关闭窗口句柄"><a href="#关闭窗口句柄" class="headerlink" title="关闭窗口句柄"></a>关闭窗口句柄</h4><h5 id="方法一："><a href="#方法一：" class="headerlink" title="方法一："></a>方法一：</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span>  win32process <span class="keyword">import</span> GetWindowThreadProcessId</span><br><span class="line"><span class="keyword">from</span> win32api <span class="keyword">import</span> OpenProcess,TerminateProcess</span><br><span class="line"><span class="comment"># 获得主框的句柄</span></span><br><span class="line">mainHwnd = win32gui.FindWindow(<span class="string">'#32770'</span>, <span class="string">'登录'</span>)</span><br><span class="line">print(<span class="string">"mainHwnd："</span>,mainHwnd)</span><br><span class="line"><span class="keyword">if</span> mainHwnd&gt;<span class="number">1</span>:</span><br><span class="line">    _id = GetWindowThreadProcessId(mainHwnd)</span><br><span class="line">    handle = OpenProcess(<span class="number">1</span>, <span class="literal">False</span>, _id[<span class="number">1</span>])</span><br><span class="line">    TerminateProcess(handle, <span class="number">-1</span>)</span><br><span class="line">    sleep(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<h5 id="方法二："><a href="#方法二：" class="headerlink" title="方法二："></a>方法二：</h5><p><strong><em>此方法可能会出现拒绝访问</em></strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获得主框的句柄</span></span><br><span class="line">mainHwnd = win32gui.FindWindow(<span class="string">'#32770'</span>, <span class="string">'登录'</span>)</span><br><span class="line">print(<span class="string">"mainHwnd："</span>,mainHwnd)</span><br><span class="line"><span class="keyword">if</span> mainHwnd&gt;<span class="number">1</span>:</span><br><span class="line">     win32gui.SetForegroundWindow(mainHwnd)  <span class="comment">#使当前窗口在最前</span></span><br><span class="line">     win32gui.PostMessage(mainHwnd, win32con.WM_CLOSE, <span class="number">0</span>, <span class="number">0</span>) <span class="comment"># 直接关闭 主框</span></span><br><span class="line">     sleep(<span class="number">0.5</span>)</span><br></pre></td></tr></table></figure>
+
+<h5 id="方法三："><a href="#方法三：" class="headerlink" title="方法三："></a>方法三：</h5><p><strong><em>此方法可能会出现拒绝访问</em></strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> os <span class="keyword">import</span> system</span><br><span class="line">ifexistexe = system(<span class="string">'tasklist|findstr "SecureConnect.exe"'</span>)</span><br><span class="line"><span class="keyword">if</span> ifexistexe==<span class="number">0</span>:</span><br><span class="line">    system(<span class="string">'taskkill /f /im "SecureConnect.exe"'</span>)</span><br><span class="line">    sleep(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">wnd=win32ui.FindWindow(classname,<span class="literal">None</span>)</span><br><span class="line">wnd.SendMessage(win32con.WM_CLOSE)  成功！</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或</span></span><br><span class="line">hwnd = win32gui.FindWindow(<span class="number">0</span>, <span class="string">'练习'</span>)</span><br><span class="line">win32gui.SetForegroundWindow(hwnd)  <span class="comment">#使当前窗口在最前</span></span><br><span class="line">win32gui.PostMessage(hwnd, win32con.WM_CLOSE, <span class="number">0</span>, <span class="number">0</span>)  <span class="comment">#关闭窗口</span></span><br><span class="line"><span class="comment">#参数1 窗口句柄</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 或</span></span><br><span class="line"><span class="comment"># 方法三</span></span><br><span class="line"><span class="keyword">import</span> win32process,win32api</span><br><span class="line">_id = win32process.GetWindowThreadProcessId(mainHwnd) <span class="comment"># 根据窗口句柄获取 进程ID</span></span><br><span class="line">handle = win32api.OpenProcess(<span class="number">1</span>, <span class="literal">False</span>, _id[<span class="number">1</span>]) <span class="comment"># 根据ID打开进程</span></span><br><span class="line">win32api.TerminateProcess(handle, <span class="number">-1</span>) <span class="comment"># 根据进程句柄关闭进程</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> win32api</span><br><span class="line"><span class="keyword">import</span> win32gui</span><br><span class="line"><span class="keyword">import</span> win32con</span><br><span class="line"><span class="keyword">import</span> win32process</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"> </span><br><span class="line">filename = <span class="string">'2020年公司经营对比表.xlsx'</span>   <span class="comment">#文件名</span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">close_process_by_hwnd</span><span class="params">(hwnd, _)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> win32gui.IsWindowVisible(hwnd):</span><br><span class="line">        <span class="comment"># 可以正则判断</span></span><br><span class="line">        <span class="keyword">if</span> filename <span class="keyword">in</span> win32gui.GetWindowText(hwnd):</span><br><span class="line">            <span class="comment"># PostMessage 会弹出关闭提示, 比如文件已经修改的情况  方法一</span></span><br><span class="line">            win32gui.SetForegroundWindow(hwnd)  <span class="comment">#使当前窗口在最前</span></span><br><span class="line">            win32gui.PostMessage(hwnd, win32con.WM_CLOSE, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">            <span class="comment"># # 根据窗口句柄获取 进程ID 下面的 方法二</span></span><br><span class="line">            <span class="comment"># _id = win32process.GetWindowThreadProcessId(hwnd)</span></span><br><span class="line">            <span class="comment"># # 根据ID打开进程</span></span><br><span class="line">            <span class="comment"># handle = win32api.OpenProcess(1, False, _id[1])</span></span><br><span class="line">            <span class="comment"># # 根据进程句柄关闭进程</span></span><br><span class="line">            <span class="comment"># win32api.TerminateProcess(handle, -1)</span></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    win32gui.EnumWindows(close_process_by_hwnd, <span class="literal">None</span>)</span><br><span class="line">    time.sleep(<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+
+<h5 id="win32process方法"><a href="#win32process方法" class="headerlink" title="win32process方法"></a>win32process方法</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">一个程序要用到某个文件，经常会出现文件被占用，而无法继续运行，所以需要探知文件是否被占用，及如何进行关闭</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> win32process</span><br><span class="line">handle = win32process.CreateProcess(<span class="string">'C:\\Windows\\notepad.exe'</span>, <span class="string">''</span>, <span class="literal">None</span>, <span class="literal">None</span>, <span class="number">0</span>, win32process </span><br><span class="line">.CREATE_NO_WINDOW, <span class="literal">None</span>, <span class="literal">None</span>, win32process.STARTUPINFO())            <span class="comment"># 打开记事本，获得其句柄</span></span><br><span class="line">print(handle,handle[<span class="number">0</span>])</span><br><span class="line">time.sleep(<span class="number">0.5</span>)</span><br><span class="line">win32process.TerminateProcess(handle[<span class="number">0</span>], <span class="number">0</span>) </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> win32gui</span><br><span class="line">hwnd_title = dict()</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_all_hwnd</span><span class="params">(hwnd,mouse)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> win32gui.IsWindow(hwnd) <span class="keyword">and</span> win32gui.IsWindowEnabled(hwnd) <span class="keyword">and</span> win32gui.IsWindowVisible(hwnd):</span><br><span class="line">        hwnd_title.update(&#123;hwnd:win32gui.GetWindowText(hwnd)&#125;)</span><br><span class="line">win32gui.EnumWindows(get_all_hwnd, <span class="number">0</span>)</span><br><span class="line">  </span><br><span class="line"><span class="keyword">for</span> h,t <span class="keyword">in</span> hwnd_title.items():</span><br><span class="line">    <span class="keyword">if</span> t != <span class="string">""</span>:</span><br><span class="line">        print(h,t)</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="移动窗口-MoveWindow"><a href="#移动窗口-MoveWindow" class="headerlink" title="移动窗口  MoveWindow"></a>移动窗口  MoveWindow</h4><p><code>win32gui.MoveWindow(hld,  int X, int Y, int nWidth, int nHeight, BOOL bRepaint )</code><br>移动某窗口hld到指定位置。</p>
+<ul>
+<li><code>x,y</code>指与屏幕左上角距离，</li>
+<li><code>nWidth, nHeight</code> 指长和高</li>
+<li><code>bRepaint</code> ：是否重绘</li>
+</ul>
+<h4 id="窗口最大化与最小化"><a href="#窗口最大化与最小化" class="headerlink" title="窗口最大化与最小化"></a>窗口最大化与最小化</h4><p><strong>ShowWindow</strong> ：设置窗口，</p>
+<ul>
+<li>参数2：<ul>
+<li>0:close, </li>
+<li>1:normal, </li>
+<li>2:min, </li>
+<li>3:max</li>
+</ul>
+</li>
+</ul>
+<h5 id="最大化最小化"><a href="#最大化最小化" class="headerlink" title="最大化最小化"></a>最大化最小化</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">hwnd=win32gui.FindWindow(<span class="string">"Notepad"</span>, <span class="literal">None</span>)</span><br><span class="line">        win32gui.ShowWindow(hwnd, win32con.SW_MAXIMIZE)  <span class="comment">#最大化指定的窗口。nCmdShow=3</span></span><br><span class="line">        win32gui.ShowWindow(hwnd, win32con.SW_MINIMIZE)  <span class="comment">#最小化指定的窗口并且激活在Z序中的下一个顶层窗口。nCmdShow=6</span></span><br><span class="line">        </span><br><span class="line"><span class="comment"># 或</span></span><br><span class="line">        </span><br><span class="line">hwnd=win32gui.FindWindow(<span class="string">"Notepad"</span>, <span class="literal">None</span>)</span><br><span class="line">        win32gui.ShowWindow(hwnd, win32con.SW_SHOWMAXIMIZED)  <span class="comment">#激活窗口并将其最大化。nCmdShow=3</span></span><br><span class="line">        <span class="comment"># SW_SHOWMINIMIZED：激活窗口并将其最小化。nCmdShow=2。</span></span><br><span class="line">        <span class="comment"># SW_SHOWMINNOACTIVE：窗口最小化，激活窗口仍然维持激活状态。nCmdShow=7。</span></span><br><span class="line">        <span class="comment"># SW_SHOWNA：以窗口原来的状态显示窗口。激活窗口仍然维持激活状态。nCmdShow=8。</span></span><br><span class="line">        <span class="comment"># SW_SHOWNOACTIVATE：以窗口最近一次的大小和状态显示窗口。激活窗口仍然维持激活状态。nCmdShow=4。</span></span><br><span class="line">        <span class="comment"># SW_SHOWNORMAL：激活并显示一个窗口。如果窗口被最小化或最大化，系统将其恢复到原来的尺寸和大小。应用程序在第一次显示窗口的时候应该指定此标志。nCmdShow=1</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="最小化判断-win32gui-IsIconic"><a href="#最小化判断-win32gui-IsIconic" class="headerlink" title="最小化判断 win32gui.IsIconic"></a>最小化判断 win32gui.IsIconic</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 检查窗口是否最小化，如果是最大化</span></span><br><span class="line"><span class="keyword">if</span>(win32gui.IsIconic(hwnd)):</span><br><span class="line"><span class="comment">#     win32gui.ShowWindow(hwnd, win32con.SW_SHOWNORMAL)</span></span><br><span class="line">    win32gui.ShowWindow(hwnd, <span class="number">8</span>)</span><br><span class="line">    sleep(<span class="number">0.5</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">hwnd=win32gui.FindWindow(<span class="string">"Notepad"</span>, <span class="literal">None</span>)</span><br><span class="line">i=win32gui.IsIconic(hwnd)  <span class="comment">#检查窗口是否最小化</span></span><br><span class="line"><span class="comment">#是  返回1，不是返回0</span></span><br><span class="line">win32gui.ShowWindow(hwnd, win32con.SW_SHOWNORMAL)  <span class="comment">#不要最小化</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="窗口隐藏"><a href="#窗口隐藏" class="headerlink" title="窗口隐藏"></a>窗口隐藏</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hwnd=win32gui.FindWindow(<span class="string">"Notepad"</span>, <span class="literal">None</span>)</span><br><span class="line">win32gui.ShowWindow(hwnd, win32con.SW_HIDE)  <span class="comment">#隐藏窗口</span></span><br><span class="line">time.sleep(<span class="number">2</span>)</span><br><span class="line">win32gui.ShowWindow(hwnd, win32con.SW_SHOW)  <span class="comment">#显示窗口</span></span><br><span class="line"><span class="comment">#SW_SHOW：在窗口原来的位置以原来的尺寸激活和显示窗口</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="获取窗口左边及大小"><a href="#获取窗口左边及大小" class="headerlink" title="获取窗口左边及大小"></a>获取窗口左边及大小</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">left, top, right, bottom = win32gui.GetWindowRect(mainHwnd)</span><br><span class="line"></span><br><span class="line">宽 = right - left</span><br><span class="line">高 = botton - top</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="设置指定窗口的大小"><a href="#设置指定窗口的大小" class="headerlink" title="设置指定窗口的大小"></a>设置指定窗口的大小</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">set_window</span><span class="params">(handler, start_x, start_y, size_x, size_y)</span>:</span></span><br><span class="line">        win32gui.SetWindowPos(handler, win32con.HWND_TOPMOST, start_x, start_y, size_x, size_y, win32con.SWP_SHOWWINDO</span><br><span class="line"></span><br><span class="line">第一个参数是指定窗口句柄， 后四个是坐标位置</span><br><span class="line">分别是起点x，起点y，终点x，终点y</span><br><span class="line">例如<span class="number">0</span>,<span class="number">0</span>,<span class="number">800</span>,<span class="number">600</span>就是在屏幕左上角开始设置宽<span class="number">800</span>，高<span class="number">600</span>的窗口</span><br></pre></td></tr></table></figure>
+
+<p><strong>参数详细说明</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 为窗口指定一个新位置和状态。它也可改变窗口在内部窗口列表中的位置</span></span><br><span class="line">win32gui.SetWindowPos（HWN hWnd，HWND hWndlnsertAfter, int X，int Y, int cx，int cy, UNIT．Flags）</span><br><span class="line"></span><br><span class="line"> hWnd:窗口句柄。</span><br><span class="line"></span><br><span class="line">hWndlnsertAfter:在z序中的位于被置位的窗口前的窗口句柄。该参数必须为一个窗口句柄，或下列值之一：</span><br><span class="line"></span><br><span class="line">    HWND_BOTTOM：将窗口置于Z序的底部。如果参数hWnd标识了一个顶层窗口，则窗口失去顶级位置，并且被置在其他窗口的底部。</span><br><span class="line"></span><br><span class="line">    HWND_DOTTOPMOST：将窗口置于所有非顶层窗口之上（即在所有顶层窗口之后）。如果窗口己经是非顶层窗口则该标志不起作用。</span><br><span class="line"></span><br><span class="line">    HWND_TOP:将窗口置于Z序的顶部。</span><br><span class="line"></span><br><span class="line">    HWND_TOPMOST:将窗口置于所有非顶层窗口之上。即使窗口未被激活窗口也将保持顶级位置。</span><br><span class="line"></span><br><span class="line">x：以客户坐标指定窗口新位置的左边界。</span><br><span class="line"></span><br><span class="line">Y：以客户坐标指定窗口新位置的顶边界。</span><br><span class="line"></span><br><span class="line">cx:以像素指定窗口的新的宽度。</span><br><span class="line"></span><br><span class="line">cy：以像素指定窗口的新的高度。</span><br><span class="line"></span><br><span class="line">uFlags:窗口尺寸和定位的标志。该参数可以是下列值的组合：</span><br><span class="line">    SWP_ASNCWINDOWPOS：如果调用进程不拥有窗口，系统会向拥有窗口的线程发出需求。这就防止调用线程在其他线程处理需求的时候发生死锁。</span><br><span class="line"></span><br><span class="line">    SWP_DEFERERASE：防止产生WM_SYNCPAINT消息。</span><br><span class="line"></span><br><span class="line">    SWP_DRAWFRAME：在窗口周围画一个边框（定义在窗口类描述中）。</span><br><span class="line"></span><br><span class="line">    SWP_FRAMECHANGED：给窗口发送WM_NCCALCSIZE消息，即使窗口尺寸没有改变也会发送该消息。如果未指定这个标志，只有在改变了窗口尺寸时才发送WM_NCCALCSIZE。</span><br><span class="line"></span><br><span class="line">    SWP_HIDEWINDOW;隐藏窗口。</span><br><span class="line"></span><br><span class="line">    SWP_NOACTIVATE：不激活窗口。如果未设置标志，则窗口被激活，并被设置到其他最高级窗口或非最高级组的顶部（根据参数hWndlnsertAfter设置）。</span><br><span class="line"></span><br><span class="line">    SWP_NOCOPYBITS：清除客户区的所有内容。如果未设置该标志，客户区的有效内容被保存并且在窗口尺寸更新和重定位后拷贝回客户区。</span><br><span class="line"></span><br><span class="line">    SWP_NOMOVE：维持当前位置（忽略X和Y参数）。</span><br><span class="line"></span><br><span class="line">    SWP_NOOWNERZORDER：不改变z序中的所有者窗口的位置。</span><br><span class="line"></span><br><span class="line">    SWP_NOREDRAW:不重画改变的内容。如果设置了这个标志，则不发生任何重画动作。适用于客户区和非客户区（包括标题栏和滚动条）和任何由于窗回移动而露出的父窗口的所有部分。如果设置了这个标志，应用程序必须明确地使窗口无效并区重画窗口的任何部分和父窗口需要重画的部分。</span><br><span class="line"></span><br><span class="line">    SWP_NOREPOSITION；与SWP_NOOWNERZORDER标志相同。</span><br><span class="line"></span><br><span class="line">    SWP_NOSENDCHANGING：防止窗口接收WM_WINDOWPOSCHANGING消息。</span><br><span class="line"></span><br><span class="line">    SWP_NOSIZE：维持当前尺寸（忽略cx和Cy参数）。</span><br><span class="line"></span><br><span class="line">    SWP_NOZORDER：维持当前Z序（忽略hWndlnsertAfter参数）。</span><br><span class="line"></span><br><span class="line">    SWP_SHOWWINDOW：显示窗口。</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="6-进程线程"><a href="#6-进程线程" class="headerlink" title="6 进程线程"></a>6 进程线程</h3><h4 id="GetWindowThreadProcessId"><a href="#GetWindowThreadProcessId" class="headerlink" title="GetWindowThreadProcessId"></a><strong>GetWindowThreadProcessId</strong></h4><p>通过<code>GetWindowThreadProcessId</code>这个函数来获得窗口所属进程ID和线程ID，从而判断创建窗口的进程和线程。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DWORD GetWindowThreadProcessId(  HWND   hWnd, //传入的窗口句柄  </span><br><span class="line">								LPDWORD lpdwProcessId //返回的进程ID地址。);</span><br></pre></td></tr></table></figure>
+
+<h4 id="OpenProcess"><a href="#OpenProcess" class="headerlink" title="OpenProcess"></a><strong>OpenProcess</strong></h4><p><code>OpenProcess</code> 函数用来打开一个已存在的进程对象，并返回进程的句柄。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HANDLE OpenProcess(  DWORD dwDesiredAccess, //想拥有的该进程访问权限  </span><br><span class="line">					BOOL  bInheritHandle,//表示所得到的进程句柄是否可以被继承  </span><br><span class="line">					DWORD dwProcessId//被打开进程的PID);</span><br></pre></td></tr></table></figure>
+
+<h4 id="ReadProcessMemory"><a href="#ReadProcessMemory" class="headerlink" title="ReadProcessMemory"></a>ReadProcessMemory</h4><p>是一个内存操作函数， 其作用为根据进程句柄读入该进程的某个内存空间；</p>
+<ul>
+<li>函数原型为BOOL. 当函数读取成功时返回1， 失败则返回0</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">BOOL ReadProcessMemory(  HANDLE  hProcess, //进程句柄  </span><br><span class="line">						LPCVOID lpBaseAddress,//读出数据的地址  </span><br><span class="line">						LPVOID  lpBuffer,//存放读取数据的地址  </span><br><span class="line">						SIZE_T  nSize,//读出的数据大小  </span><br><span class="line">						SIZE_T  *lpNumberOfBytesRead//数据的实际大小);</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-中文编码"><a href="#7-中文编码" class="headerlink" title="7 中文编码"></a>7 中文编码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gbk2utf8</span><span class="params">(s)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> s.decode(<span class="string">'gbk'</span>).encode(<span class="string">'utf-8'</span>)</span><br><span class="line"></span><br><span class="line">title = win32gui.GetWindowText(hWnd)</span><br><span class="line">title = gbk2utf8(title)</span><br><span class="line">clsname = win32gui.GetClassName(hWnd)</span><br></pre></td></tr></table></figure>
+
+<h3 id="8-发送信息"><a href="#8-发送信息" class="headerlink" title="8 发送信息"></a>8 发送信息</h3><p><em><code>win32gui.SendMessage()</code> ： 输入‘字符’</em></p>
+<p><em><code>win32gui.PostMessage()</code>：按下发送按钮</em></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">win = win32gui.FindWindow(<span class="string">'Notepad'</span>, <span class="literal">None</span>)</span><br><span class="line">tid = win32gui.FindWindowEx(win, <span class="literal">None</span>, <span class="string">'Edit'</span>, <span class="literal">None</span>)</span><br><span class="line"><span class="comment"># 输入文本</span></span><br><span class="line">win32gui.SendMessage(tid, win32con.WM_SETTEXT, <span class="literal">None</span>, <span class="string">'你好hello word!'</span>)</span><br><span class="line"><span class="comment"># 确定</span></span><br><span class="line">win32gui.SendMessage(handle, win32con.WM_COMMAND, <span class="number">1</span>, btnhld)</span><br><span class="line"><span class="comment"># 关闭窗口</span></span><br><span class="line">win32gui.PostMessage(win32gui.FindWindow(<span class="string">'Notepad'</span>, <span class="literal">None</span>), win32con.WM_CLOSE, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line"><span class="comment"># 回车</span></span><br><span class="line">win32gui.PostMessage(tid, win32con.WM_KEYDOWN, win32con.VK_RETURN, <span class="number">0</span>)  <span class="comment"># 插入一个回车符,post 没有返回值，执行完马上返回</span></span><br><span class="line">win32gui.PostMessage(tid, win32con.WM_KEYDOWN, win32con.VK_RETURN, <span class="number">0</span>)</span><br><span class="line">print(<span class="string">"%x"</span> % win)</span><br><span class="line">print(<span class="string">"%x"</span> % tid)</span><br></pre></td></tr></table></figure>
+
+<h4 id="SendMessage"><a href="#SendMessage" class="headerlink" title="SendMessage"></a>SendMessage</h4><p><code>SendMessage(hWnd, Msg, wParam, lParam)</code></p>
+<p><strong>描述</strong>：在消息队列中加入为指定的窗体加入一条消息，直到窗体处理完信息才返回。</p>
+<ul>
+<li><p><code>hWnd</code>：接收消息的窗体句柄</p>
+</li>
+<li><p><code>Msg</code>：要发送的消息</p>
+<ul>
+<li>发送的消息，根据不同的需求和不同的对象，需要填入不同的实参。我们在模拟用户操作时，需要填入 WindowMessage可以参见<a href="http://msdn.microsoft.com/en-us/library/windows/desktop/ms644927(v=vs.85).aspx#system_defined" target="_blank" rel="noopener">系统定义消息（System-Defined Messages）</a></li>
+</ul>
+</li>
+<li><p><code>wParam</code>：消息的wParam参数</p>
+<ul>
+<li>附加的消息信息，对<code>Msg</code>的补充。</li>
+<li>这边我们应该填入 键盘操作的虚拟键值(键值表下面有给出)</li>
+</ul>
+</li>
+<li><p><code>lParam</code>：消息的lParam参数</p>
+<ul>
+<li><p>附加的消息信息，对<code>Msg</code>的补充。</p>
+</li>
+<li><p>此处我们需要填入一个32位的uint参数，具体的定义如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">0~15位：表示发送的次数，一般就是1次</span><br><span class="line">16~23位：表示键盘的操作的扫描码</span><br><span class="line">24位：表示是左ALT、CTRL还是右ALT、CTRL（通常为0）</span><br><span class="line">25~28位：保留</span><br><span class="line">29位：决定了 消息内容中 fAltDown 的值为1还是0(不知道有什么用…)</span><br><span class="line">30位：表示上一个键的状态KEY DOWN or UP，1为发送前的DOWN状态，0为UP</span><br><span class="line">31位：0为按下，1为释放</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><strong>请注意编码，包含中文请用gbk编码，否则乱码</strong></p>
+</li>
+<li><p>系统定义消息中不同消息分别有相应的参数</p>
+<ul>
+<li>参数：wParam和lParam，<a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms646280%28v=vs.85%29.aspx" target="_blank" rel="noopener">可查询官网参数详情</a></li>
+</ul>
+</li>
+</ul>
+<h5 id="获取窗口文本的字符数"><a href="#获取窗口文本的字符数" class="headerlink" title="获取窗口文本的字符数"></a>获取窗口文本的字符数</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">hwnd = win32gui.FindWindow(<span class="string">"Notepad"</span>, <span class="literal">None</span>)</span><br><span class="line">        bufSize = win32api.SendMessage(hwnd, win32con.WM_GETTEXTLENGTH, <span class="number">0</span>, <span class="number">0</span>)  <span class="comment">#获取窗口文本的字符数</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 或</span></span><br><span class="line">dlg = win32gui.FindWindowEx(hld, <span class="literal">None</span>, <span class="string">'Edit'</span>, <span class="literal">None</span>)<span class="comment">#获取hld下第一个为edit控件的句柄</span></span><br><span class="line">buffer = <span class="string">'0'</span> *<span class="number">50</span></span><br><span class="line">len = win32gui.SendMessage(dlg, win32con.WM_GETTEXTLENGTH)+<span class="number">1</span> <span class="comment">#获取edit控件文本长度</span></span><br><span class="line">win32gui.SendMessage(dlg, win32con.WM_GETTEXT, len, buffer) <span class="comment">#读取文本</span></span><br><span class="line">print(buffer[:len<span class="number">-1</span>])</span><br></pre></td></tr></table></figure>
+
+<h4 id="PostMessage"><a href="#PostMessage" class="headerlink" title="PostMessage"></a>PostMessage</h4><p><code>PostMessage(hWnd, Msg, wParam, lParam)</code></p>
+<p><strong>参数和使用方法同SendMessage</strong>。</p>
+<h5 id="区别"><a href="#区别" class="headerlink" title="区别:"></a><strong>区别</strong>:</h5><ul>
+<li>PostMessage只将消息放入待执行消息队列，不等待处理和返回，只要放入队列即算执行完毕。</li>
+<li>而SendMessage需要等待执行处理完后，才继续，返回的是其他程序处理后的返回值。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#self.user32.PostMessageA(hwnd,0x319,0,APPCOMMAND_VOLUME_UP)  #增加系统音量2%</span></span><br><span class="line">        <span class="comment">#self.user32.PostMessageA(hwnd, 0x319, 0, APPCOMMAND_VOLUME_DOWN)  #减小系统音量2%</span></span><br><span class="line">        self.user32.PostMessageA(hwnd, 0x319, 0, APPCOMMAND_VOLUME_MUTE)  <span class="comment">#系统静音</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="WM-GETTEXT-获取信息"><a href="#WM-GETTEXT-获取信息" class="headerlink" title="WM_GETTEXT 获取信息"></a>WM_GETTEXT 获取信息</h4><p><strong>如果要获取目标文本框的内容呢，可以使用<code>WM_GETTEXT</code></strong></p>
+<p><code>WM_GETTEXT消息</code>：</p>
+<ul>
+<li>描述：将窗体的文本内容复制到指定的buffer对象中</li>
+<li>参数：<ul>
+<li>wParam：要复制字符的最大长度，包括截尾的空字节</li>
+<li>lParam：用来保存字符串的buffer的指针</li>
+</ul>
+</li>
+<li>返回值：返回复制字符的数量，不包括截尾的空字节</li>
+</ul>
+<blockquote>
+<p>利用win32gui.PyMakeBuffer(len, addr)可以造一个buffer对象，类似python3中的bytearray，lParam的返回值。</p>
+<p>而利用WM_GETTEXTLENGTH可以获取不含截尾空字节的文本长度的长度，可以用来设置Buffer的长度。</p>
+</blockquote>
+<p><strong>完整的示例如下</strong>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">buf_size = win32gui.SendMessage(hwnd, win32con.WM_GETTEXTLENGTH, <span class="number">0</span>, <span class="number">0</span>) + <span class="number">1</span> <span class="comment"># 要加上截尾的字节</span></span><br><span class="line">str_buffer = win32gui.PyMakeBuffer(buf_size) <span class="comment"># 生成buffer对象</span></span><br><span class="line">win32api.SendMessage(hwnd, win32con.WM_GETTEXT, buf_size, str_buffer) <span class="comment"># 获取buffer</span></span><br><span class="line">str = str(str_buffer[:<span class="number">-1</span>]) <span class="comment"># 转为字符串</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="示例：文本框写入与读取"><a href="#示例：文本框写入与读取" class="headerlink" title="示例：文本框写入与读取"></a>示例：文本框写入与读取</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> win32api, win32gui, win32con</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 获得父容器</span></span><br><span class="line">pHwnd = win32gui.FindWindow(<span class="string">'WTWindow'</span>, <span class="string">'验证码识别'</span>)</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 获取子容器,识别结果输入框</span></span><br><span class="line">edtextHwnd = win32gui.FindWindowEx(pHwnd, <span class="literal">None</span>, <span class="string">'Edit'</span>, <span class="string">''</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取窗口文本不含截尾空字符的长度</span></span><br><span class="line"><span class="comment"># 参数：窗口句柄； 消息类型； 参数WParam； 参数IParam</span></span><br><span class="line">bufSize = win32api.SendMessage(subHandle, win32con.WM_GETTEXTLENGTH, <span class="number">0</span>, <span class="number">0</span>) +<span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 利用api生成Buffer</span></span><br><span class="line">strBuf = win32gui.PyMakeBuffer(bufSize)</span><br><span class="line">print(strBuf)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 发送消息获取文本内容</span></span><br><span class="line"><span class="comment"># 参数：窗口句柄； 消息类型；文本大小； 存储位置</span></span><br><span class="line">length = win32gui.SendMessage(subHandle, win32con.WM_GETTEXT, bufSize, strBuf)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 反向内容，转为字符串</span></span><br><span class="line"><span class="comment"># text = str(strBuf[:-1])</span></span><br><span class="line"></span><br><span class="line">address, length = win32gui.PyGetBufferAddressAndLen(strBuf) </span><br><span class="line">text = win32gui.PyGetString(address, length) </span><br><span class="line"><span class="comment"># print('text: ', text)</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="9-消息框"><a href="#9-消息框" class="headerlink" title="9 消息框"></a>9 消息框</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> win32gui,win32con,win32api</span><br><span class="line">win32api.MessageBox(<span class="number">0</span>,<span class="string">"Hello PYwin32"</span>,<span class="string">"MessageBox"</span>,win32con.MB_OK | win32con.MB_ICONWARNING)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 选项框</span></span><br><span class="line">res = win32api.MessageBox(<span class="literal">None</span>, <span class="string">"Hello Pywin32"</span>, <span class="string">"pywin32"</span>, win32con.MB_YESNOCANCEL)</span><br><span class="line">print(res)</span><br><span class="line">win32api.MessageBox(<span class="number">0</span>, <span class="string">"Hello PYwin32"</span>, <span class="string">"MessageBox"</span>, win32con.MB_OK | win32con.MB_ICONWARNING)  <span class="comment"># 加警告标志</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="消息框置顶"><a href="#消息框置顶" class="headerlink" title="消息框置顶"></a>消息框置顶</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">MessageBox弹出的对话框放置在最前面</span><br><span class="line">有时候，MessageBox弹出对话框会在别的窗口的后面，可以如下：</span><br><span class="line"></span><br><span class="line">MessageBox(NULL,<span class="string">"text"</span>, <span class="string">"caption"</span>, MB_OK | MB_SYSTEMMODAL);</span><br><span class="line">MessageBox(NULL,<span class="string">"text"</span>, <span class="string">"caption"</span>, MB_OK | MB_TOPMOST);</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="10-位置"><a href="#10-位置" class="headerlink" title="10 位置"></a>10 位置</h3><p>获取某元素hld位置。</p>
+<ul>
+<li>left,top分别指与屏幕左上角距离</li>
+<li>right,bottom 指长和高。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">left, top, right, bottom = win32gui.GetWindowRect(pHwnd)</span><br><span class="line">print(left, top, right, bottom)</span><br></pre></td></tr></table></figure>
+
+<h3 id="11-Menu-菜单"><a href="#11-Menu-菜单" class="headerlink" title="11 Menu 菜单"></a>11 Menu 菜单</h3><h4 id="GetMenu-hwnd"><a href="#GetMenu-hwnd" class="headerlink" title="GetMenu(hwnd)"></a><code>GetMenu(hwnd)</code></h4><ul>
+<li>​    描述：获取窗口的菜单句柄。</li>
+<li>参数：<ul>
+<li>hwnd：整型，需要获取菜单的窗口的句柄。</li>
+</ul>
+</li>
+<li>说明：获取的是插图中黄色的部分。</li>
+</ul>
+<h4 id="GetSubMenu-hMenu-nPos"><a href="#GetSubMenu-hMenu-nPos" class="headerlink" title="GetSubMenu(hMenu, nPos)"></a><code>GetSubMenu(hMenu, nPos)</code></h4><ul>
+<li>描述：获取菜单的下拉菜单或者子菜单。</li>
+<li>参数：<ul>
+<li>hMenu：整型，菜单的句柄，从GetMenu获得。</li>
+<li>nPos：整型，下拉菜单或子菜单的的索引，从0算起。</li>
+</ul>
+</li>
+<li>说明：这个可以获取插图中蓝色的部分；如描述所述，这个不仅可以获取本例中的下拉菜单，还可以获取子菜单。</li>
+</ul>
+<h4 id="GetMenuItemID-hMenu-nPos"><a href="#GetMenuItemID-hMenu-nPos" class="headerlink" title="GetMenuItemID(hMenu, nPos)"></a><code>GetMenuItemID(hMenu, nPos)</code></h4><ul>
+<li>描述：获取菜单中特定项目的标识符。</li>
+<li>参数：<ul>
+<li>hMenu：整型，包含所需菜单项的菜单句柄，从GetSubMenu获得。</li>
+<li>nPos：整型，菜单项的索引，从0算起。</li>
+</ul>
+</li>
+<li>说明：这个获取的就是红色区域中的项目啦，注意，分隔符是被编入索引的，所以Open的索引是2而非1，而Exit的索引是9而非6。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_menu_text</span><span class="params">(menu, idx)</span>:</span></span><br><span class="line">        <span class="keyword">import</span> win32gui_struct</span><br><span class="line">        mii, extra = win32gui_struct.EmptyMENUITEMINFO()  <span class="comment"># 新建一个win32gui的空的结构体mii</span></span><br><span class="line">        win32gui.GetMenuItemInfo(menu, idx, <span class="literal">True</span>, mii)  <span class="comment"># 将子菜单内容获取到mii</span></span><br><span class="line">        ftype, fstate, wid, hsubmenu, hbmpchecked, hbmpunchecked, \</span><br><span class="line">        dwitemdata, text, hbmpitem = win32gui_struct.UnpackMENUITEMINFO(mii)  <span class="comment"># 解包mii</span></span><br><span class="line">        <span class="keyword">return</span> text</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_menu</span><span class="params">()</span>:</span></span><br><span class="line">        <span class="string">"""menu操作（记事本）"""</span></span><br><span class="line">        menu = win32gui.GetMenu(handle)</span><br><span class="line">        menu1 = win32gui.GetSubMenu(menu, <span class="number">0</span>)  <span class="comment"># 第几个菜单 0-第一个</span></span><br><span class="line">        cmd_ID = win32gui.GetMenuItemID(menu1, <span class="number">3</span>)  <span class="comment"># 第几个子菜单</span></span><br><span class="line">        win32gui.PostMessage(handle, win32con.WM_COMMAND, cmd_ID, <span class="number">0</span>)</span><br><span class="line">        menu_text1 = [get_menu_text(menu, i) <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>)]</span><br><span class="line">        menu_text2 = [get_menu_text(menu1, i) <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">9</span>)]</span><br><span class="line">        print(menu_text1)</span><br><span class="line">        print(menu_text2)</span><br></pre></td></tr></table></figure>
+
+<h3 id="12-打开程序"><a href="#12-打开程序" class="headerlink" title="12 打开程序"></a>12 打开程序</h3><h4 id="ShellExecute"><a href="#ShellExecute" class="headerlink" title="ShellExecute"></a>ShellExecute</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#  ShellExecute .不支持定向输出</span></span><br><span class="line"><span class="keyword">from</span> win32con <span class="keyword">import</span> SW_HIDE, SW_SHOWNORMAL</span><br><span class="line"></span><br><span class="line">win32api.ShellExecute(<span class="literal">None</span>, <span class="string">"open"</span>, <span class="string">"C:Test.txt"</span>, <span class="literal">None</span>, <span class="literal">None</span>, SW_SHOWNORMAL)  <span class="comment"># 打开C:Test.txt 文件</span></span><br><span class="line">win32api.ShellExecute(<span class="literal">None</span>, <span class="string">"open"</span>, <span class="string">"http:#www.google.com"</span>, <span class="literal">None</span>, <span class="literal">None</span>, SW_SHOWNORMAL)  <span class="comment"># 打开网页www.google.com</span></span><br><span class="line">win32api.ShellExecute(<span class="literal">None</span>, <span class="string">"explore"</span>, <span class="string">"D:C++"</span>, <span class="literal">None</span>, <span class="literal">None</span>, SW_SHOWNORMAL)  <span class="comment"># 打开目录D:C++</span></span><br><span class="line">win32api.ShellExecute(<span class="literal">None</span>, <span class="string">"print"</span>, <span class="string">"C:Test.txt"</span>, <span class="literal">None</span>, <span class="literal">None</span>, SW_HIDE)  <span class="comment"># 打印文件C:Test.txt</span></span><br><span class="line">win32api.ShellExecute(<span class="literal">None</span>,</span><br><span class="line">                      <span class="string">"open"</span>, <span class="string">"mailto:"</span>, <span class="literal">None</span>, <span class="literal">None</span>, SW_SHOWNORMAL)  <span class="comment"># 打开邮箱</span></span><br><span class="line">win32api.ShellExecute(<span class="literal">None</span>, <span class="string">"open"</span>, <span class="string">"calc.exe"</span>, <span class="literal">None</span>, <span class="literal">None</span>, SW_SHOWNORMAL)  <span class="comment"># 调用计算器</span></span><br><span class="line">win32api.ShellExecute(<span class="literal">None</span>, <span class="string">"open"</span>, <span class="string">"NOTEPAD.EXE"</span>, <span class="literal">None</span>, <span class="literal">None</span>, SW_SHOWNORMAL)  <span class="comment"># 调用记事本</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="13-控件"><a href="#13-控件" class="headerlink" title="13 控件"></a>13 控件</h3><h4 id="GetDlgItem"><a href="#GetDlgItem" class="headerlink" title="GetDlgItem"></a>GetDlgItem</h4><p>用控件的ID取得控件的句柄</p>
+<p><code>HWND = GetDlgItem(hDlg, IDDlgItem )</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">a=<span class="string">u"用户登录"</span> <span class="comment"># 写在文件里要用U编码</span></span><br><span class="line">dlg=win32gui.FindWindow(<span class="literal">None</span>,a)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用控件的ID取得控件的句柄</span></span><br><span class="line">t1=win32gui.GetDlgItem(dlg,<span class="number">1012</span>)</span><br><span class="line">t2=win32gui.GetDlgItem(dlg,<span class="number">1001</span>)</span><br><span class="line">k1=win32gui.GetDlgItem(dlg,<span class="number">1605</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 模拟写入输入框文本并按下提交按键</span></span><br><span class="line">win32gui.SendMessage(t1,win32con.WM_SETTEXT,<span class="literal">None</span>,<span class="string">'902723'</span>)</span><br><span class="line">win32gui.SendMessage(t2,win32con.WM_SETTEXT,<span class="literal">None</span>,<span class="string">'761209'</span>)</span><br><span class="line">win32gui.SendMessage(k1,win32con.BM_CLICK,<span class="literal">None</span>,<span class="literal">None</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="GetDlgItemText"><a href="#GetDlgItemText" class="headerlink" title="GetDlgItemText"></a>GetDlgItemText</h4><p>获取控件文本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">w=win32ui.FindWindow(classname,窗体title)</span><br><span class="line"><span class="keyword">print</span> w.GetDlgItemText(<span class="number">0xFFFF</span>)  <span class="comment"># 获得弹窗里的消息文字</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="14-显示器屏幕大小"><a href="#14-显示器屏幕大小" class="headerlink" title="14 显示器屏幕大小"></a>14 显示器屏幕大小</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#获取显示器屏幕大小</span></span><br><span class="line">    width = win32api.GetSystemMetrics(win32con.SM_CXSCREEN)</span><br><span class="line">    height = win32api.GetSystemMetrics(win32con.SM_CYSCREEN)</span><br></pre></td></tr></table></figure>
+
+<h3 id="15-权限问题"><a href="#15-权限问题" class="headerlink" title="15 权限问题"></a>15 权限问题</h3><p>被拒绝访问时，</p>
+<ul>
+<li>部分操作，会无效，没有任何提示，比如 SendMessage</li>
+<li>部分操作，会直接弹出错误，比如 PostMessage</li>
+</ul>
+<h4 id="pywintypes-error-5-39-PostMessage-39-39-拒绝访问。-39"><a href="#pywintypes-error-5-39-PostMessage-39-39-拒绝访问。-39" class="headerlink" title="pywintypes.error: (5, &#39;PostMessage&#39;, &#39;拒绝访问。&#39;)"></a><code>pywintypes.error: (5, &#39;PostMessage&#39;, &#39;拒绝访问。&#39;)</code></h4><ul>
+<li><p>由于windows安全机制导致 integrity level低的进程不能向高的进程发消息 。</p>
+</li>
+<li><p>出现这个问题的原因与用户界面特权隔离(User Interface Privilege Isolation ，UIPI)有关，就是那个窗口程序的权限比代码的权限高，可以用微软的Windows Sysinternals工具集中的进程浏览器(Process Explorer)来查看代码权限跟目标窗口权限。</p>
+<ul>
+<li>打开 Process Explorer (进程浏览器)，右键列标题，<code>Select Colums</code> - 勾选 -  <code>integrity level</code></li>
+<li>点击，列标题的“”Windows Staus“ - 筛选下 ，可以看到 running，正在运行的程序</li>
+<li>可以看到 你的程序的  <code>integrity level</code> 为High。</li>
+</ul>
+</li>
+</ul>
+<p><strong>解决：</strong></p>
+<ol>
+<li>提示软件权限，以管理员模式运行CMD，再执行程序</li>
+<li>需要用ChangeWindowMessageFilter这个玩意来调整<ul>
+<li><a href="https://blog.csdn.net/zpxili/article/details/9722529" target="_blank" rel="noopener">https://blog.csdn.net/zpxili/article/details/9722529</a></li>
+</ul>
+</li>
+</ol>
+<h2 id="三、鼠标键盘"><a href="#三、鼠标键盘" class="headerlink" title="三、鼠标键盘"></a>三、鼠标键盘</h2><h3 id="获取鼠标点击位置-GetCursorPos"><a href="#获取鼠标点击位置-GetCursorPos" class="headerlink" title="获取鼠标点击位置 GetCursorPos"></a>获取鼠标点击位置 GetCursorPos</h3><p><code>POS =win32gui. GetCursorPos()</code></p>
+<p>获取当前鼠标点击的窗口元素的坐标</p>
+<p>结合<code>WindowFromPoint</code> 使用</p>
+<p><code>edit=win32gui.WindowFromPoint(POS)</code></p>
+<p>获取包含指定点的窗口句柄，即根据坐标获取元素句柄</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获取当前坐标</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_point</span><span class="params">()</span>:</span></span><br><span class="line">       point = win32api.GetCursorPos()</span><br><span class="line">       <span class="keyword">return</span> point</span><br></pre></td></tr></table></figure>
+
+<h3 id="移动鼠标至指定坐标位-SetCursorPos"><a href="#移动鼠标至指定坐标位-SetCursorPos" class="headerlink" title="移动鼠标至指定坐标位 SetCursorPos"></a>移动鼠标至指定坐标位 SetCursorPos</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">win32api.SetCursorPos([<span class="number">30</span>,<span class="number">150</span>])  <span class="comment">#鼠标定位到(30,50)--坐标系屏幕</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mouse_move</span><span class="params">(x, y)</span>:</span></span><br><span class="line">	    windll.user32.SetCursorPos(x, y)</span><br></pre></td></tr></table></figure>
+
+<h3 id="鼠标单击"><a href="#鼠标单击" class="headerlink" title="鼠标单击"></a>鼠标单击</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">mouse_click</span><span class="params">(self, x=None, y=None)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> x <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">and</span> <span class="keyword">not</span> y <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            self.mouse_move(x, y)</span><br><span class="line">            sleep(<span class="number">0.05</span>)</span><br><span class="line">        win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>) <span class="comment"># 鼠标按下</span></span><br><span class="line">        win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>) <span class="comment"># 鼠标弹起</span></span><br><span class="line">        </span><br><span class="line"><span class="comment"># ------------------或</span></span><br><span class="line">win32api.SetCursorPos([<span class="number">30</span>,<span class="number">150</span>])  <span class="comment">#鼠标定位到(30,50)--坐标系屏幕</span></span><br><span class="line">win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP | win32con.MOUSEEVENTF_LEFTDOWN, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>) <span class="comment">#执行左单键击，若需要双击则延时几毫秒再点击一次即可</span></span><br><span class="line">win32api.mouse_event(win32con.MOUSEEVENTF_RIGHTUP | win32con.MOUSEEVENTF_RIGHTDOWN, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)  <span class="comment">#右键单击</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ----------------或</span></span><br><span class="line"><span class="comment">#点击窗口button</span></span><br><span class="line">w=win32ui.FindWindow(clsname,windowtitle)</span><br><span class="line">b=w.GetDlgItem(窗口id)</span><br><span class="line">b.postMessage(win32con.BM_CLICK)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="keybd-event"><a href="#keybd-event" class="headerlink" title="keybd_event"></a>keybd_event</h3><p><code>keybd_event(bVk, bScan, dwFlags , dwExtraInfo)</code></p>
+<ul>
+<li><p><code>bVk</code>:为按键的虚拟键值，键值具体参考如下：<a href="https://docs.microsoft.com/zh-cn/windows/win32/inputdev/virtual-key-codes?redirectedfrom=MSDN" target="_blank" rel="noopener">微软官网Virtual-Key Codes</a> （注意转换16进制）</p>
+</li>
+<li><p><code>bScan</code>：为扫描码，一般不用设置，用0代替就行</p>
+</li>
+<li><p><code>dwFlags</code>：为选项标志，如果为keydown则置0即可，如果为keyup则设成”KEYEVENTF_KEYUP”</p>
+</li>
+<li><p><code>dwExtraInfo</code>：点击键关联的附加数据，一般置0即可</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">win32api.keybd_event(<span class="number">18</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>) <span class="comment">#按下ALT键，按下后不会弹起</span></span><br><span class="line"></span><br><span class="line">win32api.keybd_event(<span class="number">18</span>,<span class="number">0</span>, win32con.KEYEVENTF_KEYUP,<span class="number">0</span>) <span class="comment">#手动点上键结束点击</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="mouse-event"><a href="#mouse-event" class="headerlink" title="mouse_event"></a>mouse_event</h3><p><code>mouse_event( dwFlags, dx, dy, cButtons, dwExtraInfo)</code></p>
+<ul>
+<li><code>dwFlags</code>：控制鼠标移动和点击按钮的各个方面。可以是下列值的某些组合：MOUSEEVENTF_ABSOLUTE,MOUSEEVENTF_LEFTDOWN,MOUSEEVENTF_MIDDLEUP等</li>
+<li><code>dx:</code>鼠标的位置沿x轴的位移</li>
+<li><code>dy</code>：鼠标的位置沿y轴的位移</li>
+<li><code>cButtons</code>: 与鼠标事件关联的附加值，在这里不关注</li>
+<li><code>dwExtraInfo</code>: 与鼠标事件关联的附加值，在这里不关注</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN,<span class="number">0</span>,<span class="number">0</span>) <span class="comment">#鼠标左键按下</span></span><br><span class="line"></span><br><span class="line">win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP,<span class="number">0</span>,<span class="number">0</span>) <span class="comment">#鼠标左键拾起</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="SetCursorPos"><a href="#SetCursorPos" class="headerlink" title="SetCursorPos"></a>SetCursorPos</h3><p><code>win32api.SetCursorPos(x,y)</code>  ：将光标移到屏幕坐标（x,y）处</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#鼠标定位到(30,50)</span></span><br><span class="line">win32api.SetCursorPos([<span class="number">30</span>,<span class="number">150</span>])</span><br><span class="line"><span class="comment">#执行左单键击，若需要双击则延时几毫秒再点击一次即可</span></span><br><span class="line">win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP | win32con.MOUSEEVENTF_LEFTDOWN, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line"><span class="comment">#右键单击</span></span><br><span class="line">win32api.mouse_event(win32con.MOUSEEVENTF_RIGHTUP | win32con.MOUSEEVENTF_RIGHTDOWN, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 发送回车键</span></span><br><span class="line">win32api.keybd_event(<span class="number">13</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>)</span><br><span class="line">win32api.keybd_event(<span class="number">13</span>,<span class="number">0</span>,win32con.KEYEVENTF_KEYUP,<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭窗口</span></span><br><span class="line">win32gui.PostMessage(win32lib.findWindow(classname, titlename), win32con.WM_CLOSE, <span class="number">0</span>, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">按键-看键盘码</span><br><span class="line"><span class="comment"># 获取鼠标当前位置的坐标</span></span><br><span class="line">cursor_pos = win32api.GetCursorPos()</span><br><span class="line"><span class="comment"># 将鼠标移动到坐标处</span></span><br><span class="line">win32api.SetCursorPos((<span class="number">200</span>, <span class="number">200</span>))</span><br><span class="line"><span class="comment"># 回车</span></span><br><span class="line">win32api.keybd_event(<span class="number">13</span>, <span class="number">0</span>, win32con.KEYEVENTF_EXTENDEDKEY, <span class="number">0</span>)</span><br><span class="line">win32api.keybd_event(<span class="number">13</span>, <span class="number">0</span>, win32con.KEYEVENTF_KEYUP, <span class="number">0</span>)</span><br><span class="line"><span class="comment"># 左单键击</span></span><br><span class="line">win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP | win32con.MOUSEEVENTF_LEFTDOWN, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line"><span class="comment"># 右键单击</span></span><br><span class="line">win32api.mouse_event(win32con.MOUSEEVENTF_RIGHTUP | win32con.MOUSEEVENTF_RIGHTDOWN, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line"><span class="comment"># 鼠标左键按下-放开</span></span><br><span class="line">win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line"><span class="comment"># 鼠标右键按下-放开</span></span><br><span class="line">win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line"><span class="comment"># TAB键</span></span><br><span class="line">win32api.keybd_event(win32con.VK_TAB, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">win32api.keybd_event(win32con.VK_TAB, <span class="number">0</span>, win32con.KEYEVENTF_KEYUP, <span class="number">0</span>)</span><br><span class="line"><span class="comment"># 快捷键Alt+F</span></span><br><span class="line">win32api.keybd_event(<span class="number">18</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)  <span class="comment"># Alt</span></span><br><span class="line">win32api.keybd_event(<span class="number">70</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)  <span class="comment"># F</span></span><br><span class="line">win32api.keybd_event(<span class="number">70</span>, <span class="number">0</span>, win32con.KEYEVENTF_KEYUP, <span class="number">0</span>)  <span class="comment"># 释放按键</span></span><br><span class="line">win32api.keybd_event(<span class="number">18</span>, <span class="number">0</span>, win32con.KEYEVENTF_KEYUP, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="虚拟键值表"><a href="#虚拟键值表" class="headerlink" title="虚拟键值表"></a>虚拟键值表</h3><table>
+<thead>
+<tr>
+<th>虚拟键</th>
+<th>十六进制值</th>
+<th>十进制值</th>
+<th>相应键盘或鼠标键</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>VK_LBUTTON</td>
+<td>1</td>
+<td>1</td>
+<td>鼠标左键</td>
+</tr>
+<tr>
+<td>VK_RBUTTON</td>
+<td>2</td>
+<td>2</td>
+<td>鼠标右键</td>
+</tr>
+<tr>
+<td>VK_CANCEL</td>
+<td>3</td>
+<td>3</td>
+<td>Ctrl-Break键</td>
+</tr>
+<tr>
+<td>VK_MBUTTON</td>
+<td>4</td>
+<td>4</td>
+<td>鼠标中键</td>
+</tr>
+<tr>
+<td>VK_BACK</td>
+<td>8</td>
+<td>8</td>
+<td>Backspace键</td>
+</tr>
+<tr>
+<td>VK_TAB</td>
+<td>9</td>
+<td>9</td>
+<td>Tab键</td>
+</tr>
+<tr>
+<td>VK_CLEAR</td>
+<td>0C</td>
+<td>12</td>
+<td>Clear键</td>
+</tr>
+<tr>
+<td>VK_RETURN</td>
+<td>0D</td>
+<td>13</td>
+<td>Enter键</td>
+</tr>
+<tr>
+<td>VK_SHIFT</td>
+<td>10</td>
+<td>16</td>
+<td>Shift键</td>
+</tr>
+<tr>
+<td>VK_CONTROL</td>
+<td>11</td>
+<td>17</td>
+<td>Ctrl键</td>
+</tr>
+<tr>
+<td>VK_MENU</td>
+<td>12</td>
+<td>18</td>
+<td>Alt键</td>
+</tr>
+<tr>
+<td>VK_PAUSE</td>
+<td>13</td>
+<td>19</td>
+<td>Pause键</td>
+</tr>
+<tr>
+<td>VK_CAPITAL</td>
+<td>14</td>
+<td>20</td>
+<td>Caps Lock键</td>
+</tr>
+<tr>
+<td>VK_ESCAPE</td>
+<td>1B</td>
+<td>27</td>
+<td>Esc键</td>
+</tr>
+<tr>
+<td>VK_SPACE</td>
+<td>20</td>
+<td>32</td>
+<td>Space键</td>
+</tr>
+<tr>
+<td>VK_PRIOR</td>
+<td>21</td>
+<td>33</td>
+<td>Page Up键</td>
+</tr>
+<tr>
+<td>VK_NEXT</td>
+<td>22</td>
+<td>34</td>
+<td>Page Down键</td>
+</tr>
+<tr>
+<td>VK_END</td>
+<td>23</td>
+<td>35</td>
+<td>End键</td>
+</tr>
+<tr>
+<td>VK_HOME</td>
+<td>24</td>
+<td>36</td>
+<td>Home键</td>
+</tr>
+<tr>
+<td>VK_LEFT</td>
+<td>25</td>
+<td>37</td>
+<td>←键</td>
+</tr>
+<tr>
+<td>VK_UP</td>
+<td>26</td>
+<td>38</td>
+<td>↑键</td>
+</tr>
+<tr>
+<td>VK_RIGHT</td>
+<td>27</td>
+<td>39</td>
+<td>→键</td>
+</tr>
+<tr>
+<td>VK_DOWN</td>
+<td>28</td>
+<td>40</td>
+<td>↓键</td>
+</tr>
+<tr>
+<td>VK_SELECT</td>
+<td>29</td>
+<td>41</td>
+<td>Select键</td>
+</tr>
+<tr>
+<td>VK_PRINT</td>
+<td>2A</td>
+<td>42</td>
+<td>Print键</td>
+</tr>
+<tr>
+<td>VK_EXECUTE</td>
+<td>2B</td>
+<td>43</td>
+<td>Execute键</td>
+</tr>
+<tr>
+<td>VK_SNAPSHOT</td>
+<td>2C</td>
+<td>44</td>
+<td>Print Screen键</td>
+</tr>
+<tr>
+<td>VK_INSERT</td>
+<td>2D</td>
+<td>45</td>
+<td>Ins键</td>
+</tr>
+<tr>
+<td>VK_DELETE</td>
+<td>2E</td>
+<td>46</td>
+<td>Del键</td>
+</tr>
+<tr>
+<td>VK_HELP</td>
+<td>2F</td>
+<td>47</td>
+<td>Help键</td>
+</tr>
+<tr>
+<td>VK_0</td>
+<td>30</td>
+<td>48</td>
+<td>0键</td>
+</tr>
+<tr>
+<td>VK_1</td>
+<td>31</td>
+<td>49</td>
+<td>1键</td>
+</tr>
+<tr>
+<td>VK_2</td>
+<td>32</td>
+<td>50</td>
+<td>2键</td>
+</tr>
+<tr>
+<td>VK_3</td>
+<td>33</td>
+<td>51</td>
+<td>3键</td>
+</tr>
+<tr>
+<td>VK_4</td>
+<td>34</td>
+<td>52</td>
+<td>4键</td>
+</tr>
+<tr>
+<td>VK_5</td>
+<td>35</td>
+<td>53</td>
+<td>5键</td>
+</tr>
+<tr>
+<td>VK_6</td>
+<td>36</td>
+<td>54</td>
+<td>6键</td>
+</tr>
+<tr>
+<td>VK_7</td>
+<td>37</td>
+<td>55</td>
+<td>7键</td>
+</tr>
+<tr>
+<td>VK_8</td>
+<td>38</td>
+<td>56</td>
+<td>8键</td>
+</tr>
+<tr>
+<td>VK_9</td>
+<td>39</td>
+<td>57</td>
+<td>9键</td>
+</tr>
+<tr>
+<td>VK_A</td>
+<td>41</td>
+<td>65</td>
+<td>A键</td>
+</tr>
+<tr>
+<td>VK_B</td>
+<td>42</td>
+<td>66</td>
+<td>B键</td>
+</tr>
+<tr>
+<td>VK_C</td>
+<td>43</td>
+<td>67</td>
+<td>C键</td>
+</tr>
+<tr>
+<td>VK_D</td>
+<td>44</td>
+<td>68</td>
+<td>D键</td>
+</tr>
+<tr>
+<td>VK_E</td>
+<td>45</td>
+<td>69</td>
+<td>E键</td>
+</tr>
+<tr>
+<td>VK_F</td>
+<td>46</td>
+<td>70</td>
+<td>F键</td>
+</tr>
+<tr>
+<td>VK_G</td>
+<td>47</td>
+<td>71</td>
+<td>G键</td>
+</tr>
+<tr>
+<td>VK_H</td>
+<td>48</td>
+<td>72</td>
+<td>H键</td>
+</tr>
+<tr>
+<td>VK_I</td>
+<td>49</td>
+<td>73</td>
+<td>I键</td>
+</tr>
+<tr>
+<td>VK_J</td>
+<td>4A</td>
+<td>74</td>
+<td>J键</td>
+</tr>
+<tr>
+<td>VK_K</td>
+<td>4B</td>
+<td>75</td>
+<td>K键</td>
+</tr>
+<tr>
+<td>VK_L</td>
+<td>4C</td>
+<td>76</td>
+<td>L键</td>
+</tr>
+<tr>
+<td>VK_M</td>
+<td>4D</td>
+<td>77</td>
+<td>M键</td>
+</tr>
+<tr>
+<td>VK_N</td>
+<td>4E</td>
+<td>78</td>
+<td>N键</td>
+</tr>
+<tr>
+<td>VK_O</td>
+<td>4F</td>
+<td>79</td>
+<td>O键</td>
+</tr>
+<tr>
+<td>VK_P</td>
+<td>50</td>
+<td>80</td>
+<td>P键</td>
+</tr>
+<tr>
+<td>VK_Q</td>
+<td>51</td>
+<td>81</td>
+<td>Q键</td>
+</tr>
+<tr>
+<td>VK_R</td>
+<td>52</td>
+<td>82</td>
+<td>R键</td>
+</tr>
+<tr>
+<td>VK_S</td>
+<td>53</td>
+<td>83</td>
+<td>S键</td>
+</tr>
+<tr>
+<td>VK_T</td>
+<td>54</td>
+<td>84</td>
+<td>T键</td>
+</tr>
+<tr>
+<td>VK_U</td>
+<td>55</td>
+<td>85</td>
+<td>U键</td>
+</tr>
+<tr>
+<td>VK_V</td>
+<td>56</td>
+<td>86</td>
+<td>V键</td>
+</tr>
+<tr>
+<td>VK_W</td>
+<td>57</td>
+<td>87</td>
+<td>W键</td>
+</tr>
+<tr>
+<td>VK_X</td>
+<td>58</td>
+<td>88</td>
+<td>X键</td>
+</tr>
+<tr>
+<td>VK_Y</td>
+<td>59</td>
+<td>89</td>
+<td>Y键</td>
+</tr>
+<tr>
+<td>VK_Z</td>
+<td>5A</td>
+<td>90</td>
+<td>Z键</td>
+</tr>
+<tr>
+<td>VK_LWIN</td>
+<td>5B</td>
+<td>91</td>
+<td>左Windows键</td>
+</tr>
+<tr>
+<td>VK_RWIN</td>
+<td>5C</td>
+<td>92</td>
+<td>右Windows键</td>
+</tr>
+<tr>
+<td>VK_APPS</td>
+<td>5D</td>
+<td>93</td>
+<td>应用程序键</td>
+</tr>
+<tr>
+<td>VK_SLEEP</td>
+<td>5F</td>
+<td>95</td>
+<td>休眠键</td>
+</tr>
+<tr>
+<td>VK_NUMPAD0</td>
+<td>60</td>
+<td>96</td>
+<td>小数字键盘0键</td>
+</tr>
+<tr>
+<td>VK_NUMPAD1</td>
+<td>61</td>
+<td>97</td>
+<td>小数字键盘1键</td>
+</tr>
+<tr>
+<td>VK_NUMPAD2</td>
+<td>62</td>
+<td>98</td>
+<td>小数字键盘2键</td>
+</tr>
+<tr>
+<td>VK_NUMPAD3</td>
+<td>63</td>
+<td>99</td>
+<td>小数字键盘3键</td>
+</tr>
+<tr>
+<td>VK_NUMPAD4</td>
+<td>64</td>
+<td>100</td>
+<td>小数字键盘4键</td>
+</tr>
+<tr>
+<td>VK_NUMPAD5</td>
+<td>65</td>
+<td>101</td>
+<td>小数字键盘5键</td>
+</tr>
+<tr>
+<td>VK_NUMPAD6</td>
+<td>66</td>
+<td>102</td>
+<td>小数字键盘6键</td>
+</tr>
+<tr>
+<td>VK_NUMPAD7</td>
+<td>67</td>
+<td>103</td>
+<td>小数字键盘7键</td>
+</tr>
+<tr>
+<td>VK_NUMPAD8</td>
+<td>68</td>
+<td>104</td>
+<td>小数字键盘8键</td>
+</tr>
+<tr>
+<td>VK_NUMPAD9</td>
+<td>69</td>
+<td>105</td>
+<td>小数字键盘9键</td>
+</tr>
+<tr>
+<td>VK_MULTIPLY</td>
+<td>6A</td>
+<td>106</td>
+<td>乘号键</td>
+</tr>
+<tr>
+<td>VK_ADD</td>
+<td>6B</td>
+<td>107</td>
+<td>加号键</td>
+</tr>
+<tr>
+<td>VK_SEPARATOR</td>
+<td>6C</td>
+<td>108</td>
+<td>分割键</td>
+</tr>
+<tr>
+<td>VK_SUBSTRACT</td>
+<td>6D</td>
+<td>109</td>
+<td>减号键</td>
+</tr>
+<tr>
+<td>VK_DECIMAL</td>
+<td>6E</td>
+<td>110</td>
+<td>小数点键</td>
+</tr>
+<tr>
+<td>VK_DIVIDE</td>
+<td>6F</td>
+<td>111</td>
+<td>除号键</td>
+</tr>
+<tr>
+<td>VK_F1</td>
+<td>70</td>
+<td>12</td>
+<td>F1键</td>
+</tr>
+<tr>
+<td>VK_F2</td>
+<td>71</td>
+<td>113</td>
+<td>F2键</td>
+</tr>
+<tr>
+<td>VK_F3</td>
+<td>72</td>
+<td>114</td>
+<td>F3键</td>
+</tr>
+<tr>
+<td>VK_F4</td>
+<td>73</td>
+<td>115</td>
+<td>F4键</td>
+</tr>
+<tr>
+<td>VK_F5</td>
+<td>74</td>
+<td>116</td>
+<td>F5键</td>
+</tr>
+<tr>
+<td>VK_F6</td>
+<td>75</td>
+<td>117</td>
+<td>F6键</td>
+</tr>
+<tr>
+<td>VK_F7</td>
+<td>76</td>
+<td>118</td>
+<td>F7键</td>
+</tr>
+<tr>
+<td>VK_F8</td>
+<td>77</td>
+<td>119</td>
+<td>F8键</td>
+</tr>
+<tr>
+<td>VK_F9</td>
+<td>78</td>
+<td>120</td>
+<td>F9键</td>
+</tr>
+<tr>
+<td>VK_F10</td>
+<td>79</td>
+<td>121</td>
+<td>F10键</td>
+</tr>
+<tr>
+<td>VK_F11</td>
+<td>7A</td>
+<td>122</td>
+<td>F11键</td>
+</tr>
+<tr>
+<td>VK_F12</td>
+<td>7B</td>
+<td>123</td>
+<td>F12键</td>
+</tr>
+<tr>
+<td>VK_F13</td>
+<td>7C</td>
+<td>124</td>
+<td>F13键</td>
+</tr>
+<tr>
+<td>VK_F14</td>
+<td>7D</td>
+<td>125</td>
+<td>F14键</td>
+</tr>
+<tr>
+<td>VK_F15</td>
+<td>7E</td>
+<td>126</td>
+<td>F15键</td>
+</tr>
+<tr>
+<td>VK_F16</td>
+<td>7F</td>
+<td>127</td>
+<td>F16键</td>
+</tr>
+<tr>
+<td>VK_F17</td>
+<td>80</td>
+<td>128</td>
+<td>F17键</td>
+</tr>
+<tr>
+<td>VK_F18</td>
+<td>81</td>
+<td>129</td>
+<td>F18键</td>
+</tr>
+<tr>
+<td>VK_F19</td>
+<td>82</td>
+<td>130</td>
+<td>F19键</td>
+</tr>
+<tr>
+<td>VK_F20</td>
+<td>83</td>
+<td>131</td>
+<td>F20键</td>
+</tr>
+<tr>
+<td>VK_F21</td>
+<td>84</td>
+<td>132</td>
+<td>F21键</td>
+</tr>
+<tr>
+<td>VK_F22</td>
+<td>85</td>
+<td>133</td>
+<td>F22键</td>
+</tr>
+<tr>
+<td>VK_F23</td>
+<td>86</td>
+<td>134</td>
+<td>F23键</td>
+</tr>
+<tr>
+<td>VK_F24</td>
+<td>87</td>
+<td>135</td>
+<td>F24键</td>
+</tr>
+<tr>
+<td>VK_NUMLOCK</td>
+<td>90</td>
+<td>144</td>
+<td>Num Lock键</td>
+</tr>
+<tr>
+<td>VK_SCROLL</td>
+<td>91</td>
+<td>45</td>
+<td>Scroll Lock键</td>
+</tr>
+<tr>
+<td>VK_LSHIFT</td>
+<td>A0</td>
+<td>160</td>
+<td>左Shift键</td>
+</tr>
+<tr>
+<td>VK_RSHIFT</td>
+<td>A1</td>
+<td>161</td>
+<td>右Shift键</td>
+</tr>
+<tr>
+<td>VK_LCONTROL</td>
+<td>A2</td>
+<td>162</td>
+<td>左Ctrl键</td>
+</tr>
+<tr>
+<td>VK_RCONTROL</td>
+<td>A3</td>
+<td>163</td>
+<td>右Ctrl键</td>
+</tr>
+<tr>
+<td>VK_LMENU</td>
+<td>A4</td>
+<td>164</td>
+<td>左Alt键</td>
+</tr>
+<tr>
+<td>VK_RMENU</td>
+<td>A5</td>
+<td>165</td>
+<td>右Alt键</td>
+</tr>
+</tbody></table>
+<h2 id="五、注册表"><a href="#五、注册表" class="headerlink" title="五、注册表"></a>五、注册表</h2><h3 id="RegOpenKey"><a href="#RegOpenKey" class="headerlink" title="RegOpenKey"></a>RegOpenKey</h3><p><code>win32api.RegOpenKey(hKey,ipSubKey,phkResult)</code></p>
+<p><strong>打开给定键，一般是打开一个现有的注册表项</strong></p>
+<ul>
+<li><code>hKey</code> ：要打开键的句柄，即注册表最外层名称</li>
+<li><code>lpSubKey</code>：要打开的项名，即项具体路径名称</li>
+<li><code>phkResult</code>：指定一个变量，用于装载（保存）打开注册表项的一个句柄</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">打开endpoint注册表：</span><br><span class="line"></span><br><span class="line">endpoint_key=win32api.RegOpenKey(win32con.HKEY_LOCAL_MACHINE,<span class="string">'SOFTWARE\Ixia Communications\Endpoint'</span>,<span class="number">0</span>, win32con.KEY_READ) <span class="comment">#最后一个参数指权限为读</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="RegQueryValueEx"><a href="#RegQueryValueEx" class="headerlink" title="RegQueryValueEx"></a>RegQueryValueEx</h3><p><code>win32api.RegQueryValueEx(hKey, lpValueName, lpReserved, lpType, lpData, lpcbData)</code></p>
+<p>检索一个已打开的注册表句柄中，指定的注册表键的类型和设置值。</p>
+<ul>
+<li><code>HKEY hKey</code>:一个已打开项的句柄，即RegOpenKey打开的注册表项的句柄</li>
+<li><code>LPCTSTR lpValueName</code>：要查询注册表键值的名字字符串，注册表键的名字，以空字符结束。</li>
+<li><code>LPDWORD lpReserved</code>：未用，设为零</li>
+<li><code>LPDWORD lpType</code>：用于装载取回数据类型的一个变量</li>
+<li><code>LPBYTE lpData</code>：用于装载指定值的一个缓冲区</li>
+<li><code>LPDWORD lpcbData</code>：用于装载lpData缓冲区长度的一个变量。 //一旦返回，它会设为实际装载到缓冲区的字节数</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">install_path = win32api.RegQueryValueEx(endpoint_key,<span class="string">'Installation Directory'</span>)</span><br><span class="line">最终根据键值名字<span class="string">' Installation Directory'</span>得到返回值 <span class="string">'C:\Program Files\Ixia\Endpoint\'</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="RegCloseKey"><a href="#RegCloseKey" class="headerlink" title="RegCloseKey"></a>RegCloseKey</h3><p><code>RegCloseKey(hKey)</code></p>
+<p>不使用时，关闭注册表。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">win32api.RegCloseKey(endpoint_key)</span><br></pre></td></tr></table></figure>
+
+<h2 id="六、Win32con-函数"><a href="#六、Win32con-函数" class="headerlink" title="六、Win32con 函数"></a>六、Win32con 函数</h2><p>Win32con函数<code>一般作为win32gui win32api的参数</code>调用。</p>
+<ul>
+<li>其参数命名可以这样理解：Obj_Opt</li>
+</ul>
+<h3 id="WM-COMMAND"><a href="#WM-COMMAND" class="headerlink" title="WM_COMMAND"></a>WM_COMMAND</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">win32api.SendMessage(hld, win32con.WM_COMMAND, (<span class="number">9</span>&lt;&lt;<span class="number">16</span>)+ctrl_id, vHandle)</span><br><span class="line"></span><br><span class="line">发送命令(<span class="number">9</span>&lt;&lt;<span class="number">16</span>)+ctrl_id 给窗口hld，命令要操作的窗口对象是vHandle</span><br><span class="line"></span><br><span class="line">WM_XXXXXX：Window Message即窗口消息对应的操作</span><br></pre></td></tr></table></figure>
+
+<h3 id="CB-GETCOUNT"><a href="#CB-GETCOUNT" class="headerlink" title="CB_GETCOUNT"></a>CB_GETCOUNT</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">count=win32api.SendMessage(vHandle, win32con.CB_GETCOUNT,<span class="number">0</span>,<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># vHandle是一个ComboBox, 通过发送CB_GETCOUNT消息获取的此下拉列表框可选值个数</span></span><br><span class="line"></span><br><span class="line">CB_XXXXXX：ComboBox对象对应的操作</span><br></pre></td></tr></table></figure>
+
+<h3 id="HKEY-LOCAL-MACHINE"><a href="#HKEY-LOCAL-MACHINE" class="headerlink" title="HKEY_LOCAL_MACHINE"></a>HKEY_LOCAL_MACHINE</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">endpoint_key=win32api.RegOpenKey(win32con.HKEY_LOCAL_MACHINE,<span class="string">'SOFTWARE\Ixia Communications\Endpoint'</span>,<span class="number">0</span>, win32con.KEY_READ)</span><br><span class="line"></span><br><span class="line">HKEY_CLASSES_ROOT</span><br><span class="line"></span><br><span class="line">HKEY_CURRENT_CONFIG</span><br><span class="line"></span><br><span class="line">HKEY_CURRENT_USER</span><br><span class="line"></span><br><span class="line">HKEY_LOCAL_MACHINE</span><br><span class="line"></span><br><span class="line">HKEY_USERS</span><br><span class="line"></span><br><span class="line">HKEY_XXXXXX:注册表对应的操作</span><br></pre></td></tr></table></figure>
+
+<h3 id="SW-XXXX"><a href="#SW-XXXX" class="headerlink" title="SW_XXXX"></a>SW_XXXX</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># SW_HIDE：隐藏窗口并激活其他窗口。nCmdShow&#x3D;0。</span><br><span class="line"># SW_MAXIMIZE：最大化指定的窗口。nCmdShow&#x3D;3。</span><br><span class="line"># SW_MINIMIZE：最小化指定的窗口并且激活在Z序中的下一个顶层窗口。nCmdShow&#x3D;6。</span><br><span class="line"># SW_RESTORE：激活并显示窗口。如果窗口最小化或最大化，则系统将窗口恢复到原来的尺寸和位置。在恢复最小化窗口时，应用程序应该指定这个标志。nCmdShow&#x3D;9。</span><br><span class="line"># SW_SHOW：在窗口原来的位置以原来的尺寸激活和显示窗口。nCmdShow&#x3D;5。</span><br><span class="line"># SW_SHOWDEFAULT：依据在STARTUPINFO结构中指定的SW_FLAG标志设定显示状态，STARTUPINFO 结构是由启动应用程序的程序传递给CreateProcess函数的。nCmdShow&#x3D;10。</span><br><span class="line"># SW_SHOWMAXIMIZED：激活窗口并将其最大化。nCmdShow&#x3D;3。</span><br><span class="line"># SW_SHOWMINIMIZED：激活窗口并将其最小化。nCmdShow&#x3D;2。</span><br><span class="line"># SW_SHOWMINNOACTIVE：窗口最小化，激活窗口仍然维持激活状态。nCmdShow&#x3D;7。</span><br><span class="line"># SW_SHOWNA：以窗口原来的状态显示窗口。激活窗口仍然维持激活状态。nCmdShow&#x3D;8。</span><br><span class="line"># SW_SHOWNOACTIVATE：以窗口最近一次的大小和状态显示窗口。激活窗口仍然维持激活状态。nCmdShow&#x3D;4。</span><br><span class="line"># SW_SHOWNORMAL：激活并显示一个窗口。如果窗口被最小化或最大化，系统将其恢复到原来的尺寸和大小。应用程序在第一次显示窗口的时候应该指定此标志。nCmdShow&#x3D;1。</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="KEY-ALL-ACCESS"><a href="#KEY-ALL-ACCESS" class="headerlink" title="KEY_ALL_ACCESS"></a>KEY_ALL_ACCESS</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">xml_key = win32api.RegOpenKey(win32con.HKEY_LOCAL_MACHINE,<span class="string">'SOFTWARE\\</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Microsoft\\Office\\MSXML60'</span>,<span class="number">0</span>, win32con.KEY_ALL_ACCESS)</span><br><span class="line"></span><br><span class="line">KEY_XXXXXX:理解为附加参数。在这里指打开注册表权限为全部</span><br></pre></td></tr></table></figure>
+
+<h3 id="KEYEVENTF-KEYUP"><a href="#KEYEVENTF-KEYUP" class="headerlink" title="KEYEVENTF_KEYUP"></a>KEYEVENTF_KEYUP</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">win32api.keybd_event(<span class="number">69</span>,<span class="number">0</span>,win32con.KEYEVENTF_KEYUP,<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">按键松开</span><br></pre></td></tr></table></figure>
+
+<h3 id="BM-CLICK"><a href="#BM-CLICK" class="headerlink" title="BM_CLICK"></a>BM_CLICK</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">win32gui.SendMessage(btn1,win32con.BM_CLICK,<span class="literal">None</span>,<span class="literal">None</span>)</span><br><span class="line"></span><br><span class="line">BM_XXXXXX:Button按键对应的操作</span><br></pre></td></tr></table></figure>
+
+<h3 id="MOUSEEVENTF-LEFTDOWN"><a href="#MOUSEEVENTF-LEFTDOWN" class="headerlink" title="MOUSEEVENTF_LEFTDOWN"></a>MOUSEEVENTF_LEFTDOWN</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN,<span class="number">0</span>,<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">MOUSEEVENTF_XXXXXX：鼠标对应的操作</span><br></pre></td></tr></table></figure>
+
+<h3 id="VK-RETURN"><a href="#VK-RETURN" class="headerlink" title="VK_RETURN"></a>VK_RETURN</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">win32gui.PostMessage(nuSerWindowHandle,win32con.WM_KEYDOWN, win32con.VK_RETURN, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">VK_XXXXXX:键盘按键操作，后跟键名称,<span class="keyword">return</span>指回车键</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><h3 id="文件的读写"><a href="#文件的读写" class="headerlink" title="文件的读写"></a>文件的读写</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> win32file, win32api, win32con</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">SimpleFileDemo</span><span class="params">()</span>:</span></span><br><span class="line">    testName = os.path.join(win32api.GetTempPath(), <span class="string">"opt_win_file.txt"</span>)</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">if</span> os.path.exists(testName):</span><br><span class="line">        os.unlink(testName)  <span class="comment"># os.unlink() 方法用于删除文件,如果文件是一个目录则返回一个错误。</span></span><br><span class="line">    <span class="comment"># 写</span></span><br><span class="line">    handle = win32file.CreateFile(testName,</span><br><span class="line">                                  win32file.GENERIC_WRITE,</span><br><span class="line">                                  <span class="number">0</span>,</span><br><span class="line">                                  <span class="literal">None</span>,</span><br><span class="line">                                  win32con.CREATE_NEW,</span><br><span class="line">                                  <span class="number">0</span>,</span><br><span class="line">                                  <span class="literal">None</span>)</span><br><span class="line">    test_data = <span class="string">"Hello0there"</span>.encode(<span class="string">"ascii"</span>)</span><br><span class="line">    win32file.WriteFile(handle, test_data)</span><br><span class="line">    handle.Close()</span><br><span class="line">    <span class="comment"># 读</span></span><br><span class="line">    handle = win32file.CreateFile(testName, win32file.GENERIC_READ, <span class="number">0</span>, <span class="literal">None</span>, win32con.OPEN_EXISTING, <span class="number">0</span>, <span class="literal">None</span>)</span><br><span class="line">    rc, data = win32file.ReadFile(handle, <span class="number">1024</span>)</span><br><span class="line">    handle.Close()  <span class="comment"># 此处也可使用win32file.CloseHandle(handle)来关闭句柄</span></span><br><span class="line">    <span class="keyword">if</span> data == test_data:</span><br><span class="line">        print(<span class="string">"Successfully wrote and read a file"</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">raise</span> Exception(<span class="string">"Got different data back???"</span>)</span><br><span class="line">    os.unlink(testName)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="1"><a href="#1" class="headerlink" title="1"></a>1</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> win32gui</span><br><span class="line"><span class="keyword">import</span> win32con</span><br><span class="line"><span class="keyword">import</span> win32api</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从顶层窗口向下搜索主窗口，无法搜索子窗口</span></span><br><span class="line"><span class="comment"># FindWindow(lpClassName=None, lpWindowName=None)  窗口类名 窗口标题名</span></span><br><span class="line">handle = win32gui.FindWindow(<span class="string">"Notepad"</span>, <span class="literal">None</span>) </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取窗口位置</span></span><br><span class="line">left, top, right, bottom = win32gui.GetWindowRect(handle)</span><br><span class="line"><span class="comment">#获取某个句柄的类名和标题</span></span><br><span class="line">title = win32gui.GetWindowText(handle)     </span><br><span class="line">clsname = win32gui.GetClassName(handle)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打印句柄</span></span><br><span class="line"><span class="comment"># 十进制</span></span><br><span class="line">print(handle)</span><br><span class="line"><span class="comment"># 十六进制</span></span><br><span class="line">print(<span class="string">"%x"</span> %(handle) )</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 搜索子窗口</span></span><br><span class="line"><span class="comment"># 枚举子窗口</span></span><br><span class="line">hwndChildList = []     </span><br><span class="line">win32gui.EnumChildWindows(handle, <span class="keyword">lambda</span> hwnd, param: param.append(hwnd),  hwndChildList)</span><br><span class="line"></span><br><span class="line"><span class="comment"># FindWindowEx(hwndParent=0, hwndChildAfter=0, lpszClass=None, lpszWindow=None) 父窗口句柄 若不为0，则按照z-index的顺序从hwndChildAfter向后开始搜索子窗体，否则从第一个子窗体开始搜索。 子窗口类名 子窗口标题</span></span><br><span class="line">subHandle = win32gui.FindWindowEx(handle, <span class="number">0</span>, <span class="string">"EDIT"</span>, <span class="literal">None</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获得窗口的菜单句柄</span></span><br><span class="line">menuHandle = win32gui.GetMenu(subHandle)</span><br><span class="line"><span class="comment"># 获得子菜单或下拉菜单句柄   </span></span><br><span class="line"><span class="comment"># 参数：菜单句柄 子菜单索引号</span></span><br><span class="line">subMenuHandle = win32gui.GetSubMenu(menuHandle, <span class="number">0</span>)</span><br><span class="line"><span class="comment"># 获得菜单项中的的标志符，注意，分隔符是被编入索引的  </span></span><br><span class="line"><span class="comment"># 参数：子菜单句柄 项目索引号 </span></span><br><span class="line">menuItemHandle = win32gui.GetMenuItemID(subMenuHandle, <span class="number">0</span>)</span><br><span class="line"><span class="comment"># 发送消息，加入消息队列，无返回 </span></span><br><span class="line"><span class="comment"># 参数：句柄 消息类型 WParam IParam</span></span><br><span class="line">win32gui.postMessage(subHandle, win32con.WM_COMMAND, menuItemHandle, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># wParam的定义是32位整型，high word就是他的31至16位，low word是它的15至0位。</span></span><br><span class="line"><span class="comment"># 当参数超过两个，wParam和lParam不够用时，可以将wParam就给拆成两个int16来使用。</span></span><br><span class="line"><span class="comment"># 这种时候在python里记得用把HIWORD的常数向左移16位，再加LOWORD，即wParam = HIWORD&lt;&lt;16+LOWORD。</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 下选框内容更改</span></span><br><span class="line"><span class="comment"># 参数：下选框句柄； 消息内容； 参数下选框的哪一个item，以0起始的待选选项的索引；如果该值为-1，将从组合框列表中删除当前选项，并使当前选项为空； 参数</span></span><br><span class="line"><span class="comment"># CB_Handle为下选框句柄，PCB_handle下选框父窗口句柄</span></span><br><span class="line"><span class="keyword">if</span> win32api.SendMessage(CB_handle, win32con.CB_SETCURSEL, <span class="number">1</span>, <span class="number">0</span>) == <span class="number">1</span>:</span><br><span class="line"><span class="comment"># 下选框的父窗口命令</span></span><br><span class="line"><span class="comment"># 参数：父窗口句柄； 命令； 参数：WParam：高位表示类型，低位表示内容；参数IParam，下选框句柄</span></span><br><span class="line"><span class="comment"># CBN_SELENDOK当用户选择了有效的列表项时发送，提示父窗体处理用户的选择。 LOWORD为组合框的ID. HIWORD为CBN_SELENDOK的值。</span></span><br><span class="line">            win32api.SendMessage(PCB_handle, win32con.WM_COMMAND, <span class="number">0x90000</span>, CB_handle) </span><br><span class="line"><span class="comment"># CBN_SELCHANGE当用户更改了列表项的选择时发送，不论用户是通过鼠标选择或是通过方向键选择都会发送此通知。LOWORD为组合框的ID. HIWORD为CBN_SELCHANGE的值。</span></span><br><span class="line">            win32api.SendMessage(PCB_handle, win32con.WM_COMMAND, <span class="number">0x10000</span>, CB_handle) </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置文本框内容，等窗口处理完毕后返回true。中文需编码成gbk </span></span><br><span class="line"><span class="comment"># 参数：句柄；消息类型；参数WParam，无需使用； 参数IParam，要设置的内容，字符串</span></span><br><span class="line">win32api.SendMessage(handle, win32con.WM_SETTEXT, <span class="number">0</span>, os.path.abspath(fgFilePath).encode(<span class="string">'gbk'</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 控件点击确定,处理消息后返回0</span></span><br><span class="line"><span class="comment"># 参数:窗口句柄; 消息类型; 参数WParam HIWORD为0（未使用），LOWORD为控件的ID; 参数IParam  0（未使用）,确定控件的句柄</span></span><br><span class="line">win32api.SendMessage(Mhandle, win32con.WM_COMMAND, <span class="number">1</span>, confirmBTN_handle)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取窗口文本不含截尾空字符的长度</span></span><br><span class="line"><span class="comment"># 参数：窗口句柄； 消息类型； 参数WParam； 参数IParam</span></span><br><span class="line">bufSize = win32api.SendMessage(subHandle, win32con.WM_GETTEXTLENGTH, <span class="number">0</span>, <span class="number">0</span>) +<span class="number">1</span></span><br><span class="line"><span class="comment"># 利用api生成Buffer</span></span><br><span class="line">strBuf = win32gui.PyMakeBuffer(bufSize)</span><br><span class="line">print(strBuf)</span><br><span class="line"><span class="comment"># 发送消息获取文本内容</span></span><br><span class="line"><span class="comment"># 参数：窗口句柄； 消息类型；文本大小； 存储位置</span></span><br><span class="line">length = win32gui.SendMessage(subHandle, win32con.WM_GETTEXT, bufSize, strBuf)</span><br><span class="line"><span class="comment"># 反向内容，转为字符串</span></span><br><span class="line"><span class="comment"># text = str(strBuf[:-1])</span></span><br><span class="line"></span><br><span class="line">address, length = win32gui.PyGetBufferAddressAndLen(strBuf) </span><br><span class="line">text = win32gui.PyGetString(address, length) </span><br><span class="line"><span class="comment"># print('text: ', text)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 鼠标单击事件</span></span><br><span class="line"><span class="comment">#鼠标定位到(30,50)</span></span><br><span class="line">win32api.SetCursorPos([<span class="number">30</span>,<span class="number">150</span>])</span><br><span class="line"><span class="comment">#执行左单键击，若需要双击则延时几毫秒再点击一次即可</span></span><br><span class="line">win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP | win32con.MOUSEEVENTF_LEFTDOWN, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line"><span class="comment">#右键单击</span></span><br><span class="line">win32api.mouse_event(win32con.MOUSEEVENTF_RIGHTUP | win32con.MOUSEEVENTF_RIGHTDOWN, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">click1</span><span class="params">(x,y)</span>:</span>                <span class="comment">#第一种</span></span><br><span class="line">    win32api.SetCursorPos((x,y))</span><br><span class="line">    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN,x,y,<span class="number">0</span>,<span class="number">0</span>)</span><br><span class="line">    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP,x,y,<span class="number">0</span>,<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">click2</span><span class="params">(x,y)</span>:</span>               <span class="comment">#第二种</span></span><br><span class="line">    ctypes.windll.user32.SetCursorPos(x,y)</span><br><span class="line">    ctypes.windll.user32.mouse_event(<span class="number">2</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>)</span><br><span class="line">    ctypes.windll.user32.mouse_event(<span class="number">4</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">click_it</span><span class="params">(pos)</span>:</span>          <span class="comment">#第三种</span></span><br><span class="line">    handle= win32gui.WindowFromPoint(pos)</span><br><span class="line">    client_pos =win32gui.ScreenToClient(handle,pos)</span><br><span class="line">    tmp=win32api.MAKELONG(client_pos[<span class="number">0</span>],client_pos[<span class="number">1</span>])</span><br><span class="line">    win32gui.SendMessage(handle, win32con.WM_ACTIVATE,win32con.WA_ACTIVE,<span class="number">0</span>)</span><br><span class="line">    win32gui.SendMessage(handle, win32con.WM_LBUTTONDOWN,win32con.MK_LBUTTON,tmp)</span><br><span class="line">    win32gui.SendMessage(handle, win32con.WM_LBUTTONUP,win32con.MK_LBUTTON,tmp)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 发送回车</span></span><br><span class="line">win32api.keybd_event(<span class="number">13</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>)</span><br><span class="line">win32api.keybd_event(<span class="number">13</span>,<span class="number">0</span>,win32con.KEYEVENTF_KEYUP,<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭窗口</span></span><br><span class="line">win32gui.PostMessage(win32lib.findWindow(classname, titlename), win32con.WM_CLOSE, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查窗口是否最小化，如果是最大化</span></span><br><span class="line"><span class="keyword">if</span>(win32gui.IsIconic(hwnd)):</span><br><span class="line"><span class="comment">#     win32gui.ShowWindow(hwnd, win32con.SW_SHOWNORMAL)</span></span><br><span class="line">    win32gui.ShowWindow(hwnd, <span class="number">8</span>)</span><br><span class="line">    sleep(<span class="number">0.5</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="2"><a href="#2" class="headerlink" title="2"></a>2</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#-*- coding: utf-8 -*-  ##设置编码方式</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> win32api,win32gui,win32con</span><br><span class="line"></span><br><span class="line">label = <span class="string">'tt'</span> <span class="comment">#此处假设主窗口名为tt</span></span><br><span class="line"></span><br><span class="line">hld = win32gui.FindWindow(<span class="literal">None</span>, label)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> hld &gt; <span class="number">0</span>:</span><br><span class="line"></span><br><span class="line">    dlg = win32gui.FindWindowEx(hld, <span class="literal">None</span>, <span class="string">'Edit'</span>, <span class="literal">None</span>)<span class="comment">#获取hld下第一个为edit控件的句柄</span></span><br><span class="line"></span><br><span class="line">    buffer = <span class="string">'0'</span> *<span class="number">50</span></span><br><span class="line"></span><br><span class="line">    len = win32gui.SendMessage(dlg, win32con.WM_GETTEXTLENGTH)+<span class="number">1</span> <span class="comment">#获取edit控件文本长度</span></span><br><span class="line"></span><br><span class="line">    win32gui.SendMessage(dlg, win32con.WM_GETTEXT, len, buffer) <span class="comment">#读取文本</span></span><br><span class="line"></span><br><span class="line">    print(buffer[:len<span class="number">-1</span>])</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3"><a href="#3" class="headerlink" title="3"></a>3</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> win32process<span class="comment">#进程模块</span></span><br><span class="line"><span class="keyword">from</span> win32con <span class="keyword">import</span> PROCESS_ALL_ACCESS <span class="comment">#Opencress 权限</span></span><br><span class="line"><span class="keyword">import</span> win32api<span class="comment">#调用系统模块</span></span><br><span class="line"><span class="keyword">import</span> ctypes<span class="comment">#C语言类型</span></span><br><span class="line"><span class="keyword">from</span> win32gui <span class="keyword">import</span> FindWindow<span class="comment">#界面对游戏的一个读操作，读取血量。</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">GetProcssID</span><span class="params">(address,bufflength)</span>:</span>    </span><br><span class="line">    pid = ctypes.c_ulong() // 设置 pid 为 无符号单精度类型   </span><br><span class="line">    kernel32 = ctypes.windll.LoadLibrary(<span class="string">"kernel32.dll"</span>)//加载动态链接库    </span><br><span class="line">    hwnd = FindWindow(<span class="string">"XYElementClient Window"</span>, <span class="string">u"口袋西游"</span>)//获取窗口句柄    </span><br><span class="line">    hpid, pid = win32process.GetWindowThreadProcessId(hwnd)//获取窗口ID    </span><br><span class="line">    hProcess = win32api.OpenProcess(PROCESS_ALL_ACCESS, <span class="literal">False</span>, pid)//获取进程句柄     </span><br><span class="line">    ReadProcessMemory = kernel32.ReadProcessMemory    </span><br><span class="line">    addr = ctypes.c_ulong()    </span><br><span class="line">    ReadProcessMemory(int(hProcess), address, ctypes.byref(addr), bufflength, <span class="literal">None</span>)//读内存          		win32api.CloseHandle(hProcess)//关闭句柄    </span><br><span class="line">    <span class="keyword">return</span> addr.value    </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span>    </span><br><span class="line">    addr = GetProcssID(<span class="number">0xD0DF1C</span>, <span class="number">4</span>)    </span><br><span class="line">    ret = addr + <span class="number">0x1C</span>    </span><br><span class="line">    ret2 = GetProcssID(ret, <span class="number">4</span>)    </span><br><span class="line">    ret3 = ret2 + <span class="number">0x28</span>    </span><br><span class="line">    ret4 = GetProcssID(ret3, <span class="number">4</span>)    </span><br><span class="line">    ret5 = ret4 + <span class="number">0x288</span>    </span><br><span class="line">    ret6 = GetProcssID(ret5, <span class="number">4</span>) // 传入偏移地址    </span><br><span class="line">    <span class="keyword">print</span> (<span class="string">"Hp:%d"</span> % ret6)</span><br><span class="line">    </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:    </span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>参考：<a href="https://www.cnblogs.com/jiyirain/p/6742671.html" target="_blank" rel="noopener">https://www.cnblogs.com/jiyirain/p/6742671.html</a></p>
+<p><a href="https://nymrli.top/2018/08/31/python-win32api-win32gui-win32con-PyUserInput%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E5%8C%96%E8%84%9A%E6%9C%AC/" target="_blank" rel="noopener">python pywin32 PyUserInput实现自动化脚本</a></p>
+</blockquote>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Gkon</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://gxkon.top/posts/b63cc29b/">http://gxkon.top/posts/b63cc29b/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://gxkon.top" target="_blank">Gxkon's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Python/">Python</a></div><div class="post_share"><div class="social-share" data-image="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/10/7/68coffee-5567269_1280.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/posts/1b320349/"><img class="prev_cover" data-src="/Pic/post.jpg" onerror="onerror=null;src='/Pic/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Clash for Windows 教程 | 汉化 | 使用</div></div></a></div><div class="next-post pull_right"><a href="/posts/83dbd91b/"><img class="next_cover" data-src="/Pic/post.jpg" onerror="onerror=null;src='/Pic/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Python中级之操作6种数据库</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fa fa-fw fa-thumbs-up" aria-hidden="true"></i><span> 相关推荐</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/posts/ffb5fdc7/" title="Python GUI编程(Tkinter)"><img class="relatedPosts_cover" data-src="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/09/night-4011992_1280.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2020-09-24</div><div class="relatedPosts_title">Python GUI编程(Tkinter)</div></div></a></div><div class="relatedPosts_item"><a href="/posts/1ed47f5b/" title="Python基础之列表"><img class="relatedPosts_cover" data-src="https://tvax3.sinaimg.cn/large/4a9e9735gy1gdait9noiwj24802diqp3.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2020-03-28</div><div class="relatedPosts_title">Python基础之列表</div></div></a></div><div class="relatedPosts_item"><a href="/posts/f1154067/" title="Python基础之库、Pip、Pypi"><img class="relatedPosts_cover" data-src="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/09/norway-4970081_1280.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2020-05-28</div><div class="relatedPosts_title">Python基础之库、Pip、Pypi</div></div></a></div><div class="relatedPosts_item"><a href="/posts/49a688a0/" title="Python基础之字符串"><img class="relatedPosts_cover" data-src="https://tvax3.sinaimg.cn/large/4a9e9735gy1gdaiuzfg25j24002o0b29.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2020-03-28</div><div class="relatedPosts_title">Python基础之字符串</div></div></a></div><div class="relatedPosts_item"><a href="/posts/bbbc4a2f/" title="Python基础之安装与部署"><img class="relatedPosts_cover" data-src="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/09/geyser-4766105_1280.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2020-05-27</div><div class="relatedPosts_title">Python基础之安装与部署</div></div></a></div><div class="relatedPosts_item"><a href="/posts/dcbec147/" title="Python中级之Pyinstaller打包成exe"><img class="relatedPosts_cover" data-src="/Pic/post.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2020-11-07</div><div class="relatedPosts_title">Python中级之Pyinstaller打包成exe</div></div></a></div></div><div class="clear_both"></div></div><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i><span> 评论</span></div><div id="gitalk-container"></div><script>var gitalk = new Gitalk({
+  clientID: '1ce3148e3133bf004c96',
+  clientSecret: '2a1e5c0f4d38387460b916843bfe5cac67ef2d07',
+  repo: 'blankwz.github.io',
+  owner: 'blankwz',
+  admin: ['blankwz'],
+  id: md5(decodeURI(location.pathname)),
+  language: 'zh-CN',
+  perPage: 10,
+  distractionFreeMode: false,
+  pagerDirection: 'last',
+  createIssueManually: false,
+  updateCountCallback: commentCount
+})
+gitalk.render('gitalk-container')
+
+function commentCount(n){
+  try {
+    document.getElementsByClassName('gitalk-comment-count')[0].innerHTML= n
+  } catch (e) {
+    return false
+  }
+}</script></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By Gkon</div><div class="framework-info"><span>驱动 </span><a href="https://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="阅读模式"></i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">簡</a><i class="darkmode fa fa-moon-o" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><a id="to_comment" href="#post-comment" title="直达评论"><i class="scroll_to_comment fa fa-comments">  </i></a><i class="fa fa-list-ul close" id="mobile-toc-button" title="目录" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@3/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script><script src="/js/third-party/ClickShowText.js"></script></body></html>

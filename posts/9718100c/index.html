@@ -1,0 +1,539 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Windows批处理之mshta使用JS脚本让BAT更强大 | Gxkon's Blog</title><meta name="description" content="Windows批处理之mshta使用JS脚本让BAT更强大一、介绍 mshta.exe是微软Windows操作系统相关程序，英文全称Microsoft HTML Application，可翻译为微软超文本标记语言应用，用于执行.HTA文件。hta文件解释器（也能解释html）  就如同IE是html的解释器，CMD是批处理文件的解释器，WScript.exe、CScript.exe是vbs&#x2F;js脚"><meta name="keywords" content="批处理"><meta name="author" content="Gkon"><meta name="copyright" content="Gkon"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="dns-prefetch" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="crossorigin"/><link rel="dns-prefetch" href="https://fonts.googleapis.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="dns-prefetch" href="//busuanzi.ibruce.info"/><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Windows批处理之mshta使用JS脚本让BAT更强大"><meta name="twitter:description" content="Windows批处理之mshta使用JS脚本让BAT更强大一、介绍 mshta.exe是微软Windows操作系统相关程序，英文全称Microsoft HTML Application，可翻译为微软超文本标记语言应用，用于执行.HTA文件。hta文件解释器（也能解释html）  就如同IE是html的解释器，CMD是批处理文件的解释器，WScript.exe、CScript.exe是vbs&#x2F;js脚"><meta name="twitter:image" content="http://gxkon.top/Pic/post.jpg"><meta property="og:type" content="article"><meta property="og:title" content="Windows批处理之mshta使用JS脚本让BAT更强大"><meta property="og:url" content="http://gxkon.top/posts/9718100c/"><meta property="og:site_name" content="Gxkon's Blog"><meta property="og:description" content="Windows批处理之mshta使用JS脚本让BAT更强大一、介绍 mshta.exe是微软Windows操作系统相关程序，英文全称Microsoft HTML Application，可翻译为微软超文本标记语言应用，用于执行.HTA文件。hta文件解释器（也能解释html）  就如同IE是html的解释器，CMD是批处理文件的解释器，WScript.exe、CScript.exe是vbs&#x2F;js脚"><meta property="og:image" content="http://gxkon.top/Pic/post.jpg"><meta property="article:published_time" content="2021-01-11T12:18:54.000Z"><meta property="article:modified_time" content="2021-02-13T12:49:38.801Z"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>var autoChangeMode = '1'
+var t = Cookies.get("theme")
+if (autoChangeMode == '1'){
+  var isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+  var isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+  var isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined){
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport){
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour < 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+  }
+  } else if (t == 'light') activateLightMode()
+  else activateDarkMode()
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="canonical" href="http://gxkon.top/posts/9718100c/"><link rel="prev" title="Windows批处理之延时启动程序" href="http://gxkon.top/posts/4d313360/"><link rel="next" title="炉石传说" href="http://gxkon.top/posts/9cc46ef0/"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script><script src="https://cdn.jsdelivr.net/npm/blueimp-md5/js/md5.min.js"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: {"text":"本人,超帅,打钱","fontSize":"15px"},
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  highlightShrink: 'false',
+  isFontAwesomeV5: false,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false
+  
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isSidebar: true  
+  }</script><noscript><style>
+#page-header {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 4.2.0"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/Pic/avatar.png" onerror="onerror=null;src='/Pic/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">156</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">83</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">54</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 娱乐</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li></ul></div></div></div></div><i class="fa fa-arrow-right on" id="toggle-sidebar" aria-hidden="true">     </i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Windows批处理之mshta使用JS脚本让BAT更强大"><span class="toc-text">Windows批处理之mshta使用JS脚本让BAT更强大</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、介绍"><span class="toc-text">一、介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-宿主"><span class="toc-text">1 宿主</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-接收JS和VBS的方法"><span class="toc-text">2 接收JS和VBS的方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#注意事项"><span class="toc-text">注意事项</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#示例"><span class="toc-text">示例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-BAT玩法"><span class="toc-text">3 BAT玩法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#可接受环境变量"><span class="toc-text">可接受环境变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#隐藏下载指定的第三方工具"><span class="toc-text">隐藏下载指定的第三方工具</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#解析地址中的变量和命令行参数"><span class="toc-text">解析地址中的变量和命令行参数</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、批处理之家玩法"><span class="toc-text">二、批处理之家玩法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-批处理之家在线-HTA-脚本"><span class="toc-text">1 批处理之家在线 HTA 脚本</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#用法示例"><span class="toc-text">用法示例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-批处理之家-js-在线脚本库"><span class="toc-text">2 批处理之家 js 在线脚本库</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#19-个自写库"><span class="toc-text">19 个自写库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#45-个转载的库"><span class="toc-text">45 个转载的库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#顺便附上一些实用的-url，批处理也可用："><span class="toc-text">顺便附上一些实用的 url，批处理也可用：</span></a></li></ol></li></ol></li></ol></li></ol></div></div></div><div id="body-wrap"><div class="post-bg" id="nav" style="background-image: url(/Pic/post.jpg)"><div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">Gxkon's Blog</a></span><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 娱乐</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li></ul></div></div><span class="toggle-menu close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span></span></div><div id="post-info"><div id="post-title"><div class="posttitle">Windows批处理之mshta使用JS脚本让BAT更强大</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2021-01-11 20:18:54"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2021-01-11</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2021-02-13 20:49:38"><i class="fa fa-history" aria-hidden="true"></i> 更新于 2021-02-13</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E6%89%B9%E5%A4%84%E7%90%86%E5%92%8C%E6%B3%A8%E5%86%8C%E8%A1%A8/">批处理和注册表</a></span></div><div class="meta-secondline"> </div><div class="meta-thirdline"><span class="post-meta-pv-cv"><i class="fa fa-eye post-meta__icon" aria-hidden="true"> </i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"><span class="post-meta__separator">|</span><i class="post-meta__icon fa fa-comment-o" aria-hidden="true"></i><span>评论数:</span><a href="/posts/9718100c/#post-comment"><span class="gitalk-comment-count comment-count"></span></a></span></div></div></div></div><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h1 id="Windows批处理之mshta使用JS脚本让BAT更强大"><a href="#Windows批处理之mshta使用JS脚本让BAT更强大" class="headerlink" title="Windows批处理之mshta使用JS脚本让BAT更强大"></a>Windows批处理之mshta使用JS脚本让BAT更强大</h1><h2 id="一、介绍"><a href="#一、介绍" class="headerlink" title="一、介绍"></a>一、介绍</h2><blockquote>
+<p>mshta.exe是微软Windows操作系统相关程序，英文全称Microsoft HTML Application，可翻译为微软超文本标记语言应用，用于执行.HTA文件。<strong>hta文件解释器</strong>（也能解释html）</p>
+<ul>
+<li>就如同IE是html的解释器，CMD是批处理文件的解释器，WScript.exe、CScript.exe是vbs/js脚本的解释器。</li>
+</ul>
+</blockquote>
+<p><strong>mshta是用来解释hta程序的,或者叫hta程序的宿主</strong></p>
+<ul>
+<li><p><strong>文件位置</strong>：%SystemRoot%\system32\mshta.exe</p>
+</li>
+<li><p><strong>进程名称</strong>： Microsoft HTML Application Host</p>
+</li>
+<li><p><strong>它支持命令行参数，可以接收JS和VBS的方法</strong>！</p>
+</li>
+<li><p><code>玩mshta命令就是玩的是html标签</code></p>
+</li>
+</ul>
+<p><strong>那么它就能做很多事！！</strong></p>
+<ul>
+<li>你有足够多和聪明的JS脚本！</li>
+<li>脚本放置在网页上和本地都可以</li>
+<li>本地用法<ul>
+<li>。而hta程序其实就是html文件。所以你只要输入html标签就可以了</li>
+</ul>
+</li>
+<li>远程主机（网页）用法<ul>
+<li>本地执行 脚本语句访问网页，给与参数，JS脚本处理参数，并返回值</li>
+</ul>
+</li>
+<li>还有更多功能！！</li>
+<li><code>结合BAT，可以让Bat更强大</code>！</li>
+</ul>
+<h3 id="1-宿主"><a href="#1-宿主" class="headerlink" title="1 宿主"></a>1 宿主</h3><ul>
+<li>hta文件的宿主—-mshta</li>
+<li>html的宿主—–IE</li>
+<li>VBS的宿主—-wscrit</li>
+<li>asp的宿主—-IIS</li>
+<li>BAT的宿主—cmd</li>
+<li>vba的宿主是—office</li>
+</ul>
+<h3 id="2-接收JS和VBS的方法"><a href="#2-接收JS和VBS的方法" class="headerlink" title="2 接收JS和VBS的方法"></a>2 接收JS和VBS的方法</h3><p><strong>vbs脚本时</strong>：<code>mshta vbscript:&quot;html标签&quot;</code><br> <strong>js脚本时</strong>：<code>mshta jscript:&quot;html标签&quot;</code></p>
+<h4 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h4><ol>
+<li>不要换行</li>
+<li>标签属性可以用单引号，也可以不用引号，如果要用双引号，那么 双引号请该为双双引号</li>
+<li>遇到字符串，请用双双引号。</li>
+<li>如果要从参数的角度讲的话，mshta后面的都可以叫参数。</li>
+<li>事实上mshta后面的就是参数。</li>
+</ol>
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a><strong>示例</strong></h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># JS:</span></span><br><span class="line">mshta vbscript:window.execScript(<span class="string">"alert('hello world!');"</span>,<span class="string">"javascript"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># VBS:</span></span><br><span class="line">mshta javascript:window.execScript(<span class="string">"msgBox('hello world!'):window.close"</span>,<span class="string">"vbs"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 只要输入html标签就可以了</span></span><br><span class="line">mshta vbscript:<span class="string">"&lt;html style=background:buttonface&gt;&lt;title&gt;GX&lt;/title&gt;&lt;body&gt;hello world&lt;br/&gt;hello&lt;hr/&gt;world&lt;script language=vbscript&gt;msgbox (123)&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 调用VBS，分别使用MSGBOX函数和POPUP方法</span></span><br><span class="line">mshta vbscript:msgbox(<span class="string">"该干活了，伙计!"</span>,64,<span class="string">"提示"</span>)(window.close)</span><br><span class="line">mshta vbscript:CreateObject(<span class="string">"Wscript.Shell"</span>).popup(<span class="string">"该干活了，伙计！"</span>,7,<span class="string">"提示"</span>,64)(window.close)</span><br><span class="line"></span><br><span class="line"><span class="comment"># execute方法 一条语句连续弹二个信息框：</span></span><br><span class="line">mshta vbscript:execute(<span class="string">"msgbox "</span><span class="string">"one BOX"</span><span class="string">":msgbox "</span><span class="string">"two BOX"</span><span class="string">":window.close"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 调用系统的英文阅读：</span></span><br><span class="line">mshta vbscript:createobject(<span class="string">"sapi.spvoice"</span>).speak(<span class="string">"Good luck"</span>)(window.close)</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-BAT玩法"><a href="#3-BAT玩法" class="headerlink" title="3 BAT玩法"></a>3 BAT玩法</h3><h4 id="可接受环境变量"><a href="#可接受环境变量" class="headerlink" title="可接受环境变量"></a>可接受环境变量</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"><span class="built_in">set</span> t=<span class="string">"&lt;script language=vbs&gt;msgbox 123:self.close&lt;/script&gt;"</span></span><br><span class="line">mshta vbscript:%t%</span><br></pre></td></tr></table></figure>
+
+<h4 id="隐藏下载指定的第三方工具"><a href="#隐藏下载指定的第三方工具" class="headerlink" title="隐藏下载指定的第三方工具"></a><strong>隐藏下载指定的第三方工具</strong></h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- :</span><br><span class="line">@<span class="built_in">echo</span> off &amp; ( <span class="built_in">break</span> &gt;<span class="string">"%~f0:Zone.Identifier"</span> ) 2&gt;nul</span><br><span class="line">mshta <span class="string">"%~f0"</span></span><br><span class="line">printf.exe <span class="string">"你好，我是printf.exe\n"</span></span><br><span class="line">pause</span><br><span class="line">--&gt;</span><br><span class="line"></span><br><span class="line">&lt;script src=http://bbs.bathome.net/lib/diy/hide.js&gt;&lt;/script&gt;</span><br><span class="line">&lt;script src=http://bbs.bathome.net/lib/diy/Tools.js&gt;&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">Tools.get(<span class="string">'printf'</span>)</span><br><span class="line">//调用 Tools 对象的 get 方法在线获取第三方工具 <span class="built_in">printf</span></span><br><span class="line">//若已经存在可调用的 printf.exe，则不重复下载</span><br><span class="line">//引用 Batch-CN 的集成资源，感谢 bailong360 提供帮助</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="解析地址中的变量和命令行参数"><a href="#解析地址中的变量和命令行参数" class="headerlink" title="解析地址中的变量和命令行参数"></a><strong>解析地址中的变量和命令行参数</strong></h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line">mshta <span class="string">"%~f0"</span> 【0】开关测试 <span class="string">"【1】嵌套的"</span><span class="string">"测试"</span>   <span class="string">"【2】单个参数测试"</span>,<span class="string">"【3】其他分隔符测试"</span> | more</span><br><span class="line">pause&amp;<span class="built_in">exit</span></span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span><br><span class="line"></span><br><span class="line">&lt;script src=http://www.bathome.net/lib/diy/Libs.js&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">Libs.get(<span class="string">'WSH'</span>)</span><br><span class="line">Libs.get(<span class="string">'hide'</span>)</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">for</span>(var i=0;i&lt;WScript.Arguments.length;i++)&#123;</span><br><span class="line">        WSH.Echo(WScript.Arguments(i))</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="二、批处理之家玩法"><a href="#二、批处理之家玩法" class="headerlink" title="二、批处理之家玩法"></a>二、批处理之家玩法</h2><h3 id="1-批处理之家在线-HTA-脚本"><a href="#1-批处理之家在线-HTA-脚本" class="headerlink" title="1 批处理之家在线 HTA 脚本"></a>1 批处理之家在线 HTA 脚本</h3><p><strong>作者帖子</strong>：<a href="http://www.bathome.net/thread-38393-1-1.html" target="_blank" rel="noopener">地址</a></p>
+<p><strong>在线HTA库</strong>：<a href="http://www.bathome.net/s/hta/" target="_blank" rel="noopener">地址</a></p>
+<p><strong>帮助文件</strong>：cmd中输入 ，<code>mshta http://bathome.net/s/hta/index.html?help</code></p>
+<p>必选库为 mshta、WSH、GetRequest、Json2 和 RunCommand，其中 WSH 依赖 <a href="http://bathome.net/thread-34544-1-1.html" target="_blank" rel="noopener">批处理之家 js 在线脚本库</a></p>
+<p>从 <a href="http://www.bathome.net/thread-29918-1-1.html" target="_blank" rel="noopener">_wscript.exe 支持 .bat 的 wscript</a> 到 <a href="http://www.bathome.net/thread-30886-1-1.html" target="_blank" rel="noopener">JSConsole v2.0.1 JScript控制台</a>，再到 <a href="http://www.bathome.net/thread-33125-1-1.html" target="_blank" rel="noopener">js/bat脚本混编新方案</a> 、 <a href="http://www.bathome.net/thread-34109-1-1.html" target="_blank" rel="noopener">bat、vbs、js 原生混编</a> 、 <a href="http://www.bathome.net/thread-34544-1-1.html" target="_blank" rel="noopener">批处理之家 js 在线脚本库</a>，一直在寻觅批处理的终极增强方案，于是折腾出了这个能以最简洁的命令行调用批处理之家 js 在线脚本库的方案，集前作之所长，精巧而强大。</p>
+<h4 id="用法示例"><a href="#用法示例" class="headerlink" title="用法示例"></a><strong>用法示例</strong></h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">WSH 库可以模拟 WSH 宿主的环境，例如：</span><br><span class="line">“ mshta <span class="string">"http://bathome.net/s/hta/index.html"</span> WSH.Echo(<span class="string">'随机数：'</span>+Math.random()) &gt;输出.txt ”</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">LoadLibs 对象中用于定义要加载的可选库，配合 freshCookie() 可在命令行中修改可选库的设置，例如：</span><br><span class="line">“ mshta <span class="string">"http://bathome.net/s/hta/index.html"</span> LoadLibs.hide=<span class="literal">false</span>;freshCookie() ”</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">而使用 cleanCookie() 则可清除 Cookie 中的设置，例如：</span><br><span class="line">“ mshta <span class="string">"http://bathome.net/s/hta/index.html"</span> cleanCookie() ”</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+<h3 id="2-批处理之家-js-在线脚本库"><a href="#2-批处理之家-js-在线脚本库" class="headerlink" title="2 批处理之家 js 在线脚本库"></a>2 批处理之家 js 在线脚本库</h3><ul>
+<li>目前的库共有 64 个，涵盖框架、在线获取第三方工具、模拟对象、语法增强、dom 操作、格式转换、文本解析、常用函数、网页特效等范畴,依托于 bathome</li>
+<li>该脚本库主要用于 hta 环境，尤其适合用在<a href="http://www.bathome.net/thread-38393-1-1.html" target="_blank" rel="noopener">在线 HTA 脚本</a>中 <a href="http://www.bathome.net/viewthread.php?tid=34109" target="_blank" rel="noopener">bat+hta 混编</a>的情况下</li>
+<li>json 格式的在线 js 库列表见 <a href="http://www.bathome.net/lib/bathomeLib.json" target="_blank" rel="noopener">http://www.bathome.net/lib/bathomeLib.json</a></li>
+<li>第三方工具库则依托 Batch-CN，table 格式的第三方工具列表见 <a href="http://batch-cn.qiniudn.com/list/tool.txt" target="_blank" rel="noopener">http://batch-cn.qiniudn.com/list/tool.txt</a></li>
+<li>路径区分大小写，bathomeLib.json 和 bathomeLib.JSON 不同</li>
+<li>建议通过 Libs.js 的 Libs.get 方法、以及用 Tools.js 的 Tools.get 来调用脚本和下载第三方，可兼容大小写，例如 Libs.get(‘WSH’) 和 Libs.get(‘wsh’) 是等价的</li>
+</ul>
+<h4 id="19-个自写库"><a href="#19-个自写库" class="headerlink" title="19 个自写库"></a><strong>19 个自写库</strong></h4><table>
+<thead>
+<tr>
+<th><strong>名称 版本信息</strong></th>
+<th><strong>帮助信息</strong></th>
+<th><strong>bathome 库地址</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="http://www.bathome.net/redirect.php?goto=findpost&ptid=34544&pid=163490&fromuid=30406" target="_blank" rel="noopener">callBack</a> diy</td>
+<td>创建各种回调函数，可用于辅助 Array.prototype.each</td>
+<td><a href="http://www.bathome.net/lib/diy/callBack.js" target="_blank" rel="noopener">http://www.bathome.net/lib/diy/callBack.js</a></td>
+</tr>
+<tr>
+<td><a href="http://www.bathome.net/redirect.php?goto=findpost&ptid=34544&pid=163493&fromuid=30406" target="_blank" rel="noopener">ch2num</a> diy</td>
+<td>阿拉伯数字与中文数字互转</td>
+<td><a href="http://www.bathome.net/lib/diy/ch2num.js" target="_blank" rel="noopener">http://www.bathome.net/lib/diy/ch2num.js</a></td>
+</tr>
+<tr>
+<td><a href="http://www.bathome.net/redirect.php?goto=findpost&ptid=34544&pid=163489&fromuid=30406" target="_blank" rel="noopener">code</a> diy</td>
+<td>可在一个标签里写入多种语言的脚本</td>
+<td><a href="http://www.bathome.net/lib/diy/code.js" target="_blank" rel="noopener">http://www.bathome.net/lib/diy/code.js</a></td>
+</tr>
+<tr>
+<td><a href="http://www.bathome.net/redirect.php?goto=findpost&ptid=34544&pid=163481&fromuid=30406" target="_blank" rel="noopener">console</a> diy</td>
+<td>模拟一个 console 对象，并将其输出显示在当前窗口中。会导致当前窗口其他内容不可见</td>
+<td><a href="http://www.bathome.net/lib/diy/console.js" target="_blank" rel="noopener">http://www.bathome.net/lib/diy/console.js</a></td>
+</tr>
+<tr>
+<td><a href="http://www.bathome.net/redirect.php?goto=findpost&ptid=34544&pid=163490&fromuid=30406" target="_blank" rel="noopener">DIYprototype</a> diy</td>
+<td>在 Prototype_MOD.js 的基础上增加了一些继承方法</td>
+<td><a href="http://www.bathome.net/lib/diy/DIYprototype.js" target="_blank" rel="noopener">http://www.bathome.net/lib/diy/DIYprototype.js</a></td>
+</tr>
+<tr>
+<td><a href="http://www.bathome.net/redirect.php?goto=findpost&ptid=34544&pid=163493&fromuid=30406" target="_blank" rel="noopener">Function</a> diy</td>
+<td>各种自定义的常用函数，基于 WSH.js 和 Prototype.js</td>
+<td><a href="http://www.bathome.net/lib/diy/Function.js" target="_blank" rel="noopener">http://www.bathome.net/lib/diy/Function.js</a></td>
+</tr>
+<tr>
+<td><a href="http://www.bathome.net/redirect.php?goto=findpost&ptid=34544&pid=163493&fromuid=30406" target="_blank" rel="noopener">GetRequest</a> diy</td>
+<td>用于取得URL地址中的变量</td>
+<td><a href="http://www.bathome.net/lib/diy/GetRequest.js" target="_blank" rel="noopener">http://www.bathome.net/lib/diy/GetRequest.js</a></td>
+</tr>
+<tr>
+<td><a href="http://www.bathome.net/redirect.php?goto=findpost&ptid=34544&pid=163466&fromuid=30406" target="_blank" rel="noopener">hide</a> diy</td>
+<td>隐藏 mshta 窗口，运行后将导致 setTimeout 和 setInterval 失效</td>
+<td><a href="http://www.bathome.net/lib/diy/hide.js" target="_blank" rel="noopener">http://www.bathome.net/lib/diy/hide.js</a></td>
+</tr>
+<tr>
+<td><a href="http://www.bathome.net/redirect.php?goto=findpost&ptid=34544&pid=163491&fromuid=30406" target="_blank" rel="noopener">iconv</a> diy</td>
+<td>字符编码转换</td>
+<td><a href="http://www.bathome.net/lib/diy/iconv.js" target="_blank" rel="noopener">http://www.bathome.net/lib/diy/iconv.js</a></td>
+</tr>
+<tr>
+<td><a href="http://www.bathome.net/redirect.php?goto=findpost&ptid=34544&pid=163483&fromuid=30406" target="_blank" rel="noopener">Libs</a> diy</td>
+<td>创建一个 Libs 对象，用于管理批处理之家的脚本库</td>
+<td><a href="http://www.bathome.net/lib/diy/Libs.js" target="_blank" rel="noopener">http://www.bathome.net/lib/diy/Libs.js</a></td>
+</tr>
+<tr>
+<td><a href="http://www.bathome.net/redirect.php?goto=findpost&ptid=34544&pid=163492&fromuid=30406" target="_blank" rel="noopener">list</a> diy</td>
+<td>用于罗列各种信息的自定义的函数</td>
+<td><a href="http://www.bathome.net/lib/diy/list.js" target="_blank" rel="noopener">http://www.bathome.net/lib/diy/list.js</a></td>
+</tr>
+<tr>
+<td><a href="http://www.bathome.net/redirect.php?goto=findpost&ptid=34544&pid=163481&fromuid=30406" target="_blank" rel="noopener">loadFirebug</a> linkto 1.4.0 compressed</td>
+<td>调用后自动引用官网的 Firebug-lite.js。最强大的网页调试工具之一，按 F12 可呼出控制窗口</td>
+<td><a href="http://www.bathome.net/lib/diy/loadFirebug.js" target="_blank" rel="noopener">http://www.bathome.net/lib/diy/loadFirebug.js</a></td>
+</tr>
+<tr>
+<td><a href="http://www.bathome.net/redirect.php?goto=findpost&ptid=34544&pid=163480&fromuid=30406" target="_blank" rel="noopener">mshta</a> diy</td>
+<td>创建一个 mshta 对象，以获取窗口信息和改变窗口形态</td>
+<td><a href="http://www.bathome.net/lib/diy/mshta.js" target="_blank" rel="noopener">http://www.bathome.net/lib/diy/mshta.js</a></td>
+</tr>
+<tr>
+<td><a href="http://www.bathome.net/redirect.php?goto=findpost&ptid=34544&pid=163484&fromuid=30406" target="_blank" rel="noopener">Tools</a> diy</td>
+<td>创建一个 Tools 对象，用于管理第三方命令行工具</td>
+<td><a href="http://www.bathome.net/lib/diy/Tools.js" target="_blank" rel="noopener">http://www.bathome.net/lib/diy/Tools.js</a></td>
+</tr>
+<tr>
+<td><a href="http://www.bathome.net/redirect.php?goto=findpost&ptid=34544&pid=163486&fromuid=30406" target="_blank" rel="noopener">RunCommand</a> diy</td>
+<td>将接收到的命令行参数当作 js 语句来运行</td>
+<td><a href="http://www.bathome.net/lib/diy/RunCommand.js" target="_blank" rel="noopener">http://www.bathome.net/lib/diy/RunCommand.js</a></td>
+</tr>
+<tr>
+<td><a href="http://www.bathome.net/redirect.php?goto=findpost&ptid=34544&pid=163485&fromuid=30406" target="_blank" rel="noopener">vbs</a> diy</td>
+<td>在 js 中模拟使用 vbs 代码</td>
+<td><a href="http://www.bathome.net/lib/diy/vbs.js" target="_blank" rel="noopener">http://www.bathome.net/lib/diy/vbs.js</a></td>
+</tr>
+<tr>
+<td><a href="http://www.bathome.net/redirect.php?goto=findpost&ptid=34544&pid=163485&fromuid=30406" target="_blank" rel="noopener">VBScript</a> diy</td>
+<td>在 JScript 中调用 VBScript 函数</td>
+<td><a href="http://www.bathome.net/lib/diy/VBScript.js" target="_blank" rel="noopener">http://www.bathome.net/lib/diy/VBScript.js</a></td>
+</tr>
+<tr>
+<td><a href="http://www.bathome.net/redirect.php?goto=findpost&ptid=34544&pid=163482&fromuid=30406" target="_blank" rel="noopener">WSH</a> diy</td>
+<td>模拟一个 WSH/WScript 对象</td>
+<td><a href="http://www.bathome.net/lib/diy/WSH.js" target="_blank" rel="noopener">http://www.bathome.net/lib/diy/WSH.js</a></td>
+</tr>
+<tr>
+<td><a href="http://www.bathome.net/redirect.php?goto=findpost&ptid=34544&pid=163466&fromuid=30406" target="_blank" rel="noopener">Zones0</a> diy</td>
+<td>设置 ie 区域设置等级为最低，以免在使用 iframe 访问网页时弹出提示</td>
+<td><a href="http://www.bathome.net/lib/diy/Zones0.js" target="_blank" rel="noopener">http://www.bathome.net/lib/diy/Zones0.js</a></td>
+</tr>
+</tbody></table>
+<h4 id="45-个转载的库"><a href="#45-个转载的库" class="headerlink" title="45 个转载的库"></a><strong>45 个转载的库</strong></h4><table>
+<thead>
+<tr>
+<th><strong>名称 版本信息</strong></th>
+<th><strong>帮助信息</strong></th>
+<th><strong>bathome 库地址</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="http://openexchangerates.github.io/accounting.js/" target="_blank" rel="noopener">accounting</a> 0.4.1 compressed</td>
+<td>数字格式化通用类</td>
+<td><a href="http://www.bathome.net/lib/accounting.js" target="_blank" rel="noopener">http://www.bathome.net/lib/accounting.js</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/blueskis382/ActiveXFileWrapper.js/blob/master/ActiveXFileWrapper.js" target="_blank" rel="noopener">ActiveXFileWrapper</a> N/A mod</td>
+<td>基于 fso 和 ado 的封装类，可以直观地操作文件，默认编码为 UTF-8</td>
+<td><a href="http://www.bathome.net/lib/ActiveXFileWrapper.js" target="_blank" rel="noopener">http://www.bathome.net/lib/ActiveXFileWrapper.js</a></td>
+</tr>
+<tr>
+<td><a href="http://jsbeautifier.org/" target="_blank" rel="noopener">beautify-css</a> 1.5.4</td>
+<td>css 格式化</td>
+<td><a href="http://www.bathome.net/lib/beautify-css.js" target="_blank" rel="noopener">http://www.bathome.net/lib/beautify-css.js</a></td>
+</tr>
+<tr>
+<td><a href="http://jsbeautifier.org/" target="_blank" rel="noopener">beautify-html</a> 1.5.4</td>
+<td>html 格式化</td>
+<td><a href="http://www.bathome.net/lib/beautify-html.js" target="_blank" rel="noopener">http://www.bathome.net/lib/beautify-html.js</a></td>
+</tr>
+<tr>
+<td><a href="http://jsbeautifier.org/" target="_blank" rel="noopener">beautify</a> 1.5.4</td>
+<td>js 格式化</td>
+<td><a href="http://www.bathome.net/lib/beautify.js" target="_blank" rel="noopener">http://www.bathome.net/lib/beautify.js</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/MikeMcl/bignumber.js" target="_blank" rel="noopener">bignumber</a> 2.0.0 compressed</td>
+<td>超大数字运算</td>
+<td><a href="http://www.bathome.net/lib/bignumber.js" target="_blank" rel="noopener">http://www.bathome.net/lib/bignumber.js</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/eligrey/Blob.js" target="_blank" rel="noopener">Blob</a> N/A</td>
+<td>模拟 Blob 对象，是一个可以存储二进制文件的容器</td>
+<td><a href="http://www.bathome.net/lib/Blob.js" target="_blank" rel="noopener">http://www.bathome.net/lib/Blob.js</a></td>
+</tr>
+<tr>
+<td><a href="http://coffee-script.org/" target="_blank" rel="noopener">CoffeeScript</a> 1.9.0 compressed</td>
+<td>CoffeeScript 是 JavaScript 优雅的转义语言，为原生语法添加许多语法糖</td>
+<td><a href="http://www.bathome.net/lib/coffeescript.js" target="_blank" rel="noopener">http://www.bathome.net/lib/coffeescript.js</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/ScottHamper/Cookies" target="_blank" rel="noopener">cookies</a> 1.2.0 compressed</td>
+<td>便捷地读写Cookie</td>
+<td><a href="http://www.bathome.net/lib/cookies.js" target="_blank" rel="noopener">http://www.bathome.net/lib/cookies.js</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/knrz/CSV.js" target="_blank" rel="noopener">csv</a> 3.6.1 compressed</td>
+<td>CSV的JavaScript解析库</td>
+<td><a href="http://www.bathome.net/lib/csv.js" target="_blank" rel="noopener">http://www.bathome.net/lib/csv.js</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/flitbit/diff" target="_blank" rel="noopener">diff</a> 0.3.0 compressed</td>
+<td>比较对象之间的差异</td>
+<td><a href="http://www.bathome.net/lib/diff.js" target="_blank" rel="noopener">http://www.bathome.net/lib/diff.js</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/cemerick/jsdifflib/blob/master/README.asciidoc#diff-js" target="_blank" rel="noopener">difflib</a> 1.0.0 merge diffview.js</td>
+<td>比较文本之间的差异，还能展现在网页上</td>
+<td><a href="http://www.bathome.net/lib/difflib.js" target="_blank" rel="noopener">http://www.bathome.net/lib/difflib.js</a></td>
+</tr>
+<tr>
+<td><a href="http://dojotoolkit.org/" target="_blank" rel="noopener">Dojo</a> 1.10.4 compressed</td>
+<td>著名的JS工具包</td>
+<td><a href="http://www.bathome.net/lib/dojo.js" target="_blank" rel="noopener">http://www.bathome.net/lib/dojo.js</a></td>
+</tr>
+<tr>
+<td><a href="http://kiro.me/projects/fuse.html" target="_blank" rel="noopener">Fuse</a> 1.2.2 compressed</td>
+<td>轻量级模糊查询</td>
+<td><a href="http://www.bathome.net/lib/fuse.js" target="_blank" rel="noopener">http://www.bathome.net/lib/fuse.js</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/drslump/Ini-js" target="_blank" rel="noopener">Ini</a> 1.0.0</td>
+<td>INI的JavaScript解析库</td>
+<td><a href="http://www.bathome.net/lib/ini.js" target="_blank" rel="noopener">http://www.bathome.net/lib/ini.js</a></td>
+</tr>
+<tr>
+<td><a href="http://jquery.com/" target="_blank" rel="noopener">jQuery</a> 1.11.2 compressed</td>
+<td>继prototype之后又一个优秀的Javascrīpt框架</td>
+<td><a href="http://www.bathome.net/lib/jquery.js" target="_blank" rel="noopener">http://www.bathome.net/lib/jquery.js</a></td>
+</tr>
+<tr>
+<td><a href="http://js2.coffee/" target="_blank" rel="noopener">js2coffee</a> 2.0 compressed</td>
+<td>可将 JavaScript 翻译为 CoffeeScript.js</td>
+<td><a href="http://www.bathome.net/lib/js2coffee.js" target="_blank" rel="noopener">http://www.bathome.net/lib/js2coffee.js</a></td>
+</tr>
+<tr>
+<td><a href="http://www.json.org/js.html" target="_blank" rel="noopener">Json2</a> 2014-02-04 compressed</td>
+<td>模拟 JSON 对象</td>
+<td><a href="http://www.bathome.net/lib/json2.js" target="_blank" rel="noopener">http://www.bathome.net/lib/json2.js</a></td>
+</tr>
+<tr>
+<td><a href="http://stuk.github.io/jszip/" target="_blank" rel="noopener">JSZip</a> 2.4.0 compressed</td>
+<td>用 javascript 生成 zip 文件</td>
+<td><a href="http://www.bathome.net/lib/jszip.js" target="_blank" rel="noopener">http://www.bathome.net/lib/jszip.js</a></td>
+</tr>
+<tr>
+<td><a href="http://robertwhurst.github.io/KeyboardJS/" target="_blank" rel="noopener">KeyboardJS</a> 0.4.1 compressed</td>
+<td>支持单一快捷键或者组合键的库</td>
+<td><a href="http://www.bathome.net/lib/keyboard.js" target="_blank" rel="noopener">http://www.bathome.net/lib/keyboard.js</a></td>
+</tr>
+<tr>
+<td><a href="http://dmauro.github.io/Keypress/" target="_blank" rel="noopener">Keypress</a> 2.1.0 compressed</td>
+<td>有着许多特别功能的输入捕捉库</td>
+<td><a href="http://www.bathome.net/lib/keypress.js" target="_blank" rel="noopener">http://www.bathome.net/lib/keypress.js</a></td>
+</tr>
+<tr>
+<td><a href="http://danieltao.com/lazy.js/docs" target="_blank" rel="noopener">lazy</a> 0.4.0 compressed</td>
+<td>类似 Underscore，但使用懒惰求值的办法大幅提升效率</td>
+<td><a href="http://www.bathome.net/lib/lazy.js" target="_blank" rel="noopener">http://www.bathome.net/lib/lazy.js</a></td>
+</tr>
+<tr>
+<td><a href="https://lodash.com/docs" target="_blank" rel="noopener">lodash</a> 2.4.1 compat</td>
+<td>完全兼容 Underscore 语法的增强库，增加了许多新的方法</td>
+<td><a href="http://www.bathome.net/lib/lodash.js" target="_blank" rel="noopener">http://www.bathome.net/lib/lodash.js</a></td>
+</tr>
+<tr>
+<td><a href="http://mathjs.org/" target="_blank" rel="noopener">Math</a> 1.3.0 compressed</td>
+<td>多用途的JavaScript数学库</td>
+<td><a href="http://www.bathome.net/lib/Math.js" target="_blank" rel="noopener">http://www.bathome.net/lib/Math.js</a></td>
+</tr>
+<tr>
+<td><a href="http://momentjs.cn/docs/" target="_blank" rel="noopener">moment</a> 2.8.4 with-locales compressed</td>
+<td>为日期计算提供全面的方法</td>
+<td><a href="http://www.bathome.net/lib/moment.js" target="_blank" rel="noopener">http://www.bathome.net/lib/moment.js</a></td>
+</tr>
+<tr>
+<td><a href="http://mootools.net/" target="_blank" rel="noopener">mootools</a> 1.5.1 compressed</td>
+<td>一个简洁，模块化，面向对象的开源JavaScript web应用框架</td>
+<td><a href="http://www.bathome.net/lib/mootools.js" target="_blank" rel="noopener">http://www.bathome.net/lib/mootools.js</a></td>
+</tr>
+<tr>
+<td><a href="http://craig.is/killing/mice" target="_blank" rel="noopener">mousetrap</a> 1.4.6 compressed</td>
+<td>快捷键库，可直观地定义组合键</td>
+<td><a href="http://www.bathome.net/lib/mousetrap.js" target="_blank" rel="noopener">http://www.bathome.net/lib/mousetrap.js</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/overset/javascript-natural-sort" target="_blank" rel="noopener">naturalSort</a> 0.7</td>
+<td>支持对字符串中的小数、ip、文件名、日期等进行自然排序自然排序</td>
+<td><a href="http://www.bathome.net/lib/naturalSort.js" target="_blank" rel="noopener">http://www.bathome.net/lib/naturalSort.js</a></td>
+</tr>
+<tr>
+<td><a href="http://www.numericjs.com/" target="_blank" rel="noopener">numeric</a> 1.2.6 compressed</td>
+<td>支持特殊的数学计算，擅长本地执行小型计算</td>
+<td><a href="http://www.bathome.net/lib/numeric.js" target="_blank" rel="noopener">http://www.bathome.net/lib/numeric.js</a></td>
+</tr>
+<tr>
+<td><a href="http://www.numbersjs.info/" target="_blank" rel="noopener">numbers</a> 0.5.0</td>
+<td>一个可以运算复杂数据运算的js库,名字叫Numbers.js,可以进行三角,矩阵等复杂运算</td>
+<td><a href="http://www.bathome.net/lib/numbers.js" target="_blank" rel="noopener">http://www.bathome.net/lib/numbers.js</a></td>
+</tr>
+<tr>
+<td><a href="http://www.prototypejs.org/" target="_blank" rel="noopener">Prototype</a> 1.7.2 compressed</td>
+<td>非常优雅的javascript基础类库，对javascript做了大量的扩展，而且很好的支持Ajax</td>
+<td><a href="http://www.bathome.net/lib/Prototype.js" target="_blank" rel="noopener">http://www.bathome.net/lib/Prototype.js</a></td>
+</tr>
+<tr>
+<td><a href="http://requirejs.org/" target="_blank" rel="noopener">RequireJS</a> 2.1.16 mod</td>
+<td>非常小巧的JavaScript模块载入框架,是AMD规范最好的实现者之一</td>
+<td><a href="http://www.bathome.net/lib/require.js" target="_blank" rel="noopener">http://www.bathome.net/lib/require.js</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/hakimel/reveal.js/" target="_blank" rel="noopener">reveal</a> 3.1.0</td>
+<td>基于CSS的幻灯片工具</td>
+<td><a href="http://www.bathome.net/lib/reveal.js" target="_blank" rel="noopener">http://www.bathome.net/lib/reveal.js</a></td>
+</tr>
+<tr>
+<td><a href="http://seajs.org/" target="_blank" rel="noopener">sea</a> 2.2.3 compressed</td>
+<td>一个遵循CommonJS规范的JavaScript模块加载框架，可以实现JavaScript的模块化开发及加载机制</td>
+<td><a href="http://www.bathome.net/lib/sea.js" target="_blank" rel="noopener">http://www.bathome.net/lib/sea.js</a></td>
+</tr>
+<tr>
+<td><a href="http://bitwiseshiftleft.github.io/sjcl/doc/" target="_blank" rel="noopener">sjcl</a> N/A compressed</td>
+<td>由斯坦福大学计算机安全实验室创立的项目，旨在创建一个安全、快速、短小精悍、易使用、跨浏览器的JavaScript加密库</td>
+<td><a href="http://www.bathome.net/lib/sjcl.js" target="_blank" rel="noopener">http://www.bathome.net/lib/sjcl.js</a></td>
+</tr>
+<tr>
+<td><a href="http://www.openjs.com/scripts/events/keyboard_shortcuts/" target="_blank" rel="noopener">shortcut</a> 2.01.B</td>
+<td>提供更为方便地处理键盘快捷键的函数</td>
+<td><a href="http://www.bathome.net/lib/shortcut.js" target="_blank" rel="noopener">http://www.bathome.net/lib/shortcut.js</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/alexei/sprintf.js" target="_blank" rel="noopener">sprintf</a> 1.0.2 mod</td>
+<td>模拟 sprintf/vsprintf</td>
+<td><a href="http://www.bathome.net/lib/sprintf.js" target="_blank" rel="noopener">http://www.bathome.net/lib/sprintf.js</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/samsonjs/strftime" target="_blank" rel="noopener">strftime</a> 0.8.2 compressed</td>
+<td>模拟 strftime</td>
+<td><a href="http://www.bathome.net/lib/strftime.js" target="_blank" rel="noopener">http://www.bathome.net/lib/strftime.js</a></td>
+</tr>
+<tr>
+<td><a href="http://sugarjs.com/api" target="_blank" rel="noopener">Sugar</a> 1.4.1 full compressed</td>
+<td>为内置对象扩展了一些有用的、直观的方法，会影响 prototype，和 Prototype_MOD.js 有部分重合</td>
+<td><a href="http://www.bathome.net/lib/Sugar.js" target="_blank" rel="noopener">http://www.bathome.net/lib/Sugar.js</a></td>
+</tr>
+<tr>
+<td><a href="http://taffydb.com/" target="_blank" rel="noopener">taffy</a> 2.7 compressed</td>
+<td>基于 JSON 管理数据库</td>
+<td><a href="http://www.bathome.net/lib/taffy.js" target="_blank" rel="noopener">http://www.bathome.net/lib/taffy.js</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/twada/type-name" target="_blank" rel="noopener">typeName</a> 1.0.1</td>
+<td>比 typeof 得到的结果准确一点，但其实更建议调用 vbs 的 TypeName</td>
+<td><a href="http://www.bathome.net/lib/typename.js" target="_blank" rel="noopener">http://www.bathome.net/lib/typename.js</a></td>
+</tr>
+<tr>
+<td><a href="http://underscorejs.org/" target="_blank" rel="noopener">Underscore</a> 1.7.0 compressed</td>
+<td>提供了几十种函数式编程的方法,大大方便了Javascript的编程</td>
+<td><a href="http://www.bathome.net/lib/underscore.js" target="_blank" rel="noopener">http://www.bathome.net/lib/underscore.js</a></td>
+</tr>
+<tr>
+<td><a href="http://arshaw.com/xdate/" target="_blank" rel="noopener">XDate</a> 0.8 compressed</td>
+<td>为日期计算提供全面的方法</td>
+<td><a href="http://www.bathome.net/lib/xdate.js" target="_blank" rel="noopener">http://www.bathome.net/lib/xdate.js</a></td>
+</tr>
+<tr>
+<td><a href="http://xregexp.com/api/" target="_blank" rel="noopener">XRegExp</a> 2.0.0 compressed</td>
+<td>增加了更多未来浏览器可能包含的功能（ECMAScript 4 - ES4）</td>
+<td><a href="http://www.bathome.net/lib/xregexp.js" target="_blank" rel="noopener">http://www.bathome.net/lib/xregexp.js</a></td>
+</tr>
+<tr>
+<td><a href="http://gildas-lormeau.github.io/zip.js/" target="_blank" rel="noopener">zip</a> N/A</td>
+<td>用 JavaScript 实现的 zip 压缩和解压缩工具包</td>
+<td><a href="http://www.bathome.net/lib/zip.js" target="_blank" rel="noopener">http://www.bathome.net/lib/zip.js</a></td>
+</tr>
+</tbody></table>
+<h4 id="顺便附上一些实用的-url，批处理也可用："><a href="#顺便附上一些实用的-url，批处理也可用：" class="headerlink" title="顺便附上一些实用的 url，批处理也可用："></a>顺便附上一些实用的 url，批处理也可用：</h4><blockquote>
+<p><strong>查询本机外网 ip</strong></p>
+<p><a href="http://www.bathome.net/s/ip.php" target="_blank" rel="noopener">http://www.bathome.net/s/ip.php</a><br>由批处理之家提供</p>
+<p><a href="http://yu2n.sinaapp.com/app/ip/ip.php?act=show_ip_client" target="_blank" rel="noopener">http://yu2n.sinaapp.com/app/ip/ip.php?act=show_ip_client</a><br>由 yu2n 个人博客提供</p>
+<p><a href="http://int.dpool.sina.com.cn/iplookup/iplookup.php" target="_blank" rel="noopener">http://int.dpool.sina.com.cn/iplookup/iplookup.php</a><br>由新浪提供</p>
+<p><a href="http://pv.sohu.com/cityjson?ie=gb2312" target="_blank" rel="noopener">http://pv.sohu.com/cityjson?ie=gb2312</a><br>由搜狐提供</p>
+<p><a href="http://whois.pconline.com.cn/ip.jsp" target="_blank" rel="noopener">http://whois.pconline.com.cn/ip.jsp</a><br><a href="http://whois.pconline.com.cn/ipJson.jsp" target="_blank" rel="noopener">http://whois.pconline.com.cn/ipJson.jsp</a><br>…..<br>由太平洋电脑网提供，还有其他接口，详见：<a href="http://whois.pconline.com.cn/" target="_blank" rel="noopener">http://whois.pconline.com.cn/</a></p>
+</blockquote>
+<blockquote>
+<p><strong>查询指定 ip 归属地</strong></p>
+<p><a href="http://whois.pconline.com.cn/ip.jsp?ip=117.25.131.86" target="_blank" rel="noopener">http://whois.pconline.com.cn/ip.jsp?ip=117.25.131.86</a><br>由太平洋电脑网提供</p>
+<p><a href="http://int.dpool.sina.com.cn/iplookup/iplookup.php?ip=117.25.131.86" target="_blank" rel="noopener">http://int.dpool.sina.com.cn/ipl … hp?ip=117.25.131.86</a><br>由新浪提供</p>
+</blockquote>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Gkon</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://gxkon.top/posts/9718100c/">http://gxkon.top/posts/9718100c/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://gxkon.top" target="_blank">Gxkon's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%89%B9%E5%A4%84%E7%90%86/">批处理</a></div><div class="post_share"><div class="social-share" data-image="https://pic-1256641195.cos.ap-nanjing.myqcloud.com/2020/10/7/68coffee-5567269_1280.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/posts/4d313360/"><img class="prev_cover" data-src="/Pic/post.jpg" onerror="onerror=null;src='/Pic/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Windows批处理之延时启动程序</div></div></a></div><div class="next-post pull_right"><a href="/posts/9cc46ef0/"><img class="next_cover" data-src="/Pic/post.jpg" onerror="onerror=null;src='/Pic/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">炉石传说</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fa fa-fw fa-thumbs-up" aria-hidden="true"></i><span> 相关推荐</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/posts/6efa27f3/" title="Windows以命令方式创建VPN连接"><img class="relatedPosts_cover" data-src="/Pic/post.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2021-01-22</div><div class="relatedPosts_title">Windows以命令方式创建VPN连接</div></div></a></div><div class="relatedPosts_item"><a href="/posts/4d313360/" title="Windows批处理之延时启动程序"><img class="relatedPosts_cover" data-src="/Pic/post.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2021-01-11</div><div class="relatedPosts_title">Windows批处理之延时启动程序</div></div></a></div></div><div class="clear_both"></div></div><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i><span> 评论</span></div><div id="gitalk-container"></div><script>var gitalk = new Gitalk({
+  clientID: '1ce3148e3133bf004c96',
+  clientSecret: '2a1e5c0f4d38387460b916843bfe5cac67ef2d07',
+  repo: 'blankwz.github.io',
+  owner: 'blankwz',
+  admin: ['blankwz'],
+  id: md5(decodeURI(location.pathname)),
+  language: 'zh-CN',
+  perPage: 10,
+  distractionFreeMode: false,
+  pagerDirection: 'last',
+  createIssueManually: false,
+  updateCountCallback: commentCount
+})
+gitalk.render('gitalk-container')
+
+function commentCount(n){
+  try {
+    document.getElementsByClassName('gitalk-comment-count')[0].innerHTML= n
+  } catch (e) {
+    return false
+  }
+}</script></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By Gkon</div><div class="framework-info"><span>驱动 </span><a href="https://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="阅读模式"></i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">簡</a><i class="darkmode fa fa-moon-o" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><a id="to_comment" href="#post-comment" title="直达评论"><i class="scroll_to_comment fa fa-comments">  </i></a><i class="fa fa-list-ul close" id="mobile-toc-button" title="目录" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@3/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script><script src="/js/third-party/ClickShowText.js"></script></body></html>
